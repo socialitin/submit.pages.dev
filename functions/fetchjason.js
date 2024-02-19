@@ -8,6 +8,9 @@ export default {
        */
 //const jsonUrl = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json' 
 
+export async function onRequestGet(context) {
+  return context.env.SERVICE.fetch(context.request);
+}
 const url = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json'
       //someHost + "/static/json";
   
