@@ -16,15 +16,14 @@
 		<main>
 			<h1> Form Submission</h1>
 
-			<blockquote id ="sjson" data-json=''>
-				<p>This is a demonstration of Cloudflare Pages with Functions.</p>
+			<blockquote >
+				<p id ="sjson" data-json=''>This is a demonstration of Cloudflare Pages with Functions.</p>
 				<p>Pages deployed a <code>/public</code> directory, containing a HTML document (this webpage) and a <code>/functions</code> directory, which contains the Cloudflare Workers code for the API endpoint this <code>&lt;form&gt;</code> references.</p>
 				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
 			</blockquote>
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-			onclick="var xhr = new XMLHttpRequest();xhr.open('GET', 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json',true);xhr.onreadystatechange = function() {var data = JSON.parse(xhr.responseText);$('#sjson').attr('data-json', data)};">
-				
-			  };
+			onclick="var xhr = new XMLHttpRequest();xhr.open('GET', 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json',true);xhr.onreadystatechange = function() {var data = JSON.parse(xhr.responseText);$('#sjson').attr('data-json', data)};$('#sjson').show()">
+		
 			<form method="POST" action="/api/submit">
 				<div class="input">
 					<label for="name">Name Product or Offer</label>
