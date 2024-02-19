@@ -32,4 +32,6 @@ let pretty = JSON.stringify(output, null, 2);
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
 }
-
+export async function onRequestGet(context) {
+	return context.env.SERVICE.fetch(context.request);
+  }
