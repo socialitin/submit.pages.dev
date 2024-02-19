@@ -21,8 +21,8 @@ fetch('https://workers.cloudflare.com/playground#LYVwNgLglgDghgJwgegGYHsHALQBM4R
 .then(data => console.log(data))
 .catch(error => console.error('Error:', error));
 
-let pretty = JSON.stringify(output, null, 2)+data;
-		return new Response(pretty, {
+let pretty = JSON.stringify(output, null, 2);
+		return new Response(data, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			}
