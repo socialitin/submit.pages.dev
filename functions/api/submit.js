@@ -20,8 +20,8 @@ const myjson = fetch('https://workers.cloudflare.com/playground#LYVwNgLglgDghgJw
 //.then(response => response.json());
 //.then(data => console.log(data))
 //.catch(error => console.error('Error:', error));
-
-let pretty = JSON.parse(data);
+console.log(response);
+let pretty = JSON.stringify(output, null, 2);
 		return new Response(pretty, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
