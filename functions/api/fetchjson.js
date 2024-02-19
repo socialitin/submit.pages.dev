@@ -3,7 +3,7 @@
  */
 
 
-export async function onRequestGet({ request }) {
+////export async function onRequestGet({ request }) {
 	
         async function handleRequest(request) {
             // Make a request to the R2 JSON file
@@ -20,5 +20,5 @@ export async function onRequestGet({ request }) {
             })
           }		
 	 
-}
+//}
 
