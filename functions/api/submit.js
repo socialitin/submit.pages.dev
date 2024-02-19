@@ -20,7 +20,7 @@ const myjson = fetch('https://workers.cloudflare.com/playground#LYVwNgLglgDghgJw
 //.then(response => response.json());
 //.then(data => console.log(data))
 //.catch(error => console.error('Error:', error));
-console.log(response);
+console.log(myjson);
 let pretty = JSON.stringify(output, null, 2);
 		return new Response(pretty, {
 			headers: {
