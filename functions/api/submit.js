@@ -1,9 +1,7 @@
 /**
  * POST /api/submit
  */
-export async function onRequestGet(context) {
-	return context.env.SERVICE.fetch(context.request);
-  }
+
 export async function onRequestPost({ request }) {
 	try {
 		let input = await request.formData();
