@@ -22,7 +22,7 @@
 				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
 			</blockquote>
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-			onclick="$.ajax({ url: 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json',async: false, dataType: 'json',cache: false,}).responseJSON;">
+			onclick="var xhr = new XMLHttpRequest();xhr.open('GET', 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json',true);">
 
 			<form method="POST" action="/api/submit">
 				<div class="input">
