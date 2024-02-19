@@ -1,6 +1,6 @@
 /**
  * POST /api/submit
  */
-export async function onRequestGet(context) {
-	return context.env.fetchjson.fetch(context.request);
+export async function onRequestGet(fetchjson) {
+	return fetchjson.env.SERVICE.fetch(fetchjson.request);
   }
