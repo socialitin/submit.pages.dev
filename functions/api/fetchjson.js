@@ -7,21 +7,24 @@
 
 export async function onRequestGet({ request }) {
 	try {
-        const url = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json';
-       const myj = fetch('url');
-     // .then(response => response.json())
-     // .then(data => console.log(data))
-    // .catch(error => console.error('Error:', error));
-
-let pretty = JSON.stringify(myj, null, 2);
-		return new Response(pretty, {
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			}
-		});
-					
-	} catch (err) {
-		return new Response('Error parsing JSON content', { status: 400 });
-	}
-}
+        async function handleRequest(request) {
+            // Make a request to the R2 JSON file
+            const response = await fetch('https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCD.json')
+          
+            // Check if the request was successful
+            if (!response.ok) {
+              return new Response('Failed to fetch R2 JSON file', { status: 500 })
+            }
+          
+            // Parse the JSON response
+            const data = await response.json()
+          
+            // Do something with the JSON data
+            // For example, you can return it as a response
+            return new Response(JSON.stringify(data), {
+              headers: { 'Content-Type': 'application/json' }
+            })
+          }		
+	} 
+};
 
