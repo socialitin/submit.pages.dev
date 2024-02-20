@@ -49,7 +49,7 @@
 		  </div>
 		  <div id="Tab1" class="tabcontent">
 			<h3>Content 1</h3>
-			<p>This is the content for Tab 1.</p>
+			<div id ="jdata"></div>
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
 			onclick="fetchjson()">
 			</div>	  
@@ -139,7 +139,7 @@
 			const response = await fetch('/api/fetchjson');
 			const data = await response.text();
 		//	console.log(data);
-		document.getElementById('#Tab1').innerHTML = 'got it!!';
+		document.getElementById('#jdata').innerHTML = data;
 			}
 			</script>
 	</body>
