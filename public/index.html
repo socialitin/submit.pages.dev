@@ -12,16 +12,6 @@
 	</head>
 
 	<body>
-		<style>
-			.tab {
-			display: none;
-			}
-			</style>
-			</head>
-			<body>
-			<div class="tab">
-			<h2>Tab 1 Content</h2>
-			<p>This is the content of Tab 1.</p>			
 
 		<main>
 			<h1> Pitch your Offer </h1>
@@ -86,21 +76,6 @@
 				<button type="submit">Submit</button>
 			</form>
 		</main>
-	</div>
-		<div class="tab">
-			<h2>Tab 2 Content</h2>
-			<p>This is the content of Tab 2.</p>
-			</div>
-			<div class="tab">
-			<h2>Tab 3 Content</h2>
-			<p>This is the content of Tab 3.</p>
-			</div>
-
-			<button onclick="showTab(0)">Tab 1</button>
-			<button onclick="showTab(1)">Tab 2</button>
-			<button onclick="showTab(2)">Tab 3</button>
-			
-		
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
