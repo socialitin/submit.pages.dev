@@ -139,7 +139,7 @@
 			const response = await fetch('/api/fetchjson');
 			const data = await response.text();
 		//	console.log(data);
-			$('#tab1') = data;
+		document.getElementById(''+str+'').innerHTML = data;
 			}
 			</script>
 	</body>
