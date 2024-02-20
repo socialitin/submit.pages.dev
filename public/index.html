@@ -9,10 +9,53 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
+		<style>
+			.tab {
+			  overflow: hidden;
+			  border: 1px solid #ccc;
+			  background-color: #f1f1f1;
+			}
+			
+			.tab button {
+			  background-color: inherit;
+			  float: left;
+			  border: none;
+			  outline: none;
+			  cursor: pointer;
+			  padding: 14px 16px;
+			}
+			
+			.tab button:hover {
+			  background-color: #ddd;
+			}
+			
+			.tab button.active {
+			  background-color: #ccc;
+			}
+			
+			.tabcontent {
+			  display: none;
+			  padding: 6px 12px;
+			  border: 1px solid #ccc;
+			  border-top: none;
+			}
+			</style>
 	</head>
 
 	<body>
-
+		<div class="tab">
+			<button class="tablinks" onclick="openTab(event, 'Tab1')">Tab 1</button>
+			<button class="tablinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
+		  </div>
+		  <div id="Tab1" class="tabcontent">
+			<h3>Content 1</h3>
+			<p>This is the content for Tab 1.</p>
+			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
+			onclick="fetchjson()">
+			</div>	  
+		  <div id="Tab2" class="tabcontent">
+			<h3>Content 1</h3>
+			<p>This is the content for Tab 1.</p>
 		<main>
 			<h1> Pitch your Offer </h1>
 
@@ -21,8 +64,7 @@
 				<p>Pages deployed a <code>/public</code> directory, containing a HTML document (this webpage) and a <code>/functions</code> directory, which contains the Cloudflare Workers code for the API endpoint this <code>&lt;form&gt;</code> references.</p>
 				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
 			</blockquote>
-			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-			onclick="fetchjson()">
+
 		
 			<form method="POST" action="/api/submit">
 				<div class="input">
@@ -76,6 +118,22 @@
 				<button type="submit">Submit</button>
 			</form>
 		</main>
+	</div>
+	<script>
+		function openTab(evt, tabName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(tabName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+		</script>
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
