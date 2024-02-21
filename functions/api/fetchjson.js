@@ -4,15 +4,14 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-pAnnts = obj;
   var offers = [];
-Object.keys(pAnnts).forEach(function(key,elem) {
+Object.keys(obj).forEach(function(key,elem) {
   var tRgn = 0;
-  var value = pAnnts[key];
+  var value = obj[key];
   var str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
 var tRgn = 0;
-var value = pAnnts[key];
+//var value = pAnnts[key];
 var str = elem.toString();
   //$('#'+str+'').name = key.substring(0,2)+str;
 //$('#'+str+'').show();
