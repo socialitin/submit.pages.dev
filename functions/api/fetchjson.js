@@ -17,7 +17,7 @@ var tRgn = 0;
 //$('#'+str+'').show();
 
 tValue = ' ';
-tpics = []; 
+//tpics = []; 
 pname = '';
 var cRegion = key;
 var aRegion = key.substring(0,3);
