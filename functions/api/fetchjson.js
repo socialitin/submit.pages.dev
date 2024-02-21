@@ -39,7 +39,7 @@ var tValue = tValue + value[h].City + ' * ' ;
 //document.getElementById('xy'+str+'').innerHTML = mLabel;
    //  };
 //var pcountry = $('#myItin').attr('data-country')+ '/';       
-ar pcountry = "US_";  
+var pcountry = "US_";  
 var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
 var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 //var Tpics = {Tpics};
