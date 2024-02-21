@@ -6,26 +6,27 @@ export async function onRequest(context) {
 
   var offers = [];
 Object.keys(obj).forEach(function(key,elem) {
-  var value = obj[key];
-  var str = elem.toString();
+  const value = obj[key];
+  
+  const str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
 
   //$('#'+str+'').name = key.substring(0,2)+str;
 //$('#'+str+'').show();
-var tValue = '';
-var tpics = []; 
-var pname = '';
-var cRegion = key;
+const tValue = '';
+const tpics = []; 
+const cRegion = key;
 //var aRegion = key.substring(0,3);
 //+elem;
 
-rDetail = key.substring(0,2)+str+',';
+var rDetail = key.substring(0,2)+str+',';
+
  // console.warn('current', key,value[0].Province,value[0].Pitch);
-var rVideo = value[0].Pitch; 
+const rVideo = value[0].Pitch; 
 if (rVideo.includes("src=")) { 
   //use it   
  }else{
-   var rVideo = ` <div style="position: relative; padding-top: 56.25%;"><iframe src="`+rVideo+ `" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>`;  
+   const rVideo = ` <div style="position: relative; padding-top: 56.25%;"><iframe src="`+rVideo+ `" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>`;  
  };
 
 for (var h = 1; h <value.length; h++ ) {
@@ -38,7 +39,7 @@ for (var h = 1; h <value.length; h++ ) {
 //document.getElementById('xy'+str+'').innerHTML = mLabel;
    //  };
 //var pcountry = $('#myItin').attr('data-country')+ '/';       
-var pcountry = "US_";  
+//var pcountry = "US_";  
 //var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
 //var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 //tpics.push(Tpics);
