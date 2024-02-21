@@ -21,19 +21,7 @@ tValue = ' ';
 //pname = '';
 var cRegion = key;
 var aRegion = key.substring(0,3);
-//+elem;
 
-rDetail = key.substring(0,2)+str+',';
- // console.warn('current', key,value[0].Province,value[0].Pitch);
-var mLabel = value[0].Province;
-var rVideo = value[0].Pitch; 
-
- var tpics = [];
-
-//if ($('#tournet-nearby').attr('options') == 0){
-  //document.getElementById(''+str+'').name = rDtl.substring(4);
-// };
-//offers.push(thisoffer);
 });
   return new Response(obj.body);
  // return new Response(offers);
