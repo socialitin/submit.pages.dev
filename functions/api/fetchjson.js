@@ -29,26 +29,7 @@ var mLabel = value[0].Province;
 var rVideo = value[0].Pitch; 
 
  var tpics = [];
-for (var h = 1; h <value.length; h++ ) {
-    var rDetail = rDetail+value[h].IATA+',';
 
-var tValue = tValue + value[h].City + ' * ' ;
-
-   // if ($('#tournet-nearby').attr('options') == 0){
-//document.getElementById(''+str+'').src = tImg; 
-//document.getElementById('xy'+str+'').innerHTML = mLabel;
-   //  };
-//var pcountry = $('#myItin').attr('data-country')+ '/';       
-var pcountry = "US_";  
-//var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
-var tImg ='blank.jpg';
-//var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
-var Tpics = {};
-//tpics.push(Tpics);
-      
-
-
-};
 //if ($('#tournet-nearby').attr('options') == 0){
   //document.getElementById(''+str+'').name = rDtl.substring(4);
 // };
