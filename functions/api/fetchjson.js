@@ -20,6 +20,6 @@ Ofr_Pictures: {},
    Ofr_EmVideo: ''
  };
  
-  return new Response(obj.body);
-  //return new Response(offers);
+  //return new Response(obj.body);
+  return new Response(thisoffer);
 }
