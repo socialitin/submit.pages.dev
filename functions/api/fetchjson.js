@@ -4,9 +4,9 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-  var offers = [];
+  let offers = [];
 Object.keys(obj).forEach(function(key,elem) {
-  /// const value = obj[key];
+   const value = obj[key];
   
   /// const str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
