@@ -14,7 +14,7 @@ Object.keys(pAnnts).forEach(function(key,elem) {
 var tRgn = 0;
 var value = pAnnts[key];
 var str = elem.toString();
-$('#'+str+'').name = key.substring(0,2)+str;
+  //$('#'+str+'').name = key.substring(0,2)+str;
 $('#'+str+'').show();
 
 tValue = ' ';
@@ -25,7 +25,7 @@ var aRegion = key.substring(0,3);
 //+elem;
 
 rDetail = key.substring(0,2)+str+',';
-  console.warn('current', key,value[0].Province,value[0].Pitch);
+ // console.warn('current', key,value[0].Province,value[0].Pitch);
 var mLabel = value[0].Province;
 var rVideo = value[0].Pitch; 
 if (rVideo.includes("src=")) { 
@@ -33,6 +33,7 @@ if (rVideo.includes("src=")) {
  }else{
    var rVideo = ` <div style="position: relative; padding-top: 56.25%;"><iframe src="`+rVideo+ `" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>`;  
  };
+ var tpics = [];
 for (var h = 1; h <value.length; h++ ) {
     var rDetail = rDetail+value[h].IATA+',';
 
@@ -46,8 +47,8 @@ var tValue = tValue + value[h].City + ' * ' ;
 var pcountry = "US_";  
 //var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
 var tImg ='';
-var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
-//var Tpics = {Tpics};
+//var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
+var Tpics = {};
 tpics.push(Tpics);
       
 var thisoffer = {
@@ -65,9 +66,13 @@ Ofr_Pictures: JSON.stringify(tpics),
  Pdt_Type: "P",
    Ofr_EmVideo: ''
  };
-//   document.getElementById(''+elem+'').src = tImg; 
+
 };
+//if ($('#tournet-nearby').attr('options') == 0){
+  //document.getElementById(''+str+'').name = rDtl.substring(4);
+// };
+offers.push(thisoffer);
 });
-  //return new Response(obj.body);
-  return new Response(offers);
+  return new Response(obj.body);
+ // return new Response(offers);
 }
