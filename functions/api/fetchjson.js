@@ -27,11 +27,7 @@ rDetail = key.substring(0,2)+str+',';
  // console.warn('current', key,value[0].Province,value[0].Pitch);
 var mLabel = value[0].Province;
 var rVideo = value[0].Pitch; 
-if (rVideo.includes("src=")) { 
-  //use it   
- }else{
-   var rVideo = ` <div style="position: relative; padding-top: 56.25%;"><iframe src="`+rVideo+ `" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>`;  
- };
+
  var tpics = [];
 for (var h = 1; h <value.length; h++ ) {
     var rDetail = rDetail+value[h].IATA+',';
