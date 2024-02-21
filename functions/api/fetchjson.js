@@ -4,7 +4,7 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-  const offers = [];
+  var offers = '';
 Object.keys(obj).forEach(function(key,elem) {
   //const tRgn = 0;
   const value = obj[key];
@@ -21,8 +21,8 @@ const tRgn = 0;
 //pname = '';
 const cRegion = key;
 const aRegion = key.substring(0,3);
-
+var offers = offers+ str;
 });
   //return new Response(obj.body);
-  return new Response(key);
+  return new Response(offers);
 }
