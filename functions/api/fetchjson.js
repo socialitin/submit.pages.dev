@@ -44,9 +44,7 @@ var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcou
 var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 //var Tpics = {Tpics};
 tpics.push(Tpics);
-    
-
-    
+      
 var thisoffer = {
   Ofr_OfferId: 555,
  Ofr_Name:  tValue,
@@ -80,6 +78,6 @@ offers.push(thisoffer);
   if (obj === null) {
     return new Response('Not found', { status: 404 });
   }
-  //return new Response(obj.body);
-  return new Response(offers);
+  return new Response(obj.body);
+  //return new Response(offers);
 }
