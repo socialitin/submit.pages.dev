@@ -55,7 +55,7 @@ var thisoffer = {
  Ofr_Name:  tValue,
  Ofr_Location: cRegion,
  Cmp_CompanyId: "431", 
-Ofr_Pictures: JSON.stringify(tpics),
+Ofr_Pictures: tpics,
  Ofr_Type: "C",
  Ofr_Instructions: rDetail,
  Ofr_AutoResponse: 'NY',
