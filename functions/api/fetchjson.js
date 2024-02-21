@@ -50,27 +50,13 @@ var tImg ='blank.jpg';
 var Tpics = {};
 //tpics.push(Tpics);
       
-var thisoffer = {
-  Ofr_OfferId: 555,
- Ofr_Name:  tValue,
- Ofr_Location: cRegion,
- Cmp_CompanyId: "431", 
-Ofr_Pictures: tpics,
- Ofr_Type: "C",
- Ofr_Instructions: rDetail,
- Ofr_AutoResponse: 'NY',
- Pds_ProdServiceId: "272744",
- Ofr_WgtLanguages: "en" ,
-   Ofr_Published: "204",
- Pdt_Type: "P",
-   Ofr_EmVideo: ''
- };
+
 
 };
 //if ($('#tournet-nearby').attr('options') == 0){
   //document.getElementById(''+str+'').name = rDtl.substring(4);
 // };
-offers.push(thisoffer);
+//offers.push(thisoffer);
 });
   return new Response(obj.body);
  // return new Response(offers);
