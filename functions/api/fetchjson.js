@@ -9,7 +9,7 @@ Object.keys(obj).forEach(function(key,elem) {
   var tRgn = 0;
   var value = obj[key];
   var str = elem.toString();
-$('#'+str+'').name = key.substring(0,2)+str;
+//$('#'+str+'').name = key.substring(0,2)+str;
 var tRgn = 0;
 //var value = pAnnts[key];
 //var str = elem.toString();
