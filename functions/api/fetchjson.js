@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const obj = await context.env.filterjson.get('4NYCD-NIA.json');
+  const obj = await context.env.filterjson.get('NYC-NIA.json');
   if (obj === null) {
     return new Response('Not found', { status: 404 });
   }
