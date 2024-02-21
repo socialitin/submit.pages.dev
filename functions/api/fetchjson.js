@@ -19,7 +19,7 @@ const cRegion = key;
 //var aRegion = key.substring(0,3);
 //+elem;
 
-var rDetail = key.substring(0,2)+str+',';
+/// var rDetail = key.substring(0,2)+str+',';
 
  // console.warn('current', key,value[0].Province,value[0].Pitch);
 const rVideo = value[0].Pitch; 
