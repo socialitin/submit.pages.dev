@@ -21,5 +21,5 @@ Ofr_Pictures: {},
  };
  
   //return new Response(obj.body);
-  return new Response(JSON.parse(thisoffer));
+  return new Response(thisoffer);
 }
