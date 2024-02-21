@@ -16,7 +16,7 @@ const tRgn = 0;
   //$('#'+str+'').name = key.substring(0,2)+str;
 //$('#'+str+'').show();
 
-tValue = ' ';
+//tValue = ' ';
 //tpics = []; 
 //pname = '';
 const cRegion = key;
