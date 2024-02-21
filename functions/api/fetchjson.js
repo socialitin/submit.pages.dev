@@ -15,7 +15,7 @@ var tRgn = 0;
 var value = pAnnts[key];
 var str = elem.toString();
   //$('#'+str+'').name = key.substring(0,2)+str;
-$('#'+str+'').show();
+//$('#'+str+'').show();
 
 tValue = ' ';
 tpics = []; 
@@ -46,10 +46,10 @@ var tValue = tValue + value[h].City + ' * ' ;
 //var pcountry = $('#myItin').attr('data-country')+ '/';       
 var pcountry = "US_";  
 //var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
-var tImg ='';
+var tImg ='blank.jpg';
 //var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 var Tpics = {};
-tpics.push(Tpics);
+//tpics.push(Tpics);
       
 var thisoffer = {
   Ofr_OfferId: 555,
