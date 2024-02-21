@@ -3,14 +3,14 @@ export async function onRequest(context) {
   if (obj === null) {
     return new Response('Not found', { status: 404 });
   }
-  
+
 pAnnts = obj;
   var offers = [];
 Object.keys(pAnnts).forEach(function(key,elem) {
   var tRgn = 0;
   var value = pAnnts[key];
   var str = elem.toString();
-$('#'+str+'').name = key.substring(0,2)+str;
+//$('#'+str+'').name = key.substring(0,2)+str;
 var tRgn = 0;
 var value = pAnnts[key];
 var str = elem.toString();
@@ -44,7 +44,8 @@ var tValue = tValue + value[h].City + ' * ' ;
    //  };
 //var pcountry = $('#myItin').attr('data-country')+ '/';       
 var pcountry = "US_";  
-var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
+//var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +cRegion+'/'+ value[h].City+'.jpg';
+var tImg ='';
 var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 //var Tpics = {Tpics};
 tpics.push(Tpics);
@@ -62,7 +63,7 @@ Ofr_Pictures: JSON.stringify(tpics),
  Ofr_WgtLanguages: "en" ,
    Ofr_Published: "204",
  Pdt_Type: "P",
-   Ofr_EmVideo: rVideo
+   Ofr_EmVideo: ''
  };
 //   document.getElementById(''+elem+'').src = tImg; 
 };
