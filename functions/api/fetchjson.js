@@ -16,7 +16,7 @@ var tValue = '';
 var tpics = []; 
 var pname = '';
 var cRegion = key;
-var aRegion = key.substring(0,3);
+//var aRegion = key.substring(0,3);
 //+elem;
 
 rDetail = key.substring(0,2)+str+',';
@@ -29,9 +29,9 @@ if (rVideo.includes("src=")) {
  };
 
 for (var h = 1; h <value.length; h++ ) {
-    var rDetail = rDetail+value[h].IATA+',';
+   /// var rDetail = rDetail+value[h].IATA+',';
 
-var tValue = tValue + value[h].City + ' * ' ;
+/// var tValue = tValue + value[h].City + ' * ' ;
 
    // if ($('#tournet-nearby').attr('options') == 0){
 //document.getElementById(''+str+'').src = tImg; 
