@@ -24,7 +24,7 @@ Object.keys(obj).forEach(function(key,elem) {
  // console.warn('current', key,value[0].Province,value[0].Pitch);
 //const rVideo = value[0].Pitch; 
 
-const rDetail = '';
+let rDetail = '';
 for (var h = 1; h <value.length; h++ ) {
    /// var rDetail = rDetail+value[h].IATA+',';
    rDetail += value[h].IATA+',';
