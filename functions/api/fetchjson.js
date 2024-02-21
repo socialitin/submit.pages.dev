@@ -23,6 +23,6 @@ const cRegion = key;
 const aRegion = key.substring(0,3);
 
 });
-  return new Response(obj.body);
- // return new Response(offers);
+  //return new Response(obj.body);
+  return new Response(key);
 }
