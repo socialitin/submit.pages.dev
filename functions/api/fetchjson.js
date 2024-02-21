@@ -21,7 +21,7 @@ const tRgn = 0;
 //pname = '';
 const cRegion = key;
 const aRegion = key.substring(0,3);
-var offers = offers+ str;
+var offers = offers+ value;
 });
   //return new Response(obj.body);
   return new Response(offers);
