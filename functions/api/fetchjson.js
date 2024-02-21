@@ -6,32 +6,28 @@ export async function onRequest(context) {
 
   var offers = [];
 Object.keys(obj).forEach(function(key,elem) {
-  const value = obj[key];
+  /// const value = obj[key];
   
-  const str = elem.toString();
+  /// const str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
 
   //$('#'+str+'').name = key.substring(0,2)+str;
 //$('#'+str+'').show();
-const tValue = '';
-const tpics = []; 
-const cRegion = key;
+/// const tValue = '';
+//// const tpics = []; 
+/// const cRegion = key;
 //var aRegion = key.substring(0,3);
-//+elem;
+
 
 /// var rDetail = key.substring(0,2)+str+',';
 
  // console.warn('current', key,value[0].Province,value[0].Pitch);
-const rVideo = value[0].Pitch; 
-if (rVideo.includes("src=")) { 
-  //use it   
- }else{
-   const rVideo = ` <div style="position: relative; padding-top: 56.25%;"><iframe src="`+rVideo+ `" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>`;  
- };
+//const rVideo = value[0].Pitch; 
 
+const rDetail = '';
 for (var h = 1; h <value.length; h++ ) {
    /// var rDetail = rDetail+value[h].IATA+',';
-
+   rDetail += value[h].IATA+',';
 /// var tValue = tValue + value[h].City + ' * ' ;
 
    // if ($('#tournet-nearby').attr('options') == 0){
@@ -46,10 +42,10 @@ for (var h = 1; h <value.length; h++ ) {
       
 var thisoffer = {
   Ofr_OfferId: 555,
- Ofr_Name:  tValue,
- Ofr_Location: cRegion,
+ Ofr_Name:  {},
+ Ofr_Location: 'NYC',
  Cmp_CompanyId: "431", 
-Ofr_Pictures: JSON.stringify(tpics),
+Ofr_Pictures: [],
  Ofr_Type: "C",
  Ofr_Instructions: rDetail,
  Ofr_AutoResponse: 'NY',
