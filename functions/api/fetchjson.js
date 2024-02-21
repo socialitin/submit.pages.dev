@@ -4,23 +4,23 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-  var offers = [];
+  const offers = [];
 Object.keys(obj).forEach(function(key,elem) {
-  var tRgn = 0;
-  var value = obj[key];
-  var str = elem.toString();
+  //const tRgn = 0;
+  const value = obj[key];
+  const str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
-var tRgn = 0;
-//var value = pAnnts[key];
-//var str = elem.toString();
+const tRgn = 0;
+//const value = pAnnts[key];
+//const str = elem.toString();
   //$('#'+str+'').name = key.substring(0,2)+str;
 //$('#'+str+'').show();
 
 tValue = ' ';
 //tpics = []; 
 //pname = '';
-var cRegion = key;
-var aRegion = key.substring(0,3);
+const cRegion = key;
+const aRegion = key.substring(0,3);
 
 });
   return new Response(obj.body);
