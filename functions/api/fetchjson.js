@@ -4,9 +4,9 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-  let offers = [];
+  //let offers = [];
 Object.keys(obj).forEach(function(key,elem) {
-   const value = obj[key];
+  /// const value = obj[key];
   
   /// const str = elem.toString();
 //$('#'+str+'').name = key.substring(0,2)+str;
@@ -24,8 +24,8 @@ Object.keys(obj).forEach(function(key,elem) {
  // console.warn('current', key,value[0].Province,value[0].Pitch);
 //const rVideo = value[0].Pitch; 
 
-let rDetail = '';
-for (var h = 1; h <value.length; h++ ) {
+//let rDetail = '';
+for (var h = 1; h <obj[key].length; h++ ) {
    /// var rDetail = rDetail+value[h].IATA+',';
    rDetail += value[h].IATA+',';
 /// var tValue = tValue + value[h].City + ' * ' ;
@@ -60,7 +60,7 @@ Ofr_Pictures: [],
 //if ($('#tournet-nearby').attr('options') == 0){
   //document.getElementById(''+str+'').name = rDtl.substring(4);
 // };
-offers.push(thisoffer);
+//offers.push(thisoffer);
 });
   return new Response(obj.body);
  // return new Response(offers);
