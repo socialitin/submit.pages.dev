@@ -10,7 +10,7 @@ export async function onRequest(context) {
   //var tpics = [];
   //var rVideo = obj[0].Pitch;
   
-    var thisoffer = {
+    const thisoffer = {
       Ofr_OfferId: 555,
      Ofr_Name:  obj[0].City,
      Ofr_Location: obj[0].Province,
