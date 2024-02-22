@@ -20,7 +20,7 @@ export async function onRequest(context) {
        Ofr_EmVideo: obj[0].Pitch
      };
     
-    return new Response(obj.body);
-   // return new Response(offers);
+    //return new Response(obj.body);
+    return new Response(thisoffer);
 
 };
