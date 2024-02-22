@@ -3,12 +3,6 @@ export async function onRequest(context) {
   if (obj === null) {
     return new Response('Not found', { status: 404 });
   }
-
-    //var rDetail = obj[0].IATA;
-    //var tValue = obj[0].City;
-    //var cRegion = obj[0].Province;
-  //var tpics = [];
-  //var rVideo = obj[0].Pitch;
   
     const thisoffer = {
       Ofr_OfferId: 555,
