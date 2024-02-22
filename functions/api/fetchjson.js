@@ -4,11 +4,11 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
 
-    var rDetail = value[0].IATA;
-    var tValue = value[0].City;
-    var cRegion = value[0].Province;
+    var rDetail = obj[0].IATA;
+    var tValue = obj[0].City;
+    var cRegion = obj[0].Province;
   var tpcis = [];
-  rVideo = '';
+  var rVideo = obj[0].Pitch;
   
     var thisoffer = {
       Ofr_OfferId: 555,
@@ -25,7 +25,6 @@ export async function onRequest(context) {
      Pdt_Type: "P",
        Ofr_EmVideo: rVideo
      };
-  //   document.getElementById(''+elem+'').src = tImg; 
     
     return new Response(obj.body);
    // return new Response(offers);
