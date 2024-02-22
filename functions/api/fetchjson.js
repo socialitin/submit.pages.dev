@@ -4,7 +4,7 @@ export async function onRequest(context) {
     return new Response('Not found', { status: 404 });
   }
   
-    return new Response(obj.property1);
+    return new Response(obj.City);
    // return new Response(offers);
 
 };
