@@ -7,7 +7,7 @@ export async function onRequest(context) {
     var rDetail = obj[0].IATA;
     var tValue = obj[0].City;
     var cRegion = obj[0].Province;
-  var tpcis = [];
+  var tpics = [];
   var rVideo = obj[0].Pitch;
   
     var thisoffer = {
