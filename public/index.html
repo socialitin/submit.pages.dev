@@ -143,7 +143,7 @@
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
-			const data = await response.json;
+			const data = await response.formData;
 		//	console.log(data);
 		//document.getElementById('jdata').innerHTML = data;
 		document.getElementById("itemImg").innerHTML = data;
