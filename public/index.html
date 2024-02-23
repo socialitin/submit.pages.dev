@@ -143,10 +143,10 @@
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
-			const data = await response.text();
+			const data = await response.json;
 		//	console.log(data);
 		//document.getElementById('jdata').innerHTML = data;
-		document.getElementById("itemImg").innerHTML = data['Pitch'];
+		document.getElementById("itemImg").innerHTML = data;
 			}
 			</script>
 	</body>
