@@ -143,9 +143,9 @@
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
-			const data = await response.text();
+			const data = await response.json();
 	//		JSON.parse(data);
-		console.log(data.City);
+		console.log(data);
 		//document.getElementById('jdata').innerHTML = data;
 		document.getElementById("itemImg").innerHTML = JSON.stringify(data);
 
