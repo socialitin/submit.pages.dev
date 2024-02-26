@@ -35,7 +35,7 @@ let pretty = JSON.stringify(output, null, 2);
 }
 
 ///
-async function fetchjson() {
+		//async function fetchjson() {
 	const response = await fetch('/api/fetchjson');
 	const data = await response.json();
 const modifiedData = {
@@ -54,7 +54,7 @@ const modifiedData = {
 
 	});
 	console.log('updatedj',response1);
-}}
+}
 //export async function onRequestGet(context) {
 	//return context.env.SERVICE.fetch(context.request);
  // }
