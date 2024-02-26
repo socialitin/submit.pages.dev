@@ -36,3 +36,24 @@ let pretty = JSON.stringify(output, null, 2);
 export async function onRequestGet(context) {
 	return context.env.SERVICE.fetch(context.request);
   }
+
+  ///
+  const modifiedData = {
+	City: 'Cali'
+	
+  }
+  const jsonData = JSON.stringify(modifiedData);
+
+  async function fetchjson() {
+	const response1 = await fetch('/api/fetchjson',{
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+		body: jsonData
+
+	});
+	//const data = await response.json();
+
+  //}
+}
