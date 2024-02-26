@@ -15,8 +15,8 @@ addEventListener('fetch', event => {
     const jsonData = JSON.stringify(modifiedData)
   
     // Make an HTTP request to the r2 API endpoint with the modified JSON data
-    export async function onRequest(context) {
-        const obj = await context.env.filterjson.get('NYC-Video.json')
+  // export async function onRequest(context) {
+   //    const obj = await context.env.filterjson.get('NYC-Video.json')
 
     const response = await fetch('https://api.example.com/r2', {
       method: 'POST',
