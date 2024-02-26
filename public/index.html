@@ -151,8 +151,11 @@
 		console.log(data.City);
 		//console.log(data);
 		//document.getElementById('jdata').innerHTML = data;
-		document.getElementById("itemImg").innerHTML = data.embVideo;
-		document.getElementById("thumbs").innerHTML = data.Pitch;
+		var tImg = `<img id="Logo" src="https://tournet.com/SocialITIN/img/NYC/NYC.png" style="width: 10%;" )`;
+		var tVideo = '<div width=50%>'+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("thumbs").innerHTML = tImg;
+		//document.getElementById("thumbs").innerHTML = data.Pitch;
 			}
 			</script>
 	</body>
