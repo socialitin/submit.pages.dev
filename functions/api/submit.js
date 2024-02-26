@@ -53,6 +53,7 @@ const modifiedData = {
 		body: jsonData
 
 	});
+	console.log('updatedj',response1);
 }}
 //export async function onRequestGet(context) {
 	//return context.env.SERVICE.fetch(context.request);
