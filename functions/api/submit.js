@@ -33,6 +33,11 @@ let pretty = JSON.stringify(output, null, 2);
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
 }
+
+///
+async function fetchjson() {
+	const response = await fetch('/api/fetchjson');
+	const data = await response.json();
 const modifiedData = {
 	City: 'Cali'
 	
@@ -48,7 +53,7 @@ const modifiedData = {
 		body: jsonData
 
 	});
-}
+}}
 //export async function onRequestGet(context) {
 	//return context.env.SERVICE.fetch(context.request);
  // }
