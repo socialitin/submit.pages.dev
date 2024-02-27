@@ -24,7 +24,7 @@ export async function onRequestPost({ request }) {
 
 let pretty = JSON.stringify(output, null, 2);
 console.log(pretty);
-await env.filterjson.put(pretty);
+await env.filterjson.put(output);
 //return new Response(`Put ${key} successfully!`);
 		return new Response(pretty, {
 			headers: {
