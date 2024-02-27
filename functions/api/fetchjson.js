@@ -8,7 +8,7 @@ export default {
         await env.filterjson.put('NYC-SAN.json', request.body);
         //return new Response(`Put ${key} successfully!`);
       case 'GET':
-        const object = await env.filterjson.get('NYC-Video.json');
+        const object = await env.filterjson.get(key);
 
         if (object === null) {
           return new Response('Object Not Found', { status: 404 });
