@@ -28,7 +28,7 @@ let pretty = JSON.stringify(output, null, 2);
 				'Content-Type': 'application/json;charset=utf-8'
 			}
 		});
-		console.log('current json', pretty);					
+		console.log('current json', pretty);			
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
