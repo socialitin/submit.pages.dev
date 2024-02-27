@@ -1,8 +1,8 @@
 export default {
   async fetch(request, env) {
-    const url = new URL('https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/430.json');
+    const url = new URL('https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYC-Video.json');
     const key = url.pathname.slice(1);
-
+console.log(key);
     switch (request.method) {
       case 'PUT':
         await env.filterjson.put(key, request.body);
