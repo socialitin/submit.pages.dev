@@ -33,7 +33,7 @@ let pretty = JSON.stringify(output, null, 2);
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
 }
-console.log('current json', $("#pitch"));
+console.log('current json', context.env.SERVICE.fetch(context.request));
 export async function onRequestGet(context) {
 return context.env.SERVICE.fetch(context.request);
 
