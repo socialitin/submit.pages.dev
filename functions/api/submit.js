@@ -28,7 +28,7 @@ let pretty = JSON.stringify(output, null, 2);
 				'Content-Type': 'application/json;charset=utf-8'
 			}
 		});
-					
+		console.log('current json', pretty);					
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
@@ -36,7 +36,7 @@ let pretty = JSON.stringify(output, null, 2);
 
 export async function onRequestGet(context) {
 	const mdjson = context.env.SERVICE.fetch(context.request);
-	console.log('current json', pretty);
+	
 return mdjson;
 
  };
