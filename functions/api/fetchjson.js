@@ -29,7 +29,7 @@ console.log(key);
         return new Response('Method Not Allowed', {
           status: 405,
           headers: {
-            Allow: 'PUT, GET, DELETE',
+            Allow: 'GET',
           },
         });
     }
