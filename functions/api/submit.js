@@ -36,7 +36,7 @@ let pretty = JSON.stringify(output, null, 2);
 
 export async function onRequestGet(context) {
 	const mdjson = context.env.SERVICE.fetch(context.request);
-	console.log('current json', mdjson);
+	console.log('current json', 'uff');
 return mdjson;
 
  };
