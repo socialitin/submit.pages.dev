@@ -23,12 +23,12 @@ export async function onRequestPost({ request }) {
 //.catch(error => console.error('Error:', error));
 
 let pretty = JSON.stringify(output, null, 2);
+console.log('current json', pretty);
 		return new Response(pretty, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			}
 		});
-		console.log('current json', pretty);			
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
