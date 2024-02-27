@@ -6,7 +6,7 @@ export default {
     switch (request.method) {
       case 'PUT':
         await env.filterjson.put('NYC-SAN.json', request.body);
-        //return new Response(`Put ${key} successfully!`);
+        return new Response(`Put ${key} successfully!`);
       case 'GET':
         const object = await env.filterjson.get('NYC-Video.json');
 
