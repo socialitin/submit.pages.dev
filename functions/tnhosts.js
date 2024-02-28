@@ -1,5 +1,5 @@
 var src_default = {
-    async fetch(request, env) {
+    fetch: async function(request, env) {
       const { pathname } = new URL(request.url);
       if (pathname === "/api/beverages") {
         const { results } = await env.DB.prepare(
@@ -7,11 +7,10 @@ var src_default = {
         ).bind("Bs Beverages").all();
         return Response.json(results);
       }
-      //return new Response(
+      return new Response(
         "Call /api/beverages to see everyone who works at Bs Beverages"
-      //);
+      );
     }
   };
-  export {
-    src_default as default
-  };
+  export default src_default;
+    
