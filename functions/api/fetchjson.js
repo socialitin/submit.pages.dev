@@ -1,6 +1,15 @@
-export default {
-  async fetch(request, env, ctx) {
-  const res = await env.DB.prepare("SELECT * FROM jcontent;").all();
-  return new Response(JSON.stringify(res, null, 2));
-  },
-  };
+export async function onRequest(context) {
+  const obj = await context.env.filterjson.get('NYC-Video.json');
+  if (obj === null) {
+    return new Response('Not found', { status: 404 });
+  }
+  const modifiedData = {
+    City: 'Cali',
+    
+  }
+  const jsonData = JSON.stringify(modifiedData)
+  
+    return new Response(obj.body);
+   //return new Response(JSON.stringify(obj))
+   //return new Response(obj.City);
+};
