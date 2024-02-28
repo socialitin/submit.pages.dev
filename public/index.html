@@ -56,7 +56,7 @@
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" >
 			
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-			onclick="tnhosts()">
+			onclick="fetchjson()">
 			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
 				<div class="row">
@@ -148,7 +148,7 @@
 		}
 		</script>
 		<script>
-			async function tnhosts() {
+			async function fetchjson() {
 			const response = await fetch('/api/tnhosts');
 			const data = await response.json();
 		//JSON.parse(data);
