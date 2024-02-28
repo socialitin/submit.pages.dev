@@ -150,7 +150,7 @@
 		<script>
 			async function tnhosts() {
 			const response = await fetch('/api/tnhosts');
-			const data = await response.text();
+			const data = await response.body;
 	///		JSON.parse(data);
 		console.log(data);
 
