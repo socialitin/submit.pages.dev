@@ -7,6 +7,6 @@
     
     // Fetch all rows and metadata
     const allRows = await stmt.all();
-    console.log(allRows);
-    return allRows;
+    console.log(allRows.body);
+    return allRows.body;
   };
