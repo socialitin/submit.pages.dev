@@ -56,7 +56,7 @@
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" >
 			
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-			onclick="d1tnhosts()">
+			onclick="fetchjson()">
 			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
 				<div class="row">
@@ -149,18 +149,18 @@
 		</script>
 		<script>
 			async function d1tnhosts() {
-			const response = await fetch('/api/d1tnhosts');
+			const response = await fetch('/api/fetchjson');
 			const data1 = await response.json();
 		const data =JSON.parse(data1);
 		console.log(data);
 
 	var tImg = `<img src="https://tournet.com/SocialITIN/img/NYC/NYC.png" style="width: 100%;" >`;
-		//var tVideo = '<div width="40%" ">'+data.embVideo+data.Pitch+'</div>';
-		//document.getElementById("itemImg").innerHTML = tVideo;
-		//document.getElementById("thumbs").innerHTML = tImg;
-		//document.getElementById("name").value = data.City;
-		//document.getElementById("pitch").value = data.Pitch;
-		//document.getElementById("email").value = data.Pictures;
+		var tVideo = '<div width="40%" ">'+data.embVideo+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("thumbs").innerHTML = tImg;
+		document.getElementById("name").value = data.City;
+		document.getElementById("pitch").value = data.Pitch;
+		document.getElementById("email").value = data.Pictures;
 	
 			}
 			</script>
