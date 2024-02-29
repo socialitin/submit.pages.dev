@@ -3,7 +3,6 @@ export async function onRequest(context) {
   if (obj === null) {
     return new Response('Not found', { status: 404 });
   };
-  
-    return new Response.json(obj.body);
+      return new Response(obj.body);
 
 };
