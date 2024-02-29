@@ -1,10 +1,15 @@
-export async function onRequest(context) {
-  const obj = await context.env.filterjson.get('NYC-Video.json');
-  if (obj === null) {
-    return new Response('Not found', { status: 404 });
-  };
-  
-    return new Response(obj.body);
-   //return new Response(JSON.stringify(obj))
-   //return new Response(obj.City);
+var src_default = {
+  fetch: async function(request, env) {
+    const { pathname } = new URL(request.url);
+    if (pathname === "/api/beverages") {
+      const { results } = await env.DB.prepare(
+        "SELECT * FROM Hosts WHERE CompanyName = ?"
+      ).bind("Bs Beverages").all();
+      return Response.json(results);
+    }
+    return new Response(
+      "Call /api/beverages to see everyone who works at Bs Beverages"
+    );
+  }
 };
+export default src_default;
