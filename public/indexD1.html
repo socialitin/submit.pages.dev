@@ -151,7 +151,7 @@
 			async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
 			const data1 = await response;
-		const data =JSON.parse(data1);
+		const data =JSON.stringify(data1);
 		console.log(data);
 
 	var tImg = `<img src="https://tournet.com/SocialITIN/img/NYC/NYC.png" style="width: 100%;" >`;
