@@ -5,6 +5,5 @@ export async function onRequest(context) {
   };
   
     return new Response(obj.body);
-   //return new Response(JSON.stringify(obj))
-   //return new Response(obj.City);
+
 };

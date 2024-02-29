@@ -1,4 +1,4 @@
-fetch('d1-tn-hosts.socialitin.workers.dev')
+fetch('d1-tn-hosts')
 .then(response => response.json())
 .then(data => {
 console.log(data);
