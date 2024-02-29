@@ -5,8 +5,7 @@ var src_default = {
       const { results } = await env.DB.prepare(
         "SELECT * FROM Hosts WHERE CompanyName = ?"
       ).bind("Bs Beverages").all();
-      return results
-      //Response.json(results);
+      return Response.results;
     }
     return new Response(
       "Call /api/beverages to see everyone who works at Bs Beverages"
