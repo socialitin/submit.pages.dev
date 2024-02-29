@@ -1,12 +1,7 @@
-  async function fetchData() {
-    const stmt = DB.prepare('SELECT * FROM Hosts LIMIT 3');
-    
-    // Fetch the first row
-   // const firstRow = await stmt.first();
-   // console.log(firstRow);
-    
-    // Fetch all rows and metadata
-    const allRows = await stmt.all();
-    console.log(allRows);
-    return allRows;
-  };
+  export async function onRequest(context) {
+    // Create a prepared statement with our query
+    const ps = context.env.DB.prepare('SELECT * from hosts');
+    const data = await ps.first();
+  
+    return Response.json(data);
+  }
