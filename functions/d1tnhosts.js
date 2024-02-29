@@ -5,6 +5,7 @@ const src_default = {
         const { results } = await env.DB.prepare(
           "SELECT * FROM Hosts WHERE CompanyName = ?"
         ).bind("Bs Beverages").all();
+        console.log('got',Response.json(results));
         return Response.json(results);
       //}
     }
