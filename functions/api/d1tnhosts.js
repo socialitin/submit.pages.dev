@@ -1,5 +1,5 @@
   async function fetchData() {
-    const stmt = db.prepare('SELECT * FROM Hosts LIMIT 3');
+    const stmt = d1-tn-hosts.prepare('SELECT * FROM Hosts LIMIT 3');
     
     // Fetch the first row
    // const firstRow = await stmt.first();
