@@ -150,9 +150,9 @@
 		<script>
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
-			const data1 = await response.json;
-		const data =JSON.parse(data1);
-		console.log(data);
+			//const data1 = await response.json;
+		//const data =JSON.parse(data1);
+		console.log(response);
 	var tImg = `<img src="https://tournet.com/SocialITIN/img/NYC/NYC.png" style="width: 100%;" >`;
 		var tVideo = '<div width="40%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
