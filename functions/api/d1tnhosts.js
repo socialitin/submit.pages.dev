@@ -8,5 +8,5 @@
     // Fetch all rows and metadata
     const allRows = await stmt.all();
     console.log(allRows);
-    return allRows;
+    return allRows.json;
   };
