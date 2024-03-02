@@ -27,13 +27,13 @@ export async function onRequestPost({ request }) {
 let pretty = JSON.stringify(output, null, 2);
 
 console.log(pretty);
-///await env.filterjson.put('NYC-Video.json');
-//return new Response(`Put ${key} successfully!`);
-		return new Response(pretty, {
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			}
-		});
+
+		//return new Response(pretty, {
+		//	headers: {
+		//		'Content-Type': 'application/json;charset=utf-8'
+		//	}
+		//});
+
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
