@@ -28,7 +28,11 @@ let pretty = JSON.stringify(output, null, 2);
 
 console.log(pretty);
 
-		return new Response(pretty);
+		return new Response(pretty, {
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			}
+		});
 		
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
