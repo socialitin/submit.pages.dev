@@ -39,6 +39,7 @@ console.log(pretty);
 export async function onRequestGet(context) {
 	const mdjson = context.env.SERVICE.fetch(context.request);
 	
-return mdjson;
+return pretty;
+//mdjson;
 
  };
