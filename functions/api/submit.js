@@ -29,7 +29,7 @@ let pretty = JSON.stringify(output, null, 2);
 console.log(pretty);
 const info = await env.DB.prepare('UPDATE hosts SET CompanyName = "Tournet"').run();
 
-		return new Response(info);
+		return new Response('Updated?');
 		
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
