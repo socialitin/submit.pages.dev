@@ -24,6 +24,11 @@ export async function onRequestPost({ request }) {
 //.catch(error => console.error('Error:', error));
 
 let pretty = JSON.stringify(output, null, 2);
+const info = await env.DB.prepare('UPDATE hosts SET CompanyName = "Tournet"');
+//?1, ContactName = ?2, CustomerId = ?3 WHERE CustomerId = 1;')
+     //   .bind(content.text, Math.round(Date.now() / 1000), content.handle, id)
+     //   .run()
+
 console.log(pretty);
 ///await env.filterjson.put('NYC-Video.json');
 //return new Response(`Put ${key} successfully!`);
