@@ -27,8 +27,9 @@ export async function onRequestPost({ request }) {
 let pretty = JSON.stringify(output, null, 2);
 
 console.log(pretty);
-const info = await env.DB.prepare('UPDATE hosts SET CompanyName = "Tournet"');
+const info = await env.DB.prepare('INSERT INTO hosts pitching VALUES {"City": "Cali"}');
 const dat = await info;
+
 		return new Response({'Updated': '?'});
 		
 	} catch (err) {
