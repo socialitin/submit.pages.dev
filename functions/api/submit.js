@@ -26,7 +26,7 @@ let pretty = JSON.stringify(output, null, 2);
 console.log(pretty);
 ///await env.filterjson.put('NYC-Video.json');
 //return new Response(`Put ${key} successfully!`);
-		return new Response(pretty, {
+		return new Response(output, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			}
@@ -35,3 +35,9 @@ console.log(pretty);
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
 }
+export async function onRequestGet(context) {
+	const mdjson = context.env.SERVICE.fetch(context.request);
+	
+return mdjson;
+
+ };
