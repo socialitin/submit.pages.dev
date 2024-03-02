@@ -35,10 +35,3 @@ console.log(pretty);
 		return new Response('Error parsing JSON content', { status: 400 });
 	}
 }
-
-export async function onRequestGet(context) {
-	const mdjson = context.env.SERVICE.fetch(context.request);
-	return pretty+mdjson;
-//mdjson;
-
- };
