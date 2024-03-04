@@ -60,7 +60,7 @@
 			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
 				<div class="row">
-				<div id="thumbs" style="width:15%; float:left;"></div>	
+				<div id="thumbs" style="width:15%; float:left;" onclick = " document.getElementById('itemImg') = $('#'+event.target.id+'').src" ></div>	
 				<div width="4%"></div>
 				<div id="itemImg" style ="width:85%; float:left;"></div>
 		</div>	 
@@ -155,10 +155,10 @@
 		//.pitching);
 		console.log((data));
 
-	var tImg = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" onclick = "document.getElementById('itemImg').innerHTML=' <img src='https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg' >  '; ">`;
-	var tImg1 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
-	var tImg2 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 90%;" >`;
-	var tImg3 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 90%;" >`;
+	var tImg = `<img id = "0" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" >`;
+	var tImg1 = `<img id = "1" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
+	var tImg2 = `<img id = "2" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 90%;" >`;
+	var tImg3 = `<img id = "3" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 90%;" >`;
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
 		document.getElementById("thumbs").innerHTML = tImg+tImg1+tImg2+tImg3;
