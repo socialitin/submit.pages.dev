@@ -155,10 +155,13 @@
 		//.pitching);
 		console.log((data));
 
-	var tImg = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 10%;" >`;
+	var tImg = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 50%;" >`;
+	var tImg1 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 50%;" >`;
+	var tImg2 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 50%;" >`;
+	var tImg3 = `<img src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 50%;" >`;
 		var tVideo = '<div width="40%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
-		document.getElementById("thumbs").innerHTML = tImg;
+		document.getElementById("thumbs").innerHTML = tImg+tImg1+tImg2+tImg3;
 		document.getElementById("name").value = data.City;
 		document.getElementById("pitch").value = data.Pitch;
 	//	document.getElementById("email").value = data.Pictures;
