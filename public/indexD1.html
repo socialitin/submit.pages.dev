@@ -174,8 +174,10 @@ var picsj = JSON.parse(pics);
 function picsDtl(evt,name) {
 	//var cpic = event.target.id;
 console.log(event.target.id);
-document.getElementById("itemImg").innerHTML = getElementById(''+event.target.id+'').src;
-
+//document.getElementById("itemImg").innerHTML = 
+var picUrl = getElementById(''+event.target.id+'').src;
+$('#itemImg').innerHTML(picUrl);
+//$('#myItin').attr('data-country','NYC')
 };	
 </script>					
 	</body>
