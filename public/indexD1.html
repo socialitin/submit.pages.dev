@@ -153,7 +153,10 @@
 			const data1 = await response.json();
 		const data =JSON.parse(data1.pitching);
 		//.pitching);
-		console.log((data));
+		var pics = '[{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+var picsj = JSON.stringify(pics);
+		console.log((picsj));
+
 
 	var tImg = `<img id = "0" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" >`;
 	var tImg1 = `<img id = "1" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
