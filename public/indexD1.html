@@ -156,15 +156,22 @@
 		var pics = '[{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/www.travelknowhow.com\\\\\\/New York\\/ChicagoMusical\\\\\\/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
 var picsj = JSON.parse(pics);
 		console.log((picsj));
+		for (var h = 0; h <picsj.length; h++ ) {
+var timg = '<img id = "0" src="'+picsj[h].img+'style="width: 90%;" >';
+var tname = picsj[h].name;
+var tdesc = picsj[h].description;
+var tvalue ='';
+document.getElementById("thumbs").innerHTML = tImg;
+		};
+		var Tpics = {"img": tImg , "name" : value[h].City, "description" : value[h].Pitch, "iata" : value[h].IATA};
 
-
-	var tImg = `<img id = "0" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" >`;
-	var tImg1 = `<img id = "1" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
-	var tImg2 = `<img id = "2" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 90%;" >`;
-	var tImg3 = `<img id = "3" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 90%;" >`;
+	//var tImg = `<img id = "0" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" >`;
+	//var tImg1 = `<img id = "1" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
+	//var tImg2 = `<img id = "2" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 90%;" >`;
+	//var tImg3 = `<img id = "3" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 90%;" >`;
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
-		document.getElementById("thumbs").innerHTML = tImg+tImg1+tImg2+tImg3;
+		//document.getElementById("thumbs").innerHTML = tImg+tImg1+tImg2+tImg3;
 		document.getElementById("name").value = data.City;
 		document.getElementById("pitch").value = data.Pitch;
 	//	document.getElementById("email").value = data.Pictures;
