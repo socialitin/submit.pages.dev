@@ -185,7 +185,7 @@ function picsDtl(evt,name) {
 //console.log(getElementById(''+event.target.id+'').src);
 
 //var picis = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg ";
-var picis = getElementById(event.target.id).attr('src');
+var picis = $('#'+event.target.id+'').attr('src');
 //picsj[event.target.id].img;
 var picUrl = '<img src ="'+picis+' " style = "width:70%;"></img>';
 console.log(picUrl);
