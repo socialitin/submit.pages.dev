@@ -164,7 +164,7 @@ var picsj = JSON.parse(pics);
 var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
 
 console.log(tImg);
-var tImgAll = tImgAll;
+var tImgAll = tImgAll+tImg;
 		};
 document.getElementById("thumbs").innerHTML= tImg;
 		
