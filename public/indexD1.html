@@ -60,7 +60,7 @@
 			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
 				<div class="row">
-				<div id="thumbs" style="width:15%; float:left;" onclick = "picsDtl(getElementById(''+event.target.id+'').src);" ></div>	
+				<div id="thumbs" style="width:15%; float:left;" ></div>	
 				<div width="4%"></div>
 				<div id="itemImg" style ="width:85%; float:left;"></div>
 		</div>	 
@@ -158,7 +158,8 @@ var picsj = JSON.parse(pics);
 		console.log((picsj));
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
-var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" >';
+var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl();" >';
+
 var tname = picsj[h].name;
 var tdesc = picsj[h].description;
 var tvalue ='';
