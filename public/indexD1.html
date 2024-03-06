@@ -158,15 +158,15 @@ var picsj = JSON.parse(pics);
 		console.log((picsj));
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
-var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			var tprice ='';
+var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
 
-var tname = picsj[h].name;
-var tdesc = picsj[h].description;
-var tprice ='';
 console.log(tImg);
-var tImgAll = tImgAll+tImg+tname+tdesc;
+//var tImgAll = tImgAll+tImg+tname+tdesc;
 		};
-document.getElementById("thumbs").innerHTML= tImgAll;
+document.getElementById("thumbs").innerHTML= tImg;
 		
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
