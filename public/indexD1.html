@@ -162,10 +162,10 @@ var picsj = JSON.parse(pics);
 			var tdesc = picsj[h].description;
 			var tprice ='';
 var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
-console.log(tImg);
+console.log(tImgAll);
 var tImgAll = tImgAll+tImg;
 		};
-document.getElementById("thumbs").innerHTML= tImg;
+document.getElementById("thumbs").innerHTML= tImgAll;
 		
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
