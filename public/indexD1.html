@@ -162,19 +162,14 @@ var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick
 
 var tname = picsj[h].name;
 var tdesc = picsj[h].description;
-var tvalue ='';
+var tprice ='';
 console.log(tImg);
-var tImgAll = tImgAll+tImg;
+var tImgAll = tImgAll+tImg+tname+tdesc;
 		};
 document.getElementById("thumbs").innerHTML= tImgAll;
 		
-	//var tImg = `<img id = "0" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/New%20York%20City.jpg" style="width: 90%;" >`;
-	//var tImg1 = `<img id = "1" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg " style="width: 90%;" >`;
-	//var tImg2 = `<img id = "2" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Washington.jpg " style="width: 90%;" >`;
-	//var tImg3 = `<img id = "3" src="https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Savannah.jpg " style="width: 90%;" >`;
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
-		//document.getElementById("thumbs").innerHTML = tImg+tImg1+tImg2+tImg3;
 		document.getElementById("name").value = data.City;
 		document.getElementById("pitch").value = data.Pitch;
 	//	document.getElementById("email").value = data.Pictures;
@@ -182,19 +177,12 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src) {
-	//var cpic = event.target.id;
-//console.log(getElementById(''+event.target.id+'').src);
-//getElementById(''+event.target.id+'').src
-//var picis = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg ";
 var picis = src;
-//$('#'+event.target.id+'').attr('src');
-//picsj[event.target.id].img;
+
 var picUrl = '<img src ="'+picis+' " style = "width:70%;"></img>';
 console.log(picUrl);
 document.getElementById("itemImg").innerHTML = picUrl;
-//$('#'+event.target.id+'').attr('src');
-//$('#itemImg').innerHTML(picUrl);
-//$('#myItin').attr('data-country','NYC')
+
 };	
 </script>					
 	</body>
