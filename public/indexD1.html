@@ -63,7 +63,7 @@
 				<div id="thumbs" style="width:15%; float:left;" ></div>	
 				<div width="2%"></div>
 				<div>
-				<div id="itemImg" style ="width:60%; float:left;"></div>
+				<div id="itemImg" style ="width:50%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;">
 					<form method="POST" action="">
 						<div class="input">
@@ -170,12 +170,12 @@ var picsj = JSON.parse(pics);
 			var tname = picsj[h].name;
 			var tdesc = picsj[h].description;
 			var tprice ='';
-var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
+var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event, src);" >';
 console.log(tImgAll);
 var tImgAll = tImgAll+tImg;
 		};
 document.getElementById("thumbs").innerHTML= tImgAll;
-		
+document.getElementById("pic").value = tname; 		
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
 		document.getElementById("name").value = data.City;
