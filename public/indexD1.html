@@ -158,7 +158,7 @@ var picsj = JSON.parse(pics);
 		console.log((picsj));
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
-var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl();" >';
+var tImg = '<img id = "'+h+'" src="'+picsj[h].img+'" style="width: 90%;" onclick = "picsDtl(event, src);" >';
 
 var tname = picsj[h].name;
 var tdesc = picsj[h].description;
@@ -181,12 +181,13 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 				}
 			</script>
 <script>
-function picsDtl(evt,name) {
+function picsDtl(evt,src) {
 	//var cpic = event.target.id;
 //console.log(getElementById(''+event.target.id+'').src);
-
+//getElementById(''+event.target.id+'').src
 //var picis = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/US_/US2-Eastern/Chicago.jpg ";
-var picis = $('#'+event.target.id+'').attr('src');
+var picis = src;
+//$('#'+event.target.id+'').attr('src');
 //picsj[event.target.id].img;
 var picUrl = '<img src ="'+picis+' " style = "width:70%;"></img>';
 console.log(picUrl);
