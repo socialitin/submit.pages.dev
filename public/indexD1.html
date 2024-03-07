@@ -75,12 +75,12 @@
 				<div id="picDtls" style ="width:20%; float:left;">
 					<form method="POST" action="">
 						<div type="input">
-							<label for="pic">Offer</label>
+							<label >Offer</label>
 							<input id="pic" name="pic" type="text" />
 						</div>
 						<div type="input">
-							<label for="desc">Offer</label>
-							<input id="desc" desc="..." type="text" />
+							<label >Description</label>
+							<input id="detail" descp="..." type="text" />
 						</div>
 						</form>
 				</div>
@@ -197,7 +197,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src,pdesc,pname) {
-	console.log('params',pdesc,name);
+	console.log('params',pdesc,pname);
 var picis = src;
 var Pname = pname;
 var Pdesc = pdesc;
@@ -205,7 +205,7 @@ var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 document.getElementById("itemImg").innerHTML = picUrl;
 document.getElementById("pic").value = Pname+Pdesc; 	
-//document.getElementById("desc").value = Pname; 
+document.getElementById("descp").value = Pdesc; 
 };	
 </script>					
 	</body>
