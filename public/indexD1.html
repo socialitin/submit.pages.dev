@@ -67,11 +67,11 @@
 				<div id="picDtls" style ="width:20%; float:left;">
 					<form method="POST" action="">
 						<div class="input">
-							<label for="pic">Product or Offer</label>
+							<label for="pic">Offer</label>
 							<input id="pic" name="pic" type="text" />
 						</div>
 						<div class="input">
-							<label for="desc">Product or Offer</label>
+							<label for="desc"></label>
 							<input id="desc" name="desc" type="text" />
 						</div>
 						</form>
@@ -174,7 +174,7 @@ var picsj = JSON.parse(pics);
 			var tname = picsj[h].name;
 			var tdesc = picsj[h].description;
 			var tprice ='';
-var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event, src,name);" >';
+var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event, src,name,desc);" >';
 console.log(tImgAll);
 var tImgAll = tImgAll+tImg;
 		};
