@@ -10,36 +10,38 @@
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
 		<style>
-			.tab {
-			  overflow: hidden;
-			  border: 1px solid #ccc;
-			  background-color: #f1f1f1;
-			}
-			
-			.tab button {
-			  background-color: inherit;
-			  float: left;
-			  border: none;
-			  outline: none;
-			  cursor: pointer;
-			  padding: 14px 16px;
-			}
-			
-			.tab button:hover {
-			  background-color: #ddd;
-			}
-			
-			.tab button.active {
-			  background-color: #ccc;
-			}
-			
-			.tabcontent {
-			  display: none;
-			  width:50%;
-			  padding: 6px 12px;
-			  border: 1px solid #ccc;
-			  border-top: none;
-			}
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  display: inline-block; /* Ensure the container only takes as much space as needed */
+}
+
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  display: block; /* Change from float to block */
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: none;
+  width: 50%;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
 			</style>
 	</head>
 
