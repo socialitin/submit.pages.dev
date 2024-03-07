@@ -70,6 +70,10 @@
 							<label for="pic">Product or Offer</label>
 							<input id="pic" name="pic" type="text" />
 						</div>
+						<div class="input">
+							<label for="desc">Product or Offer</label>
+							<input id="desc" name="desc" type="text" />
+						</div>
 						</form>
 				</div>
 		</div>	 
@@ -184,15 +188,15 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 				}
 			</script>
 <script>
-function picsDtl(evt,src,name) {
+function picsDtl(evt,src,name,desc) {
 var picis = src;
 var pname = name;
-
+var pdesc = desc;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 console.log(picUrl);
 document.getElementById("itemImg").innerHTML = picUrl;
 document.getElementById("pic").value = pname; 	
-//document.getElementById("pdesc").value = pdesc; 
+document.getElementById("desc").value = pdesc; 
 };	
 </script>					
 	</body>
