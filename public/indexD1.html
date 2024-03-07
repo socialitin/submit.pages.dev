@@ -182,7 +182,7 @@ var picsj = JSON.parse(pics);
 			var tname = picsj[h].name;
 			var tdesc = picsj[h].description;
 			var tprice ='';
-var tImg = '<img name = "'+tname+'" desc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event, src,desc,name);" >';
+var tImg = '<img pname = "'+tname+'" pdesc ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event, src,pdesc,pname);" >';
 console.log(tImgAll);
 var tImgAll = tImgAll+tImg;
 		};
@@ -196,16 +196,16 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 				}
 			</script>
 <script>
-function picsDtl(evt,src,name,desc) {
+function picsDtl(evt,src,pdesc,pname) {
 	console.log(desc,name);
 var picis = src;
-var pname = name;
-var pdesc = desc;
+var Pname = pname;
+var Pdesc = pdesc;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 document.getElementById("itemImg").innerHTML = picUrl;
-document.getElementById("pic").value = pname; 	
-document.getElementById("desc").value = pdesc; 
+document.getElementById("pic").value = Pname; 	
+document.getElementById("desc").value = Pdesc; 
 };	
 </script>					
 	</body>
