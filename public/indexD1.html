@@ -181,7 +181,7 @@ var picsj = JSON.parse(pics);
 		for (var h = 0; h <picsj.length; h++ ) {
 			var tname = picsj[h].name;
 			var tdesc = picsj[h].description;
-			var jdata = '{'+tname+','+tdesc+'}'
+			var jdata = '{"'+tname+'","'+tdesc+'"}'
 			var tprice ='';
 var tImg = '<img name = "'+jdata+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
 console.log(tImgAll);
@@ -198,9 +198,9 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src,name) {
-	console.log('params',name[1]);
+	console.log('params',name(1));
 var picis = src;
-var Pname = document.getElementById(event.target.id).name[0];
+var Pname = name(0);
 //var Pdesc = pdesc;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
