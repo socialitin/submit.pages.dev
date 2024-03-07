@@ -22,8 +22,10 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  display: block; /* Change from float to block */
+  padding: 14px 0; /* Adjust padding */
+  display: inline-block; /* Display inline-block to prevent text from wrapping */
+  transform: rotate(-90deg); /* Rotate text vertically */
+  transform-origin: center center; /* Center rotation */
 }
 
 .tab button:hover {
