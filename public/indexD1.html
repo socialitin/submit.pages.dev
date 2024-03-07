@@ -197,9 +197,9 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(src,name) {
-	console.log('params',document.getElementById(event.target.id).name);
+	//console.log('params',document.getElementById(event.target.id).name);
 var picis = src;
-var Pname = JSON.stringify(name);
+var Pname = JSON.parse(name);
 //var Pdesc = pdesc;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
