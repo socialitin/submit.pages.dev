@@ -197,15 +197,15 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src,pdesc,pname) {
-	console.log(pdesc,name);
+	console.log('params',pdesc,name);
 var picis = src;
 var Pname = pname;
 var Pdesc = pdesc;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 document.getElementById("itemImg").innerHTML = picUrl;
-document.getElementById("pic").value = Pname; 	
-document.getElementById("desc").value = Pname; 
+document.getElementById("pic").value = Pname+Pdesc; 	
+//document.getElementById("desc").value = Pname; 
 };	
 </script>					
 	</body>
