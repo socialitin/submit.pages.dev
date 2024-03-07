@@ -198,10 +198,10 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src,name) {
-	console.log('params',name(1));
+	console.log('params',name);
 var picis = src;
-var Pname = name(0);
-//var Pdesc = pdesc;
+var Pname = name[0];
+var Pdesc = name[1];
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 document.getElementById("itemImg").innerHTML = picUrl;
