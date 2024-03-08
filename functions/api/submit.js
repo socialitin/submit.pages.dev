@@ -18,7 +18,7 @@ export async function onRequestPost({ request }) {
 			}
 		
 		}
-
+		console.log(output);
 let pretty = JSON.stringify(output, null, 2);
 
 console.log(pretty);
