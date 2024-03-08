@@ -1,5 +1,5 @@
 const stmt = context.env.DB
-    .prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CustomerId =4 ");
+    .prepare("UPDATE hosts SET CompanyName = 'Pereira');
    // const data = await stmt;
      //     return Response.json(data);
 
