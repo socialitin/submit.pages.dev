@@ -166,6 +166,15 @@
 		  evt.currentTarget.className += " active";
 		}
 		</script>
+
+<script>
+	async function d1tnupdate() {
+	const response = await fetch('/api/d1tnupadte');
+	const data2 = await response.json();
+const data =JSON.parse(data2);
+console.log(data2);
+	};
+	</script>
 		<script>
 			async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
