@@ -169,8 +169,7 @@
 
 <script>
 	async function d1tnupdate() {
-	//const response = await fetch('/api/d1tnupdate');
-	const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CustomerId = 1");
+	const response = await fetch('/api/d1tnupdate');
 	//const data2 = await response.json();
 //const data =JSON.parse(data2);
 console.log(response);
