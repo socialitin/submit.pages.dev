@@ -1,6 +1,6 @@
 export async function onRequest(context) {
    const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName = 'tn' ");
-   const data = await StrictMode;
+   const data = await stmt;
     return Response.json(data);}
 
    // export async function onRequest(context) {
