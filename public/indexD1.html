@@ -185,7 +185,7 @@ var picsj = JSON.parse(pics);
 			jdata.push(tname);
 			jdata.push(tdesc);
 			var tprice ='';
-var tImg = '<img name ='+ {"vendorId":227, "ofr_id": 538, "pds_id": 272825 }+' id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+jdata+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
@@ -200,7 +200,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 			</script>
 <script>
 function picsDtl(evt,src,name) {
-	console.log('params',JSON.stringify(name));
+	console.log('params',name, name[1], name[0]);
 var picis = src;
 var Pname = name[0];
 var Pdesc = name[1];
