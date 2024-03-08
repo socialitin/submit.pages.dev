@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-   const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName = 'tn' ");
+   const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName LIKE '%tn%' ");
    const data = await stmt;
     return Response.json(data);}
 
