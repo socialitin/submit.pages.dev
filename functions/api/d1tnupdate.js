@@ -1,4 +1,4 @@
-    const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CustomerId = 1");
+    const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName = 'tn' ");
 
    // const data = await stmt;
      //     return Response.json(data);
@@ -7,3 +7,4 @@
     //    const ps = context.env.DB.prepare('SELECT * from hosts');
     //    const data = await ps.first();
     //      return Response.json(data);}
+    
