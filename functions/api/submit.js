@@ -35,7 +35,7 @@ console.log(pretty);
 }
 export async function onRequestGet(context) {
 	const mdjson = context.env.SERVICE.fetch(context.request);
-	
+	console.log('pjson', mdjson)
 return mdjson;
 
  };
