@@ -16,10 +16,11 @@ export async function onRequestPost(context) {
 
         // Convert the JSON object to a string
         let jsonData = JSON.stringify(formDataObject);
-
+console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
-        await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
-
+       // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
+       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = jsonData WHERE CompanyName LIKE '%Pereira%' ");
+       const result = await stmt.run(); // Execute the prepared statement
         return new Response('Data inserted successfully', {
             status: 200,
             headers: {
