@@ -4,6 +4,7 @@
 export async function onRequestPost(context) {
     try {
       let input = await context.request.formData();
+      console.log('pjson', input);
       let pretty = JSON.stringify([...input], null, 2);
       return new Response(pretty, {
         headers: {
