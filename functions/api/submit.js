@@ -19,7 +19,7 @@ export async function onRequestPost(context) {
 console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
-       const stmt = context.env.DB.insert("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
+       const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
        const result = await stmt.run(); // Execute the prepared statement
         return new Response('Data inserted successfully', {
             status: 200,
