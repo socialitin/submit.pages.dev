@@ -23,7 +23,7 @@ let pretty = JSON.stringify(output, null, 2);
 var toupd = '<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="d1tnupdate()">';
 console.log(pretty);
 
-		return new Response(pretty+toupd, {
+		return new Response(toupd, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			}
