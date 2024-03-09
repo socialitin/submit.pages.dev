@@ -23,7 +23,11 @@ let pretty = JSON.stringify(output, null, 2);
 var toupd = $('<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="d1tnupdate()">');
 console.log(pretty);
 
-		return new Response(SON.stringify(output, null, 2));
+		return new Response(SON.stringify(output, null, 2), {
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+			  },
+		});
 		
 	} catch (err) {
 		return new Response('Error parsing JSON content', { status: 400 });
