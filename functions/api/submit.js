@@ -20,8 +20,10 @@ console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
-       const stmt = context.env.DB.prepare("UPDATE hosts SET (pitching) VALUES (?) [jsonData] WHERE CompanyName LIKE '%Pereirawas%' ");
-       const response = await stmt.run(); // Execute the prepared statement
+
+       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
+const response = await stmt.bind(jsonData).run(); 
+
         return new Response('Data inserted successfully', {
             status: 200,
             headers: {
