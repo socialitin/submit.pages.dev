@@ -20,7 +20,7 @@ export async function onRequestPost({ request }) {
 		}
 		console.log(output);
 let pretty = JSON.stringify(output, null, 2);
-var toupd = '$(<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="d1tnupdate()">)';
+var toupd = $('<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="d1tnupdate()">');
 console.log(pretty);
 
 		return new Response(toupd+JSON.stringify(output, null, 2), {
