@@ -1,32 +1,33 @@
 /**
  * POST /api/submit
  */
+export async function onRequestPost(context) {
+    try {
+        const db = context.env.DB;
 
-export async function onRequest(context) {
-    const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Cartagena' WHERE CompanyName LIKE '%tn%' ");
-    const result = await stmt.run(); // Execute the prepared statement
+        // Parse form data from the request
+        let formData = await context.request.formData();
 
-    // Check the result of the update operation
-    if (result.changes > 0) {
-        return new Response.json({ success: true, message: 'Records updated successfully.' });
-    } else {
-        return new Response.json({ success: false, message: 'No records were updated.' });
+        // Convert form data to JSON object
+        let formDataObject = {};
+        for (const [name, value] of formData.entries()) {
+            formDataObject[name] = value;
+        }
+
+        // Convert the JSON object to a string
+        let jsonData = JSON.stringify(formDataObject);
+
+        // Insert the JSON data into the SQLite database
+        await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
+
+        return new Response('Data inserted successfully', {
+            status: 200,
+            headers: {
+                'Content-Type': 'text/plain'
+            }
+        });
+    } catch (err) {
+        return new Response('Error inserting data into SQLite database', { status: 500 });
     }
 }
-export async function onRequestPost(context) {
-    
-    try {
-      let input = await context.request.formData();
-      console.log('pjson', input);
-      let pretty = JSON.stringify([...input], null, 2);
-      
-      return new Response(pretty, {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-      });
-    } catch (err) {
-      return new Response('Error parsing JSON content', { status: 400 });
-    }
-  }
   
