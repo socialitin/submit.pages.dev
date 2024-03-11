@@ -73,16 +73,7 @@
 				<div>
 				<div id="itemImg" style ="width:50%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;">
-				
-					<form method="POST" 
-						<div class="input" >
-							<label for="tofr">this Offer</label>
-							<input id="tofr" name="tofr" type="text" />
-						</div>
-					</form>	
-
-						<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
-						onclick="picsUpd()">
+		
 					
 				</div>
 		</div>	 
@@ -216,12 +207,28 @@ var Pname = name;
 var Pdesc = name;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
-document.getElementById("itemImg").innerHTML = picUrl;
-document.getElementById("tofr").name = name; 	
+//document.getElementById("itemImg").innerHTML = picUrl;
+//document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
 
-var element = document.getElementById('tofr');
-    element.style.display = 'block';
+//var element = document.getElementById('tofr');
+ //   element.style.display = 'block';
+ var htmlPics = 
+'<form id="updPics"  style = "height: auto; ">' +
+	'<div> <input  name="name" id="name" >'+											
+'<input  id ="descI" value ="'+
+Pdesc +'" >'+
+'</div>' +
+//document.getElementById("iOrder").innerHTML ='Connect <input id="picPost" type ="Submit"  value="Post" style= "float: left;"';
+
+									'</form>'
+;	
+										                           							            										                           
+					$('#'+ picDtls + '').html(updPics);
+					$('#'+ picDtls + '').slideDown('slow');
+
+//	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
+		
 };	
 </script>					
 	</body>
