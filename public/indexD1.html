@@ -216,7 +216,9 @@ var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 document.getElementById("itemImg").innerHTML = picUrl;
 document.getElementById("pic").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
-document.getElementById("picDtls").show();
+
+var element = document.getElementById('pic');
+    element.style.display = 'block';
 };	
 </script>					
 	</body>
