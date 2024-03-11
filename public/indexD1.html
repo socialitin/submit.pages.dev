@@ -73,11 +73,15 @@
 				<div>
 				<div id="itemImg" style ="width:50%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;">
+				
+					<form method="POST" action="/api/submit">
 					
-						<div>
-							<label for ="pic">Offer</label>
-							<label id="pic" name="pic" ></label>
+						<div class="input" >
+							<label for="tofr">this Offer</label>
+							<input id="tofr" name="tofr" type="text" />
 						</div>
+					</form>	
+
 						<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
 						onclick="d1tnupdate()">
 					
@@ -214,10 +218,10 @@ var Pdesc = name;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 document.getElementById("itemImg").innerHTML = picUrl;
-document.getElementById("pic").name = name; 	
+document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
 
-var element = document.getElementById('pic');
+var element = document.getElementById('tofr');
     element.style.display = 'block';
 };	
 </script>					
