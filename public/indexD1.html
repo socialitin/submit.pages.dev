@@ -97,7 +97,7 @@
 						
 			<form method="POST" action="/api/submit">
 				<div class="input" type = "hidden">
-					<label for="IATA">Name Product or Offer</label>
+					<label for="IATA"></label>
 					<input id="IATA" name="IATA" type="text" />
 					<input id="Province" name="Province" type="text" />
 				</div>
@@ -105,10 +105,13 @@
 					<label for="name">Name of Offer</label>
 					<input id="name" name="name" type="text" />
 				</div>
-
+				<div class="input" style: "display:none;">
+					<label for="video">Video</label>
+					<input id="embVideo" name="embVideo" type="array" />
+				</div>
 				<div class="input" style: "display:none;">
 					<label for="pictures">Pictures </label>
-					<input id="pictures" name="Pictures" type="array" />
+					<input id="Pictures" name="Pictures" type="array" />
 				</div>
 
 				<div class="input">
@@ -198,6 +201,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 		document.getElementById("name").value = data.City;
 		document.getElementById("pitch").value = data.Pitch;
 		document.getElementById("Pictures").value = data.Pictures;
+		document.getElementById("embVideo").value = tVideo;
 				}
 			</script>
 <script>
