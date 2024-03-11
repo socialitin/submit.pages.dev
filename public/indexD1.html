@@ -96,19 +96,24 @@
 				<p>All Pitches submitted are <code>/Private</code>  untill you select one as  <code>/Public</code> directory, which contains 
 						
 			<form method="POST" action="/api/submit">
-				<div class="input">
-					<label for="name">Name Product or Offer</label>
+				<div class="input" type = "hidden">
+					<label for="IATA">Name Product or Offer</label>
+					<input id="IATA" name="IATA" type="text" />
+					<input id="Province" name="Province" type="text" />
+				</div>
+				<div class="input" >
+					<label for="name">Name of Offer</label>
 					<input id="name" name="name" type="text" />
 				</div>
 
 				<div class="input" style: "display:none;">
-					<label for="picures">URL </label>
-					<input id="pictures" name="https://Tournet.com" type="json" />
+					<label for="pictures">Pictures </label>
+					<input id="pictures" name="Pictures" type="array" />
 				</div>
 
 				<div class="input">
-					<label for="referers">Type/kind of offer</label>
-					<select id="referers" name="referers">
+					<label for="typeKind">Type/kind of offer</label>
+					<select id="typeKind" name="typeKind">
 						<option hidden disabled selected value></option>
 						<option value="Sightseeing">Sightseeing</option>
 						<option value="Excursion">Excursion</option>
@@ -120,7 +125,7 @@
 
 				<div class="checklist">
 					<label for="Venue">Whats the venue</label>
-					<select id="referers1" name="referers1">
+					<select id="venue" name="venue">
 						<option hidden disabled selected value></option>
 						<option value="Attraction">Attraction</option>
 						<option value="Club">Club, Event</option>
