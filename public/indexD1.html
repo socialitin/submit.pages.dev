@@ -74,8 +74,7 @@
 				<div id="itemImg" style ="width:50%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;">
 				
-					<form method="POST" action="/api/d1tnupdate">
-					
+					<form method="POST" 
 						<div class="input" >
 							<label for="tofr">this Offer</label>
 							<input id="tofr" name="tofr" type="text" />
@@ -194,7 +193,7 @@ var picsj = JSON.parse(pics);
 			jdata.push(tname);
 			jdata.push(tdesc);
 			var tprice ='';
-var tImg = '<img name = "'+jdata+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+tname+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
