@@ -105,11 +105,11 @@
 					<label for="name">Name of Offer</label>
 					<input id="name" name="name" type="text" />
 				</div>
-				<div class="input" style: "display:none;">
+				<div class="input" ">
 					<label for="video">Video</label>
 					<input id="embVideo" name="embVideo" type="array" />
 				</div>
-				<div class="input" style: "display:none;">
+				<div class="input" ">
 					<label for="pictures">Pictures </label>
 					<input id="Pictures" name="Pictures" type="array" />
 				</div>
@@ -200,7 +200,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 		document.getElementById("itemImg").innerHTML = tVideo;
 		document.getElementById("name").value = data.City;
 		document.getElementById("pitch").value = data.Pitch;
-		document.getElementById("Pictures").value = data.Pictures;
+		document.getElementById("Pictures").value = pics;
 		document.getElementById("embVideo").value = tVideo;
 				}
 			</script>
