@@ -175,6 +175,7 @@ console.log(data2);
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
 		
 var picsj = JSON.parse(pics);
+sessionStorage.setItem("pics",picsj);
 		console.log((data.Pictures));
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
@@ -236,7 +237,8 @@ function picPost(evt,picsj){
 //document.getElementById("name").value= document.getElementById("descI").value;
 //json.price = 30;
 //picsj.name = document.getElementById("name").value;
-console.log(picsj);
+var ppicsj = sessionStorage.getItem("pics");
+console.log(ppicsj);
 };
 </script>
 
