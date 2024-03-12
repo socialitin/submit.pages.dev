@@ -218,7 +218,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 	'<div> <input id="name" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+
 Pdesc +'" >'+
-'<div> <input id="picPost" type ="Submit"  value="Save " style= "float: left;" onclick = "console.log(document.getElementById("name").value);" </div>';
+'<div> <input id="picPost" type ="Submit"  style= "float: left;"</div>';
 
 									'</form>'
 ;	
@@ -229,6 +229,13 @@ document.getElementById('picDtls').innerHTML = htmlPics;
 //	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
 		
 };	
-</script>					
+</script>	
+
+<script> 
+$('#picPost').click(function(){
+console.log('pic changes',document.getElementById("name").value);
+});
+</script>
+
 	</body>
 </html>
