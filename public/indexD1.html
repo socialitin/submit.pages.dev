@@ -184,7 +184,7 @@ var picsj = JSON.parse(pics);
 			jdata.push(tname);
 			jdata.push(tdesc);
 			var tprice ='';
-var tImg = '<img name = "'+tname+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+jdata+'" data ="'+tdesc+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
@@ -204,7 +204,7 @@ function picsDtl(evt,src,name) {
 	console.log('params',name);
 var picis = src;
 var Pname = name;
-var Pdesc = data;
+var Pdesc = name;
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
 
 //document.getElementById("itemImg").innerHTML = picUrl;
