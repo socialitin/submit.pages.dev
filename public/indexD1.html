@@ -184,7 +184,7 @@ var picsj = JSON.parse(pics);
 			jdata.push(tname);
 			jdata.push(tdesc);
 			var tprice ='';
-var tImg = '<img name = "'+JSON.stringify(picsj[h])+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+JSON.parse(picsj[h])+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
