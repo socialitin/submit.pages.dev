@@ -214,7 +214,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //var element = document.getElementById('tofr');
  //   element.style.display = 'block';
  var htmlPics = 
-'<form id="updPics"  action="picPost" style = "height: auto; ">' +
+'<form id="updPics"  action="/picPost" >' +
 	'<div> <input id="name" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+
 Pdesc +'" >'+
@@ -233,7 +233,7 @@ document.getElementById('picDtls').innerHTML = htmlPics;
 
 <script> 
 function picPost(){
-console.log('pic changes',document.getElementById("name").value);
+document.getElementById("name").value= 'got here';
 };
 </script>
 
