@@ -238,8 +238,8 @@ function picPost(evt,id){
 //json.price = 30;
 //picsj.name = document.getElementById("name").value;
 var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-ppicsj[id].name = document.getElementById(id).name;
-ppicsj[id].description = document.getElementById(id).descI;
+ppicsj[id].name = document.getElementById("name").value;
+ppicsj[id].description = document.getElementById("descI").value;
 console.log(ppicsj[id].name ,ppicsj[id].description);
 };
 </script>
