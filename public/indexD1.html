@@ -240,7 +240,8 @@ function picPost(evt,id){
 var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
 ppicsj[id].name = document.getElementById("name").value;
 ppicsj[id].description = document.getElementById("descI").value;
-console.log(ppicsj[id].name ,ppicsj[id].description);
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",ppicsj);
 };
 </script>
 
