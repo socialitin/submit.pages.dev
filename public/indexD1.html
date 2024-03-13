@@ -219,7 +219,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 	'<div> <input id="name" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+
 Pdesc +'" >'+
-'<div> <input id="'+ pcount+'" type ="Submit"  style= "float: left;" onclick= "picPost(event,pcount); "></div>';
+'<div> <input id="'+ pcount+'" type ="Submit"  style= "float: left;" onclick= "picPost(event,id); "></div>';
 
 									'</form>'
 ;	
@@ -233,14 +233,14 @@ document.getElementById('picDtls').innerHTML = htmlPics;
 </script>	
 
 <script> 
-function picPost(evt,pcount){
+function picPost(evt,id){
 //document.getElementById("name").value= document.getElementById("descI").value;
 //json.price = 30;
 //picsj.name = document.getElementById("name").value;
 var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-ppicsj[pcount].name = pcount;
+ppicsj[id].name = id;
 
-console.log(ppicsj[0].name ,ppicsj);
+console.log(ppicsj[id].name ,ppicsj);
 };
 </script>
 
