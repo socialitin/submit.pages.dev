@@ -207,7 +207,7 @@ var picis = src;
 var Pname = name.split(',')[0];
 var Pdesc = name.split(',')[1];
 var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
-
+var pcount = event.taget.id;
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
@@ -219,7 +219,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 	'<div> <input id="name" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+
 Pdesc +'" >'+
-'<div> <input id="pPost" type ="Submit"  style= "float: left;" onclick= "picPost(event); "></div>';
+'<div> <input id= pcount type ="Submit"  style= "float: left;" onclick= "picPost(event,pcount); "></div>';
 
 									'</form>'
 ;	
@@ -233,12 +233,12 @@ document.getElementById('picDtls').innerHTML = htmlPics;
 </script>	
 
 <script> 
-function picPost(){
+function picPost(evt,pcount){
 //document.getElementById("name").value= document.getElementById("descI").value;
 //json.price = 30;
 //picsj.name = document.getElementById("name").value;
 var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-ppicsj[event.target.id].name = event.target.id;
+ppicsj[pcount].name = pcount;
 
 console.log(ppicsj[0].name ,ppicsj);
 };
