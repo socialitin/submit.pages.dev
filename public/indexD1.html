@@ -238,7 +238,7 @@ function picPost(){
 //json.price = 30;
 //picsj.name = document.getElementById("name").value;
 var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-ppicsj[''+event.target.id+''].name = 'changed'+event.target.id;
+ppicsj[event.target.id].name = event.target.id;
 
 console.log(ppicsj[0].name ,ppicsj);
 };
