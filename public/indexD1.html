@@ -267,10 +267,12 @@ var j2publish =JSON.stringify(data);
 //const mergedObj = Object.assign(j2publish, j2addStorage); 
 //const jsonStr = JSON.stringify(mergedObj); 
 
-const extendJSON = (...objs) => objs.reduce((result, current) => ({...result, ...JSON.parse(current)}), {});
+//const extendJSON = (...objs) => objs.reduce((result, current) => ({...result, ...JSON.parse(current)}), {});
   
-console.log(extendJSON(j2publish, j2add),j2aad);
+//console.log(extendJSON(j2publish, j2add),j2aad);
 //console.log(jsonStr); 
+
+console.log(j2publish.push(j2addStorage));
 			};	
 </script>
 	</body>
