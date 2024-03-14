@@ -171,8 +171,7 @@ console.log(data2);
 		<script>
 			async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
-			const data1 = await response.json();
-			sessionStorage.setItem("j2post",JSON.stringify(data1));			
+			const data1 = await response.json();		
 		const data =JSON.parse(data1.pitching);
 		//.pitching);
 		var pics = data.Pictures;
@@ -260,6 +259,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 			const data = await response.json();
 		//const data =JSON.parse(data1);
 		console.log(data);
+		sessionStorage.setItem("j2post",JSON.stringify(data));	
 			};	
 </script>
 	</body>
