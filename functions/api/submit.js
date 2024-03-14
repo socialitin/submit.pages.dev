@@ -16,7 +16,6 @@ export async function onRequestPost(context) {
 
         // Convert the JSON object to a string
         let jsonData = JSON.stringify(formDataObject);
-        sessionStorage.setItem("j2add",jsonData);      
 console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
