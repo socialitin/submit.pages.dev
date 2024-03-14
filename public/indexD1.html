@@ -264,7 +264,7 @@ var j2addStorage = {"IATA":"NYC","Province":"Eastern","City":"US2-Eastern","embV
 //var j2add = JSON.parse(j2addStorage);
 var j2publish = data; 
 //const j2add = JSON.parse(sessionStorage.getItem("j2add")); 
-const mergedObj = Object.assign({}, j2publish, j2addStorage); 
+const mergedObj = Object.assign(j2publish, j2addStorage); 
 const jsonStr = JSON.stringify(mergedObj); 
 console.log(jsonStr); 
 			};	
