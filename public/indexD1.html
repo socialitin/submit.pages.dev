@@ -261,16 +261,12 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 	//	console.log(data);
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
-    "NYCS": [
-{
   "IATA": "US2",
-  "City": "US2-Eastern",
-  "Province": "Eastern",
+  "City": "US3-Eastern",
+  "Province": "Western",
   "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
   "Pictures":" [{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
-  "Pitch": "Unique and captivating, with channels that continually change a scenario unlike any other in the world."
-}
-]
+  "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
 };
 
 var j2add = JSON.stringify(j2addStorage);
@@ -283,8 +279,8 @@ var j2publish =JSON.stringify(data);
   
 //console.log(extendJSON(j2publish, j2add),j2aad);
 //console.log(jsonStr); 
-var newjson = j2addStorage["NYCS"].push(j2add);
-console.log(newjson,j2addStorage,j2add);
+var newjson = j2publish["NYCS"].push(j2add);
+console.log(newjson,j2add,j2publish);
 			};	
 </script>
 	</body>
