@@ -255,10 +255,23 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 
 <script>
 			async function fetchjson() {
-			const response = await fetch('/api/fetchjson');
-			const data = await response.json();
+			//const response = await fetch('/api/fetchjson');
+			//const data = await response.json();
 		//const data =JSON.parse(data1);
 	//	console.log(data);
+
+	addEventListener('fetch', event => {
+event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+const url = new URL(request.url)
+const params = url.searchParams
+const myParam = params.get('myParam')
+
+return new Response(`My parameter value is: ${myParam}`)
+}
+
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
   "IATA": "US2",

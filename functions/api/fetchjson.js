@@ -5,3 +5,15 @@ export async function onRequest(context) {
   };
       return new Response(obj.body);
 };
+
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+  })
+  
+  async function handleRequest(request) {
+  const url = new URL(request.url)
+  const params = url.searchParams
+  const myParam = params.get('myParam')
+  
+  return new Response(`My parameter value is: ${myParam}`)
+  }
