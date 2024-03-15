@@ -9,7 +9,7 @@ export async function onRequest(context) {
     const params = url.searchParams
     //const myParam = params.get('myParam')
     
-    return new Response(`My parameter value is: ${params}`)
+    return new Response(`My parameter value is: ${url}`)
     }
 
   //const obj = await context.env.filterjson.get('NYCS.json');
