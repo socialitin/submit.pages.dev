@@ -258,19 +258,11 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 				addEventListener('fetch', event => {
 event.respondWith(handleRequest(event.request))
 })
-
-async function handleRequest(request) {
-const url = new URL(request.url)
-const params = url.searchParams
-const myParam = params.get('puthisjson')
-
-return new Response(`My parameter value is: ${myParam}`)
-console.log(Response);
-}
 			const response = await fetch('/api/fetchjson');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
 	//	console.log(data);
+	
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
   "IATA": "US2",
