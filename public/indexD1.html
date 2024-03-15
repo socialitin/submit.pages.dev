@@ -255,6 +255,18 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 
 <script>
 			async function fetchjson() {
+				addEventListener('fetch', event => {
+event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+const url = new URL(request.url)
+const params = url.searchParams
+const myParam = params.get('puthisjson')
+
+return new Response(`My parameter value is: ${myParam}`)
+console.log(Response);
+}
 			const response = await fetch('/api/fetchjson');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
@@ -281,9 +293,9 @@ var j2publish =data;
 //console.log(jsonStr); 
 var newjson = j2publish["NYCS"].push(j2add);
 console.log(j2publish);
- response2 = await fetch('/api/fetchputjson');
+ //response2 = await fetch('/api/fetchputjson');
 			//const data2 = await response.json();
-			console.log(response2);
+		//	console.log(response2);
 			};	
 </script>
 	</body>
