@@ -7,7 +7,7 @@ export async function onRequest(context) {
     async function handleRequest(request) {
     const url = new URL(request.url)
     const params = url.searchParams
-    const myParam = params.get('myParam')
+    const myParam = params.get('name')
     
     return new Response(`My parameter value is: ${myParam}`)
     }
