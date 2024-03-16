@@ -7,7 +7,7 @@ export async function onRequest(context) {
     async function handleRequest(request) {
     const url = new URL(request.url)
     const params = url.searchParams
-    const myParam = params.get('name')
+    var myParam = params.get('name')
     if (myParam = 'put'){
   const obj = await context.env.filterjson.get('NYCS.json');
   if (obj === null) {
