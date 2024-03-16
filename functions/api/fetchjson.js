@@ -21,7 +21,12 @@ async function handleRequest(request) {
   
     //return new Response(`Value of paramName: ${paramValue}`);
   } else {
-    return new Response(params);
+    const obj = await context.env.filterjson.get('NYCS.json');
+    if (obj === null) {
+      return new Response('Not found', { status: 404 });
+    };
+        return new Response(obj.body);
+    //return new Response(params);
   }
 }
 }
