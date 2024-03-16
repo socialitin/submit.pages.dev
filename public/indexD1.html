@@ -82,7 +82,7 @@
 	
 		</div>
 		  <div id="Tab2" class="tabcontent">
-			<p style=" float:right;">Publish <img id="fjson1" name ="put" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "fetchjson(name);"</p> 
+			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "fetchjson();"</p> 
 		<main>
 			
 			<h1> Pitch your Offer </h1>
@@ -254,11 +254,11 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 </script>
 
 <script>
-			async function fetchjson(name) {
+			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
-		console.log(data);
+	//	console.log(data);
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
   "IATA": "US2",
@@ -279,8 +279,8 @@ var j2publish =data;
   
 //console.log(extendJSON(j2publish, j2add),j2aad);
 //console.log(jsonStr); 
-		var newjson = j2publish["NYCS"].push(j2add);
-		console.log(j2publish);
+var newjson = j2publish["NYCS"].push(j2add);
+console.log(j2publish);
  //response2 = await fetch('/api/fetchputjson');
 			//const data2 = await response.json();
 		//	console.log(response2);
