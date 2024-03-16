@@ -9,12 +9,12 @@ export async function onRequest(request) {
   if (paramValue) {
     // Fetch JSON data
     //const response = await fetch('/api/fetchjson?paramn=' + paramValue);
-    var obj = await context.env.filterjson.get('NYCS.json');
+    const obj = await context.env.filterjson.get('NYCS.json');
     if (!response.ok) {
       return new Response('Failed to fetch JSON data', { status: 500 });
     }
     
-    const obj = await response.json();
+    //const obj = await response.json();
    // return new Response(JSON.stringify(obj));
    return new Response(obj.body);
   } else {
