@@ -8,7 +8,7 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   const params = url.searchParams;
   //const paramValue = params.get('paramn');
-  const paramValue = URLSearchParams.get(paramn)
+  const paramValue = URLSearchParams.get('paramn')
   // Your logic using the query parameters
   // For example:
   if (paramValue) {
