@@ -7,8 +7,8 @@ async function handleRequest(request) {
   // Accessing query parameters from the request URL
   const url = new URL(request.url);
   const params = url.searchParams;
-  const paramValue = params.get(paramn);
-
+  const paramValue = params.get('paramn');
+//URLSearchParams.get()
   // Your logic using the query parameters
   // For example:
   if (paramValue) {
