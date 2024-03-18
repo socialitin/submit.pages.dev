@@ -20,12 +20,12 @@
 			
 			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
 			onclick="fetchjson()">
-			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
+			<div id ="ofrContainerFormkiosk1" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
 				<div class="row">
-				<div id="thumbs" style="width:15%; float:left;"></div>	
+				<div id="thumbs1" style="width:15%; float:left;"></div>	
 				<div width="4%"></div>
-				<div id="itemImg" style ="width:85%; float:left;"></div>
+				<div id="itemImg1" style ="width:85%; float:left;"></div>
 		</div>	 
 	
 		</div>
@@ -54,10 +54,10 @@ var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+pic
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
-document.getElementById("thumbs").innerHTML= tImgAll;
+document.getElementById("thumbs1").innerHTML= tImgAll;
 //	
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
-		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("itemImg1").innerHTML = tVideo;
 		document.getElementById("City").value = data.City;
 		document.getElementById("Province").value = data.Province;
 		document.getElementById("pitch").value = data.Pitch;
