@@ -35,7 +35,7 @@
           window.addEventListener('DOMContentLoaded', () => {
 		//	async function fetchjson() {
 			const response =  fetch('/api/fetchjson');
-			const data = await response.json();
+			const data = response.json();
 		//const data1 =JSON.stringify(data);
 		console.log(data);
 		var pics = data.NYCS[0].Pictures;
