@@ -32,6 +32,7 @@
 
 
 		<script>
+            $(document).ready(function() {
 			async function fetchjson() {
 			const response = await fetch('/api/fetchjson');
 			const data = await response.json();
@@ -64,6 +65,7 @@ document.getElementById("thumbs1").innerHTML= tImgAll;
 		document.getElementById("Pictures").value = pics;
 		document.getElementById("embVideo").value = tVideo;
 				}
+            ];                
 
 			
 			</script>
