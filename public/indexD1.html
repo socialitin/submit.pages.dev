@@ -82,7 +82,7 @@
 	
 		</div>
 		  <div id="Tab2" class="tabcontent">
-			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "fetchjson();"</p> 
+			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "d1tnhosts();"</p> 
 		<main>
 			
 			<h1> Pitch your Offer </h1>
@@ -254,8 +254,8 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 </script>
 
 <script>
-			async function fetchjson() {
-			const response = await fetch('/api/fetchjson');
+			async function d1tnhosts() {
+			const response = await fetch('/api/d1tnhost');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
 		console.log(data);
