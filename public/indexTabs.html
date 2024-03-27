@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Cloudflare Pages 2 Tournet presence</title>
+		<meta name="theme-color" content="#d86300">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
+		<link rel="stylesheet" href="/index.css">
+	
+    
+	</head>
+
+	<body>
+
+		  <div id="Tab1" >
+			<h3>Pitching now ...</h3>
+			<div id ="jdata"></div>
+			
+			<img id="fjson" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" 
+			onclick="fetchjson()">
+			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
+			</div>
+				<div class="row">
+				<div id="thumbs" style="width:15%; float:left;"></div>	
+				<div width="4%"></div>
+				<div id="itemImg" style ="width:85%; float:left;"></div>
+		</div>	 
+	
+		</div>
+		  <div id="Tab2" class="tabcontent">
+			<h3>Content 1</h3>
+			<p>This is the content for Tab 1.</p>
+		<main>
+			<h1> Pitch your Offer </h1>
+
+			<blockquote >
+				<p id ="sjson" data-json=''>This is a demonstration of Cloudflare Pages with Functions.</p>
+				<p>Pages deployed a <code>/public</code> directory, containing a HTML document (this webpage) and a <code>/functions</code> directory, which contains the Cloudflare Workers code for the API endpoint this <code>&lt;form&gt;</code> references.</p>
+				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
+			</blockquote>
+
+		
+			<form method="POST" action="/api/submit">
+				<div class="input">
+					<label for="name">Name Product or Offer</label>
+					<input id="name" name="name" type="text" />
+				</div>
+
+				<div class="input">
+					<label for="email">URL </label>
+					<input id="email" name="email" type="url" />
+				</div>
+
+				<div class="input">
+					<label for="referers">Type/kind of offer</label>
+					<select id="referers" name="referers">
+						<option hidden disabled selected value></option>
+						<option value="Sightseeing">Sightseeing</option>
+						<option value="Excursion">Excursion</option>
+						<option value="Night life">Night life</option>
+						<option value="Walking tour">Walking tour</option>
+						<option value="Water crusing">Water crusing</option>
+
+		<script>
+			async function fetchjson() {
+			const response = await fetch('/api/fetchjson');
+			const data = await response.json();
+		//const data1 =JSON.stringify(data);
+		console.log(data);
+		var pics = data.NYCS[0].Pictures;
+		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+		console.log(pics);		
+var picsj = JSON.parse(pics);
+
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+document.getElementById("thumbs").innerHTML= tImgAll;
+//	
+		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("City").value = data.City;
+		document.getElementById("Province").value = data.Province;
+		document.getElementById("pitch").value = data.Pitch;
+		document.getElementById("Pictures").value = pics;
+		document.getElementById("embVideo").value = tVideo;
+				}
+
+			
+			</script>
+	</body>
+</html>
