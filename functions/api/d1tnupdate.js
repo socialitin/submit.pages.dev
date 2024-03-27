@@ -4,7 +4,7 @@
              const ps = context.env.DB.prepare('SELECT * from hosts');
        const data = await ps.first();
           const data1 = Response.json(data);
-          const p2p =data1.pitching;
+          const p2p = JSON.stringify(data1.pitching);
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
             method: 'GET', // or 'POST', 'PUT', etc. depending on your Worker
