@@ -1,5 +1,25 @@
 
     export async function onRequest(context) {
+
+       
+            const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
+            const response = await fetch(workerURL, {
+            method: 'GET', // or 'POST', 'PUT', etc. depending on your Worker
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            });
+            
+            if (response.ok) {
+            const data = await response.json();
+            return new Response(JSON.stringify(data), {
+            headers: { 'Content-Type': 'application/json' },
+            });
+            } else {
+            return new Response('Error calling the Worker', { status: response.status });
+            }
+            
+            
        //// const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName LIKE '%tn%' ");
        /// const result = await stmt.run(); // Execute the prepared statement
     
@@ -13,20 +33,20 @@
 
     /////new update
   
-       const ps = context.env.DB.prepare('SELECT * from hosts');
-       const data = await ps.first();
+     ///  const ps = context.env.DB.prepare('SELECT * from hosts');
+      /// const data = await ps.first();
          /// return Response.json(data);
      //const info = await env.DB.prepare(`INSERT INTO jsondata (pitch) VALUES ('{"City": "Cali"}')`);
      //const info = await env.DB.prepare(`UPDATE jsondata SET pitch = json_replace(pitch, '$.City', 'NYC') `);
 
     
     ///call tournet.worker to fetch json
-   const obj = context.env.grabjson.fetch('NYCS2.json');
+   ///const obj = context.env.grabjson.fetch('NYCS2.json');
     
    /// const obj = await context.env.grabjson.get('NYCS2.json');
    ////if (j2upd === null) {
    ////   return new Response('Not found', { status: 404 });
    /// };
-       return new Response(obj.body);
+      //// return new Response(obj.body);
      }
     
