@@ -9,10 +9,10 @@
         } else {
             return new Response.json({ success: false, message: 'No records were updated.' });
         }
-    }
+    
 
     /////new update
-    export async function onRequest(context) {
+   /// export async function onRequest(context) {
         const ps = context.env.DB.prepare('SELECT * from hosts');
         const data = await ps.first();
           return Response.json(data);
