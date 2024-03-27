@@ -8,7 +8,7 @@
 //return Response.json(dat);
 
 ///call tournet.worker to fetch json
-const j2upd = context.env.gjson.fetch('NYCS2.json');
+const j2upd = context.env.filterjson.fetch('NYCS2.json');
 
 //const obj = await context.env.filterjson.get('NYCS2.json');
 if (j2upd === null) {
