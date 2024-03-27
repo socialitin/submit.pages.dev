@@ -1,6 +1,9 @@
 
     export async function onRequest(context) {
 
+             const ps = context.env.DB.prepare('SELECT * from hosts');
+       const data = await ps.first();
+          const p2p = Response.json(data);
        
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
@@ -12,7 +15,8 @@
             
             if (response.ok) {
             const data = await response.json();
-            return new Response(JSON.stringify(data), {
+            const j2upd = new Response(JSON.stringify(data))+p2p;
+            return (j2upd , {
             headers: { 'Content-Type': 'application/json' },
             });
             } else {
