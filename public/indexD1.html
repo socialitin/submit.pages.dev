@@ -82,7 +82,7 @@
 	
 		</div>
 		  <div id="Tab2" class="tabcontent">
-			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "d1tnhosts();"</p> 
+			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "fetchjson();"</p> 
 		<main>
 			
 			<h1> Pitch your Offer </h1>
@@ -176,7 +176,7 @@ console.log(data2);
 		//.pitching);
 		var pics = data.Pictures;
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
-		console.log((data1));		
+		console.log((data.Pictures));		
 //var picsj = JSON.parse(pics);
 if (!sessionStorage.getItem("pics")){
 sessionStorage.setItem("pics",pics);
@@ -255,7 +255,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 
 <script>
 			async function d1tnhosts() {
-			const response = await fetch('/api/d1tnhost');
+			const response = await fetch('/api/d1tnhos');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
 		console.log(data);
