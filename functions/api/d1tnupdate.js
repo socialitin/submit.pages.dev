@@ -21,7 +21,7 @@
 
     
     ///call tournet.worker to fetch json
-   const obj = context.env.filterjson.fetch('NYCS2.json');
+   const obj = context.env.grabjson.fetch('NYCS2.json');
     
    /// const obj = await context.env.grabjson.get('NYCS2.json');
    ////if (j2upd === null) {
