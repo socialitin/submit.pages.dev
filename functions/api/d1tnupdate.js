@@ -15,8 +15,7 @@
             
             if (response.ok) {
             const data = await response.json();
-            const j2upd = new Response(JSON.stringify(data));
-            return (j2upd , {
+            return new Response(JSON.stringify(data), {
             headers: { 'Content-Type': 'application/json' },
             });
             } else {
