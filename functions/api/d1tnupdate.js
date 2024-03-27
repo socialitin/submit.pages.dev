@@ -4,11 +4,11 @@
        /// const result = await stmt.run(); // Execute the prepared statement
     
         // Check the result of the update operation
-        if (result.changes > 0) {
+       /// if (result.changes > 0) {
            ///return new Response.json({ success: true, message: 'Records updated successfully.' });
-        } else {
+       /// } else {
           ///  return new Response.json({ success: false, message: 'No records were updated.' });
-        }
+      ////  }
     
 
     /////new update
@@ -22,12 +22,12 @@
     //return Response.json(dat);
     
     ///call tournet.worker to fetch json
-    const j2upd = context.env.filterjson.fetch('NYCS2.json');
+    ///const j2upd = context.env.filterjson.fetch('NYCS2.json');
     
     //const obj = await context.env.filterjson.get('NYCS2.json');
-    if (j2upd === null) {
+   /// if (j2upd === null) {
       ///return new Response('Not found', { status: 404 });
-    };
+   /// };
        //// return new Response(obj.body);
       }
     
