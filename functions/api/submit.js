@@ -31,7 +31,7 @@ console.log('jdata is', jsonData);
      const data = await response2.json();
      const j2upd = new Response(JSON.stringify(data));
      var newjson = j2upd["NYCS"].push(jsonData);
-     return j2upd;
+    return j2upd;
      //new Response(JSON.stringify(data), {
      //headers: { 'Content-Type': 'application/json' },
      //});
@@ -47,6 +47,9 @@ console.log('jdata is', jsonData);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
 
+    } catch (err) {
+       // return new Response('Error inserting data into SQLite database', { status: 500 });
+    }
     
 }
   
