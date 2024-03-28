@@ -4,10 +4,10 @@
   const ps = context.env.DB.prepare('SELECT pitching from hosts');
 //const ps = context.env.DB.prepare('SELECT json_extract(pitching, "$") AS extracted_pitch FROM hosts ');             
        const rows = await ps.all();
-       const data1 = rows[0].pitching;
+       //const data1 = rows[0].pitching;
        //const data1 = await ps.first();
        //return Response.json(data);
-          const p2p = Response.json(data1);
+          //const p2p = Response.json(data1);
           //const p2p = data2.pitching;
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
