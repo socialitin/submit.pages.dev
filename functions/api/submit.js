@@ -30,7 +30,9 @@ const p2p = new Response(jsonData, {
                 'Content-Type': 'text/plain'
             }
         });
-
+    } catch (err) {
+        return new Response('Error inserting data into SQLite database', { status: 500 });
+    }
      /// insert /update pubd json
      const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
      const response2 = await fetch(workerURL, {
@@ -54,8 +56,6 @@ const p2p = new Response(jsonData, {
      }
 
      ///
-    } catch (err) {
-        return new Response('Error inserting data into SQLite database', { status: 500 });
-    }
+    
 }
   
