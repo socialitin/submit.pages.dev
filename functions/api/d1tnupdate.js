@@ -6,7 +6,7 @@
        const data1 = await ps.get();
        //const data1 = await ps;
        //return Response.json(data);
-          //const p2p = Response.json(data1);
+          const p2p = Response.json(data1);
           //const p2p = data2.pitching;
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
@@ -20,7 +20,7 @@
             const data = await response.json();
             const j2upd = new Response(JSON.stringify(data));
             //var newjson = j2upd["NYCS"].push(p2p);
-            return data1;
+            return p2p;
             //new Response(JSON.stringify(data), {
             //headers: { 'Content-Type': 'application/json' },
             //});
