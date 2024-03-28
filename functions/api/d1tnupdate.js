@@ -28,7 +28,7 @@
             } else {
             return new Response('Error calling the Worker', { status: response.status });
             }
-            
+           
             
        //// const stmt = context.env.DB.prepare("UPDATE hosts SET CompanyName = 'Pereira' WHERE CompanyName LIKE '%tn%' ");
        /// const result = await stmt.run(); // Execute the prepared statement
