@@ -24,32 +24,7 @@ console.log('jdata is', jsonData);
        const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
 const response = await stmt.bind(jsonData).run(); 
 
-     /// insert /update pubd json
-     const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
-     const response2 = await fetch(workerURL, {
-     method: 'GET', // or 'POST', 'PUT', etc. depending on your Worker
-     headers: {
-     'Content-Type': 'application/json',
-     },
-     });
-     
-     if (response2.ok) {
-     const data = await response2.json();
-     const j2upd = new Response(JSON.stringify(data));
-     var newjson = j2upd["NYCS"].push(jsonData);
-    // return j2upd;
-     //new Response(JSON.stringify(data), {
-     //headers: { 'Content-Type': 'application/json' },
-     //});
-     
-     } else {
-     return new Response('Error calling the Worker', { status: response.status });
-     }
-
-     ///
-
-
-return new Response(j2upd, {
+return new Response(jsonData, {
             status: 200,
             headers: {
                 'Content-Type': 'text/plain'
