@@ -19,14 +19,9 @@ export async function onRequestPost(context) {
 console.log('jdata is', jsonData);
 
      /// insert /update pubd json
-     const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
-     const response2 = await fetch(workerURL, {
-     method: 'GET', // or 'POST', 'PUT', etc. depending on your Worker
-     headers: {
-     'Content-Type': 'application/json',
-     },
-     });
-     
+     //const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
+     //const response2 = await fetch(workerURL, {method: 'GET', // or 'POST', 'PUT', etc. depending on your Workerheaders: {'Content-Type': 'application/json',},});
+     const response2 = await context.env.filterjson.get('NYCS.json');
      if (response2.ok) {
      const data = await response2.json();
      const j2upd = new Response(JSON.stringify(data));
