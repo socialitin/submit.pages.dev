@@ -1,7 +1,8 @@
 
     export async function onRequest(context) {
 
-             const ps = context.env.DB.prepare('SELECT * from hosts');
+           //  const ps = context.env.DB.prepare('SELECT * from hosts');
+const ps = context.env.DB.prepare('SELECT json_extract(pitching, "$.Pitching") AS extracted FROM hosts');             
        const data1 = await ps.first();
        //return Response.json(data);
           const data2 = Response.json(data1);
