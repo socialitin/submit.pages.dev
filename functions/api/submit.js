@@ -23,12 +23,7 @@ console.log('jdata is', jsonData);
 
        const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
 const response = await stmt.bind(jsonData).run(); 
-return new Response(jsonData, {
-            status: 200,
-            headers: {
-                'Content-Type': 'text/plain'
-            }
-        });
+
     } catch (err) {
         return new Response('Error inserting data into SQLite database', { status: 500 });
     }
