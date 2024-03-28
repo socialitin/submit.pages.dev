@@ -25,7 +25,7 @@ console.log('jdata is', jsonData);
      if (response2.ok) {
      const data = await response2.json();
      const j2upd = new Response(JSON.stringify(data));
-     var newjson = j2upd["NYCS"].push(jsonData);
+     //var newjson = j2upd["NYCS"].push(jsonData);
     return j2upd;
      //new Response(JSON.stringify(data), {
      //headers: { 'Content-Type': 'application/json' },
