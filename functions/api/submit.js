@@ -37,7 +37,7 @@ const response = await stmt.bind(jsonData).run();
      const data = await response2.json();
      const j2upd = new Response(JSON.stringify(data));
      var newjson = j2upd["NYCS"].push(jsonData);
-     return j2upd;
+    // return j2upd;
      //new Response(JSON.stringify(data), {
      //headers: { 'Content-Type': 'application/json' },
      //});
@@ -49,7 +49,7 @@ const response = await stmt.bind(jsonData).run();
      ///
 
 
-return new Response(jsonData, {
+return new Response(j2upd, {
             status: 200,
             headers: {
                 'Content-Type': 'text/plain'
