@@ -1,7 +1,7 @@
 
     export async function onRequest(context) {
 
-  const ps = context.env.DB.prepare('SELECT pitching from hosts ');
+  const ps = context.env.DB.prepare('SELECT pitching from hosts WHERE CustomerId = 1 ');
 //const ps = context.env.DB.prepare('SELECT json_extract(pitching, "$") AS extracted_pitch FROM hosts ');             
        const rows = await ps.all();
        const data1 = rows.length > 0 ? rows[0].pitching : null;
@@ -21,7 +21,7 @@
             const data = await response.json();
             const j2upd = new Response(JSON.stringify(data));
             //var newjson = j2upd["NYCS"].push(p2p);
-            return p2p;
+            return rows;
             //new Response(JSON.stringify(data), {
             //headers: { 'Content-Type': 'application/json' },
             //});
