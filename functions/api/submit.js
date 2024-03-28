@@ -25,12 +25,7 @@ export async function onRequestPost(context) {
         // Write the updated JSON data back to the file
        // await fs.writeFile(filePath, updatedJsonData, 'utf8');
 
-        return new Response(updatedJsonData, {
-            status: 200,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        return updatedJsonData
     } catch (err) {
         return new Response('Error updating JSON file', { status: 500 });
     }
