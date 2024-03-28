@@ -17,15 +17,15 @@ export async function onRequestPost(context) {
         const existingJson = JSON.parse(obj);
     
         // Update the JSON object with the new data
-        existingJson.NYCS = formDataObject;
+        //existingJson.NYCS = formDataObject;
 
         // Convert the updated JSON object to a string
-        let updatedJsonData = JSON.stringify(existingJson);
+        //let updatedJsonData = JSON.stringify(existingJson);
 
         // Write the updated JSON data back to the file
        // await fs.writeFile(filePath, updatedJsonData, 'utf8');
 
-        return updatedJsonData
+        return formDataObject;
     } catch (err) {
         return new Response('Error updating JSON file', { status: 500 });
     }
