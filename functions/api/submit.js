@@ -23,8 +23,7 @@ console.log('jdata is', jsonData);
 
        const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
 const response = await stmt.bind(jsonData).run(); 
-//return
-const p2p = new Response(jsonData, {
+return new Response(jsonData, {
             status: 200,
             headers: {
                 'Content-Type': 'text/plain'
@@ -45,7 +44,7 @@ const p2p = new Response(jsonData, {
      if (response2.ok) {
      const data = await response2.json();
      const j2upd = new Response(JSON.stringify(data));
-     var newjson = j2upd["NYCS"].push(p2p);
+     var newjson = j2upd["NYCS"].push(jsonData);
      return j2upd;
      //new Response(JSON.stringify(data), {
      //headers: { 'Content-Type': 'application/json' },
