@@ -18,7 +18,7 @@
             const data = await response.json();
             const j2upd = new Response(JSON.stringify(data));
             //var newjson = j2upd["NYCS"].push(p2p);
-            return JSON.stringify(data2);
+            return data2;
             //new Response(JSON.stringify(data), {
             //headers: { 'Content-Type': 'application/json' },
             //});
