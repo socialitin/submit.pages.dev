@@ -3,7 +3,8 @@
 
              const ps = context.env.DB.prepare('SELECT * from hosts');
        const data1 = await ps.first();
-          //const data1 = data;
+       //return Response.json(data);
+          const data2 = Response.json(data1);
           //const p2p =JSON.parse(data1.pitching);
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
@@ -17,7 +18,7 @@
             const data = await response.json();
             const j2upd = new Response(JSON.stringify(data));
             //var newjson = j2upd["NYCS"].push(p2p);
-            return j2upd[0];
+            return data2;
             //new Response(JSON.stringify(data), {
             //headers: { 'Content-Type': 'application/json' },
             //});
