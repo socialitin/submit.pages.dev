@@ -11,10 +11,10 @@ export async function onRequestPost(context) {
         }
 
         // Read the existing JSON file
-        const obj = await context.env.filterjson.get('NYCS.json');
+        ///const obj = await context.env.filterjson.get('NYCS.json');
         //const filePath = 'path_to_your_json_file.json';
         //const existingData = await fs.readFile(filePath, 'utf8');
-        const existingJson = JSON.parse(obj);
+        ///const existingJson = JSON.parse(obj);
     
         // Update the JSON object with the new data
         //existingJson.NYCS = formDataObject;
