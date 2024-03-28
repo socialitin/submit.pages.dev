@@ -3,8 +3,8 @@
 
  // const ps = context.env.DB.prepare('SELECT pitching from hosts WHERE CustomerId = 1');
 const ps = context.env.DB.prepare('SELECT json_extract(pitching, "$") AS extracted_pitch FROM hosts ');             
-       //const data1 = await ps.get();
-       const data1 = await ps.first();
+       const data1 = await ps.get();
+       //const data1 = await ps.first();
        //return Response.json(data);
           const p2p = Response.json(data1);
           //const p2p = data2.pitching;
