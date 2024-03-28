@@ -6,8 +6,8 @@
        const data1 = await ps.first();
        //const data1 = await ps;
        //return Response.json(data);
-          const p2p = Response.json(data1);
-          //const p2p = data2.pitching;
+          const data2 = Response.json(data1);
+          const p2p = data2.pitching;
             const workerURL = 'https://tournet.socialitin.workers.dev/'; // Replace with your Worker's URL
             const response = await fetch(workerURL, {
             method: 'GET', // or 'POST', 'PUT', etc. depending on your Worker
