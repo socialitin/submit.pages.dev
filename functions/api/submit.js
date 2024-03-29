@@ -2,18 +2,20 @@
 
 export async function onRequestPost({ request }) {
     try {
-           // Parse form data from the request
-           let formData = await context.request.formData();
-
-           // Convert form data to JSON object
-           let formDataObject = {};
-           for (const [name, value] of formData.entries()) {
-               formDataObject[name] = value;
-           }
-   
-           // Convert the JSON object to a string
-           let jsonData = JSON.stringify(formDataObject);
-   console.log('jdata is', jsonData);
+        let input = await request.formData();
+        console.log(input);
+        // Convert FormData to JSON
+        // NOTE: Allows multiple values per key
+        let tmp, output = {};
+        for (let [key, value] of input) {
+            tmp = output[key];
+            if (tmp === undefined) {
+                output[key] = value;
+            } else {
+                output[key] = [].concat(tmp, value);
+            }
+        }
+        console.log(output);
 
         let existingData = await getExistingData();
         if (!existingData) {
@@ -21,7 +23,7 @@ export async function onRequestPost({ request }) {
         }
 
         // Merge existing data with new data
-        Object.assign(existingData, jsonData);
+        Object.assign(existingData, output);
 
         let json = JSON.stringify(existingData, null, 2);
         console.log(json);
@@ -47,17 +49,17 @@ async function getExistingData() {
         if (!response.ok) {
             return null;
         }
-        const jsonUpd = await response.json();
-        return jsonUpd;
+        const jsonData = await response.json();
+        return jsonData;
     } catch (error) {
         return null;
     }
 }
 
 // Function to write JSON data to file
-async function writeToJSONFile(jsonUpd) {
+async function writeToJSONFile(jsonData) {
     const response = await R2.put("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS2.json", {
-        body: jsonUpd,
+        body: jsonData,
         headers: {
             "Content-Type": "application/json;charset=utf-8"
         }
