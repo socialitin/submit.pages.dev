@@ -43,7 +43,7 @@ console.log('jdata is', jsonData);
 
         //let json = JSON.stringify(existingData, null, 2);
 
-            return new Response(jMrgd);
+            return new Response(jMrgd,jsonData);
       
 
     } catch (err) {
