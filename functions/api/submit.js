@@ -30,11 +30,11 @@ console.log('jdata is', jsonData);
 
         //const mixj = Object.assign(obj, jsonData);
         // Merge existing data with new data
-        var jMrgd = existingData["NYCS"].push(jsonData);
+        const jMrgd = existingData["NYCS"].push(jsonData);
         
         //let json = JSON.stringify(existingData, null, 2);
 
-        let jMrgd = JSON.stringify(obj, null, 2);
+        //let jMrgd = JSON.stringify(obj, null, 2);
         console.log(jMrgd);
 
         //let json = JSON.stringify(existingData, null, 2);
