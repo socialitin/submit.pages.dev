@@ -23,23 +23,18 @@ export async function onRequestPost({ request }) {
         }
 
         // Merge existing data with new data
-        Object.assign(existingData, output);
-
-        let json = JSON.stringify(existingData, null, 2);
-        console.log(json);
+       const merged = Object.assign(existingData, output);
+return merged;
+     ///   let json = JSON.stringify(existingData, null, 2);
+     ///   console.log(json);
 
         // Write JSON data to file
-        await writeToJSONFile(json);
+       //// await writeToJSONFile(json);
 
-        return new Response(json, {
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-        });
+      ///  return new Response(json, {           headers: {           'Content-Type': 'application/json;charset=utf-8',        },  });
 
     } catch (err) {
-        return existingData;
-        //new Response('Error parsing JSON content', { status: 400 });
+        return new Response('Error parsing JSON content', { status: 400 });
     }
 }
 
