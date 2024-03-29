@@ -21,7 +21,6 @@ export async function onRequestPost({ request }) {
         if (!existingData) {
             existingData = {};
         }
-
         // Merge existing data with new data
         Object.assign(existingData, output);
 
