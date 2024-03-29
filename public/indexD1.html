@@ -172,7 +172,7 @@ console.log(data2);
 			async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
 			const data1 = await response.json();		
-		const data = JSON.parse(data1.pitching);
+		const data = JSON.parse(data1);
 		//JSON.parse(data1.pitching);
 		//.pitching);
 		var pics = data.Pictures;
