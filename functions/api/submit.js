@@ -19,9 +19,7 @@ export async function onRequestPost({ request }) {
 
   return output;
 
-    } catch (err) {
-       return new Response('Error parsing JSON content', output);
-    }
+    } finally{}
 }
 
 
