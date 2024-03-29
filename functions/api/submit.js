@@ -23,23 +23,30 @@ console.log('jdata is', jsonData);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
       
-        const obj = await context.env.filterjson.get('NYCS.json');
+        const obj = await context.env.filterjson.get('NYCS3.json');
         if (obj === null) {
           return new Response('Not found', { status: 404 });
         };
 const existingData = obj;
         //const mixj = Object.assign(obj, jsonData);
-          // Merge existing data with new data for matching keys only if the key already exists
-          for (const [key,value] of Object.entries(jsonData)) {
-            if (existingData.hasOwnProperty(key)) {
-                if (Array.isArray(existingData[key])) {
-                    existingData[key].push(...value);
-                } else {
-                    existingData[key] = value;
+        // Check if grouping key exists in both existing data and new data, and if their content matches
+        const groupingKey = '440-1'; // Replace 'groupingKey' with your actual grouping key
+        if (existingData.hasOwnProperty(groupingKey) && jsonData.hasOwnProperty(groupingKey) &&
+            JSON.stringify(existingData[groupingKey]) === JSON.stringify(jsonData[groupingKey])) {
+            // Merge existing data with new data for matching grouping key
+            for (const [key, value] of Object.entries(jsonData)) {
+                if (key !== groupingKey) {
+                    if (existingData.hasOwnProperty(key) && Array.isArray(existingData[key])) {
+                        existingData[key].push(...value);
+                    } else {
+                        existingData[key] = value;
+                    }
                 }
             }
-        }     
-
+        } else {
+            // If the grouping key does not match, treat it as a new entry
+            existingData = jsonData;
+        }
         
         //const jMrgd = obj["NYCS"].push(jsonData);
         let jMrgd = JSON.stringify(existingData, null, 2);
