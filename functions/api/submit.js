@@ -27,19 +27,22 @@ console.log('jdata is', jsonData);
         if (obj === null) {
           return new Response('Not found', { status: 404 });
         };
-
+const existingData = obj;
         //const mixj = Object.assign(obj, jsonData);
-        // Merge existing data with new data
-        for (const [key, value] of Object.entries(jsonData)) {
-            if (Array.isArray(obj[key])) {
-                obj[key].push(...value);
-            } else {
-                obj[key] = value;
+          // Merge existing data with new data for matching keys only if the key already exists
+          for (const [key,value] of Object.entries(jsonData)) {
+            if (existingData.hasOwnProperty(key)) {
+                if (Array.isArray(existingData[key])) {
+                    existingData[key].push(...value);
+                } else {
+                    existingData[key] = value;
+                }
             }
-        }
+        }     
+
         
         //const jMrgd = obj["NYCS"].push(jsonData);
-        let jMrgd = JSON.stringify(obj, null, 2);
+        let jMrgd = JSON.stringify(existingData, null, 2);
         console.log(jMrgd);
 
         //let json = JSON.stringify(existingData, null, 2);
