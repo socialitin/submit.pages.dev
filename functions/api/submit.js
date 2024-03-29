@@ -31,7 +31,7 @@ console.log('jdata is', jsonData);
 
         //let json = JSON.stringify(existingData, null, 2);
 
-            return new Response(mixj.body);
+            return new Response(jsonData);
       
 
     } catch (err) {
