@@ -27,11 +27,11 @@ console.log('jdata is', jsonData);
           return new Response('Not found', { status: 404 });
         };
 
-        Object.assign(obj, jsonData);
+        const mixj = Object.assign(obj, jsonData);
 
         //let json = JSON.stringify(existingData, null, 2);
 
-            return new Response(obj.body);
+            return new Response(mixj.body);
       
 
     } catch (err) {
