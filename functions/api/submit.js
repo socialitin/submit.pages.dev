@@ -23,20 +23,16 @@ console.log('jdata is', jsonData);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
       
-        const obj = await context.env.filterjson.get('NYCS.json');
-        if (obj === null) {
+        const existingData = await context.env.filterjson.get('NYCS.json');
+        if (existingData === null) {
           return new Response('Not found', { status: 404 });
         };
 
         //const mixj = Object.assign(obj, jsonData);
         // Merge existing data with new data
-        for (const [key, value] of Object.entries(jsonData)) {
-            if (Array.isArray(obj[key])) {
-                obj[key].push(...value);
-            } else {
-                obj[key] = value;
-            }
-        }
+        var jMrgd = existingData["NYCS"].push(jsonData);
+        
+        //let json = JSON.stringify(existingData, null, 2);
 
         let jMrgd = JSON.stringify(obj, null, 2);
         console.log(jMrgd);
