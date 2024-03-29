@@ -38,8 +38,8 @@ console.log('jdata is', jsonData);
             }
         }
         
-        const jMrgd = obj["NYCS"].push(jsonData);
-        //let jMrgd = JSON.stringify(obj, null, 2);
+        //const jMrgd = obj["NYCS"].push(jsonData);
+        let jMrgd = JSON.stringify(obj, null, 2);
         console.log(jMrgd);
 
         //let json = JSON.stringify(existingData, null, 2);
