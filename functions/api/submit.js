@@ -1,40 +1,73 @@
-/**
- * POST /api/submit
- */
-export async function onRequestPost(context) {
+// POST /api/submit
+
+export async function onRequestPost({ request }) {
     try {
-      //  const db = context.env.DB;
+        let input = await request.formData();
+        console.log(input);
+        // Convert FormData to JSON
+        // NOTE: Allows multiple values per key
+        let tmp, output = {};
+        for (let [key, value] of input) {
+            tmp = output[key];
+            if (tmp === undefined) {
+                output[key] = value;
+            } else {
+                output[key] = [].concat(tmp, value);
+            }
+        }
+        console.log(output);
 
-        // Parse form data from the request
-        let formData = await context.request.formData();
-
-        // Convert form data to JSON object
-        let formDataObject = {};
-        for (const [name, value] of formData.entries()) {
-            formDataObject[name] = value;
+        let existingData = await getExistingData();
+        if (!existingData) {
+            existingData = {};
         }
 
-        // Convert the JSON object to a string
-        let jsonData = JSON.stringify(formDataObject);
-console.log('jdata is', jsonData);
-        // Insert the JSON data into the SQLite database
-       // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
-       //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
+        // Merge existing data with new data
+        Object.assign(existingData, output);
 
-       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
-const response = await stmt.bind(jsonData).run(); 
+        let json = JSON.stringify(existingData, null, 2);
+        console.log(json);
 
-       //Update corresponding published json
+        // Write JSON data to file
+        await writeToJSONFile(json);
 
-       
-        return new Response(jsonData, {
-            status: 200,
+        return new Response(json, {
             headers: {
-                'Content-Type': 'text/plain'
-            }
+                'Content-Type': 'application/json;charset=utf-8',
+            },
         });
+
     } catch (err) {
-        return new Response('Error inserting data into SQLite database', { status: 500 });
+        return new Response('Error parsing JSON content', { status: 400 });
     }
 }
+
+// Function to fetch existing JSON data
+async function getExistingData() {
+    try {
+        const response = await R2.get("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS2.json");
+        if (!response.ok) {
+            return null;
+        }
+        const jsonData = await response.json();
+        return jsonData;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Function to write JSON data to file
+async function writeToJSONFile(jsonData) {
+    const response = await R2.put("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS2.json", {
+        body: jsonData,
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to write JSON data to file");
+    }
+}
+
   
