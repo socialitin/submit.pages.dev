@@ -38,7 +38,7 @@ console.log('jdata is', jsonData);
 
         let json = JSON.stringify(jMrgd, null, 2);
 
-            return new Response(jsonData);
+            return new Response(JSON.stringify(jsonData));
       
 
     } catch (err) {
