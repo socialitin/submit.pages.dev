@@ -27,7 +27,14 @@ console.log('jdata is', jsonData);
           return new Response('Not found', { status: 404 });
         };
 
-         obj.body['440-2'] = jsonData;           
+        // obj.body['440-2'] = jsonData;    
+        const subgroupID = '440-2'; 
+        for (let i = 0; i < obj.length; i++) {
+            if (obj[i][subgroupID]) {
+              obj[i][subgroupID] = {};
+              break; // Assuming each subgroup ID is unique, so no need to continue searching
+            }
+          }      
             return new Response(obj.body);
    
 
