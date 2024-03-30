@@ -52,8 +52,16 @@ if (!found) {
   }
   
   // Return the modified JSON data as a response
-  return new Response(JSON.stringify(data));
-   
+ // return new Response(JSON.stringify(data));
+  // Now, update the JSON data in Cloudflare KV by overwriting the existing value
+const putResponse = await context.env.filterjson.put('NYCS3.json', JSON.stringify(data));
+
+if (!putResponse.ok) {
+  return new Response('Failed to update data in Cloudflare KV', { status: putResponse.status });
+}
+
+// Return a success response
+return new Response('JSON data updated successfully', { status: 200 }); 
 
     } catch (err) {
         return new Response('Error inserting data ', { status: 500 });
