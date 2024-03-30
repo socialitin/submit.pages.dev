@@ -30,26 +30,25 @@ console.log('jdata is', jsonData);
         // obj.body['440-2'] = jsonData;    
       
         
-const subgroupID = '440-2'; // The ID of the subgroup you want to modify
-let modified = false; // Flag to track if the subgroup was modified
-
-// Iterate over the array to find the object containing the subgroup with the specified ID
-for (let i = 0; i < obj.length; i++) {
-  if (obj[i][subgroupID]) {
-    obj[i][subgroupID] = jsonData; // Replace the content of the subgroup with jsonData
-    modified = true; // Set the flag to true indicating that the subgroup was modified
-    break; // Assuming each subgroup ID is unique, so no need to continue searching
-  }
-}
-
-if (!modified) {
-  // Handle case when subgroup with the specified ID is not found
-  return new Response('Subgroup not found', { status: 404 });
-}
-
-// Now obj contains the modified JSON object
-return new Response(JSON.stringify(obj));
-
+        const subgroupID = '440-2'; // The ID of the subgroup you want to modify
+        let found = false;
+        
+        // Iterate over each object in the array
+        for (let i = 0; i < obj.length; i++) {
+          // Check if the subgroup ID exists in the current object
+          if (obj[i][subgroupID]) {
+            obj[i][subgroupID] = jsonData; // Replace the content of the subgroup with jsonData
+            found = true;
+            break; // Exit the loop if the subgroup is found (assuming subgroup IDs are unique)
+          }
+        }
+        
+        if (!found) {
+          return new Response('Subgroup ID not found', { status: 404 });
+        }
+        
+        // Now obj contains the modified JSON object
+        return new Response(JSON.stringify(obj));
    
 
     } catch (err) {
