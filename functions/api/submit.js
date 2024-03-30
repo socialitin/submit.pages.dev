@@ -22,8 +22,11 @@ console.log('jdata is', jsonData);
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
-      
-        const obj = await context.env.get("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json");
+       const filePath = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json';
+       const existingData = await fs.readFile(filePath, 'utf8');
+       const obj = JSON.parse(existingData);
+
+        //const obj = await context.env.get("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json");
         //await context.env.filterjson.get('NYCV.json');
         if (obj === null) {
           return new Response('Not found', { status: 404 });
@@ -39,7 +42,7 @@ console.log('jdata is', jsonData);
 
         //let json = JSON.stringify(jMrgd, null, 2);
 
-            return new Response(JSON.stringify(obj));
+            return new Response(obj);
       
 
     } catch (err) {
