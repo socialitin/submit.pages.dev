@@ -22,8 +22,9 @@ console.log('jdata is', jsonData);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
       
-        const obj = await context.env.filterjson.get('NYCS3.json');
-        if (obj === null) {
+        const response = await context.env.filterjson.get('NYCS3.json');
+        const data = await response.json();
+        if (response === null) {
           return new Response('Not found', { status: 404 });
         };
 
@@ -34,8 +35,8 @@ console.log('jdata is', jsonData);
 let found = false;
 
 // Iterate over each object in the array
-for (let i = 0; i < obj.length; i++) {
-  const currentObj = obj[i];
+for (let i = 0; i < data.length; i++) {
+  const currentObj = data[i];
 
   // Check if the current object contains the subgroup ID
   if (currentObj.hasOwnProperty(subgroupID)) {
@@ -47,8 +48,11 @@ for (let i = 0; i < obj.length; i++) {
 }
 
 if (!found) {
-  return new Response('Subgroup ID not found', { status: 404 });
-}
+    return new Response('Subgroup ID not found', { status: 404 });
+  }
+  
+  // Return the modified JSON data as a response
+  return new Response(JSON.stringify(data));
    
 
     } catch (err) {
