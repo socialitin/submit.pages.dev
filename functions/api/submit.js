@@ -27,7 +27,7 @@ console.log('jdata is', jsonData);
           return new Response('Not found', { status: 404 });
         };
 
-        const jID2upd = obj[440-2];           
+        const jID2upd = obj.body['440-2'];           
             return new Response(jID2upd);
    
 
