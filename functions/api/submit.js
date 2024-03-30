@@ -16,7 +16,7 @@ export async function onRequestPost(context) {
 
         // Convert the JSON object to a string
         let jsonData = formDataObject;
-        //JSON.stringify(formDataObject);
+       // JSON.stringify(formDataObject);
 console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
@@ -38,7 +38,7 @@ console.log('jdata is', jsonData);
 
         let json = JSON.stringify(jMrgd, null, 2);
 
-            return new Response(JSON.stringify(jsonData));
+            return new Response(obj);
       
 
     } catch (err) {
