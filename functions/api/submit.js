@@ -28,7 +28,7 @@ console.log('jdata is', jsonData);
           return new Response('Not found', { status: 404 });
         };
        // obj["440-2"] = jsonData;
-        const jMrgd =  obj["440-2"] ;
+        const jMrgd =  obj;
         //Object.assign(obj, jsonData);
         // Check if grouping key exists in both existing data and new data, and if their content matches
         //const groupingKey = '440-2'; // Replace 'groupingKey' with your actual grouping key
