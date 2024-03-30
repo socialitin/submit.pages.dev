@@ -35,7 +35,7 @@ console.log('jdata is', jsonData);
               break; // Assuming each subgroup ID is unique, so no need to continue searching
             }
           }      
-            return new Response(obj);
+            return new Response(JSON.stringify(obj));
    
 
     } catch (err) {
