@@ -28,7 +28,7 @@ console.log('jdata is', jsonData);
         };
 
          obj.body['440-2'] = jsonData;           
-            return new Response(jsonData);
+            return new Response(obj.body);
    
 
     } catch (err) {
