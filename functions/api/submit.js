@@ -31,11 +31,11 @@ console.log('jdata is', jsonData);
         const subgroupID = '440-2'; 
         for (let i = 0; i < obj.length; i++) {
             if (obj[i][subgroupID]) {
-              obj[i][subgroupID] = {};
+              obj[i][subgroupID] = jsonData;
               break; // Assuming each subgroup ID is unique, so no need to continue searching
             }
           }      
-            return new Response(obj.body);
+            return new Response(obj);
    
 
     } catch (err) {
