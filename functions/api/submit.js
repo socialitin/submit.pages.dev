@@ -30,7 +30,7 @@ console.log('jdata is', jsonData);
 const existingData = obj;
         //const mixj = Object.assign(obj, jsonData);
         // Check if grouping key exists in both existing data and new data, and if their content matches
-        const groupingKey = '430-1'; // Replace 'groupingKey' with your actual grouping key
+        const groupingKey = '440-2'; // Replace 'groupingKey' with your actual grouping key
         if (existingData.hasOwnProperty(groupingKey) && jsonData.hasOwnProperty(groupingKey) &&
             JSON.stringify(existingData[groupingKey]) === JSON.stringify(jsonData[groupingKey])) {
             // Merge existing data with new data for matching grouping key
