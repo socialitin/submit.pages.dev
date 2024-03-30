@@ -15,34 +15,20 @@ export async function onRequestPost(context) {
         }
 
         // Convert the JSON object to a string
-        let jsonData = formDataObject;
-       // JSON.stringify(formDataObject);
+        let jsonData = JSON.stringify(formDataObject);
 console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
-       const filePath = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json';
-       const existingData = await fs.readFile(filePath, 'utf8');
-       const obj = JSON.parse(existingData);
-
-        //const obj = await context.env.get("https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json");
-        //await context.env.filterjson.get('NYCV.json');
+      
+        const obj = await context.env.filterjson.get('NYCS2.json');
         if (obj === null) {
           return new Response('Not found', { status: 404 });
         };
-       // obj["440-2"] = jsonData;
-        const jMrgd =  obj;
-        //Object.assign(obj, jsonData);
-        // Check if grouping key exists in both existing data and new data, and if their content matches
-        //const groupingKey = '440-2'; // Replace 'groupingKey' with your actual grouping key
-              //const jMrgd = obj["NYCS"].push(jsonData);
+
         
-        console.log(jMrgd);
-
-        //let json = JSON.stringify(jMrgd, null, 2);
-
-            return new Response(obj);
+            return new Response(obj.body);
       
 
     } catch (err) {
