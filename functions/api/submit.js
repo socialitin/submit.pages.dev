@@ -80,7 +80,8 @@ if (!found) {
         }
   
         // Return a success response
-        return new Response('JSON data updated successfully', { status: 200 });
+        return new Response(j2updData);
+          ///('JSON data updated successfully', { status: 200 });
       } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });
