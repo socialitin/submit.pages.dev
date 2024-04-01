@@ -54,13 +54,40 @@ if (!found) {
   // Return the modified JSON data as a response
  /// return new Response(JSON.stringify(data));
   // Now, update the JSON data in Cloudflare KV by overwriting the existing value
-const putResponse = await context.env.filterjson.put('NYCS3.json', JSON.stringify(data));
-
-if (!putResponse.ok) {
-  return new Response('Failed ', { status: putResponse.status });
-}
-// Return a success response
-return new Response('JSON data updated successfully', { status: 200 }); 
+  
+   // async fetch(request, env, ctx) {
+      const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
+  
+      const j2updData = {
+        data
+      };
+  
+      const init = {
+        method: 'PUT', // Use PUT method for updating the resource
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(jsonData), // Convert JSON data to a string
+      };
+  
+      try {
+        // Make a PUT request to the Cloudflare Worker endpoint
+        const response = await fetch(url, init);
+  
+        // Check if the request was successful
+        if (!response.ok) {
+          return new Response('Failed to update JSON data', { status: response.status });
+        }
+  
+        // Return a success response
+        return new Response('JSON data updated successfully', { status: 200 });
+      } catch (error) {
+        console.error('Error:', error);
+        return new Response('Internal Server Error', { status: 500 });
+      }
+   // },
+  
+  
 
     } catch (err) {
         return new Response('Error inserting data ', { status: 500 });
