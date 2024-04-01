@@ -28,7 +28,7 @@ console.log('jdata is', jsonData);
         const putResponse = await context.env.filterjson.put('NYCS3.json', JSON.stringify(tdata));
 
         if (!putResponse.ok) {
-          return new Response('Failed  ', { status: putResponse.statusText});
+          return new Response(putResponse.statusText);
           
         }
         // Return a success response
