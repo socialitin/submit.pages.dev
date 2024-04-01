@@ -185,11 +185,11 @@ console.log(data2);
 //var picsj = JSON.parse(pics);
 console.log('mypics', picsj);	
 if (!sessionStorage.getItem("pics")){
-sessionStorage.setItem("pics",pics);
+sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
 }else{
-///var pics = sessionStorage.getItem("pics");
-//var picsj = JSON.parse(pics);
+var pics = sessionStorage.getItem("pics");
+var picsj = JSON.parse(pics);
 };
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
