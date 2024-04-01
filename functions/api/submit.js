@@ -57,7 +57,7 @@ if (!found) {
 const putResponse = await context.env.filterjson.put('NYCS3.json', JSON.stringify(data));
 
 if (!putResponse.ok) {
-  return new Response('Failed to update data ', { status: putResponse.status });
+  return new Response('Failed ', { status: putResponse.status });
 }
 // Return a success response
 return new Response('JSON data updated successfully', { status: 200 }); 
