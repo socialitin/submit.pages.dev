@@ -80,7 +80,7 @@ if (!found) {
         }
   
         // Return a success response
-        return new Response(origData);
+        return new Response(JSON.stringify(origData));
           ///('JSON data updated successfully', { status: 200 });
       } catch (error) {
         console.error('Error:', error);
