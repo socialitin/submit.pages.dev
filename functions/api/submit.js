@@ -72,7 +72,7 @@ if (!found) {
   
       try {
         // Make a PUT request to the Cloudflare Worker endpoint
-        const response = await context.env.grabjson.put(url, j2updData);
+        const response = await context.env.grabjson.put(url, init);
         //await fetch(url, init);
         
         // Check if the request was successful
