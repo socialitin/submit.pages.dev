@@ -31,7 +31,7 @@ console.log('jdata is', jsonData);
         // obj.body['440-2'] = jsonData;  
 //const data1 =JSON.parse(data);
  //       data['440-2'].City = 'Cali';
-        const origData = data;
+        const origData = JSON.parse(data);
         // Iterate over each object in the array
         const subgroupID = "440-2"; // The ID of the subgroup you want to modify
 let found = false;
@@ -61,7 +61,7 @@ if (!found) {
       const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
 
       const j2updData = {
-        origData
+        data
       };
   
       const init = {
