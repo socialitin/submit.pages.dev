@@ -22,7 +22,7 @@ console.log('jdata is', jsonData);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
       
-        const response = await context.env.filterjson.get('NYCS3.json');
+        const response = await context.env.filterjson.get('NYCS2.json');
         const data = await response.json();
         if (response === null) {
           return new Response('Not found', { status: 404 });
