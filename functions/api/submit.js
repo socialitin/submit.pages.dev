@@ -28,8 +28,10 @@ console.log('jdata is', jsonData);
           return new Response('Not found', { status: 404 });
         };
 
-        // obj.body['440-2'] = jsonData;    
-        const origData = data;
+        // obj.body['440-2'] = jsonData;  
+const data1 =JSON.parse(data);
+        data1['440-2'].City = 'Cali';
+        const origData = JSON.stringify(data1);
         // Iterate over each object in the array
         const subgroupID = "440-2"; // The ID of the subgroup you want to modify
 let found = false;
@@ -57,7 +59,7 @@ if (!found) {
   
    // async fetch(request, env, ctx) {
       const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
-  
+
       const j2updData = {
         origData
       };
@@ -82,7 +84,8 @@ if (!found) {
         }
   
         // Return a success response
-        return new Response('JSON data updated successfully', { status: 200 });
+        return new Response(JSON.stringify(origData));
+        //('JSON data updated successfully', { status: 200 });
       } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });
