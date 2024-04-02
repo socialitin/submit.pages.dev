@@ -29,7 +29,7 @@ console.log('jdata is', jsonData);
         };
 
         // obj.body['440-2'] = jsonData;    
-        
+        origData = data;
         // Iterate over each object in the array
         const subgroupID = "440-2"; // The ID of the subgroup you want to modify
 let found = false;
@@ -67,7 +67,7 @@ if (!found) {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
         },
-        body: JSON.stringify(j2updData), // Convert JSON data to a string
+        body: JSON.stringify(origData), // Convert JSON data to a string
       };
   
       try {
