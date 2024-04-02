@@ -72,16 +72,16 @@ if (!found) {
   
       try {
         // Make a PUT request to the Cloudflare Worker endpoint
-        const response = await fetch(url, init);
-  
+        const response = await context.env.filterjson.put(url, j2updData);
+        //await fetch(url, init);
+        
         // Check if the request was successful
         if (!response.ok) {
           return new Response('Failed to update JSON data', { status: response.status });
         }
   
         // Return a success response
-        return new Response(JSON.stringify(jsonData,null, 2));
-          ///('JSON data updated successfully', { status: 200 });
+        return new Response('JSON data updated successfully', { status: 200 });
       } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });
