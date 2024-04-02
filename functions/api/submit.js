@@ -59,7 +59,7 @@ if (!found) {
       const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
   
       const j2updData = {
-        data
+        origData
       };
   
       const init = {
