@@ -48,7 +48,7 @@ for (let i = 0; i < data.length; i++) {
 }
 
 if (!found) {
-    return new Response('Subgroup ID not found', { status: 404 });
+    return new Response('Subg ID not found', { status: 404 });
   }
   
   // Return the modified JSON data as a response
