@@ -29,9 +29,9 @@ console.log('jdata is', jsonData);
         };
 
         // obj.body['440-2'] = jsonData;  
-const data1 =JSON.parse(data);
-        data1[440-2].City = 'Cali';
-        const origData = JSON.stringify(data1);
+//const data1 =JSON.parse(data);
+        data[440-2].City = 'Cali';
+        const origData = JSON.stringify(data);
         // Iterate over each object in the array
         const subgroupID = "440-2"; // The ID of the subgroup you want to modify
 let found = false;
