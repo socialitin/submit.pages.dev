@@ -77,7 +77,7 @@ if (!found) {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
         },
-        body: JSON.stringify(j2updData), // Convert JSON data to a string
+        body: JSON.stringify(data), // Convert JSON data to a string
       };
   
       try {
