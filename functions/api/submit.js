@@ -37,8 +37,8 @@ console.log('jdata is', jsonData);
 let found = false;
 
 // Iterate over each object in the array
-for (let i = 0; i < data.length; i++) {
-  const currentObj = data[i];
+for (let i = 0; i < origData.length; i++) {
+  const currentObj = origData[i];
 
   // Check if the current object contains the subgroup ID
   if (currentObj.hasOwnProperty(subgroupID)) {
@@ -61,7 +61,7 @@ if (!found) {
       const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
 
       const j2updData = {
-        data
+        origData
       };
   
       const init = {
