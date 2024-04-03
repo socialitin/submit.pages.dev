@@ -20,7 +20,9 @@ export async function onRequestPost(context) {
        
         //jsonData1.slice(1,0);
         //let jsonData = jsonData2.slice(0,-1);
-        let jsonData = jsonData1.substring(1,jsonData1.length-1);
+        //let jsonData = jsonData1.substring(1,jsonData1.length-1);
+        let jsonData2 = jsonData1.replace('"{','{');
+        let jsonData = jsonData2.replace('}"','}');
 console.log('jdata is',jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
