@@ -51,7 +51,7 @@ for (let i = 0; i < data.length; i++) {
   // Check if the current object contains the subgroup ID
   if (currentObj.hasOwnProperty(subgroupID)) {
     // If the subgroup ID is found, replace its content with jsonData
-    currentObj[subgroupID] = JSON.stringify(JSON.parse(jsonData));
+    currentObj[subgroupID] = JSON.parse(jsonData);
     found = true; // Set found flag to true
     break; // Exit the loop after modifying the subgroup (assuming subgroup IDs are unique)
   }
