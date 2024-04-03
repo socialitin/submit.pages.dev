@@ -23,7 +23,7 @@ console.log('jdata is', jsonData);
 
       
         const response = await context.env.filterjson.get('NYCS3.json');
-        const data = await response.json();
+        const origData = await response.json();
         if (response === null) {
           return new Response('Not found', { status: 404 });
         };
@@ -32,7 +32,7 @@ console.log('jdata is', jsonData);
 //const data1 =JSON.parse(data);
  //       data['440-2'].City = 'Cali';
         //const origData1 = JSON.parse(data);
-        const origData = data['data'];
+        const data = origData['data'];
         // Iterate over each object in the array
         const subgroupID = "440-2"; // The ID of the subgroup you want to modify
 let found = false;
