@@ -66,8 +66,8 @@ if (!found) {
   // Now, update the JSON data in Cloudflare KV by overwriting the existing value
   
    // async fetch(request, env, ctx) {
-      const url = 'https://tournet.socialitin.workers.dev/NYCS3.json'; // Replace with your Cloudflare Worker URL
-
+     
+      const url = 'https://tournet.socialitin.workers.dev?url=NYCS3.json';
       const j2updData = {
         data
       };
