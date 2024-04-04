@@ -15,11 +15,7 @@ export async function onRequestPost(context) {
 
     // Convert the JSON object to a string
     let jsonData1 = JSON.stringify(formDataObject);
-    //let jsonData = jsonData1.replace(/^"|"$/g, '');
-   
-    //jsonData1.slice(1,0);
-    //let jsonData = jsonData2.slice(0,-1);
-    //let jsonData = jsonData1.substring(1,jsonData1.length-1);
+
     let jsonData2 = jsonData1.replace('"{','{');
     let jsonData = jsonData2.replace('}"','}');
 console.log('jdata is',jsonData);
@@ -38,17 +34,16 @@ console.log('jdata is',jsonData);
 //const data1 =JSON.parse(data);
 //       data['440-2'].City = 'Cali';
       //const origData1 = JSON.parse(data);
-      const origData = jsonData;
-      ///j2upData['data'];
+      const origData = j2upData['data'];
 
       //const origData = { data: [{ "440-2": {} }] }; // This should be replaced with your actual fetch logic
 
       const subgroupID = "440-2";
-      //let found = false;
+      let found = false;
       
       for (let item of origData) {
           if (item.hasOwnProperty(subgroupID)) {
-              item[subgroupID] = formDataObject;
+              item[subgroupID] = jsonData;
               found = true;
               break;
           }
