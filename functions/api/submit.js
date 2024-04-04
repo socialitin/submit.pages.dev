@@ -59,6 +59,7 @@ export async function onRequestPost(context) {
       return new Response('JSON data updated successfully', { status: 200 });
   } catch (err) {
       console.error('Error processing request:', err);
-      return new Response('Error processing request', { status: 500 });
+      return (JSON.stringify(origData));
+      //new Response('Error processing request', { status: 500 });
   }
 }
