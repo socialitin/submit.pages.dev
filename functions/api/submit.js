@@ -18,9 +18,9 @@ export async function onRequestPost(context) {
 //const data1 =JSON.parse(data);
 //       data['440-2'].City = 'Cali';
       //const origData1 = JSON.parse(data);
-      const data = j2upData['data'];
+      const origData = j2upData['data'];
 
-      const origData = { data: [{ "440-2": {} }] }; // This should be replaced with your actual fetch logic
+      //const origData = { data: [{ "440-2": {} }] }; // This should be replaced with your actual fetch logic
 
       const subgroupID = "440-2";
       let found = false;
