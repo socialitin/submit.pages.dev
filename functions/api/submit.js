@@ -23,9 +23,9 @@ export async function onRequestPost(context) {
       //const origData = { data: [{ "440-2": {} }] }; // This should be replaced with your actual fetch logic
 
       const subgroupID = "440-2";
-      let found = false;
+      //let found = false;
       
-      for (let item of origData.data) {
+      for (let item of origData) {
           if (item.hasOwnProperty(subgroupID)) {
               item[subgroupID] = formDataObject;
               found = true;
