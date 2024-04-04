@@ -9,7 +9,7 @@ export async function onRequestPost(context) {
       
       // fetch to retrieve existing data 
       const j2upd = await context.env.filterjson.get('NYCS3.json');
-      const j2upData = await response.json();
+      const j2upData = await j2upd.json();
       if (response === null) {
         return new Response('Not found', { status: 404 });
       };
