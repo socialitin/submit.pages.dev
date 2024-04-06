@@ -79,7 +79,7 @@ if (!found) {
         },
         body: JSON.stringify(data), // Convert JSON data to a string
       };
-  
+
       try {
         // Make a PUT request to the Cloudflare Worker endpoint
         const response = await fetch(url, init);
