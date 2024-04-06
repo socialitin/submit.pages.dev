@@ -67,7 +67,7 @@ if (!found) {
   
    // async fetch(request, env, ctx) {
      
-      const url = 'https://tournet.socialitin.workers.dev?url=NYCS3.json';
+      const url = 'https://tournet.socialitin.workers.dev?url=http://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS3.json';
       const j2updData = {
         data
       };
