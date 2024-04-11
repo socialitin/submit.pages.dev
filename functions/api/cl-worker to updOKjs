@@ -1,0 +1,48 @@
+/* wroker to PUT only, works for new fils
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+const method = 'PUT'; // Assuming this is for demonstration. Typically, you'd use request.method
+
+async function handleRequest(request) {
+  if (method !== 'PUT') {
+    return new Response('This worker only accepts PUT requests', { status: 405 });
+  }
+
+  const requestBody1 = {
+    "data": [{
+      "430-1": {
+        "IATA": "US1",
+        "City": "US1-Western",
+        "Province": "Westen",
+        "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
+        "Pictures": [
+          // Pictures data omitted for brevity
+        ],
+        "Pitch": "MASOMO ...Unique and captivating, with channels that continually change a scenario unlike any other in the world."
+      }
+    }]
+  };
+
+  try {
+    // Convert the request body to a JSON string
+    const requestBody = JSON.stringify(requestBody1);
+    
+    // Use a fixed filename to replace the file on each PUT request
+    const fileName = 'https://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/NYCS2.json';
+    //'fixedFilename.json'; // This name remains constant
+    
+    // Upload (or overwrite) the file in the R2 bucket
+    await updjson.put(fileName, requestBody, {
+      httpMetadata: {
+        contentType: 'application/json'
+      }
+    });
+
+    return new Response(`File '${fileName}' uploaded/updated successfully.`, { status: 200 });
+  } catch (error) {
+    return new Response(`Error uploading file: ${error}`, { status: 500 });
+  }
+}
+
