@@ -38,14 +38,23 @@
 		<script>
    async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
-			const data = await response.json();
-		//const data1 =JSON.stringify(data);
-		console.log(data);
-		var pics = data.NYCS[0].Pictures;
+			const data1 = await response.json();
+		console.log(data1);
+///		var pics = data.NYCS[0].Pictures;
+///		console.log(pics);		
+///var picsj = JSON.parse(pics);		
+		
+		const data2 = JSON.parse(data1.pitching);
+		const data = data2['440-2'];
+		//const data = data3.pitching;
+		//.pitching);
+	
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
-		console.log(pics);		
-var picsj = JSON.parse(pics);
-
+		console.log('mypitch', data);
+		var picsj = data.Pictures;
+			
+//var picsj = JSON.parse(pics);
+console.log('mypics', picsj);	
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
 			jdata=[];
