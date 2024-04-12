@@ -54,11 +54,77 @@
 	<body>
 		<div class="tab">
 			<div class="tab">
-				<button class="tablinks" onclick="openTab(event, 'Tab1')">Join</button>
-				<button class="tablinks" onclick="openTab(event, 'Tab2')">Offer(s)</button>
+				<button class="tablinks" onclick="openTab(event, 'Tab0')">Join</button>
+				<button class="tablinks" onclick="openTab(event, 'Tab1')">Offers(s)</button>
+				<button class="tablinks" onclick="openTab(event, 'Tab2')">Publish</button>
 			</div>
 
 		  </div>
+		  <div id="Tab0" class="tabcontent">
+
+			<main>
+				<h1> Basic Subscription is FREE </h1>
+	
+				<blockquote >
+					<p id ="subjjson" data-json=''>
+					  Welcome to the niche social network for Destination Sales and Promotions
+					  
+					</p>
+				</blockquote>   
+				<form method="POST" action="/api/subscribe">
+					<div class="input">
+						<label for="name">Name Product or Offer</label>
+						<input id="name" name="name" type="text" />
+					</div>
+	
+					<div class="input">
+						<label for="email">URL </label>
+						<input id="email" name="email" type="url" />
+					</div>
+	
+					<div class="input">
+						<label for="referers">Type/kind of offer</label>
+						<select id="referers" name="referers">
+							<option hidden disabled selected value></option>
+							<option value="Sightseeing">Sightseeing</option>
+							<option value="Excursion">Excursion</option>
+							<option value="Night life">Night life</option>
+							<option value="Walking tour">Walking tour</option>
+							<option value="Water cruising">Water cruising</option>
+						</select>
+					</div>
+	
+					<div class="checklist">
+						<label>What's the venue</label>
+						<ul>
+							<li>
+								<input id="m1" type="checkbox" name="venue" value="Attraction" />
+								<label for="m1">Attraction</label>
+							</li>
+							<li>
+								<input id="m2" type="checkbox" name="venue" value="Club" />
+								<label for="m2">Club</label>
+							</li>
+							<li>
+								<input id="m3" type="checkbox" name="venue" value="Accommodation" />
+								<label for="m3">Accommodation</label>
+							</li>
+							<li>
+								<input id="m4" type="checkbox" name="venue" value="Motorcoach" />
+								<label for="m4">Motorcoach</label>
+							</li>
+						</ul>
+					</div>
+					<div class="input">
+						<label for="pitch">Pitch!</label>
+						<input id="pitch" name="pitch" type="textarea" />
+					</div>
+	
+					<button type="submit">Join Tournet</button>
+				</form>
+			</main>
+		</div>
+
 		  <div id="Tab1" class="tabcontent">
 			<h3>Streaming now ...</h3>
 			<div id ="jdata">
