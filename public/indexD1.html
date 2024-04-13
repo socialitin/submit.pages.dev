@@ -10,47 +10,67 @@
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
 
-			<style>
-				.tab {
-					height: 400px; /* Ensure sufficient height for vertical buttons */
-					display: flex; /* Use flexbox to layout buttons */
-					align-items: center; /* Center buttons vertically */
-					justify-content: space-evenly; /* Evenly space buttons horizontally */
-					background-color: #f1f1f10e;
-				}
-				
-				.tab button {
-					background-color: inherit;
-					border: none;
-					outline: none;
-					cursor: pointer;
-					padding: 10px 24px; /* Adjust padding */
-					display: block; /* Ensure buttons are block elements */
-					transform: rotate(-90deg); /* Rotate text vertically */
-					transform-origin: left center; /* Adjust rotation origin */
-					white-space: nowrap; /* Prevent text wrapping */
-				}
-				
-				.tab button:hover {
-					background-color: #ddd;
-				}
-				
-				.tab button.active {
-					background-color: #ccc;
-				}
-				
-				.tabcontent {
-					display: none;
-					width: 50%;
-					padding: 6px 12px;
-					border: 1px solid #ccc;
-					border-top: none;
-				}
-				
-				.tabcontent.active {
-					display: block;
-				}
-				</style>
+		<style>
+			.tab {
+				height: 400px; /* Fixed height for container */
+				display: flex; /* Using flexbox */
+				flex-direction: column; /* Stack buttons vertically */
+				align-items: center; /* Center buttons horizontally within the container */
+				justify-content: space-evenly; /* Distribute space evenly between buttons */
+				background-color: #f1f1f10e;
+			}
+			
+			.tab button {
+				background-color: inherit;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 10px 24px; /* Adjust padding */
+				display: block; /* Ensure buttons are block elements */
+				transform: rotate(-90deg); /* Rotate text vertically */
+				transform-origin: left center; /* Adjust rotation origin */
+				white-space: nowrap; /* Prevent text wrapping */
+			}
+			
+			.tab button:hover {
+				background-color: #ddd;
+			}
+			
+			.tab button.active {
+				background-color: #ccc;
+			}
+			
+			.tabcontent {
+				display: none;
+				width: 50%;
+				padding: 6px 12px;
+				border: 1px solid #ccc;
+				border-top: none;
+			}
+			
+			.tabcontent.active {
+				display: block;
+			}
+			</style>
+			</head>
+			
+			<body>
+				<div class="tab">
+					<button class="tablinks" onclick="openTab(event, 'Tab1')">Join</button>
+					<button class="tablinks" onclick="openTab(event, 'Tab2')">Offers(s)</button>
+					<button class="tablinks" onclick="openTab(event, 'Tab3')">Publish</button>
+				</div>
+				<div id="Tab1" class="tabcontent">
+					<!-- Tab1 content goes here -->
+				</div>
+				<div id="Tab2" class="tabcontent">
+					<!-- Tab2 content goes here -->
+				</div>
+				<div id="Tab3" class="tabcontent">
+					<!-- Tab3 content goes here -->
+				</div>
+			</body>
+			
 				</head>
 				
 				<body>
