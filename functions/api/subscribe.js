@@ -1,6 +1,4 @@
-**
- * POST /api/submit
- */
+
 export async function onRequestPost(context) {
     try {
       //  const db = context.env.DB;
