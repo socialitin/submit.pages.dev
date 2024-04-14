@@ -1,27 +1,38 @@
+**
+ * POST /api/submit
+ */
 export async function onRequestPost(context) {
     try {
-        const formData = await context.request.formData();
-        const formDataObject = Object.fromEntries(formData);
-        const jsonData = JSON.stringify(formDataObject);
-        console.log('JSON data:', jsonData);
+      //  const db = context.env.DB;
 
-        const storageUrl = 'https://tournet.socialitin.workers.dev/NYCS.json';
-        const response = await fetch(storageUrl, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: jsonData
-        });
+        // Parse form data from the request
+        let formData = await context.request.formData();
 
-        if (!response.ok) {
-            throw new Error(`Failed to store JSON data: ${response.statusText}`);
+        // Convert form data to JSON object
+        let formDataObject = {};
+        for (const [name, value] of formData.entries()) {
+            formDataObject[name] = value;
         }
+        // Convert the JSON object to a string
+        let jsonData = JSON.stringify(formDataObject);
+console.log('jdata is', jsonData);
+        // Insert the JSON data into the SQLite database
+       // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
+       //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
+       const stmt = context.env.DB.prepare("INSERT hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
+const response = await stmt.bind(jsonData).run(); 
+
+       //Update corresponding published json
+      
         return new Response(jsonData, {
             status: 200,
-            headers: {'Content-Type': 'application/json'}
+            headers: {
+                'Content-Type': 'text/plain'
+            }
         });
     } catch (err) {
-        console.error('Error processing request:', err.message, err.stack);
-        return new Response(`Error processing request: ${err.message}`, { status: 500 });
+        return new Response('Error inserting data into SQLite database', { status: 500 });
     }
 }
+  
