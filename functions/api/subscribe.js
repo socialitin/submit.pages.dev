@@ -1,39 +1,49 @@
 /**
  * POST /api/submit
+ * Handles incoming POST requests and generates a JSON file with a dynamic name based on today's date.
  */
 export async function onRequestPost(context) {
     try {
-      //  const db = context.env.DB;
-
         // Parse form data from the request
-        let formData = await context.request.formData();
+        const formData = await context.request.formData();
 
         // Convert form data to JSON object
-        let formDataObject = {};
-        for (const [name, value] of formData.entries()) {
-            formDataObject[name] = value;
-        }
+        const formDataObject = Object.fromEntries(formData);
+
         // Convert the JSON object to a string
-        let jsonData = JSON.stringify(formDataObject);
-console.log('jdata is', jsonData);
-        // Insert the JSON data into the SQLite database
-       // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
-       //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
+        const jsonData = JSON.stringify(formDataObject);
+        console.log('JSON data:', jsonData);
 
-       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
-const response = await stmt.bind(jsonData).run(); 
+        // Generate a file name based on today's date
+        const date = new Date();
+        const dateString = date.toISOString().slice(0, 10); // Formats to 'YYYY-MM-DD'
+        const fileName = `${dateString}.json`;
 
-       //Update corresponding published json
+        // Assuming the base URL for your Cloudflare Worker that handles file storage
+        const storageUrl = `https://tournet.socialitin.workers.dev/${fileName}`;
 
-       
+        // Prepare the PUT request to store the JSON data
+        const response = await fetch(storageUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to store JSON data: ${response.statusText}`);
+        }
+
+        // Return the success response with the JSON data
         return new Response(jsonData, {
             status: 200,
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'application/json'
             }
         });
     } catch (err) {
-        return new Response('Error inserting data into SQLite database', { status: 500 });
+        console.error('Error:', err);
+        return new Response('Error processing request', { status: 500 });
     }
 }
-  
