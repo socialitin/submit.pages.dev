@@ -29,9 +29,11 @@ export async function onRequestPost(context) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: jsonData
+            body: jsonData,
+            mode: 'cors'  // Ensure CORS mode is set if crossing origins
         });
 
+        
         if (!response.ok) {
             throw new Error(`Failed to store JSON data: ${response.statusText}`);
         }
