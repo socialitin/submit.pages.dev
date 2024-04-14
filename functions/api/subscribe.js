@@ -20,10 +20,10 @@ console.log('jdata is', jsonData);
        const stmt = context.env.DB.prepare("INSERT INTO jsondata (pitch) VALUES (?)");
  
            // Execute the prepared statement with jsonData as the parameter
-           const result = await stmt.run(jsonData);
+           //const result = await stmt.run(jsonData);
  
      
-//const response = await stmt.bind(jsonData).run(); 
+const response = await stmt.bind(jsonData).run(); 
 
        //Update corresponding published json
       
