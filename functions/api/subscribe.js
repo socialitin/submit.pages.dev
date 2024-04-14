@@ -30,7 +30,7 @@ export async function onRequestPost(context) {
                 'Content-Type': 'application/json'
             },
             body: jsonData,
-            mode: 'cors'  // Ensure CORS mode is set if crossing origins
+            //mode: 'cors'  // Ensure CORS mode is set if crossing origins
         });
 
         
