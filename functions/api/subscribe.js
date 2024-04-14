@@ -20,7 +20,7 @@ export async function onRequestPost(context) {
         const fileName = `${dateString}.json`;
 
         // Assuming the base URL for your Cloudflare Worker that handles file storage
-        const storageUrl = `https://your-cloudflare-worker-url.com/${fileName}`;
+        const storageUrl = `https://your-cloudflare-worker-url.com/test1.json`;
 
         // Prepare the PUT request to store the JSON data
         const response = await fetch(storageUrl, {
