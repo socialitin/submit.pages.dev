@@ -2,6 +2,7 @@
  * POST /api/submit
  * Handles incoming POST requests and generates a JSON file with a dynamic name based on today's date.
  */
+
 export async function onRequestPost(context) {
     try {
         // Parse form data from the request
@@ -14,13 +15,8 @@ export async function onRequestPost(context) {
         const jsonData = JSON.stringify(formDataObject);
         console.log('JSON data:', jsonData);
 
-        // Generate a file name based on today's date
-        const date = new Date();
-        const dateString = date.toISOString().slice(0, 10); // Formats to 'YYYY-MM-DD'
-        const fileName = `${dateString}.json`;
-
         // Assuming the base URL for your Cloudflare Worker that handles file storage
-        const storageUrl = 'https://tournet.socialitin.workers.dev/test.json';
+        const storageUrl = 'https://tournet.socialitin.workers.dev/NYCS.json';
         //`https://your-cloudflare-worker-url.com/test1.json`;
 
         // Prepare the PUT request to store the JSON data
