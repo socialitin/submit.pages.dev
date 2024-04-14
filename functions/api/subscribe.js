@@ -1,48 +1,27 @@
-/**
- * POST /api/submit
- * Handles incoming POST requests and generates a JSON file with a dynamic name based on today's date.
- */
-
 export async function onRequestPost(context) {
     try {
-        // Parse form data from the request
         const formData = await context.request.formData();
-
-        // Convert form data to JSON object
         const formDataObject = Object.fromEntries(formData);
-
-        // Convert the JSON object to a string
         const jsonData = JSON.stringify(formDataObject);
         console.log('JSON data:', jsonData);
 
-        // Assuming the base URL for your Cloudflare Worker that handles file storage
         const storageUrl = 'https://tournet.socialitin.workers.dev/NYCS.json';
-        //`https://your-cloudflare-worker-url.com/test1.json`;
-
-        // Prepare the PUT request to store the JSON data
         const response = await fetch(storageUrl, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: jsonData,
-            //mode: 'cors'  // Ensure CORS mode is set if crossing origins
+            headers: {'Content-Type': 'application/json'},
+            body: jsonData
         });
 
-        
         if (!response.ok) {
             throw new Error(`Failed to store JSON data: ${response.statusText}`);
         }
 
-        // Return the success response with the JSON data
         return new Response(jsonData, {
             status: 200,
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: {'Content-Type': 'application/json'}
         });
     } catch (err) {
-        console.error('Error:', err);
-        return new Response('Error processing request', { status: 500 });
+        console.error('Error processing request:', err.message, err.stack);
+        return new Response(`Error processing request: ${err.message}`, { status: 500 });
     }
 }
