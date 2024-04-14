@@ -20,7 +20,7 @@ export async function onRequestPost(context) {
         const fileName = `${dateString}.json`;
 
         // Assuming the base URL for your Cloudflare Worker that handles file storage
-        const storageUrl = 'https://tournet.socialitin.workers.dev?url=http://pub-ff67a151dd104cf6b171f45a47c36526.r2.dev/test1.json';
+        const storageUrl = 'https://tournet.socialitin.workers.dev/';
         //`https://your-cloudflare-worker-url.com/test1.json`;
 
         // Prepare the PUT request to store the JSON data
