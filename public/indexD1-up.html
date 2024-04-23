@@ -402,6 +402,7 @@ console.log(j2publish);
 <script>
     function mmup() {
         var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv'
+        console.warn('csv ',c2stream);
         async function fetchCSV(c2stream) {
     try {
         const response = await fetch(url);
@@ -422,7 +423,7 @@ console.log(j2publish);
 function parseCSV(csvText) {
     const lines = csvText.split('\n');
     const result = lines.map(line => line.split(','));
-    console.log(result);
+    console.warn('csv ...',result);
 }
 
 // Example usage:
