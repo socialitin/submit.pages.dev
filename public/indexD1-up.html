@@ -402,7 +402,7 @@ console.log(j2publish);
 <script>
  function mmup() {
     var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv';
-    console.warn('csv ', c2stream);
+   // console.warn('csv ', c2stream);
 
     async function fetchCSV(url) {
         console.warn('fetching ');
@@ -432,13 +432,13 @@ console.log(j2publish);
 
     // Remove all numeric characters
     result1 = result1.replace(/\d+/g, '');
-    //console.warn('csv ...', result1);
+    console.warn('csv ...', result1);
     return result1;
 ///}
 
-        const lines = result1.split('\n');
+       // const lines = result1.split('\n');
         //const result = lines.map(line => line.split(','));
-        console.warn('csv ...', lines);
+      //  console.warn('csv ...', lines);
     }
 
     fetchCSV(c2stream);  // Call the fetchCSV function and pass the URL
