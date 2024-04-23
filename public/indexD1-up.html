@@ -400,32 +400,39 @@ console.log(j2publish);
 </script>
 
 <script>
-    function mmup() {
-        var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv'
-        console.warn('csv ',c2stream);
-        async function fetchCSV(c2stream) {
-            console.warn('fetching ');       
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+ function mmup() {
+    var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv';
+    console.warn('csv ', c2stream);
+
+    async function fetchCSV(url) {
+        console.warn('fetching ');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.text();
+            
+            // Now you can process the CSV data as a text string
+            console.warn('fetched ', data);
+            // Optional: Convert CSV text to arrays or objects
+            parseCSV(data);
+        } catch (error) {
+            console.error('Failed to fetch CSV:', error);
         }
-        const data = await response.text();
-        
-        // Now you can process the CSV data as a text string
-        console.warn('fetched ',data);
-        // Optional: Convert CSV text to arrays or objects
-        parseCSV(data);
-    } catch (error) {
-        console.error('Failed to fetch CSV:', error);
     }
+
+    function parseCSV(csvText) {
+        const lines = csvText.split('\n');
+        const result = lines.map(line => line.split(','));
+        console.warn('csv ...', result);
+    }
+
+    fetchCSV(c2stream);  // Call the fetchCSV function and pass the URL
 }
 
-function parseCSV(csvText) {
-    const lines = csvText.split('\n');
-    const result = lines.map(line => line.split(','));
-    console.warn('csv ...',result);
-}
+//mmup(); // Call the mmup function to execute
+
 
 // Example usage:
 //fetchCSV('https://example.com/path/to/your/csvfile.csv');
@@ -433,7 +440,7 @@ function parseCSV(csvText) {
 
 
 // hide offers if none
-var ccpath = 'https://mmedia.tournet.com/Tournet/US/NYC/';
+//var ccpath = 'https://mmedia.tournet.com/Tournet/US/NYC/';
 //$('#c2stream').attr('data-iata')+'/';
 //	var offers = []	;  ///response.length
 //for (var g = 0; g <18; g++ ) {//
@@ -464,7 +471,7 @@ var ccpath = 'https://mmedia.tournet.com/Tournet/US/NYC/';
     
 //var picsj = JSON.parse(pics);
 //console.log('mypics', picsj);	
-    }
+    
 </script>
 
 	</body>
