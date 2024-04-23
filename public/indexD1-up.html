@@ -423,8 +423,21 @@ console.log(j2publish);
     }
 
     function parseCSV(csvText) {
-        const lines = csvText.split('\n');
-        const result = lines.map(line => line.split(','));
+        ////function cleanString(inputString) {
+    // Remove carriage returns (\r)
+    let result1 = csvText.replace(/\r/g, '');
+
+    // Replace multiple spaces with a single space
+    result1 = result1.replace(/\s{2,}/g, ' ');
+
+    // Remove all numeric characters
+    result1 = result1.replace(/\d+/g, '');
+    console.warn('csv ...', result1);
+    return result1;
+///}
+
+        //const lines = csvText.split('\n');
+        //const result = lines.map(line => line.split(','));
         console.warn('csv ...', result);
     }
 
