@@ -135,7 +135,7 @@
 
 			<h3>Streaming now ...</h3>
 			<div id ="jdata">
-			<label>1<img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" ></label>
+			<label>1<img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick=" mmup()"></label>
 			<label>2</label><img id="fjson2" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" >
 			<label>3</label><img id="fjson3" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" >	
 			<label>4</label><img id="fjson4" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhosts()">
@@ -398,5 +398,51 @@ console.log(j2publish);
 		//	console.log(response2);
 			};	
 </script>
+
+<script>
+    async function mmup() {
+
+        var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv'
+
+        $.ajax({
+url: c2stream,    
+cache: false,
+success: function(response) {
+
+// hide offers if none
+var ccpath = 'https://mmedia.tournet.com/Tournet/US/NYC/';
+//$('#c2stream').attr('data-iata')+'/';
+//	var offers = []	;  ///response.length
+for (var g = 0; g <18; g++ ) {
+
+var oTxt = response[g];
+//var img2s = oTxt.replace(/\s+/g, '');	
+///var oPics = ccpath+img2s.substring(0,20)+'.jpg';
+//var oPics = '[{"img":' + '"'+oPics +'" }]';
+
+//sPrefs = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "25px" id ="` +(g+1)+`" data-name ="` +oTxt+`" src="`+oPics+`"  ><label id ="ctt` +(g+1)+`"> `+oTxt+`</label>   </div><br> `;
+//onclick = "add2itin(event,name);"
+//$('#hotelWidget').append(sPrefs);    
+ console.warn('OfferP AnnPics', oTxt);	
+
+};
+
+//console.warn('OfferP Annt found', response);
+}});				
+    //const response = await fetch('/api/d1tnhosts');
+    //const data1 = await response.json();		
+
+//const data2 = JSON.parse(data1.pitching);
+//const data = data2['440-2'];
+
+///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+console.log('mypitch', data);
+//var picsj = data.Pictures;
+    
+//var picsj = JSON.parse(pics);
+//console.log('mypics', picsj);	
+    }
+</script>
+
 	</body>
 </html>
