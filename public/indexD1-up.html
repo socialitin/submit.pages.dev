@@ -404,6 +404,7 @@ console.log(j2publish);
         var c2stream = 'https://tournet.com/assets/Annoucements/miami-us.csv'
         console.warn('csv ',c2stream);
         async function fetchCSV(c2stream) {
+            console.warn('fetching ');       
     try {
         const response = await fetch(url);
         if (!response.ok) {
