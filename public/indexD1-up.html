@@ -444,11 +444,14 @@ console.log(j2publish);
       //  document.getElementById("pickOfr").append = result[g][0];
 
         // Assuming result[g][0] is a string or a Node you want to append
-var content = result[g][0];
+var oTxt = result[g][0];
+var oTxT1 = oTxt.replace(/\d+/g, '');
+var img2s = oTxt1.replace(/\s+/g, '');	
+	var oPics = img2s.substring(0,20)+'.jpg';
 
 // Get the element by ID
 //var element = document.getElementById("pickOfr");
-var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "50px" id ="` +(g)+`" data-name ="` +g+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+result[g][0]+`</label>   </div><br> `;
+var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "50px" id ="` +(g)+`" data-name ="` +oPics+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+result[g][0]+`</label>   </div><br> `;
 var element = document.getElementById("pickOfr");
 // Append the content to the element
 //element.append(cLine);
