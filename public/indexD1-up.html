@@ -453,7 +453,7 @@ var img2s =img2.trim();
 
 // Get the element by ID
 //var element = document.getElementById("pickOfr");
-var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "80px" id ="` +(g)+`" data-name ="` +oPics+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+img2s+`</label> `+oPics+` </div><br> `;
+var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "90px" onclick="dimg(event,src);" id ="` +(g)+`" data-name ="` +oPics+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+img2s+`</label> `+oPics+` </div><br> `;
 var element = document.getElementById("pickOfr");
 // Append the content to the element
 //element.append(cLine);
@@ -508,6 +508,35 @@ element.innerHTML += cLine;
 //console.log('mypics', picsj);	
     
 </script>
+<script>
+function dimg(src) {
+//document.getElementById('downloadableImage').addEventListener('click', function() {
+    const imageUrl = this.src; // or manually set the URL if different
+    const imageName = event.target.id.name; // Set the new name for the downloaded image
 
+    fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            // Create a URL for the blob object
+            const blobUrl = URL.createObjectURL(blob);
+
+            // Create a temporary anchor element
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = imageName; // Set the name of the download file
+
+            // Append the anchor to the body, click it, and remove it
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Optional: Free up the blob URL allocation to avoid memory leaks
+            window.URL.revokeObjectURL(blobUrl);
+        })
+        .catch(error => console.error('Error downloading the image:', error));
+//});
+
+};
+</script>
 	</body>
 </html>
