@@ -439,7 +439,7 @@ console.log(j2publish);
        const lines = result1.split('\n');
         const result = lines.map(line => line.split(','));
         
-        for (var g = 0; g <18; g++ ) {
+        for (var g = 0; g <20; g++ ) {
             console.warn('csv ...', result[g]);
       //  document.getElementById("pickOfr").append = result[g][0];
 
@@ -448,7 +448,7 @@ var content = result[g][0];
 
 // Get the element by ID
 //var element = document.getElementById("pickOfr");
-var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "25px" id ="` +(g)+`" data-name ="` +g+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+result[g][0]+`</label>   </div><br> `;
+var cLine = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "50px" id ="` +(g)+`" data-name ="` +g+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+result[g][0]+`</label>   </div><br> `;
 var element = document.getElementById("pickOfr");
 // Append the content to the element
 //element.append(cLine);
