@@ -441,7 +441,17 @@ console.log(j2publish);
         
         for (var g = 0; g <18; g++ ) {
             console.warn('csv ...', result[g]);
-        document.getElementById("pickOfr").appendChild = result[g][0];
+      //  document.getElementById("pickOfr").append = result[g][0];
+
+        // Assuming result[g][0] is a string or a Node you want to append
+var content = result[g][0];
+
+// Get the element by ID
+var element = document.getElementById("pickOfr");
+
+// Append the content to the element
+element.append(content);
+
         }
     }
 
