@@ -509,10 +509,10 @@ element.innerHTML += cLine;
     
 </script>
 <script>
-function dimg(evt, data-name, src) {
+function dimg(evt,src) {
 //document.getElementById('downloadableImage').addEventListener('click', function() {
     const imageUrl = src; // or manually set the URL if different
-    const imageName = name; // Set the new name for the downloaded image
+    const imageName = event.target.id.data-name; // Set the new name for the downloaded image
 console.warn('url', src);
     fetch(imageUrl)
         .then(response => response.blob())
