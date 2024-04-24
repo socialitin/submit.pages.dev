@@ -438,9 +438,10 @@ console.log(j2publish);
 
        const lines = result1.split('\n');
         const result = lines.map(line => line.split(','));
-        console.warn('csv ...', result);
+        
         for (var g = 0; g <18; g++ ) {
-        document.getElementById("pickOfr").append = result[g];
+            console.warn('csv ...', result[g]);
+        document.getElementById("pickOfr").innerHTML = result[g];
         }
     }
 
