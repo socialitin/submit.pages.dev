@@ -439,7 +439,9 @@ console.log(j2publish);
        const lines = result1.split('\n');
         const result = lines.map(line => line.split(','));
         console.warn('csv ...', result);
-        document.getElementById("pickOfr").innerHTML = result;
+        for (var g = 0; g <18; g++ ) {
+        document.getElementById("pickOfr").append = result(g);
+        }
     }
 
     fetchCSV(c2stream);  // Call the fetchCSV function and pass the URL
