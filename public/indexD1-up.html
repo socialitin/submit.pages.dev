@@ -447,7 +447,8 @@ console.log(j2publish);
 var content = result[g][0];
 
 // Get the element by ID
-var element = document.getElementById("pickOfr");
+//var element = document.getElementById("pickOfr");
+var element = `<br><div style = "margin-left: 20px; float:left; height:70px; " > <img width = "25px" id ="` +(g)+`" data-name ="` +oTxt+`" src="`+result[g][1]+`"  ><label id ="ctt` +(g)+`"> `+result[g][0]+`</label>   </div><br> `;
 
 // Append the content to the element
 element.append(content);
