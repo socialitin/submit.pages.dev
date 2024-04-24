@@ -151,16 +151,19 @@
 				<div id="thumbs" style="width:15%; float:left;" ></div>	
 				<div width="2%"></div>
 				<div>
-				<div id="itemImg" style ="width:50%; float:left;"></div>
+				<div id="itemImg"  style ="width:50%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;"></div>
 		        </div>	
                 <div>
-	
+                    <label>Select city</label><img id="fjson4" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="mmup()">
+                    <div id="pickOfr" style ="width:20%; float:right;" >
+               
+                    
                 </div>
-                <label>4</label><img id="fjson4" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="mmup()">
-	            </div>
+             
+	        
 	
-		</div>
+		         </div>
 		  <div id="Tab3" class="tabcontent">
 			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "d1tnupdate();"</p> 
 		<main>
@@ -439,6 +442,7 @@ console.log(j2publish);
        const lines = result1.split('\n');
         const result = lines.map(line => line.split(','));
         console.warn('csv ...', result);
+        getElementById(pickOfr).innerHTML = result;
     }
 
     fetchCSV(c2stream);  // Call the fetchCSV function and pass the URL
