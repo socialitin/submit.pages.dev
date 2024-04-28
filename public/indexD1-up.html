@@ -407,36 +407,50 @@ console.log(j2publish);
 });
 
 async function handleRequest(request) {
-  // URL of the Target Worker
-  const targetWorkerUrl = 'https://imageupl.socialitin.workers.dev';
+const method = "POST";
+  if (request.method !== "POST") {
+   return new Response("Expected POST", { status: 405 });
+  }
+
+  // Retrieving the file from the request using the FormData API
+  const formData = await request.formData();
+  const imageFile = formData.get("image"); // 'image' is the name field in the form
+
+  if (!imageFile) {
+    return new Response("Noimage provided", { status: 400 });
+  }
 
   try {
-    // Making a fetch request to the Target Worker
-    const responseFromTarget = await fetch(targetWorkerUrl, {
-      method: 'POST', // Change this to 'POST' if required, and add body if needed
-      headers: {
-        // Add headers if necessary for your request
-        'Content-Type': 'application/json'
-      }
-      // If it's a POST request, add a body:
-      // body: JSON.stringify({ key: 'value' })
-    });
-
-    // Waiting for the response from the Target Worker
-    const data = await responseFromTarget.json();
-
-    // Returning the response from the Target Worker to the client
-    return new Response(JSON.stringify(data), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const imageURL = await uploadToCloudflareImages(imageFile);
+    return new Response(`Image uploaded successfully: ${imageURL}`, { status: 200 });
   } catch (error) {
-    // Handling any errors in the fetch request
-    return new Response('Error contacting the target Worker: ' + error.message, { status: 500 });
+    return new Response(`Failed to upload image: ${error}`, { status: 500 });
   }
 }
 
+async function uploadToCloudflareImages(file) {
+  const CLOUDFLARE_IMAGES_ENDPOINT = "https://api.cloudflare.com/client/v4/accounts/f0c92755958332f29a4d8658606c6f34/images/v1";
+  const CLOUDFLARE_API_TOKEN = "imagepipe";
 
-   }  
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(CLOUDFLARE_IMAGES_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN}`
+    },
+    body: formData
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to upload to Cloudflare Images');
+  }
+
+  const result = await response.json();
+  return result.result.url; // Assuming the API returns the URL of the uploaded image
+}
+   };
 </script>
 <script>
  function mmup() {
