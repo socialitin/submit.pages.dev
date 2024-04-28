@@ -413,7 +413,7 @@ async function handleRequest(request) {
   try {
     // Making a fetch request to the Target Worker
     const responseFromTarget = await fetch(targetWorkerUrl, {
-      method: 'GET', // Change this to 'POST' if required, and add body if needed
+      method: 'POST', // Change this to 'POST' if required, and add body if needed
       headers: {
         // Add headers if necessary for your request
         'Content-Type': 'application/json'
