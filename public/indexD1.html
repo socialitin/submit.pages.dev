@@ -347,7 +347,7 @@ Pdesc +'" >'+
 
 //	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
 var picsUpl = 
-'<form id="uploadForm">' +
+	'<form id="uploadForm" method="POST" enctype="multipart/form-data">'+
         '<input type="file" id="imageInput" name="image" accept="image/*" required />'+
         '<button type="submit" >Upload Image</button>'+
     '</form>';
