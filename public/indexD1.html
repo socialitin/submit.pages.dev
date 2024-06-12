@@ -349,10 +349,10 @@ Pdesc +'" >'+
 var picsUpl = 
 '<form id="uploadForm">' +
         '<input type="file" id="imageInput" name="image" accept="image/*" required />'+
-        '<button type="submit">Upload Image</button>'+
+        '<button type="submit" >Upload Image</button>'+
     '</form>';
 
-src="upload.js";
+//src="upload.js";
 document.getElementById('picDtls').innerHTML = htmlPics+picsUpl;	
 };	
 
@@ -372,7 +372,7 @@ document.getElementById('picDtls').innerHTML = htmlPics+picsUpl;
                 const formData = new FormData();
                 formData.append('image', imageFile);
 
-                const response = await fetch('https://your-worker.your-subdomain.workers.dev', {
+                const response = await fetch('https://imageupl.socialitin.workers.dev/', {
                     method: 'POST',
                     body: formData
                 });
