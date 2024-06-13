@@ -373,11 +373,14 @@ document.getElementById('picDtls').innerHTML = picsUpl;
                 const formData = new FormData();
                 formData.append('image', imageFile);
 
-                const response = await fetch('https://imageupl.socialitin.workers.dev/', {
-                    method: 'POST',
-                    body: formData
-                });
-
+				const response = await fetch('https://imageupl.socialitin.workers.dev/', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Access-Control-Allow-Origin': '*', // Optional: Not required here as it's set server-side
+          }
+        });
+		
                 if (!response.ok) {
                     throw new Error('Failed to upload image');
                 }
