@@ -30,4 +30,37 @@ addEventListener('fetch', event => {
       return new Response('Error contacting the target Worker: ' + error.message, { status: 500 });
     }
   }
+
+  /////script
+  document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const imageInput = document.getElementById('imageInput');
+    if (imageInput.files.length === 0) {
+      alert('Please select an image to upload.');
+      return;
+    }
+
+    const imageFile = imageInput.files[0];
+
+    try {
+      const formData = new FormData();
+      formData.append('image', imageFile);
+  ///https://imageupl.socialitin.workers.dev/
+      const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload image');
+      }
+
+      const result = await response.text();
+      alert('Image uploaded successfully: ' + result);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image: ' + error.message);
+    }
+  });
   
