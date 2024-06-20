@@ -397,9 +397,9 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		const data2 = result.variants;
 		//const data = data2['440-2'];
 		const data = data2[0];
-          console.log(data2,data);
+          //console.log(data2,data);
 		  document.getElementById("itemImg").src = data;
-		  console.log(document.getElementById("itemImg").src);
+		  console.log(document.getElementById("itemImg"));
         } else {
           alert(`Failed to upload image: ${result}`);
         }
