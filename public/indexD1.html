@@ -398,6 +398,7 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		//const data = data2['440-2'];
 		const data = data2[0];
           console.log(data2,data);
+		  document.getElementById("itemImg").src = data;
         } else {
           alert(`Failed to upload image: ${result}`);
         }
