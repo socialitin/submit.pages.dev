@@ -392,8 +392,12 @@ document.getElementById('picDtls').innerHTML = picsUpl;
         console.log('Upload response:', result);
 
         if (response.ok) {
-          alert('Image uploaded successfully!');
-          console.log(result);
+          alert('Image uploaded successfully!');	
+		
+		const data2 = JSON.parse(result.variants);
+		//const data = data2['440-2'];
+		const data = data2[0];
+          console.log(data2,data);
         } else {
           alert(`Failed to upload image: ${result}`);
         }
