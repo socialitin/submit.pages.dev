@@ -326,7 +326,7 @@ function picsDtl(evt,src,name) {
 var picis = src;
 var Pname = name.split(',')[0];
 var Pdesc = name.split(',')[1];
-var picUrl = '<img src ="'+picis+' " style = "width:99%;"></img>';
+var picUrl = '<img id="u'+ pcount+'" src ="'+picis+' " style = "width:99%;"></img>';
 var pcount = event.target.id;
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
