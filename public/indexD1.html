@@ -399,6 +399,7 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		const data = data2[0];
           //console.log(data2,data);
 		  document.getElementById("itemImg").src = data;
+		  document.getElementById("itemImg").style.display = 'block'
 		  console.log(document.getElementById("itemImg"));
         } else {
           alert(`Failed to upload image: ${result}`);
