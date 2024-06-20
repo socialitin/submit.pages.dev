@@ -394,7 +394,7 @@ document.getElementById('picDtls').innerHTML = picsUpl;
         if (response.ok) {
           alert('Image uploaded successfully!');	
 		
-		const data2 = JSON.parse(result.variants);
+		const data2 = result.variants;
 		//const data = data2['440-2'];
 		const data = data2[0];
           console.log(data2,data);
