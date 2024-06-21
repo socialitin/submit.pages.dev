@@ -335,6 +335,14 @@ document.getElementById("itemImg").innerHTML = picUrl;
 
 //var element = document.getElementById('tofr');
  //   element.style.display = 'block';
+
+ var picsUpl = 
+    '<form id="upload-form" onsubmit="uploadImage(event)">'+
+      '<input type="file" id="file-input" name="file" required onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit">Upload Image</button>'+
+    '</form>';
+
  var htmlPics = 
 '<form id="updPics" >' +
 	'<div> <input id="name" value = "'+Pname+'">'+											
@@ -342,8 +350,8 @@ document.getElementById("itemImg").innerHTML = picUrl;
 Pdesc +'" >'+
 '<div> <input id="'+ pcount+'" type ="Submit"  style= "float: left;" onclick= "picPost(event,id); "></div>'
 									'</form>';	
-document.getElementById('picDtls').innerHTML = htmlPics;								                           							            										                           
-					$('#'+ picDtls + '').html(updPics);
+document.getElementById('picDtls').innerHTML = htmlPics + picUpl;								                           							            										                           
+				//	$('#'+ picDtls + '').html(updPics);
 					$('#'+ picDtls + '').slideDown('slow');
 
 //	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
@@ -356,14 +364,8 @@ document.getElementById('picDtls').innerHTML = htmlPics;
 //        '<button type="submit" >Upload Image</button>'+
 //    '</form>';
 
-	var picsUpl = 
-    '<form id="upload-form" onsubmit="uploadImage(event)">'+
-      '<input type="file" id="file-input" name="file" required onchange="previewImage(event)">'+
-     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
-      '<button type="submit">Upload Image</button>'+
-    '</form>';
 
-document.getElementById('picDtls').appendChild = picsUpl;	
+//document.getElementById('picDtls').appendChild = picsUpl;	
 };	
 </script>
 
