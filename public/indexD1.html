@@ -372,7 +372,7 @@ document.getElementById('picDtls').innerHTML = picsUpl;
       const fileInput = event.target;
       const file = fileInput.files[0];
       const preview = document.getElementById('itemImg');
-
+console.warn('preview', file);
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
