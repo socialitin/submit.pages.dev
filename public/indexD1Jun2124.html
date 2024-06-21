@@ -350,42 +350,18 @@ Pdesc +'" >'+
 
 //'<input type="file" id="imageInput" name="image" accept="image/*" required />'+
 //'<form id="uploadForm" method="POST" enctype="multipart/form-data">'
-//var picsUpl = 
-//	'<form id="upload-form" onsubmit="uploadImage(event)">'+
-//		'<input type="file" id="file-input" name="file" required">'+
-//        '<button type="submit" >Upload Image</button>'+
-//    '</form>';
-
 	var picsUpl = 
-    '<form id="upload-form" onsubmit="uploadImage(event)">'+
-      '<input type="file" id="file-input" name="file" required onchange="previewImage(event)">'+
-     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
-      '<button type="submit">Upload Image</button>'+
+	'<form id="upload-form" onsubmit="uploadImage(event)">'+
+		'<input type="file" id="file-input" name="file" required">'+
+        '<button type="submit" >Upload Image</button>'+
     '</form>';
-
+	
+//src="upload.js";
 document.getElementById('picDtls').innerHTML = picsUpl;	
 };	
 </script>
 
   <script>
-	    function previewImage(event) {
-      const fileInput = event.target;
-      const file = fileInput.files[0];
-      const preview = document.getElementById('itemImg');
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-      } else {
-        preview.src = '';
-        preview.style.display = 'none';
-      }
-    }
-
     async function uploadImage(event) {
       event.preventDefault();
       console.log('Form submitted');
@@ -423,7 +399,6 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		//const data = data2['440-2'];
 		const data = data2[0];
           //console.log(data2,data);
-		
 		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
 		  document.getElementById("itemImg").innerHTML = picUrl;
 		  document.getElementById("3").src = data;
