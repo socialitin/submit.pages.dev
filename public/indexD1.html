@@ -338,7 +338,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 
  var picsUpl = 
     '<form id="upload-form" onsubmit="uploadImage(event)">'+
-		'<div> <input id="name" value = "'+Pname+'">'+											
+		'<div> <input id="picname" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+Pdesc +'" >'+	
       '<input type="file" id="file-input" name="file" onchange="previewImage(event)">'+
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
@@ -423,7 +423,7 @@ console.warn('preview', file);
 
 		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
 	  var id = '3';
-ppicsj[id].name = document.getElementById("name").value;
+ppicsj[id].name = document.getElementById("picname").value;
 ppicsj[id].description = document.getElementById("descI").value;
 ppicsj[id].img = data;
 //console.log(ppicsj[id].name ,ppicsj[id].description);
