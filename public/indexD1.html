@@ -318,17 +318,17 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 		document.getElementById("pitch").value = data.Pitch;
 		document.getElementById("Pictures").value = pics;
 		document.getElementById("embVideo").value = tVideo;
-				}
+				
 
 				var picsUpl = 
     '<form id="upload-video'+"3"+'" onsubmit="uploadImage(event)">'+
-		'<div> <input id="offer" value = "'+"name"+'">'+											
-'<input  id ="pitch" value ="'+"Pitch" +'" >'+	
+		'<div> <input id="offer" value = "'+"data.City"+'">'+											
+'<input  id ="pitch" value ="'+"data.Pitch" +'" >'+	
       '<input type="file" id="v-input" fname="file" onchange="previewImage(event)">'+
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
-      '<button type="submit">Upload Image</button>'+
+      '<button type="submit">Upload Video</button>'+
     '</form>';
-
+		};
 document.getElementById('picDtls').innerHTML = picsUpl;					
 			</script>
 <script>
