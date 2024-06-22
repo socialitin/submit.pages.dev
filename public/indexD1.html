@@ -423,19 +423,20 @@ console.warn('preview', file);
 
 		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
 		  cImgId = event.target.id;
+		  cimgid = cImgId.charAt(cImgId.length-1)
 		  console.warn('this t-image',cImgId.charAt(cImgId.length-1));
-	  var id = '3';  
-ppicsj[id].name = document.getElementById("picname").value;
-ppicsj[id].description = document.getElementById("descI").value;
-ppicsj[id].img = data;
+	  var idis = cImgId.charAt(cImgId.length-1);  
+ppicsj[idis].name = document.getElementById("picname").value;
+ppicsj[idis].description = document.getElementById("descI").value;
+ppicsj[idis].img = data;
 //console.log(ppicsj[id].name ,ppicsj[id].description);
 sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 
 		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
 		  document.getElementById("itemImg").innerHTML = picUrl;
-		  document.getElementById("3").src = data;
+		  document.getElementById("id").src = data;
 		  //document.getElementById("itemImg").style.display = 'block'
-		  console.log(document.getElementById("3").src);
+		  console.log(document.getElementById("id").src);
         } else {
           alert(`Failed to upload image: ${result}`);
         }
