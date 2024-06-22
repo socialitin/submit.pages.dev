@@ -337,7 +337,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
  //   element.style.display = 'block';
 
  var picsUpl = 
-    '<form id="upload-form" onsubmit="uploadImage(event)">'+
+    '<form id="upload-form" '+picis+' onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+Pdesc +'" >'+	
       '<input type="file" id="file-input" name="file" onchange="previewImage(event)">'+
