@@ -423,7 +423,7 @@ console.warn('preview', file);
 
 		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
 		  cImgId = event.target.id;
-		  console.warn('this t-image',cImgId.charAt(str.length-1));
+		  console.warn('this t-image',cImgId.charAt(cImgId.length-1));
 	  var id = '3';  
 ppicsj[id].name = document.getElementById("picname").value;
 ppicsj[id].description = document.getElementById("descI").value;
