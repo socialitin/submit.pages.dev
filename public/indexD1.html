@@ -434,9 +434,9 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 
 		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
 		  document.getElementById("itemImg").innerHTML = picUrl;
-		  document.getElementById("id").src = data;
+		  document.getElementById(idis).src = data;
 		  //document.getElementById("itemImg").style.display = 'block'
-		  console.log(document.getElementById("id").src);
+		  console.log(document.getElementById(idis).src);
         } else {
           alert(`Failed to upload image: ${result}`);
         }
