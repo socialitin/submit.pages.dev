@@ -308,7 +308,7 @@ var picsj = JSON.parse(pics);
 			
 			console.log(fj);
 var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
-document.getElementById('fjson' + fj).src = picsj[0].img;
+document.getElementById('fjson' + fj).src = picsj[h].img;
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
