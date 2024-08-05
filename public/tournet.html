@@ -264,7 +264,44 @@
 
     </script>
 		
+		<script>
+			async function d1tnlogin() {
 
+				const response = await fetch('/api/d1tnhosts');
+			const data1 = await response.json();		
+		
+		const data2 = JSON.parse(data1.pitching);
+		const data = data2['440-2'];
+		console.log('mypitch', data);
+		var picsj = data.Pictures;
+		console.log('mypics', picsj);	
+
+//sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+
+//var pics = sessionStorage.getItem("pics");
+//var picsj = JSON.parse(pics);
+
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+			var fj = h+1;
+			
+			console.log(fj);
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+document.getElementById('fjson' + fj).src = picsj[].img;
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+
+			};
+			</script>
+		
 <script>
 	async function d1tnupdate() {
 	const response = await fetch('/api/d1tnupdate');
@@ -306,9 +343,9 @@ var picsj = JSON.parse(pics);
 			var tprice ='';
 			var fj = h+1;
 			
-			console.log(fj);
+//			console.log(fj);
 var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
-document.getElementById('fjson' + fj).src = picsj[h].img;
+//document.getElementById('fjson' + fj).src = picsj[].img;
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
