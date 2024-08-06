@@ -435,7 +435,7 @@ var tImgAll = tImgAll+tImg;
 		};
     document.getElementById("thumbs").style = "width: 75%; display: flex; overflow-x: auto; white-space: nowrap;";
 document.getElementById("thumbs").innerHTML= tImgAll;
-	
+	document.getElementById("img").style = "width: 100%; ";
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
 		document.getElementById("IATA").value = data.IATA;
@@ -454,10 +454,11 @@ document.getElementById("thumbs").innerHTML= tImgAll;
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
       '<button type="submit">Upload Video</button>'+
     '</form>';
-		
+    document.getElementById('picDtls').style = "width:100%;";		
 document.getElementById('picDtls').innerHTML = picsUpl;	
 		};				
 			</script>
+      
 <script>
 function picsDtl(evt,src,name) {
 //	console.log('params',document.getElementById("0").data);
