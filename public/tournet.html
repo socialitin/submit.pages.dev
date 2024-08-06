@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+
   <title>Cloudflare Pages 2 Tournet presence</title>
   <meta name="theme-color" content="#d86300">
   <meta name="mobile-web-app-capable" content="yes">
@@ -9,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
   <link rel="stylesheet" href="/index.css">
-
   <style>
     .tab {
       display: flex;
@@ -17,22 +17,22 @@
       align-items: center;
       justify-content: space-evenly;
       background-color: #f1f1f10e;
-      padding: 0px;
-      /*flex-wrap: wrap; /* Allow items to wrap */
+      padding: 10px;
+      flex-wrap: wrap; /* Allow items to wrap */
     }
 
     .tab button {
-		width: 20%;
       background-color: #c46767;
       border: none;
       outline: none;
       cursor: pointer;
+      padding: 10px 24px;
       display: inline-block;
       white-space: nowrap;
       color: white;
       font-size: 16px;
       transition: background-color 0.3s ease;
-      /* margin: .5px; /* Add margin for spacing between buttons */
+      margin: 5px; /* Add margin for spacing between buttons */
     }
 
     .tab button:hover {
@@ -46,43 +46,85 @@
     .tabcontent {
       display: none;
       width: 75%;
-      /* padding: 6px 12px;*/
+      padding: 6px 12px;
       border: 1px solid #ccc;
       border-top: none;
-      margin: 2.0px auto; /* Center the tab content */
+      margin: 20px auto; /* Center the tab content */
     }
 
     .tabcontent.active {
       display: block;
     }
 
-    /* Responsive adjustments */
+    .carousel-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+    }
+
+    .carousel-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .carousel-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .carousel-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
     @media (max-width: 768px) {
       .tab {
-        flex-direction: column; /* Stack buttons vertically on smaller screens */
-        align-items: stretch; /* Stretch buttons to full width */
+        flex-direction: column;
+        align-items: stretch;
       }
 
       .tab button {
-        width: 20%; /* Make buttons take full width */
-        /* margin: .5px 0; /* Adjust margin for vertical spacing */
+        width: 100%;
+        margin: 5px 0;
       }
 
       .tabcontent {
-        width: 100%; /* Full width for content on smaller screens */
-        padding: 1.2px; /* Increase padding for better readability */
+        width: 100%;
+        padding: 12px;
+      }
+
+      .carousel-item {
+        margin-right: 10px; /* Less space between items on smaller screens */
+      }
+
+      .carousel-item span {
+        font-size: 12px;
       }
     }
 
     @media (max-width: 480px) {
       .tab button {
-        font-size: 14px; /* Reduce font size on very small screens */
+        font-size: 14px;
+      }
+
+      .carousel-item {
+        margin-right: 5px; /* Even less space between items */
+      }
+
+      .carousel-item span {
+        font-size: 12px;
       }
     }
   </style>
 </head>
 <body>
   <div>
+
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'Tab1')">Members</button>
       <button class="tablinks active" onclick="openTab(event, 'Tab2')">Pitch !!</button>
@@ -157,30 +199,27 @@
       </main>
     </div>
 
-    <div id="Tab2" class="tabcontent">
+    <div id="Tab2" class="tabcontent active">
       <h3>Streaming now ...</h3>
-      <div id="jdata">
-         <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" style="margin-top:10px; float:left;" onclick="d1tnlogin()">
-         <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" style="margin-top:10px; float:left;">
-         <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" style="margin-top:10px; float:left;">
-         <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" style="margin-top:10px; float:left;" onclick="d1tnhosts()">
-        <script>
-          window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById("fjson4").click();
-          });
-        </script>
-      </div>
-      <div id="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px; float:left;">
-      </div>
-      <div class="row">
-        <div id="thumbs" style="width:15%; float:left;"></div>
-        <div width="2%"></div>
-        <div>
-          <div id="itemImg" style="width:61%; float:left;"></div>
-          <div id="picDtls" style="width:20%; float:left;">
-          </div>
+      <div class="carousel-container">
+        <div class="carousel-item">
+          <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Image 1">
+          <span>Image 1</span>
+        </div>
+        <div class="carousel-item">
+          <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Image 2">
+          <span>Image 2</span>
+        </div>
+        <div class="carousel-item">
+          <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Image 3">
+          <span>Image 3</span>
+        </div>
+        <div class="carousel-item">
+          <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Image 4">
+          <span>Image 4</span>
         </div>
       </div>
+    </div>
     </div>
 
     <div id="Tab3" class="tabcontent">
