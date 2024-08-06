@@ -427,13 +427,13 @@ var picsj = JSON.parse(pics);
 			var fj = h+1;
 			
 //			console.log(fj);
-var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 50%;" onclick = "picsDtl(event,src,name);" >';
 //document.getElementById('fjson' + fj).src = picsj[].img;
 
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
-    document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap; margin-right: 10px; max-width: 20%;";
+    document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap; margin-right: 20px;";
 document.getElementById("thumbs").innerHTML= tImgAll;
 	
 		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
