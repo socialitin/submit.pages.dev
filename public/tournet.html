@@ -17,7 +17,7 @@
       align-items: right;
       justify-content: space-evenly;
       background-color: #f1f1f10e;
-      padding: 1.0px;
+      padding: 0px;
 width:80%;
       /*flex-wrap: wrap; /* Allow items to wrap */
     }
@@ -28,13 +28,13 @@ width:80%;
       border: none;
       outline: none;
       cursor: pointer;
-      padding: 1.0px 2.4px;
+      padding: 0px 0px;
       display: inline-block;
       white-space: nowrap;
       color: white;
       font-size: 16px;
       transition: background-color 0.3s ease;
-      margin: .5px; /* Add margin for spacing between buttons */
+      margin: 0; /* Add margin for spacing between buttons */
     }
 
     .tab button:hover {
@@ -427,7 +427,7 @@ var picsj = JSON.parse(pics);
 			var fj = h+1;
 			
 //			console.log(fj);
-var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 80px;" margin-right: 1; onclick = "picsDtl(event,src,name);" >';
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 75px;" margin-right: 10px; onclick = "picsDtl(event,src,name);" >';
 //document.getElementById('fjson' + fj).src = picsj[].img;
 
 console.log(tImgAll,jdata);
