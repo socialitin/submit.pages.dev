@@ -58,6 +58,34 @@ width:80%;
       display: block;
     }
 
+
+    .pitch-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+    }
+
+    .pitch-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .pitch-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pitch-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
+
     .carousel-container {
       overflow-x: auto; /* Enable horizontal scrolling */
       white-space: nowrap; /* Prevent line breaks between items */
@@ -200,7 +228,33 @@ width:80%;
     </div>
 
     <div id="Tab2" class="tabcontent active">
+      <div id="jdata">
+         <div class="pitch-container">
+          <div class="pitch-item">
+            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Offer 1" onclick="d1tnlogin()">
+            <span>Offer 1</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Offer 2">
+            <span>Offer 2</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Offer 3">
+            <span>Offer 3</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts()">
+            <span>Offer 4</span>
+          </div>
+        </div>
 
+ 
+ <script>
+          window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById("fjson4").click();
+          });
+        </script>
+      </div>
       <div id="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px; float:left;">
       </div>
       <div class="row">
