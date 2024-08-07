@@ -230,7 +230,7 @@ width:80%;
       <div id="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px; float:left;">
       </div>
       <div class="row">
-        <div id="thumbs" style="width:15%; float:left;"></div>
+        <div id="thumbs" class="carousel-container" style="width:15%; float:left;"></div>
         <div width="2%"></div>
         <div>
           <div id="itemImg" style="width:61%; float:left;"></div>
@@ -427,7 +427,9 @@ var picsj = JSON.parse(pics);
 			var fj = h+1;
 			
 //			console.log(fj);
-var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 75px;" margin-right: 10px; onclick = "picsDtl(event,src,name);" >';
+
+
+var tImg = '<div class="carousel-item"><img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 75px;" margin-right: 10px; onclick = "picsDtl(event,src,name);" ></div>';
 //document.getElementById('fjson' + fj).src = picsj[].img;
 
 console.log(tImgAll,jdata);
