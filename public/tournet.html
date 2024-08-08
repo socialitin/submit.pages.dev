@@ -399,7 +399,7 @@ function openTab(evt, tabName) {
                 }
 
                 // Parse the JSON content
-                const data1 = await response.json();
+                const mpitch = await response.json();
 
                 // Display the JSON data in the <pre> element
               //  document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
@@ -418,10 +418,22 @@ function openTab(evt, tabName) {
 		
 		//const data2 = JSON.parse(data1.pitching);
 		//const data = data2['440-2'];
-		console.log('mypitch', data1);
+		console.log('mypitch', mpitch);
 		//var picsj = data1.Pictures;
-		console.log('mypics', Object.keys(data1));
+		console.log('mypics', Object.keys(mpitch));
 	
+    for (const group in mypitch) {
+  if (mypitch.hasOwnProperty(group)) {
+    console.log(`Group: ${group}`);
+
+    // Extract and loop through each item in the current group
+    mypitch[group].forEach(item => {
+      console.log(`IATA: ${AITA}, Pitch: ${Pitch}`);
+    });
+
+    console.log(''); // Line break between groups for readability
+  }
+}
 
 //sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
