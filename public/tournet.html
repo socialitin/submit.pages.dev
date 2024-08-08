@@ -429,7 +429,7 @@ const tgroup = group;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
 const cItem = item;
-      console.log( tgroup, cItem[IATA], cItem[City]);
+      console.log( tgroup, cItem.IATA, cItem.City);
     });
     console.log(''); // Line break between groups for readability
   }
