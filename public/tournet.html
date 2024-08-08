@@ -388,7 +388,7 @@ function openTab(evt, tabName) {
 
         // Function to fetch and display JSON data
         
-            try {
+           // try {
                 // Fetch data from the Cloudflare Worker
                 const response = await fetch(workerUrl);
 
@@ -403,10 +403,10 @@ function openTab(evt, tabName) {
 
                 // Display the JSON data in the <pre> element
               //  document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
+           // } catch (error) {
                 // Handle any errors that occur during the fetch
 //document.getElementById('jData').textContent = 'Error fetching JSON: ' + error.message;
-            }
+           // }
         
 
         // Call the function to fetch and display JSON data when the page loads
