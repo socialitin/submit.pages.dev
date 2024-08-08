@@ -386,10 +386,10 @@ function openTab(evt, tabName) {
 				const response = await fetch('/api/d1tnlogin');
 			const data1 = await response.json();		
 		
-		const data2 = JSON.parse(data1.pitching);
-		const data = data2['440-2'];
+		//const data2 = JSON.parse(data1.pitching);
+		//const data = data2['440-2'];
 		console.log('mypitch', data);
-		var picsj = data.Pictures;
+		var picsj = data1.Pictures;
 		console.log('mypics', picsj);	
 
 //sessionStorage.setItem("pics",JSON.stringify(picsj));
