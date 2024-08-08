@@ -383,14 +383,45 @@ function openTab(evt, tabName) {
 		<script>
 			async function d1tnlogin() {
 
-				const response = await fetch('/api/d1tnlogin');
-			const data1 = await response.json();		
+
+        // URL of the Cloudflare Worker
+        const workerUrl = 'https://grabjson.socialitin.workers.dev/';
+
+        // Function to fetch and display JSON data
+        
+            try {
+                // Fetch data from the Cloudflare Worker
+                const response = await fetch(workerUrl);
+
+                // Check if the response is OK (status 200)
+                if (!response.ok) {
+                    document.getElementById('jData').textContent = 'Failed to fetch JSON data';
+                    return;
+                }
+
+                // Parse the JSON content
+                const data1 = await response.json();
+
+                // Display the JSON data in the <pre> element
+                document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                // Handle any errors that occur during the fetch
+                document.getElementById('jData').textContent = 'Error fetching JSON: ' + error.message;
+            }
+        
+
+        // Call the function to fetch and display JSON data when the page loads
+        fetchJsonData();
+
+
+				//const response = await fetch('/api/d1tnlogin');
+			//const data1 = await response.json();		
 		
 		//const data2 = JSON.parse(data1.pitching);
 		//const data = data2['440-2'];
 		console.log('mypitch', data1);
-		var picsj = data1.Pictures;
-		console.log('mypics', picsj);	
+		//var picsj = data1.Pictures;
+		//console.log('mypics', picsj);	
 
 //sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
