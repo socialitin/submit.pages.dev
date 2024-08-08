@@ -425,11 +425,11 @@ function openTab(evt, tabName) {
     for (const group in mpitch) {
   if (mpitch.hasOwnProperty(group)) {
     console.log(`Group: ${group}`);
-const tgroup = $[group];
+const tgroup = group;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
 
-      console.log( tgroup, $[IATA], $[City]);
+      console.log( tgroup, IATA, City);
     });
     console.log(''); // Line break between groups for readability
   }
