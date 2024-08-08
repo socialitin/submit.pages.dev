@@ -10,7 +10,7 @@
   
                   // Check if the response is OK (status 200)
                   if (!response.ok) {
-                      document.getElementById('jData').textContent = 'Failed to fetch JSON data';
+                     // document.getElementById('jData').textContent = 'Failed to fetch JSON data';
                       return;
                   }
   
@@ -18,10 +18,10 @@
                   const data = await response.json();
   
                   // Display the JSON data in the <pre> element
-                  document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
+                  //document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
               } catch (error) {
                   // Handle any errors that occur during the fetch
-                  document.getElementById('jData').textContent = 'Error fetching JSON: ' + error.message;
+                  ///.getElementById('jData').textContent = 'Error fetching JSON: ' + error.message;
               }
           }
   
