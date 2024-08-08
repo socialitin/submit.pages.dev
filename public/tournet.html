@@ -428,8 +428,8 @@ function openTab(evt, tabName) {
 const tgroup = group;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
-
-      console.log( tgroup, IATA, City);
+const cItem = item;
+      console.log( tgroup, cItem[IATA], cItem[City]);
     });
     console.log(''); // Line break between groups for readability
   }
