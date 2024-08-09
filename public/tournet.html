@@ -430,7 +430,7 @@ let cItems = 0;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
 const cItem = item;
-cItems++;
+
 console.log( tgroup, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
       var pcountry = '430/';       
        
@@ -440,6 +440,7 @@ console.log( tgroup, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
       document.getElementById('fjson' + cItems).src = tImg;
 
     });
+    cItems++
     console.log('imgs '); // Line break between groups for readability
   }
 }
