@@ -236,19 +236,19 @@ margin-top: 20%;
       <div id="jdata">
          <div class="pitch-container">
           <div class="pitch-item">
-            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts()" >
+            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" offer = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts()" >
             <span>Offer 1</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts()">
+            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" offer = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts()">
             <span>Offer 2</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts()">
+            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" offer = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts()">
             <span>Offer 3</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts()">
+            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" offer = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts()">
             <span>Offer 4</span>
           </div>
         </div>
@@ -439,8 +439,8 @@ console.log( cItems, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
        console.log('imgs ',Tpics); 
       document.getElementById('fjson' + cItems).src = tImg;
-      document.getElementById('fjson' + cItems).data = Tpics;
-      document.getElementById('fjson' + cItems).label = cItem.City;
+      document.getElementById('fjson' + cItems).offer = Tpics;
+     // document.getElementById('fjson' + cItems).label = cItem.City;
     });
     console.log('imgs '); // Line break between groups for readability
   }
@@ -485,8 +485,8 @@ console.log(data2);
 			//const response = await fetch('/api/d1tnhosts');
 			//const data1 = await response.json();		
 		
-		const data2 = event.target.data-offer;
-    //document.getElementById('"'+event.target.id+'"').data-offer;
+		const data2 = event.target.offer;
+    //document.getElementById('"'+event.target.id+'"').offer;
     /// JSON.parse(data1.pitching);
 		//const data = data2['440-2'];
 		//const data = data3.pitching;
