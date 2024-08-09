@@ -430,17 +430,16 @@ let cItems = 0;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
 const cItem = item;
-
+cItems++;
 console.log( tgroup, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
       var pcountry = '430/';       
        
        var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
        console.log('imgs ',Tpics); 
-      document.getElementById('fjson' + cItems).src = tImg;
+      document.getElementById('fjson' + cItems-1).src = tImg;
 
     });
-    cItems++
     console.log('imgs '); // Line break between groups for readability
   }
 }
