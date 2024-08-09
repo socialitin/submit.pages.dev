@@ -257,7 +257,7 @@ margin-top: 20%;
  <script>
           window.addEventListener('DOMContentLoaded', () => {
             d1tnlogin();
-            document.getElementById("fjson1").click();
+           // document.getElementById("fjson1").click();
           });
         </script>
       </div>
@@ -439,7 +439,7 @@ console.log( cItems, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
        console.log('imgs ',Tpics); 
       document.getElementById('fjson' + cItems).src = tImg;
-      document.getElementById('fjson' + cItems).offer = Tpics;
+      document.getElementById('fjson' + cItems).attr('offer') = Tpics;
      // document.getElementById('fjson' + cItems).label = cItem.City;
     });
     console.log('imgs '); // Line break between groups for readability
