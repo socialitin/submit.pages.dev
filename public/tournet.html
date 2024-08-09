@@ -236,19 +236,19 @@ margin-top: 20%;
       <div id="jdata">
          <div class="pitch-container">
           <div class="pitch-item">
-            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" data = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts(data)" >
+            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts(data-offer)" >
             <span>Offer 1</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" data = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts(data)">
+            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts(data-offer)">
             <span>Offer 2</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" data = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts(data)">
+            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts(data-offer)">
             <span>Offer 3</span>
           </div>
           <div class="pitch-item">
-            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" data = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts(data)">
+            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts(data-offer)">
             <span>Offer 4</span>
           </div>
         </div>
@@ -481,21 +481,22 @@ console.log(data2);
 	};
 	</script>
 		<script>
-			async function d1tnhosts(data) {
-			const response = await fetch('/api/d1tnhosts');
-			const data1 = await response.json();		
+			async function d1tnhosts() {
+			//const response = await fetch('/api/d1tnhosts');
+			//const data1 = await response.json();		
 		
-		const data2 = JSON.parse(data1.pitching);
-		const data = data2['440-2'];
+		const data2 = getElementBy('"'+event.target.id+'"').data-offer;
+    /// JSON.parse(data1.pitching);
+		//const data = data2['440-2'];
 		//const data = data3.pitching;
 		//.pitching);
 	
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
-		console.log('mypitch', data);
-		var picsj = data.Pictures;
+		console.log('thispitch', data2);
+///var picsj = data.Pictures;
 			
 //var picsj = JSON.parse(pics);
-console.log('mypics', picsj);	
+//console.log('mypics', data2);	
 if (!sessionStorage.getItem("pics")){
 sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
