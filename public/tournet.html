@@ -426,14 +426,14 @@ function openTab(evt, tabName) {
 		console.log('mypics', Object.keys(mpitch));
 
     // Loop through each group in the mypitch object
-for (const group in mypitch) {
-  if (mypitch.hasOwnProperty(group)) {
+for (const group in mpitch) {
+  if (mpitch.hasOwnProperty(group)) {
     // Save the group name to a constant
     const groupName = group;
     console.log(`Group: ${groupName}`);
 
     // Extract and loop through each item in the current group
-    mypitch[group].forEach(item => {
+    mpitch[group].forEach(item => {
       // Save each item to a constant
       const currentItem = item;
       console.log(`Name: ${currentItem.name}, Score: ${currentItem.score}`);
