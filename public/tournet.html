@@ -442,7 +442,7 @@ console.log( cItems, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
        console.log('imgs ',Tpics); 
       document.getElementById('fjson' + cItems).src = tImg;
      //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
-     $('#fjson1').attr('data-offer', Tpics);
+     $('#fjson1').attr('data-offer', JSON.stringify(Tpics));
 
      // document.getElementById('fjson' + cItems).label = cItem.City;
     });
