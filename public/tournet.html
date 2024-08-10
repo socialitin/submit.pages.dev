@@ -424,32 +424,28 @@ function openTab(evt, tabName) {
 		console.log('mpitch', mpitch);
 		//var picsj = data1.Pictures;
 		console.log('mypics', Object.keys(mpitch));
-	
-    for (const group in mpitch) {
-  if (mpitch.hasOwnProperty(group)) {
-    console.log(`Group: ${group}`);
-const tgroup = group;
-let cItems = 0;
-    // Extract and loop through each item in the current group
-    mpitch[group].forEach(item => {
-const cItem = item;
-cItems++;
-//console.log( cItem );
-      var pcountry = group.substring(0,3)+'/';       
-       
-       var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
-       var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
-       console.log('imgs ',Tpics); 
-      document.getElementById('fjson' + cItems).src = tImg;
-     //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
-     $('#fjson1').attr('data-offer', JSON.stringify(Tpics));
 
-     // document.getElementById('fjson' + cItems).label = cItem.City;
+    // Loop through each group in the mypitch object
+for (const group in mypitch) {
+  if (mypitch.hasOwnProperty(group)) {
+    // Save the group name to a constant
+    const groupName = group;
+    console.log(`Group: ${groupName}`);
+
+    // Extract and loop through each item in the current group
+    mypitch[group].forEach(item => {
+      // Save each item to a constant
+      const currentItem = item;
+      console.log(`Name: ${currentItem.name}, Score: ${currentItem.score}`);
     });
-    //console.log('imgs '); // Line break between groups for readability
+
+    console.log(''); // Line break between groups for readability
   }
 }
 
+    ///////
+
+////////
 //sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
 
