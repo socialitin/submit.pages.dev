@@ -424,7 +424,7 @@ function openTab(evt, tabName) {
 		console.log('mpitch', mpitch);
 		//var picsj = data1.Pictures;
 		console.log('mypics', Object.keys(mpitch));
-    let cItems =0;
+    let cItems = 0;
     // Loop through each group in the mypitch object
 for (const group in mpitch) {
   if (mpitch.hasOwnProperty(group)) {
@@ -433,7 +433,7 @@ for (const group in mpitch) {
     const tgroup = group;
    
     console.log(`Group: ${groupName}`);
-
+    cItems++;
     // Extract and loop through each item in the current group
     mpitch[group].forEach(item => {
       // Save each item to a constant
@@ -450,7 +450,7 @@ for (const group in mpitch) {
       console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
 
     });
-    cItems++;
+   
     console.log(''); // Line break between groups for readability
   }
 }
