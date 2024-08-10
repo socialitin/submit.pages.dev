@@ -10,6 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
   <link rel="stylesheet" href="/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
     .tab {
       display: flex;
@@ -439,7 +441,9 @@ console.log( cItems, cItem.IATA, cItem.City, cItem.Pitch, cItem.Province);
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
        console.log('imgs ',Tpics); 
       document.getElementById('fjson' + cItems).src = tImg;
-     // document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
+     document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
+     $('#fjson1').attr('data-offer', Tpics);
+
      // document.getElementById('fjson' + cItems).label = cItem.City;
     });
     console.log('imgs '); // Line break between groups for readability
