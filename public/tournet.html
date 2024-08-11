@@ -431,7 +431,7 @@ for (const group in mpitch) {
     // Save the group name to a constant
     const groupName = group;
     const tgroup = group;
-   
+    
     console.log(`Group: ${groupName}`);
     cItems++;
     // Extract and loop through each item in the current group
@@ -450,7 +450,7 @@ for (const group in mpitch) {
     });
     document.getElementById('fjson'+ cItems).src = tImg;
      //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
-     $('#fjson' +cItems).attr('data-offer', JSON.stringify(Tpics));
+    // $('#fjson' +cItems).attr('data-offer', JSON.stringify(Tpics));
     console.log(''); // Line break between groups for readability
   }
 }
