@@ -431,7 +431,7 @@ for (const group in mpitch) {
     // Save the group name to a constant
     const groupName = group;
     const tgroup = group;
-    
+   
     console.log(`Group: ${groupName}`);
     cItems++;
     // Extract and loop through each item in the current group
@@ -444,13 +444,13 @@ for (const group in mpitch) {
        var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
        console.log('imgs ',Tpics); 
-   
+      document.getElementById('fjson'+ cItems).src = tImg;
+     //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
+     $('#fjson' +cItems).attr('data-offer', JSON.stringify(Tpics));
       console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
 
     });
-    document.getElementById('fjson'+ cItems).src = tImg;
-     //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
-    // $('#fjson' +cItems).attr('data-offer', JSON.stringify(Tpics));
+   
     console.log(''); // Line break between groups for readability
   }
 }
