@@ -508,7 +508,7 @@ console.log(data2);
     //const data2 = event.target.dataset.offer;
 
     //document.getElementById('"'+event.target.id+'"').data-offer;
-    var toffer = JSON.parse(data2);
+    var jpics = JSON.parse(data2);
 		//const data = data2['440-2'];
 		//const data = data3.pitching;
 		//.pitching);
@@ -516,7 +516,7 @@ console.log(data2);
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
 		
 //	console.log('params',document.getElementById("0").data);
-var picis = toffer[0].img;
+var picis = jpics[0].img;
 //var Pname = name.split(',')[0];
 //var Pdesc = name.split(',')[1];
 var pcount = event.target.id;
@@ -524,7 +524,7 @@ var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></im
 
 document.getElementById("itemImg").innerHTML = picUrl;
 
-    console.log('thispitch',toffer);
+    console.log('thispitch',jpics);
 ///var picsj = data.Pictures;
 			
 //var picsj = JSON.parse(pics);
@@ -534,7 +534,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //var picsj = JSON.parse(pics);
 
 ///var pics = sessionStorage.getItem("pics");
-var picsj = JSON.parse(pics);
+///var picsj = JSON.parse(pics);
 
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
@@ -555,6 +555,7 @@ var tImg = '<div class="carousel-item"><img name = "'+jdata+'" data ="'+picsj[h]
 console.log(tImgAll,jdata);
 var tImgAll = tImgAll+tImg;
 		};
+
     document.getElementById("thumbs").style = " display: flex; overflow-x: auto; white-space: nowrap;";
 document.getElementById("thumbs").innerHTML= tImgAll;
 	document.getElementById("itemImg").style = "width: 100%; ";
