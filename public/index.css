@@ -16,20 +16,22 @@ html {
 }
 
 body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #003682;
-	background-color: #f8fbfb;
-	font-family: system-ui,-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizelegibility;
-	overflow-x: hidden;
-	line-height: 1.4;
-/* Remove height: 100vh; */
-width: 100vw;
-min-height: 100vh; /* Use min-height instead */
+    display: flex;
+    flex-direction: column; /* Change flex direction */
+    align-items: center;
+    justify-content: flex-start; /* Align content at the top */
+    background-color: #003682;
+    background-color: #f8fbfb;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    overflow-x: hidden;
+    line-height: 1.4;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 2rem; /* Add padding if you want spacing at the top */
 }
+
 
 	main {
 		padding: 4rem;
