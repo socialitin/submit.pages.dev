@@ -1,0 +1,3 @@
+[[durable_objects]]
+binding = "PUBSUBROOM"
+class_name = "PubSubRoom"
