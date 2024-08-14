@@ -38,7 +38,7 @@ export class MyDurableObject extends DurableObject {
 	 * @returns {Promise<string>} The greeting to be sent back to the Worker
 	 */
 	async sayHello(name) {
-		return `Hello, ${name}!`;
+		return `Hola, ${name}!`;
 	}
 }
 
@@ -62,7 +62,7 @@ export default {
 
 		// We call the `sayHello()` RPC method on the stub to invoke the method on the remote
 		// Durable Object instance
-		let greeting = await stub.sayHello("world");
+		let greeting = await stub.sayHello("cityKiosks visitors");
 
 		return new Response(greeting);
 	},
