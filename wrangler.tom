@@ -4,7 +4,7 @@ type = "javascript"
 account_id = "f0c92755958332f29a4d8658606c6f34"
 workers_dev = true
 
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-08-14"
 
 [build]
 upload = { 
@@ -14,5 +14,5 @@ upload = {
 
 [[durable_objects]]
 binding = "PUBSUBROOM"
-class_name = "PubSubRoom"
+class_name = "MyDurableObject"
 script_name = "my-cloudflare-project"
