@@ -1,7 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "durable-object-starter"
 main = "src/index.js"
-compatibility_date = "2024-08-06"
+compatibility_date = "2024-08-14"
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Worker, running it closer to your back-end infrastructure
