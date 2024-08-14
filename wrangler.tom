@@ -1,4 +1,4 @@
-name = "my-cloudflare-project"
+name = "durable-object-starter"
 type = "javascript"
 
 account_id = "f0c92755958332f29a4d8658606c6f34"
