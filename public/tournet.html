@@ -774,7 +774,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 </script>
 <script>
   function subscribe() {
-  const ws = new WebSocket('wss://https://pub-sub.socialitin.workers.dev/subscribe');
+  const ws = new WebSocket('wss:https://pub-sub.socialitin.workers.dev/subscribe');
   ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (window.onMessageReceived) {
@@ -796,7 +796,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 </script>
 <script>
 function publish(message) {
-    fetch('https://pub-sub.socialitin.workers.dev//publish', {
+    fetch('https://pub-sub.socialitin.workers.dev/publish', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
