@@ -784,7 +784,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
       }
   };
   ws.onopen = () => {
-      console.log('Subscribed to the channel');
+      console.log('Subscribed to the channel',data.message);
   };
   ws.onclose = () => {
       console.log('Subscription closed');
