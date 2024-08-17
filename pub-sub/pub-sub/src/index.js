@@ -21,7 +21,6 @@ export default {
 
 // Export the MyDurableObject class so Cloudflare can use it
 export { MyDurableObject };
-
 //// Ensure MyDurableObject is exported
 //var src_default = {
 	//async fetch(request, env, ctx) {
