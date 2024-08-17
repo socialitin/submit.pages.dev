@@ -1,0 +1,20 @@
+
+# Define the durable_objects section
+[durable_objects]
+bindings = [
+  { name = "MY_DURABLE_OBJECT", class_name = "MyDurableObject" }
+]
+
+# Other configurations in wrangler.toml
+name = "pub-sub"
+main = "src/index.js"
+type = "javascript"
+compatibility_date = "2024-08-15"
+account_id = "f0c92755958332f29a4d8658606c6f34"
+workers_dev = true
+
+# Any other necessary settings...
+       [[migrations]]
+        tag = "v1" # Should be unique for each entry
+        new_classes = ["MyDurableObject"]
+        

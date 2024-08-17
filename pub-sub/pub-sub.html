@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pub/Sub Test</title>
+    <script src="pub-sub-subscribe.js"></script>
+    <script src="pub-sub-publish.js"></script>
+</head>
+<body>
+    <h1>Pub/Sub Test</h1>
+
+    <div>
+        <h2>Subscriber</h2>
+        <button id="subscribeButton">Subscribe</button>
+        <ul id="messages">
+            <!-- Messages will be displayed here -->
+        </ul>
+    </div>
+
+    <div>
+        <h2>Publisher</h2>
+        <input type="text" id="messageInput" placeholder="Enter message" />
+        <button id="publishButton">Publish</button>
+    </div>
+
+    <script>
+        document.getElementById('subscribeButton').addEventListener('click', function() {
+            // Call the subscribe function from pub-sub-subscribe.js
+            subscribe();
+        });
+
+        document.getElementById('publishButton').addEventListener('click', function() {
+            const message = document.getElementById('messageInput').value;
+            if (message) {
+                // Call the publish function from pub-sub-publish.js
+                publish(message);
+            }
+        });
+
+        // Function to add a message to the list of received messages
+        function displayMessage(message) {
+            const messageList = document.getElementById('messages');
+            const messageItem = document.createElement('li');
+            messageItem.textContent = message;
+            messageList.appendChild(messageItem);
+        }
+
+        // Override the default behavior in pub-sub-subscribe.js
+        window.onMessageReceived = function(data) {
+            displayMessage(data.message);
+        };
+    </script>
+</body>
+</html>

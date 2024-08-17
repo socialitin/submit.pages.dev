@@ -1,0 +1,18 @@
+<script>
+    const ws = new WebSocket("wss://your-worker-url/subscribe");
+  
+    ws.onmessage = (event) => {
+      console.log("New message: ", event.data);
+    };
+  
+    function sendMessage(message) {
+      fetch("https://your-worker-url/publish", {
+        method: "POST",
+        body: JSON.stringify({ message: message }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    }
+  </script>
+  
