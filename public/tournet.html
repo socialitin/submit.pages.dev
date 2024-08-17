@@ -772,7 +772,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 };
 </script>
 <script>
-  function subscribe() {
+  function subscribetmp() {
   const ws = new WebSocket('wss:https://pub-sub.socialitin.workers.dev/subscribe');
   ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -810,7 +810,7 @@ function publish(message) {
         console.error('Error sending message:', error);
     });
 }
- 
+
 </script>
 <script>
 			async function fetchjson() {
