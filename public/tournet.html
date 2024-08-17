@@ -348,58 +348,130 @@ margin-top: 4%;
             <br>
             <h1>Pub/Sub Test</h1>
 
-            <div>
-                <h2>Subscriber</h2>
-                <button id="subscribeButton">Subscribe</button>
-                <ul id="messages">
-                    <!-- Messages will be displayed here -->
-                </ul>
+                <title>CityKiosk Pub/Sub Chat</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        margin: 0;
+                        padding: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        flex-direction: column;
+                    }
+                    #chat-container {
+                        width: 400px;
+                        background-color: #fff;
+                        border-radius: 8px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        padding: 20px;
+                    }
+                    #chat-container h2 {
+                        text-align: center;
+                        color: #007bff;
+                    }
+                    #message-input {
+                        width: 100%;
+                        padding: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+                    }
+                    #conversation-list {
+                        width: 100%;
+                        padding: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+                    }
+                    #chat-container button {
+                        width: 100%;
+                        padding: 10px;
+                        background-color: #007bff;
+                        color: #fff;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        margin-bottom: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+            
+            <div id="chat-container">
+                <h2>CityKiosk Chat</h2>
+            
+                <textarea id="message-input" placeholder="Type your message..."></textarea>
+            
+                <button id="initiate-button">Initiate Conversation</button>
+            
+                <select id="conversation-list">
+                    <option value="">Select a conversation</option>
+                    <!-- Options will be dynamically populated -->
+                </select>
+            
+                <button id="reply-button">Reply to Conversation</button>
             </div>
-        
-            <div>
-                <h2>Publisher</h2>
-                <input type="text" id="messageInput" placeholder="Enter message" />
-                <button id="publishButton">Publish</button>
-            </div>
-        
+            
             <script>
-                document.getElementById('subscribeButton').addEventListener('click', function() {
-                    // Call the subscribe function from pub-sub-subscribe.js
-                    subscribe();
-                });
-        
-                document.getElementById('publishButton').addEventListener('click', function() {
-                    const message = document.getElementById('messageInput').value;
-                    if (message) {
-                        // Call the publish function from pub-sub-publish.js
-                        publish(message);
+                const baseUrl = 'https://https://pub-sub.socialitin.workers.dev/';  // Replace with your Cloudflare Worker URL
+                const conversationList = document.getElementById('conversation-list');
+            
+                async function fetchConversations() {
+                    // Fetch list of conversation IDs (this would be done via an API call in a real app)
+                    // Here, we'll just simulate it with some dummy data
+                    const conversations = ['12345', '67890'];  // Example conversation IDs
+                    
+                    // Clear existing options
+                    conversationList.innerHTML = '<option value="">Select a conversation</option>';
+            
+                    // Populate the dropdown with conversation IDs
+                    conversations.forEach(conversationId => {
+                        const option = document.createElement('option');
+                        option.value = conversationId;
+                        option.textContent = `Conversation ${conversationId}`;
+                        conversationList.appendChild(option);
+                    });
+                }
+            
+                document.getElementById('initiate-button').addEventListener('click', async () => {
+                    const message = document.getElementById('message-input').value.trim();
+                    if (message !== '') {
+                        const response = await fetch(`${baseUrl}/initiate`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ message })
+                        });
+                        const data = await response.json();
+                        alert(`Conversation initiated with ID: ${data.conversationId}`);
+                        fetchConversations();  // Refresh conversation list
                     }
                 });
-        
-                // Function to add a message to the list of received messages
-                function displayMessage(message) {
-                    const messageList = document.getElementById('messages');
-                    const messageItem = document.createElement('li');
-                    messageItem.textContent = message;
-                    messageList.appendChild(messageItem);
-                }
-        
-                // Override the default behavior in pub-sub-subscribe.js
-                window.onMessageReceived = function(data) {
-                    displayMessage(data.message);
-                };
+            
+                document.getElementById('reply-button').addEventListener('click', async () => {
+                    const message = document.getElementById('message-input').value.trim();
+                    const conversationId = conversationList.value;
+                    if (message !== '' && conversationId !== '') {
+                        const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ message })
+                        });
+                        alert(`Replied to conversation ${conversationId}`);
+                    }
+                });
+            
+                // Initialize conversation list on page load
+                fetchConversations();
             </script>
-            <br>
-            In the meantime, send us feedback with your opinion of the Network. Tell us if it fulfills any wishes you have as a Destination Promoter.
-            <br><br>
-            members@tournet.com
-            <br><br>
-          </p>
-        </blockquote>
-      </main>
-    </div>
-  </div>
 
+            
 <script>
 
 function openTab(evt, tabName) {
