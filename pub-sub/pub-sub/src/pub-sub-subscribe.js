@@ -1,5 +1,5 @@
 function subscribe() {
-  const ws = new WebSocket('wss://https://pub-sub.socialitin.workers.dev/subscribe');
+  const ws = new WebSocket('wss:https://pub-sub.socialitin.workers.dev/subscribe');
   ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (window.onMessageReceived) {

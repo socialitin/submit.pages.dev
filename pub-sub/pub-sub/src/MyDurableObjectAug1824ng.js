@@ -1,34 +1,44 @@
-// src/MyDurableObject.js
 import { DurableObject } from "cloudflare:workers";
-var MyDurableObject = class extends DurableObject {
+
+class MyDurableObject extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
-    this.subscribers = /* @__PURE__ */ new Set();
+    this.subscribers = new Set();
   }
+
   async fetch(request) {
     const url = new URL(request.url);
+
+    if (request.method === "OPTIONS") {
+      return this.handleOptions(request);
+    }
+
     if (url.pathname.endsWith("/subscribe")) {
       return this.handleSubscription(request);
     } else if (url.pathname.endsWith("/publish")) {
       return this.handlePublish(request);
     } else {
-      return new Response("Not Found", { status: 404 });
+      return this.createResponse("Not Found", 404);
     }
   }
   async handleSubscription(request) {
     const [client, server] = new WebSocketPair();
     server.accept();
     this.subscribers.add(server);
-    server.addEventListener("message", (event) => {
-    });
+
+    server.addEventListener("message", (event) => {});
+
     server.addEventListener("close", () => {
       this.subscribers.delete(server);
     });
+
     return new Response(null, { status: 101, webSocket: client });
   }
+
   async handlePublish(request) {
     const data = await request.json();
     const { message } = data;
+
     for (const subscriber of this.subscribers) {
       try {
         subscriber.send(JSON.stringify({ message }));
@@ -36,20 +46,28 @@ var MyDurableObject = class extends DurableObject {
         this.subscribers.delete(subscriber);
       }
     }
-    return new Response("Message sent to subscribers", { status: 200 });
-  }
-};
 
-// src/index.js
-var src_default = {
-  async fetch(request, env, ctx) {
-    let id = env.MY_DURABLE_OBJECT.idFromName(new URL(request.url).pathname);
-    let stub = env.MY_DURABLE_OBJECT.get(id);
-    return await stub.fetch(request);
+    return this.createResponse("Message sent to subscribers", 200);
   }
-};
-export {
-  MyDurableObject,
-  src_default as default
-};
-//# sourceMappingURL=index.js.map
+
+  handleOptions(request) {
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    };
+    return new Response(null, { status: 204, headers });
+  }
+
+  createResponse(body, status = 200) {
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    };
+    return new Response(body, { status, headers });
+  }
+}
+
+export { MyDurableObject };
+
+

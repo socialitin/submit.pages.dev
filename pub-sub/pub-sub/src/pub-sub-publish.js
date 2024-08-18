@@ -1,6 +1,6 @@
 
   function publish(message) {
-    fetch('https://https://pub-sub.socialitin.workers.dev/publish', {
+    fetch('https:https://pub-sub.socialitin.workers.dev/publish', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
