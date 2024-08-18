@@ -437,20 +437,30 @@ margin-top: 4%;
                 }
             
                 document.getElementById('initiate-button').addEventListener('click', async () => {
-                    const message = document.getElementById('message-input').value.trim();
-                    if (message !== '') {
-                        const response = await fetch(`${baseUrl}/initiate`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ message })
-                        });
-                        const data = await response.json();
-                        alert(`Conversation initiated with ID: ${data.conversationId}`);
-                        fetchConversations();  // Refresh conversation list
-                    }
-                });
+  const message = document.getElementById('message-input').value.trim();
+  if (message !== '') {
+    try {
+      const response = await fetch(`${baseUrl}/initiate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      alert(`Conversation initiated with ID: ${data.conversationId}`);
+    } catch (error) {
+      console.error('Error initiating conversation:', error);
+      alert('Failed to initiate conversation. Please try again.');
+    }
+  }
+});
+
             
                 document.getElementById('reply-button').addEventListener('click', async () => {
                     const message = document.getElementById('message-input').value.trim();
