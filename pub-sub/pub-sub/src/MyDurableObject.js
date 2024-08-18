@@ -3,77 +3,51 @@ import { DurableObject } from "cloudflare:workers";
 class MyDurableObject extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
-    this.channels = new Map(); // Map of channel names to sets of conversation IDs
-    this.env = env;
+    this.subscribers = new Set();
   }
 
   async fetch(request) {
     const url = new URL(request.url);
-    const pathnameParts = url.pathname.split("/");
 
     if (request.method === "OPTIONS") {
       return this.handleOptions(request);
     }
 
-    const action = pathnameParts[1];
-    const cityCode = pathnameParts[2];
-    const serviceType = pathnameParts[3];
-    const conversationId = pathnameParts[4];
-
-    if (action === "initiate" && cityCode && serviceType) {
-      return this.handleInitiateConversation(cityCode, serviceType, request);
-    } else if (action === "reply" && conversationId) {
-      return this.handleReply(conversationId, request);
-    } else if (action === "getConversation" && conversationId) {
-      return this.handleGetConversation(conversationId);
+    if (url.pathname.endsWith("/subscribe")) {
+      return this.handleSubscription(request);
+    } else if (url.pathname.endsWith("/publish")) {
+      return this.handlePublish(request);
     } else {
       return this.createResponse("Not Found", 404);
     }
   }
+  async handleSubscription(request) {
+    const [client, server] = new WebSocketPair();
+    server.accept();
+    this.subscribers.add(server);
 
-  async handleInitiateConversation(cityCode, serviceType, request) {
-    const channelName = `${cityCode}-${serviceType}`;
-    const convId = crypto.randomUUID(); // Generate a unique conversation ID
+    server.addEventListener("message", (event) => {});
 
-    if (!this.channels.has(channelName)) {
-      this.channels.set(channelName, new Set());
-    }
-    const conversationSet = this.channels.get(channelName);
-    conversationSet.add(convId);
+    server.addEventListener("close", () => {
+      this.subscribers.delete(server);
+    });
 
-    const initialMessage = await request.json();
-    const conversation = [{ message: initialMessage.message, timestamp: new Date().toISOString() }];
-
-    // Store the initial message in KV under the conversation ID
-    await this.env.VENDOR_CONVERSATIONS.put(convId, JSON.stringify(conversation));
-
-    return this.createResponse(JSON.stringify({ conversationId: convId }), 200);
+    return new Response(null, { status: 101, webSocket: client });
   }
 
-  async handleReply(conversationId, request) {
-    const reply = await request.json();
+  async handlePublish(request) {
+    const data = await request.json();
+    const { message } = data;
 
-    // Retrieve existing conversation from KV
-    const storedData = await this.env.VENDOR_CONVERSATIONS.get(conversationId);
-    const conversation = storedData ? JSON.parse(storedData) : [];
-
-    // Add the new message to the conversation
-    conversation.push({ message: reply.message, timestamp: new Date().toISOString() });
-
-    // Store the updated conversation in KV
-    await this.env.VENDOR_CONVERSATIONS.put(conversationId, JSON.stringify(conversation));
-
-    return this.createResponse("Message added to conversation", 200);
-  }
-
-  async handleGetConversation(conversationId) {
-    const storedData = await this.env.VENDOR_CONVERSATIONS.get(conversationId);
-
-    if (!storedData) {
-      return this.createResponse("Conversation not found", 404);
+    for (const subscriber of this.subscribers) {
+      try {
+        subscriber.send(JSON.stringify({ message }));
+      } catch (err) {
+        this.subscribers.delete(subscriber);
+      }
     }
 
-    return this.createResponse(storedData, 200);
+    return this.createResponse("Message sent to subscribers", 200);
   }
 
   handleOptions(request) {
@@ -81,7 +55,6 @@ class MyDurableObject extends DurableObject {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Max-Age": "86400",
     };
     return new Response(null, { status: 204, headers });
   }
@@ -96,3 +69,5 @@ class MyDurableObject extends DurableObject {
 }
 
 export { MyDurableObject };
+
+
