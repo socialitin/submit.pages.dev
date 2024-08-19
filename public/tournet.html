@@ -399,7 +399,6 @@ margin-top: 4%;
                 </style>
             </head>
             <body>
-  
                   <div id="chat-container">
                       <h2>CityKiosk Chat</h2>
               
@@ -416,11 +415,17 @@ margin-top: 4%;
               
                       <input id="host-id-input" placeholder="Enter Host ID" />
                       <button id="reply-button">Reply to Conversation</button>
+              
+                      <div id="conversation-messages">
+                          <h3>Conversation Messages</h3>
+                          <!-- Messages will be dynamically inserted here -->
+                      </div>
                   </div>
               
                   <script>
                       const baseUrl = 'https://pub-sub.socialitin.workers.dev';
                       const conversationList = document.getElementById('conversation-list');
+                      const conversationMessages = document.getElementById('conversation-messages');
                       let currentChannel = '';
               
                       async function fetchConversations(channel) {
@@ -447,12 +452,63 @@ margin-top: 4%;
                           }
                       }
               
+                      async function fetchAndDisplayMessages(conversationId) {
+                          try {
+                              const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                              if (!response.ok) {
+                                  throw new Error(`HTTP error! status: ${response.status}`);
+                              }
+                              const messages = await response.json();
+              
+                              // Clear existing messages
+                              conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+              
+                              // Group messages by hostId
+                              const messagesByHost = {};
+                              messages.forEach(message => {
+                                  if (!messagesByHost[message.hostId]) {
+                                      messagesByHost[message.hostId] = [];
+                                  }
+                                  messagesByHost[message.hostId].push(message);
+                              });
+              
+                              // Display messages grouped by hostId
+                              Object.keys(messagesByHost).forEach(hostId => {
+                                  const hostSection = document.createElement('div');
+                                  hostSection.classList.add('host-section');
+                                  const hostTitle = document.createElement('h4');
+                                  hostTitle.textContent = `Messages from Host: ${hostId}`;
+                                  hostSection.appendChild(hostTitle);
+              
+                                  messagesByHost[hostId].forEach(msg => {
+                                      const msgElement = document.createElement('p');
+                                      msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
+                                      hostSection.appendChild(msgElement);
+                                  });
+              
+                                  conversationMessages.appendChild(hostSection);
+                              });
+                          } catch (error) {
+                              console.error('Error fetching conversation messages:', error);
+                              alert('Failed to load conversation messages. Please try again later.');
+                          }
+                      }
+              
                       document.getElementById('load-channel-button').addEventListener('click', () => {
                           currentChannel = document.getElementById('channel-input').value.trim();
                           if (currentChannel) {
                               fetchConversations(currentChannel);
                           } else {
                               alert('Please enter a channel name.');
+                          }
+                      });
+              
+                      document.getElementById('conversation-list').addEventListener('change', () => {
+                          const selectedConversationId = conversationList.value;
+                          if (selectedConversationId) {
+                              fetchAndDisplayMessages(selectedConversationId);
+                          } else {
+                              conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
                           }
                       });
               
@@ -504,6 +560,7 @@ margin-top: 4%;
                                   }
               
                                   alert(`Replied to conversation ${conversationId}`);
+                                  fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
                               } catch (error) {
                                   console.error('Error replying to conversation:', error);
                                   alert('Failed to send reply. Please try again.');
@@ -512,10 +569,8 @@ margin-top: 4%;
                               alert('Please select a conversation, enter a host ID, and a message.');
                           }
                       });
-                             
-            </script>
-
-            
+                  </script>
+                          
 <script>
 
 function openTab(evt, tabName) {
