@@ -399,86 +399,102 @@ margin-top: 4%;
                 </style>
             </head>
             <body>
-            
-            <div id="chat-container">
-                <h2>CityKiosk Chat</h2>
-            
-                <textarea id="message-input" placeholder="Type your message..."></textarea>
-            
-                <button id="initiate-button">Initiate Conversation</button>
-            
-                <select id="conversation-list">
-                    <option value="">Select a conversation</option>
-                    <!-- Options will be dynamically populated -->
-                </select>
-            
-                <button id="reply-button">Reply to Conversation</button>
-            </div>
-            
-            <script>
-                const baseUrl = 'https://pub-sub.socialitin.workers.dev';  // Replace with your Cloudflare Worker URL
-                const conversationList = document.getElementById('conversation-list');
-            
-                async function fetchConversations() {
-                    // Fetch list of conversation IDs (this would be done via an API call in a real app)
-                    // Here, we'll just simulate it with some dummy data
-                    const conversations = ['12345', '67890'];  // Example conversation IDs
+                    <div id="chat-container">
+                        <h2>CityKiosk Chat</h2>
                     
-                    // Clear existing options
-                    conversationList.innerHTML = '<option value="">Select a conversation</option>';
-            
-                    // Populate the dropdown with conversation IDs
-                    conversations.forEach(conversationId => {
-                        const option = document.createElement('option');
-                        option.value = conversationId;
-                        option.textContent = `Conversation ${conversationId}`;
-                        conversationList.appendChild(option);
-                    });
-                }
-            
-document.getElementById('initiate-button').addEventListener('click', async () => {
-  const message = document.getElementById('message-input').value.trim();
-  if (message !== '') {
-    try {
-      const response = await fetch(`${baseUrl}/initiate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      alert(`Conversation initiated with ID: ${data.conversationId}`);
-    } catch (error) {
-      console.error('Error initiating conversation:', error);
-      alert('Failed to initiate conversation. Please try again.');
-    }
-  }
-});
-
-            
-                document.getElementById('reply-button').addEventListener('click', async () => {
-                    const message = document.getElementById('message-input').value.trim();
-                    const conversationId = conversationList.value;
-                    if (message !== '' && conversationId !== '') {
-                        const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ message })
+                        <textarea id="message-input" placeholder="Type your message..."></textarea>
+                    
+                        <button id="initiate-button">Initiate Conversation</button>
+                    
+                        <select id="conversation-list">
+                            <option value="">Select a conversation</option>
+                        </select>
+                    
+                        <button id="reply-button">Reply to Conversation</button>
+                    </div>
+                
+                    <script>
+                        const baseUrl = 'https://pub-sub.socialitin.workers.dev';  // Replace with your Cloudflare Worker URL
+                        const conversationList = document.getElementById('conversation-list');
+                
+                        async function fetchConversations() {
+                            try {
+                                const response = await fetch(`${baseUrl}/conversations`);
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                const conversations = await response.json();
+                
+                                // Clear existing options
+                                conversationList.innerHTML = '<option value="">Select a conversation</option>';
+                
+                                // Populate the dropdown with conversation IDs
+                                conversations.forEach(conversationId => {
+                                    const option = document.createElement('option');
+                                    option.value = conversationId;
+                                    option.textContent = `Conversation ${conversationId}`;
+                                    conversationList.appendChild(option);
+                                });
+                            } catch (error) {
+                                console.error('Error fetching conversations:', error);
+                                alert('Failed to load conversations. Please try again later.');
+                            }
+                        }
+                
+                        document.getElementById('initiate-button').addEventListener('click', async () => {
+                            const message = document.getElementById('message-input').value.trim();
+                            if (message !== '') {
+                                try {
+                                    const response = await fetch(`${baseUrl}/initiate`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ message })
+                                    });
+                
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                
+                                    const data = await response.json();
+                                    alert(`Conversation initiated with ID: ${data.conversationId}`);
+                                    fetchConversations();  // Refresh the conversation list after initiating
+                                } catch (error) {
+                                    console.error('Error initiating conversation:', error);
+                                    alert('Failed to initiate conversation. Please try again.');
+                                }
+                            }
                         });
-                        alert(`Replied to conversation ${conversationId}`);
-                    }
-                });
-            
-                // Initialize conversation list on page load
-                fetchConversations();
+                
+                        document.getElementById('reply-button').addEventListener('click', async () => {
+                            const message = document.getElementById('message-input').value.trim();
+                            const conversationId = conversationList.value;
+                            if (message !== '' && conversationId !== '') {
+                                try {
+                                    const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ message })
+                                    });
+                
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                
+                                    alert(`Replied to conversation ${conversationId}`);
+                                } catch (error) {
+                                    console.error('Error replying to conversation:', error);
+                                    alert('Failed to send reply. Please try again.');
+                                }
+                            }
+                        });
+                
+                        // Initialize conversation list on page load
+                        fetchConversations();
+                           
             </script>
 
             
