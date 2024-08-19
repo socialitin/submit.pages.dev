@@ -24,6 +24,8 @@ class MyDurableObject extends DurableObject {
       return this.handleReply(conversationId, request);
     } else if (action === "getConversation" && conversationId) {
       return this.handleGetConversation(conversationId);
+    } else if (action === "listConversations") {
+      return this.handleListConversations();
     } else {
       return this.createResponse("Not Found", { status: 404 });
     }
@@ -65,6 +67,14 @@ class MyDurableObject extends DurableObject {
     }
 
     return this.createResponse(storedData, 200);
+  }
+
+  async handleListConversations() {
+    // Retrieve all conversation IDs stored in the KV namespace
+    const list = await this.env.VENDOR_CONVERSATIONS.list();
+    const conversationIds = list.keys.map(key => key.name);
+
+    return this.createResponse(JSON.stringify(conversationIds), 200);
   }
 
   handleOptions(request) {
