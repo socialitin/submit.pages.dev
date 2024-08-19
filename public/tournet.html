@@ -399,28 +399,33 @@ margin-top: 4%;
                 </style>
             </head>
             <body>
-
+  
                   <div id="chat-container">
                       <h2>CityKiosk Chat</h2>
-                  
+              
+                      <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+                      <button id="load-channel-button">Load Channel</button>
+              
                       <textarea id="message-input" placeholder="Type your message..."></textarea>
-                  
+              
                       <button id="initiate-button">Initiate Conversation</button>
-                  
+              
                       <select id="conversation-list">
                           <option value="">Select a conversation</option>
                       </select>
-                  
+              
+                      <input id="host-id-input" placeholder="Enter Host ID" />
                       <button id="reply-button">Reply to Conversation</button>
                   </div>
               
                   <script>
-                      const baseUrl = 'https://pub-sub.socialitin.workers.dev';  // Replace with your Cloudflare Worker URL
+                      const baseUrl = 'https://pub-sub.socialitin.workers.dev';
                       const conversationList = document.getElementById('conversation-list');
+                      let currentChannel = '';
               
-                      async function fetchConversations() {
+                      async function fetchConversations(channel) {
                           try {
-                              const response = await fetch(`${baseUrl}/listConversations`);
+                              const response = await fetch(`${baseUrl}/listConversations/${channel}`);
                               if (!response.ok) {
                                   throw new Error(`HTTP error! status: ${response.status}`);
                               }
@@ -442,16 +447,25 @@ margin-top: 4%;
                           }
                       }
               
+                      document.getElementById('load-channel-button').addEventListener('click', () => {
+                          currentChannel = document.getElementById('channel-input').value.trim();
+                          if (currentChannel) {
+                              fetchConversations(currentChannel);
+                          } else {
+                              alert('Please enter a channel name.');
+                          }
+                      });
+              
                       document.getElementById('initiate-button').addEventListener('click', async () => {
                           const message = document.getElementById('message-input').value.trim();
-                          if (message !== '') {
+                          if (message !== '' && currentChannel !== '') {
                               try {
                                   const response = await fetch(`${baseUrl}/initiate`, {
                                       method: 'POST',
                                       headers: {
                                           'Content-Type': 'application/json',
                                       },
-                                      body: JSON.stringify({ message })
+                                      body: JSON.stringify({ channel: currentChannel, message })
                                   });
               
                                   if (!response.ok) {
@@ -460,25 +474,29 @@ margin-top: 4%;
               
                                   const data = await response.json();
                                   alert(`Conversation initiated with ID: ${data.conversationId}`);
-                                  fetchConversations();  // Refresh the conversation list after initiating
+                                  fetchConversations(currentChannel);  // Refresh the conversation list after initiating
                               } catch (error) {
                                   console.error('Error initiating conversation:', error);
                                   alert('Failed to initiate conversation. Please try again.');
                               }
+                          } else {
+                              alert('Please enter a channel and message.');
                           }
                       });
               
                       document.getElementById('reply-button').addEventListener('click', async () => {
                           const message = document.getElementById('message-input').value.trim();
                           const conversationId = conversationList.value;
-                          if (message !== '' && conversationId !== '') {
+                          const hostId = document.getElementById('host-id-input').value.trim();
+              
+                          if (message !== '' && conversationId !== '' && hostId !== '') {
                               try {
                                   const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
                                       method: 'POST',
                                       headers: {
                                           'Content-Type': 'application/json',
                                       },
-                                      body: JSON.stringify({ message })
+                                      body: JSON.stringify({ message, hostId })
                                   });
               
                                   if (!response.ok) {
@@ -490,12 +508,11 @@ margin-top: 4%;
                                   console.error('Error replying to conversation:', error);
                                   alert('Failed to send reply. Please try again.');
                               }
+                          } else {
+                              alert('Please select a conversation, enter a host ID, and a message.');
                           }
                       });
-              
-                      // Initialize conversation list on page load
-                      fetchConversations();
-              
+                             
             </script>
 
             
