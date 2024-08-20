@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 
   <title>Cloudflare Pages 2 Tournet presence</title>
   <meta name="theme-color" content="#d86300">
   <meta name="mobile-web-app-capable" content="yes">
@@ -399,178 +400,201 @@ margin-top: 4%;
                 </style>
             </head>
             <body>
-                  <div id="chat-container">
-                      <h2>CityKiosk Chat</h2>
-              
-                      <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
-                      <button id="load-channel-button">Load Channel</button>
-              
-                      <textarea id="message-input" placeholder="Type your message..."></textarea>
-              
-                      <button id="initiate-button">Initiate Conversation</button>
-              
-                      <select id="conversation-list">
-                          <option value="">Select a conversation</option>
-                      </select>
-              
-                      <input id="host-id-input" placeholder="Enter Host ID" />
-                      <button id="reply-button">Reply to Conversation</button>
-              
-                      <div id="conversation-messages">
-                          <h3>Conversation Messages</h3>
-                          <!-- Messages will be dynamically inserted here -->
-                      </div>
-                  </div>
-              
-                  <script>
-                      const baseUrl = 'https://pub-sub.socialitin.workers.dev';
-                      const conversationList = document.getElementById('conversation-list');
-                      const conversationMessages = document.getElementById('conversation-messages');
-                      let currentChannel = '';
-              
-                      async function fetchConversations(channel) {
-                          try {
-                              const response = await fetch(`${baseUrl}/listConversations/${channel}`);
-                              if (!response.ok) {
-                                  throw new Error(`HTTP error! status: ${response.status}`);
-                              }
-                              const conversations = await response.json();
-              
-                              // Clear existing options
-                              conversationList.innerHTML = '<option value="">Select a conversation</option>';
-              
-                              // Populate the dropdown with conversation IDs
-                              conversations.forEach(conversationId => {
-                                  const option = document.createElement('option');
-                                  option.value = conversationId;
-                                  option.textContent = `Conversation ${conversationId}`;
-                                  conversationList.appendChild(option);
-                              });
-                          } catch (error) {
-                              console.error('Error fetching conversations:', error);
-                              alert('Failed to load conversations. Please try again later.');
-                          }
-                      }
-              
-                      async function fetchAndDisplayMessages(conversationId) {
-                          try {
-                              const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
-                              if (!response.ok) {
-                                  throw new Error(`HTTP error! status: ${response.status}`);
-                              }
-                              const messages = await response.json();
-              
-                              // Clear existing messages
-                              conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
-              
-                              // Group messages by hostId
-                              const messagesByHost = {};
-                              messages.forEach(message => {
-                                  if (!messagesByHost[message.hostId]) {
-                                      messagesByHost[message.hostId] = [];
-                                  }
-                                  messagesByHost[message.hostId].push(message);
-                              });
-              
-                              // Display messages grouped by hostId
-                              Object.keys(messagesByHost).forEach(hostId => {
-                                  const hostSection = document.createElement('div');
-                                  hostSection.classList.add('host-section');
-                                  const hostTitle = document.createElement('h4');
-                                  hostTitle.textContent = `Messages from Host: ${hostId}`;
-                                  hostSection.appendChild(hostTitle);
-              
-                                  messagesByHost[hostId].forEach(msg => {
-                                      const msgElement = document.createElement('p');
-                                      msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
-                                      hostSection.appendChild(msgElement);
-                                  });
-              
-                                  conversationMessages.appendChild(hostSection);
-                              });
-                          } catch (error) {
-                              console.error('Error fetching conversation messages:', error);
-                              alert('Failed to load conversation messages. Please try again later.');
-                          }
-                      }
-              
-                      document.getElementById('load-channel-button').addEventListener('click', () => {
-                          currentChannel = document.getElementById('channel-input').value.trim();
-                          if (currentChannel) {
-                              fetchConversations(currentChannel);
-                          } else {
-                              alert('Please enter a channel name.');
-                          }
-                      });
-              
-                      document.getElementById('conversation-list').addEventListener('change', () => {
-                          const selectedConversationId = conversationList.value;
-                          if (selectedConversationId) {
-                              fetchAndDisplayMessages(selectedConversationId);
-                          } else {
-                              conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
-                          }
-                      });
-              
-                      document.getElementById('initiate-button').addEventListener('click', async () => {
-                          const message = document.getElementById('message-input').value.trim();
-                          if (message !== '' && currentChannel !== '') {
-                              try {
-                                  const response = await fetch(`${baseUrl}/initiate`, {
-                                      method: 'POST',
-                                      headers: {
-                                          'Content-Type': 'application/json',
-                                      },
-                                      body: JSON.stringify({ channel: currentChannel, message })
-                                  });
-              
-                                  if (!response.ok) {
-                                      throw new Error(`HTTP error! status: ${response.status}`);
-                                  }
-              
-                                  const data = await response.json();
-                                  alert(`Conversation initiated with ID: ${data.conversationId}`);
-                                  fetchConversations(currentChannel);  // Refresh the conversation list after initiating
-                              } catch (error) {
-                                  console.error('Error initiating conversation:', error);
-                                  alert('Failed to initiate conversation. Please try again.');
-                              }
-                          } else {
-                              alert('Please enter a channel and message.');
-                          }
-                      });
-              
-                      document.getElementById('reply-button').addEventListener('click', async () => {
-                          const message = document.getElementById('message-input').value.trim();
-                          const conversationId = conversationList.value;
-                          const hostId = document.getElementById('host-id-input').value.trim();
-              
-                          if (message !== '' && conversationId !== '' && hostId !== '') {
-                              try {
-                                  const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
-                                      method: 'POST',
-                                      headers: {
-                                          'Content-Type': 'application/json',
-                                      },
-                                      body: JSON.stringify({ message, hostId })
-                                  });
-              
-                                  if (!response.ok) {
-                                      throw new Error(`HTTP error! status: ${response.status}`);
-                                  }
-              
-                                  alert(`Replied to conversation ${conversationId}`);
-                                  fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
-                              } catch (error) {
-                                  console.error('Error replying to conversation:', error);
-                                  alert('Failed to send reply. Please try again.');
-                              }
-                          } else {
-                              alert('Please select a conversation, enter a host ID, and a message.');
-                          }
-                      });
-                  </script>
-                          
+    <title>CityKiosk Chat</title>
+    <!-- Add Font Awesome for icons -->
+    <style>
+        .icon-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #007BFF;
+            margin: 5px;
+        }
+        .icon-button:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h2>CityKiosk Chat</h2>
+
+        <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+        <button id="load-channel-button" class="icon-button">
+            <i class="fas fa-sync"></i> <!-- Sync icon -->
+        </button>
+
+        <textarea id="message-input" placeholder="Type your message..."></textarea>
+
+        <button id="initiate-button" class="icon-button">
+            <i class="fas fa-paper-plane"></i> <!-- Paper plane icon -->
+        </button>
+
+        <select id="conversation-list">
+            <option value="">Select a conversation</option>
+        </select>
+
+        <input id="host-id-input" placeholder="Enter Host ID" />
+        <button id="reply-button" class="icon-button">
+            <i class="fas fa-reply"></i> <!-- Reply icon -->
+        </button>
+
+        <div id="conversation-messages">
+            <h3>Conversation Messages</h3>
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+        const conversationList = document.getElementById('conversation-list');
+        const conversationMessages = document.getElementById('conversation-messages');
+        let currentChannel = '';
+
+        async function fetchConversations(channel) {
+            try {
+                const response = await fetch(`${baseUrl}/listConversations/${channel}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const conversations = await response.json();
+
+                // Clear existing options
+                conversationList.innerHTML = '<option value="">Select a conversation</option>';
+
+                // Populate the dropdown with conversation IDs
+                conversations.forEach(conversationId => {
+                    const option = document.createElement('option');
+                    option.value = conversationId;
+                    option.textContent = `Conversation ${conversationId}`;
+                    conversationList.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching conversations:', error);
+                alert('Failed to load conversations. Please try again later.');
+            }
+        }
+
+        async function fetchAndDisplayMessages(conversationId) {
+            try {
+                const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const messages = await response.json();
+
+                // Clear existing messages
+                conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+
+                // Group messages by hostId
+                const messagesByHost = {};
+                messages.forEach(message => {
+                    if (!messagesByHost[message.hostId]) {
+                        messagesByHost[message.hostId] = [];
+                    }
+                    messagesByHost[message.hostId].push(message);
+                });
+
+                // Display messages grouped by hostId
+                Object.keys(messagesByHost).forEach(hostId => {
+                    const hostSection = document.createElement('div');
+                    hostSection.classList.add('host-section');
+                    const hostTitle = document.createElement('h4');
+                    hostTitle.textContent = `Messages from Host: ${hostId}`;
+                    hostSection.appendChild(hostTitle);
+
+                    messagesByHost[hostId].forEach(msg => {
+                        const msgElement = document.createElement('p');
+                        msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
+                        hostSection.appendChild(msgElement);
+                    });
+
+                    conversationMessages.appendChild(hostSection);
+                });
+            } catch (error) {
+                console.error('Error fetching conversation messages:', error);
+                alert('Failed to load conversation messages. Please try again later.');
+            }
+        }
+
+        document.getElementById('load-channel-button').addEventListener('click', () => {
+            currentChannel = document.getElementById('channel-input').value.trim();
+            if (currentChannel) {
+                fetchConversations(currentChannel);
+            } else {
+                alert('Please enter a channel name.');
+            }
+        });
+
+        document.getElementById('conversation-list').addEventListener('change', () => {
+            const selectedConversationId = conversationList.value;
+            if (selectedConversationId) {
+                fetchAndDisplayMessages(selectedConversationId);
+            } else {
+                conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+            }
+        });
+
+        document.getElementById('initiate-button').addEventListener('click', async () => {
+            const message = document.getElementById('message-input').value.trim();
+            if (message !== '' && currentChannel !== '') {
+                try {
+                    const response = await fetch(`${baseUrl}/initiate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ channel: currentChannel, message })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    alert(`Conversation initiated with ID: ${data.conversationId}`);
+                    fetchConversations(currentChannel);  // Refresh the conversation list after initiating
+                } catch (error) {
+                    console.error('Error initiating conversation:', error);
+                    alert('Failed to initiate conversation. Please try again.');
+                }
+            } else {
+                alert('Please enter a channel and message.');
+            }
+        });
+
+        document.getElementById('reply-button').addEventListener('click', async () => {
+            const message = document.getElementById('message-input').value.trim();
+            const conversationId = conversationList.value;
+            const hostId = document.getElementById('host-id-input').value.trim();
+
+            if (message !== '' && conversationId !== '' && hostId !== '') {
+                try {
+                    const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message, hostId })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    alert(`Replied to conversation ${conversationId}`);
+                    fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
+                } catch (error) {
+                    console.error('Error replying to conversation:', error);
+                    alert('Failed to send reply. Please try again.');
+                }
+            } else {
+                alert('Please select a conversation, enter a host ID, and a message.');
+            }
+        });
+    </script>
+                       
 <script>
 
 function openTab(evt, tabName) {
