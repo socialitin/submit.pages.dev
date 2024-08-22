@@ -239,6 +239,122 @@
 					<br><br>
 				</p>
 			</blockquote>  
+				<title>CityKiosk Chat - Host</title>
+				<div id="chat-container">
+					<h2>CityKiosk Chat - Host</h2>
+			
+					<input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+					<button id="load-channel-button">Load Channel</button>
+			
+					<select id="conversation-list-select">
+						<option value="">Select a conversation</option>
+					</select>
+			
+					<textarea id="message-input" placeholder="Type your message..."></textarea>
+					<input id="host-id-input" placeholder="Enter Host ID" />
+					<button id="reply-button">Reply to Conversation</button>
+			
+					<div id="conversation-messages">
+						<h3>Conversation Messages</h3>
+					</div>
+				</div>
+			
+				<script>
+					const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+					const conversationListSelect = document.getElementById('conversation-list-select');
+					const conversationMessages = document.getElementById('conversation-messages');
+					let currentChannel = '';
+			
+					async function fetchConversations(channel) {
+						try {
+							const response = await fetch(`${baseUrl}/listConversations/${channel}`);
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							const conversations = await response.json();
+			
+							conversationListSelect.innerHTML = '<option value="">Select a conversation</option>';
+							conversations.forEach(conversationId => {
+								const option = document.createElement('option');
+								option.value = conversationId;
+								option.textContent = `Conversation ${conversationId}`;
+								conversationListSelect.appendChild(option);
+							});
+						} catch (error) {
+							console.error('Error fetching conversations:', error);
+							alert('Failed to load conversations. Please try again later.');
+						}
+					}
+			
+					async function fetchAndDisplayMessages(conversationId) {
+						try {
+							const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							const messages = await response.json();
+			
+							conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+							messages.forEach(msg => {
+								const msgElement = document.createElement('p');
+								msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
+								conversationMessages.appendChild(msgElement);
+							});
+						} catch (error) {
+							console.error('Error fetching conversation messages:', error);
+							alert('Failed to load conversation messages. Please try again later.');
+						}
+					}
+			
+					document.getElementById('load-channel-button').addEventListener('click', () => {
+						currentChannel = document.getElementById('channel-input').value.trim();
+						if (currentChannel) {
+							fetchConversations(currentChannel);
+						} else {
+							alert('Please enter a channel name.');
+						}
+					});
+			
+					document.getElementById('conversation-list-select').addEventListener('change', () => {
+						const selectedConversationId = conversationListSelect.value;
+						if (selectedConversationId) {
+							fetchAndDisplayMessages(selectedConversationId);
+						} else {
+							conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+						}
+					});
+			
+					document.getElementById('reply-button').addEventListener('click', async () => {
+						const message = document.getElementById('message-input').value.trim();
+						const conversationId = conversationListSelect.value;
+						const hostId = document.getElementById('host-id-input').value.trim();
+			
+						if (message !== '' && conversationId !== '' && hostId !== '') {
+							try {
+								const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json',
+									},
+									body: JSON.stringify({ message, hostId })
+								});
+			
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+			
+								alert(`Replied to conversation ${conversationId}`);
+								fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
+							} catch (error) {
+								console.error('Error replying to conversation:', error);
+								alert('Failed to send reply. Please try again.');
+							}
+						} else {
+							alert('Please select a conversation, enter a host ID, and a message.');
+						}
+					});
+				</script>
+			
 		</main>
 	</div>		
 	<script>
