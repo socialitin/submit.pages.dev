@@ -240,17 +240,18 @@
 				</p>
 			</blockquote>  
 				<title>CityKiosk Chat - Host</title>
+
 					<style>
 						.icon-button {
 							border: none;
 							background: none;
 							cursor: pointer;
 							font-size: 1.5rem;
-							color: #e9ecf0;
+							color: #007BFF;
 							margin: 5px;
 						}
 						.icon-button:hover {
-							color: #eaeff5;
+							color: #0056b3;
 						}
 						#conversation-list {
 							margin-top: 20px;
@@ -259,8 +260,7 @@
 							margin-top: 20px;
 						}
 					</style>
-				</head>
-				<body>
+				
 					<div id="chat-container">
 						<h2>CityKiosk Chat - Vendor</h2>
 				
@@ -322,16 +322,15 @@
 								if (!response.ok) {
 									throw new Error(`HTTP error! status: ${response.status}`);
 								}
-								const messages = await response.json();
+								const conversationData = await response.json();
 				
 								// Clear existing messages
 								conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
 				
-								// Display only messages from the current vendor
-								const vendorMessages = messages.filter(msg => msg.hostId === currentVendorId);
-								vendorMessages.forEach(msg => {
+								// Display all messages in the conversation, including the initial request
+								conversationData.forEach(msg => {
 									const msgElement = document.createElement('p');
-									msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
+									msgElement.textContent = `${msg.timestamp}: ${msg.message} (${msg.hostId})`;
 									conversationMessages.appendChild(msgElement);
 								});
 							} catch (error) {
@@ -387,7 +386,8 @@
 								alert('Please select a conversation and enter a message.');
 							}
 						});
-					</script>								
+					</script>
+								
 		</main>
 	</div>		
 	<script>
