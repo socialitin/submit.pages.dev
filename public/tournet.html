@@ -402,6 +402,7 @@ margin-top: 4%;
             <body>
     <title>CityKiosk Chat</title>
     <!-- Add Font Awesome for icons -->
+ 
     <style>
         .icon-button {
             border: none;
@@ -415,197 +416,264 @@ margin-top: 4%;
             color: #c3ced8;
         }
 
-          #conversation-list {
-              margin-top: 20px;
-          }
-          #conversation-messages {
-              margin-top: 20px;
-          }
- </style>
-</head>
-<body>
- 
-      <div id="chat-container">
-          <h2>CityKiosk Chat</h2>
-  
-          <input id="itin-id-input" placeholder="Enter Itinerary ID (e.g., ITIN1234)" />
-          <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
-          <button id="load-channel-button" class="icon-button">
-              <i class="fas fa-sync"></i> <!-- Sync icon -->
-          </button>
-  
-          <textarea id="message-input" placeholder="Type your message..."></textarea>
-  
-          <button id="initiate-button" class="icon-button">
-              <i class="fas fa-paper-plane"></i> <!-- Paper plane icon -->
-          </button>
-  
-          <select id="conversation-list">
-              <option value="">Select a conversation</option>
-          </select>
-  
-          <input id="host-id-input" placeholder="Enter Host ID" />
-          <button id="reply-button" class="icon-button">
-              <i class="fas fa-reply"></i> <!-- Reply icon -->
-          </button>
-  
-          <div id="conversation-messages">
-              <h3>Conversation Messages</h3>
-              <!-- Messages will be dynamically inserted here -->
-          </div>
-      </div>
-  
-      <script>
-          const baseUrl = 'https://pub-sub.socialitin.workers.dev';
-          const conversationList = document.getElementById('conversation-list');
-          const conversationMessages = document.getElementById('conversation-messages');
-          let currentItinId = '';
-          let currentChannel = '';
-  
-          async function fetchConversations(itinId) {
-              try {
-                  const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
-                  if (!response.ok) {
-                      throw new Error(`HTTP error! status: ${response.status}`);
-                  }
-                  const conversations = await response.json();
-  
-                  // Clear existing options
-                  conversationList.innerHTML = '<option value="">Select a conversation</option>';
-  
-                  // Populate the dropdown with conversation IDs
-                  conversations.forEach(conversationId => {
-                      const option = document.createElement('option');
-                      option.value = conversationId;
-                      option.textContent = `Conversation ${conversationId}`;
-                      conversationList.appendChild(option);
-                  });
-              } catch (error) {
-                  console.error('Error fetching conversations:', error);
-                  alert('Failed to load conversations. Please try again later.');
-              }
-          }
-  
-          async function fetchAndDisplayMessages(conversationId) {
-              try {
-                  const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
-                  if (!response.ok) {
-                      throw new Error(`HTTP error! status: ${response.status}`);
-                  }
-                  const messages = await response.json();
-  
-                  // Clear existing messages
-                  conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
-  
-                  // Group messages by hostId
-                  const messagesByHost = {};
-                  messages.forEach(message => {
-                      if (!messagesByHost[message.hostId]) {
-                          messagesByHost[message.hostId] = [];
-                      }
-                      messagesByHost[message.hostId].push(message);
-                  });
-  
-                  // Display messages grouped by hostId
-                  Object.keys(messagesByHost).forEach(hostId => {
-                      const hostSection = document.createElement('div');
-                      hostSection.classList.add('host-section');
-                      const hostTitle = document.createElement('h4');
-                      hostTitle.textContent = `Messages from Host: ${hostId}`;
-                      hostSection.appendChild(hostTitle);
-  
-                      messagesByHost[hostId].forEach(msg => {
-                          const msgElement = document.createElement('p');
-                          msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
-                          hostSection.appendChild(msgElement);
-                      });
-  
-                      conversationMessages.appendChild(hostSection);
-                  });
-              } catch (error) {
-                  console.error('Error fetching conversation messages:', error);
-                  alert('Failed to load conversation messages. Please try again later.');
-              }
-          }
-  
-          document.getElementById('load-channel-button').addEventListener('click', () => {
-              currentItinId = document.getElementById('itin-id-input').value.trim();
-              currentChannel = document.getElementById('channel-input').value.trim();
-              if (currentItinId) {
-                  fetchConversations(currentItinId);
-              } else {
-                  alert('Please enter an Itinerary ID.');
-              }
-          });
-  
-          document.getElementById('conversation-list').addEventListener('change', () => {
-              const selectedConversationId = conversationList.value;
-              if (selectedConversationId) {
-                  fetchAndDisplayMessages(selectedConversationId);
-              } else {
-                  conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
-              }
-          });
-  
-          document.getElementById('initiate-button').addEventListener('click', async () => {
-              const itinId = document.getElementById('itin-id-input').value.trim();
-              const message = document.getElementById('message-input').value.trim();
-              if (message !== '' && currentChannel !== '' && itinId !== '') {
-                  try {
-                      const response = await fetch(`${baseUrl}/initiate`, {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
-                      });
-  
-                      if (!response.ok) {
-                          throw new Error(`HTTP error! status: ${response.status}`);
-                      }
-  
-                      const data = await response.json();
-                      alert(`Conversation initiated with ID: ${data.conversationId}`);
-                      fetchConversations(itinId);  // Refresh the conversation list after initiating
-                  } catch (error) {
-                      console.error('Error initiating conversation:', error);
-                      alert('Failed to initiate conversation. Please try again.');
-                  }
-              } else {
-                  alert('Please enter an Itinerary ID, Channel, and Message.');
-              }
-          });
-  
-          document.getElementById('reply-button').addEventListener('click', async () => {
-              const message = document.getElementById('message-input').value.trim();
-              const conversationId = conversationList.value;
-              const hostId = document.getElementById('host-id-input').value.trim();
-  
-              if (message !== '' && conversationId !== '' && hostId !== '') {
-                  try {
-                      const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({ message, hostId })
-                      });
-  
-                      if (!response.ok) {
-                          throw new Error(`HTTP error! status: ${response.status}`);
-                      }
-  
-                      alert(`Replied to conversation ${conversationId}`);
-                      fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
-                  } catch (error) {
-                      console.error('Error replying to conversation:', error);
-                      alert('Failed to send reply. Please try again.');
-                  }
-              } else {
-                  alert('Please select a conversation, enter a host ID, and a message.');
-              }
-          });
-      </script>     
+        #conversation-list {
+            margin-top: 20px;
+        }
+        #conversation-messages {
+            margin-top: 20px;
+        }
+
+        /* Styles for radio buttons */
+        .conversation-option {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        #message-input-container {
+            margin-top: 20px;
+        }
+
+        /* Styles for H1 title and checkboxes */
+        #initial-request {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .conversation-entry {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .conversation-entry p {
+            margin: 0;
+            margin-left: 10px;
+        }
+    </style>
+
+    <div id="chat-container">
+        <h2>CityKiosk Chat</h2>
+
+        <input id="itin-id-input" placeholder="Enter Itinerary ID (e.g., ITIN1234)" />
+        <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+        <button id="load-channel-button" class="icon-button">
+            <i class="fas fa-sync"></i> <!-- Sync icon -->
+        </button>
+
+        <button id="initiate-button" class="icon-button">
+            <i class="fas fa-paper-plane"></i> <!-- Paper plane icon -->
+        </button>
+
+        <div id="conversation-list">
+            <!-- Conversations will be dynamically inserted here as radio buttons -->
+        </div>
+
+        <div id="conversation-messages">
+            <!-- Initial request as H1 title will be inserted here -->
+            <div id="initial-request"></div>
+
+            <h3>Conversation Messages</h3>
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+
+        <div id="message-input-container">
+            <textarea id="message-input" placeholder="Type your message..."></textarea>
+            <button id="reply-button" class="icon-button">
+                <i class="fas fa-reply"></i> <!-- Reply icon -->
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+        const conversationList = document.getElementById('conversation-list');
+        const conversationMessages = document.getElementById('conversation-messages');
+        const initialRequest = document.getElementById('initial-request');
+        let currentItinId = '';
+        let currentChannel = '';
+
+        function timeSince(date) {
+            const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+            let interval = Math.floor(seconds / 31536000);
+
+            if (interval > 1) {
+                return interval + " years ago";
+            }
+            interval = Math.floor(seconds / 2592000);
+            if (interval > 1) {
+                return interval + " months ago";
+            }
+            interval = Math.floor(seconds / 86400);
+            if (interval > 1) {
+                return interval + " days ago";
+            }
+            interval = Math.floor(seconds / 3600);
+            if (interval > 1) {
+                return interval + " hours ago";
+            }
+            interval = Math.floor(seconds / 60);
+            if (interval > 1) {
+                return interval + " minutes ago";
+            }
+            return Math.floor(seconds) + " seconds ago";
+        }
+
+        async function fetchConversations(itinId) {
+            try {
+                const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const conversations = await response.json();
+
+                // Clear existing radio buttons
+                conversationList.innerHTML = '';
+
+                // Populate with radio buttons for conversations
+                conversations.forEach((conversationId, index) => {
+                    const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
+                    const label = document.createElement('label');
+                    label.classList.add('conversation-option');
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = 'conversation';
+                    radio.value = conversationId;
+                    if (index === 0) {
+                        radio.checked = true;
+                        fetchAndDisplayMessages(conversationId); // Load messages for the first conversation by default
+                    }
+
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(channelId));
+                    conversationList.appendChild(label);
+                });
+            } catch (error) {
+                console.error('Error fetching conversations:', error);
+                alert('Failed to load conversations. Please try again later.');
+            }
+        }
+
+        async function fetchAndDisplayMessages(conversationId) {
+            try {
+                const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const messages = await response.json();
+
+                // Clear existing messages and initial request
+                conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                initialRequest.innerHTML = '';
+
+                if (messages.length > 0) {
+                    // Display the initial request as an H1 title
+                    const firstMessage = messages[0];
+                    initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
+
+                    // Display the rest of the messages
+                    messages.forEach((message, index) => {
+                        const entryDiv = document.createElement('div');
+                        entryDiv.classList.add('conversation-entry');
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.checked = index === messages.length - 1; // Default last entry
+                        entryDiv.appendChild(checkbox);
+
+                        const msgElement = document.createElement('p');
+                        msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+                        entryDiv.appendChild(msgElement);
+
+                        conversationMessages.appendChild(entryDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching conversation messages:', error);
+                alert('Failed to load conversation messages. Please try again later.');
+            }
+        }
+
+        document.getElementById('load-channel-button').addEventListener('click', () => {
+            currentItinId = document.getElementById('itin-id-input').value.trim();
+            currentChannel = document.getElementById('channel-input').value.trim();
+            if (currentItinId) {
+                fetchConversations(currentItinId);
+            } else {
+                alert('Please enter an Itinerary ID.');
+            }
+        });
+
+        document.getElementById('initiate-button').addEventListener('click', async () => {
+            const itinId = document.getElementById('itin-id-input').value.trim();
+            const message = document.getElementById('message-input').value.trim();
+            if (message !== '' && currentChannel !== '' && itinId !== '') {
+                try {
+                    const response = await fetch(`${baseUrl}/initiate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    alert(`Conversation initiated with ID: ${data.conversationId}`);
+                    fetchConversations(itinId);  // Refresh the conversation list after initiating
+                } catch (error) {
+                    console.error('Error initiating conversation:', error);
+                    alert('Failed to initiate conversation. Please try again.');
+                }
+            } else {
+                alert('Please enter an Itinerary ID, Channel, and Message.');
+            }
+        });
+
+        conversationList.addEventListener('change', (event) => {
+            const selectedConversationId = event.target.value;
+            if (selectedConversationId) {
+                fetchAndDisplayMessages(selectedConversationId);
+            } else {
+                conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                initialRequest.innerHTML = '';
+            }
+        });
+
+        document.getElementById('reply-button').addEventListener('click', async () => {
+            const message = document.getElementById('message-input').value.trim();
+            const selectedRadio = document.querySelector('input[name="conversation"]:checked');
+            const conversationId = selectedRadio ? selectedRadio.value : '';
+
+            if (message !== '' && conversationId !== '') {
+                try {
+                    const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    alert(`Replied to conversation ${conversationId}`);
+                    fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
+                } catch (error) {
+                    console.error('Error replying to conversation:', error);
+                    alert('Failed to send reply. Please try again.');
+                }
+            } else {
+                alert('Please select a conversation and enter a message.');
+            }
+        });
+    </script>
 
 <script>
 
