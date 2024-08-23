@@ -580,7 +580,7 @@ margin-top: 4%;
                             entryDiv.appendChild(checkbox);
     
                             const msgElement = document.createElement('p');
-                            msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId})`;
+                            msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
                             entryDiv.appendChild(msgElement);
     
                             conversationMessages.appendChild(entryDiv);
