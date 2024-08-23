@@ -656,9 +656,9 @@ margin-top: 4%;
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ message })
+                        body: JSON.stringify({ message,hostId })
                     });
-
+console.log(hostId);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
