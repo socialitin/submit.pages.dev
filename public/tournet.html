@@ -432,6 +432,24 @@ margin-top: 4%;
             #message-input-container {
                 margin-top: 20px;
             }
+    
+            /* Styles for H1 title and checkboxes */
+            #initial-request {
+                margin-top: 20px;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+    
+            .conversation-entry {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+            }
+    
+            .conversation-entry p {
+                margin: 0;
+                margin-left: 10px;
+            }
         </style>
     </head>
     <body>
@@ -449,6 +467,9 @@ margin-top: 4%;
             </div>
     
             <div id="conversation-messages">
+                <!-- Initial request as H1 title will be inserted here -->
+                <div id="initial-request"></div>
+    
                 <h3>Conversation Messages</h3>
                 <!-- Messages will be dynamically inserted here -->
             </div>
@@ -465,8 +486,35 @@ margin-top: 4%;
             const baseUrl = 'https://pub-sub.socialitin.workers.dev';
             const conversationList = document.getElementById('conversation-list');
             const conversationMessages = document.getElementById('conversation-messages');
+            const initialRequest = document.getElementById('initial-request');
             let currentItinId = '';
             let currentChannel = '';
+    
+            function timeSince(date) {
+                const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+                let interval = Math.floor(seconds / 31536000);
+    
+                if (interval > 1) {
+                    return interval + " years ago";
+                }
+                interval = Math.floor(seconds / 2592000);
+                if (interval > 1) {
+                    return interval + " months ago";
+                }
+                interval = Math.floor(seconds / 86400);
+                if (interval > 1) {
+                    return interval + " days ago";
+                }
+                interval = Math.floor(seconds / 3600);
+                if (interval > 1) {
+                    return interval + " hours ago";
+                }
+                interval = Math.floor(seconds / 60);
+                if (interval > 1) {
+                    return interval + " minutes ago";
+                }
+                return Math.floor(seconds) + " seconds ago";
+            }
     
             async function fetchConversations(itinId) {
                 try {
@@ -512,34 +560,32 @@ margin-top: 4%;
                     }
                     const messages = await response.json();
     
-                    // Clear existing messages
+                    // Clear existing messages and initial request
                     conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                    initialRequest.innerHTML = '';
     
-                    // Display messages grouped by hostId
-                    const messagesByHost = {};
-                    messages.forEach(message => {
-                        if (!messagesByHost[message.hostId]) {
-                            messagesByHost[message.hostId] = [];
-                        }
-                        messagesByHost[message.hostId].push(message);
-                    });
+                    if (messages.length > 0) {
+                        // Display the initial request as an H1 title
+                        const firstMessage = messages[0];
+                        initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
     
-                    // Display messages grouped by hostId
-                    Object.keys(messagesByHost).forEach(hostId => {
-                        const hostSection = document.createElement('div');
-                        hostSection.classList.add('host-section');
-                        const hostTitle = document.createElement('h4');
-                        hostTitle.textContent = `Messages from Host: ${hostId}`;
-                        hostSection.appendChild(hostTitle);
+                        // Display the rest of the messages
+                        messages.forEach((message, index) => {
+                            const entryDiv = document.createElement('div');
+                            entryDiv.classList.add('conversation-entry');
     
-                        messagesByHost[hostId].forEach(msg => {
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.checked = index === messages.length - 1; // Default last entry
+                            entryDiv.appendChild(checkbox);
+    
                             const msgElement = document.createElement('p');
-                            msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
-                            hostSection.appendChild(msgElement);
-                        });
+                            msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId})`;
+                            entryDiv.appendChild(msgElement);
     
-                        conversationMessages.appendChild(hostSection);
-                    });
+                            conversationMessages.appendChild(entryDiv);
+                        });
+                    }
                 } catch (error) {
                     console.error('Error fetching conversation messages:', error);
                     alert('Failed to load conversation messages. Please try again later.');
@@ -562,6 +608,7 @@ margin-top: 4%;
                     fetchAndDisplayMessages(selectedConversationId);
                 } else {
                     conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                    initialRequest.innerHTML = '';
                 }
             });
     
