@@ -346,62 +346,6 @@ margin-top: 4%;
         <blockquote>
           <p id="Requests">
             Coming Up... Respond to Tournet's cityKIOSKS Visitors' Requests promptly, within 24 hours at the latest.
-            <br>
-            <h1>Pub/Sub Test</h1>
-
-                <title>CityKiosk Pub/Sub Chat</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f4f4;
-                        margin: 0;
-                        padding: 20px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        flex-direction: column;
-                    }
-                    #chat-container {
-                        width: 400px;
-                        background-color: #fff;
-                        border-radius: 8px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                        padding: 20px;
-                    }
-                    #chat-container h2 {
-                        text-align: center;
-                        color: #007bff;
-                    }
-                    #message-input {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 10px;
-                        border: 1px solid #ddd;
-                        border-radius: 4px;
-                    }
-                    #conversation-list {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 10px;
-                        border: 1px solid #ddd;
-                        border-radius: 4px;
-                    }
-                    #chat-container button {
-                        width: 15%;
-                        padding: 10px;
-                        background-color: #c2cdd9;
-                        color: #fff;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;
-                        margin-bottom: 10px;
-                    }
-                </style>
-            </head>
-            <body>
-    <title>CityKiosk Chat</title>
-    <!-- Add Font Awesome for icons -->
 
         <style>
             .icon-button {
@@ -460,6 +404,10 @@ margin-top: 4%;
             <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
             <button id="load-channel-button" class="icon-button">
                 <i class="fas fa-sync"></i> <!-- Sync icon -->
+            </button>
+    
+            <button id="initiate-button" class="icon-button">
+                <i class="fas fa-paper-plane"></i> <!-- Paper plane icon -->
             </button>
     
             <div id="conversation-list">
@@ -599,6 +547,35 @@ margin-top: 4%;
                     fetchConversations(currentItinId);
                 } else {
                     alert('Please enter an Itinerary ID.');
+                }
+            });
+    
+            document.getElementById('initiate-button').addEventListener('click', async () => {
+                const itinId = document.getElementById('itin-id-input').value.trim();
+                const message = document.getElementById('message-input').value.trim();
+                if (message !== '' && currentChannel !== '' && itinId !== '') {
+                    try {
+                        const response = await fetch(`${baseUrl}/initiate`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
+                        });
+    
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+    
+                        const data = await response.json();
+                        alert(`Conversation initiated with ID: ${data.conversationId}`);
+                        fetchConversations(itinId);  // Refresh the conversation list after initiating
+                    } catch (error) {
+                        console.error('Error initiating conversation:', error);
+                        alert('Failed to initiate conversation. Please try again.');
+                    }
+                } else {
+                    alert('Please enter an Itinerary ID, Channel, and Message.');
                 }
             });
     
