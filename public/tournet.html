@@ -402,7 +402,26 @@ margin-top: 4%;
             <body>
     <title>CityKiosk Chat</title>
     <!-- Add Font Awesome for icons -->
- 
+    <style>
+        .icon-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #cdd6df;
+            margin: 5px;
+        }
+        .icon-button:hover {
+            color: #c3ced8;
+        }
+
+          #conversation-list {
+              margin-top: 20px;
+          }
+          #conversation-messages {
+              margin-top: 20px;
+          }
+ </style>
     <style>
         .icon-button {
             border: none;
@@ -433,7 +452,7 @@ margin-top: 4%;
             margin-top: 20px;
         }
 
-        /* Styles for H1 title and checkboxes */
+        /* Styles for H1 title and radio buttons */
         #initial-request {
             margin-top: 20px;
             font-size: 1.5rem;
@@ -572,15 +591,17 @@ margin-top: 4%;
                     const firstMessage = messages[0];
                     initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
 
-                    // Display the rest of the messages
+                    // Display the rest of the messages with radio buttons
                     messages.forEach((message, index) => {
                         const entryDiv = document.createElement('div');
                         entryDiv.classList.add('conversation-entry');
 
-                        const checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.checked = index === messages.length - 1; // Default last entry
-                        entryDiv.appendChild(checkbox);
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.name = 'selected-message';
+                        radio.value = message.hostId; // Use hostId as value
+
+                        entryDiv.appendChild(radio);
 
                         const msgElement = document.createElement('p');
                         msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
@@ -646,19 +667,21 @@ margin-top: 4%;
 
         document.getElementById('reply-button').addEventListener('click', async () => {
             const message = document.getElementById('message-input').value.trim();
-            const selectedRadio = document.querySelector('input[name="conversation"]:checked');
-            const conversationId = selectedRadio ? selectedRadio.value : '';
+            const selectedConversationRadio = document.querySelector('input[name="conversation"]:checked');
+            const conversationId = selectedConversationRadio ? selectedConversationRadio.value : '';
+            const selectedMessageRadio = document.querySelector('input[name="selected-message"]:checked');
+            const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
 
-            if (message !== '' && conversationId !== '') {
+            if (message !== '' && conversationId !== '' && hostId !== '') {
                 try {
                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ message,hostId })
+                        body: JSON.stringify({ message, hostId }) // Include hostId from selected message
                     });
-console.log(hostId);
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -670,7 +693,7 @@ console.log(hostId);
                     alert('Failed to send reply. Please try again.');
                 }
             } else {
-                alert('Please select a conversation and enter a message.');
+                alert('Please select a conversation, select a message, and enter a message.');
             }
         });
     </script>
