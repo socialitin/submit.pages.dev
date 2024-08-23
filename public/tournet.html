@@ -347,6 +347,9 @@ margin-top: 4%;
           <p id="Requests">
             Coming Up... Respond to Tournet's cityKIOSKS Visitors' Requests promptly, within 24 hours at the latest.
             <br>
+            <h1>Pub/Sub Test</h1>
+
+                <title>CityKiosk Pub/Sub Chat</title>
                 <style>
                     body {
                         font-family: Arial, sans-serif;
@@ -436,7 +439,7 @@ margin-top: 4%;
             margin-top: 20px;
         }
     </style>
-    <div id="chat-container">
+   <div id="chat-container">
         <h2>CityKiosk Host Chat</h2>
 
         <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
@@ -460,6 +463,16 @@ margin-top: 4%;
             <textarea id="message-input" placeholder="Type your message..."></textarea>
             <button id="reply-button" class="icon-button">
                 <i class="fas fa-reply"></i> <!-- Reply icon -->
+            </button>
+        </div>
+
+        <!-- Initiate Conversation Section -->
+        <div id="initiate-conversation-container">
+            <input id="itin-id-input" placeholder="Enter Itinerary ID (e.g., ITIN1234)" />
+            <input id="channel-init-input" placeholder="Enter Channel (e.g., NYCDE)" />
+            <textarea id="initial-message-input" placeholder="Type initial message..."></textarea>
+            <button id="initiate-button" class="icon-button">
+                <i class="fas fa-paper-plane"></i> <!-- Restore Paper plane icon -->
             </button>
         </div>
     </div>
@@ -573,7 +586,7 @@ margin-top: 4%;
                         },
                         body: JSON.stringify({ message, hostId }) // Include hostId from selected message
                     });
-console.log(hostId);
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -588,8 +601,40 @@ console.log(hostId);
                 alert('Please select a conversation, select a message, and enter a message.');
             }
         });
+
+        // Restore initiate conversation functionality
+        document.getElementById('initiate-button').addEventListener('click', async () => {
+            const itinId = document.getElementById('itin-id-input').value.trim();
+            const channel = document.getElementById('channel-init-input').value.trim();
+            const initialMessage = document.getElementById('initial-message-input').value.trim();
+
+            if (itinId && channel && initialMessage) {
+                try {
+                    const response = await fetch(`${baseUrl}/initiate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ itinId, channel, message: initialMessage })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    alert(`Conversation initiated with ID: ${data.conversationId}`);
+                    fetchConversations(channel);  // Refresh the conversation list after initiating
+                } catch (error) {
+                    console.error('Error initiating conversation:', error);
+                    alert('Failed to initiate conversation. Please try again.');
+                }
+            } else {
+                alert('Please enter an Itinerary ID, Channel, and Initial Message.');
+            }
+        });
     </script>
-           
+
 <script>
 
 function openTab(evt, tabName) {
