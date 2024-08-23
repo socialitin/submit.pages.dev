@@ -347,9 +347,6 @@ margin-top: 4%;
           <p id="Requests">
             Coming Up... Respond to Tournet's cityKIOSKS Visitors' Requests promptly, within 24 hours at the latest.
             <br>
-            <h1>Pub/Sub Test</h1>
-
-                <title>CityKiosk Pub/Sub Chat</title>
                 <style>
                     body {
                         font-family: Arial, sans-serif;
@@ -418,23 +415,6 @@ margin-top: 4%;
             margin-top: 20px;
         }
 
-        /* Styles for radio buttons */
-        .conversation-option {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        #message-input-container {
-            margin-top: 20px;
-        }
-
-        /* Styles for H1 title and checkboxes */
-        #initial-request {
-            margin-top: 20px;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
         .conversation-entry {
             display: flex;
             align-items: center;
@@ -445,20 +425,23 @@ margin-top: 4%;
             margin: 0;
             margin-left: 10px;
         }
+
+        /* Styles for radio buttons */
+        .conversation-option {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        #message-input-container {
+            margin-top: 20px;
+        }
     </style>
-
-
     <div id="chat-container">
-        <h2>CityKiosk Chat</h2>
+        <h2>CityKiosk Host Chat</h2>
 
-        <input id="itin-id-input" placeholder="Enter Itinerary ID (e.g., ITIN1234)" />
         <input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
         <button id="load-channel-button" class="icon-button">
             <i class="fas fa-sync"></i> <!-- Sync icon -->
-        </button>
-
-        <button id="initiate-button" class="icon-button">
-            <i class="fas fa-paper-plane"></i> <!-- Paper plane icon -->
         </button>
 
         <div id="conversation-list">
@@ -486,38 +469,11 @@ margin-top: 4%;
         const conversationList = document.getElementById('conversation-list');
         const conversationMessages = document.getElementById('conversation-messages');
         const initialRequest = document.getElementById('initial-request');
-        let currentItinId = '';
         let currentChannel = '';
 
-        function timeSince(date) {
-            const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-            let interval = Math.floor(seconds / 31536000);
-
-            if (interval > 1) {
-                return interval + " years ago";
-            }
-            interval = Math.floor(seconds / 2592000);
-            if (interval > 1) {
-                return interval + " months ago";
-            }
-            interval = Math.floor(seconds / 86400);
-            if (interval > 1) {
-                return interval + " days ago";
-            }
-            interval = Math.floor(seconds / 3600);
-            if (interval > 1) {
-                return interval + " hours ago";
-            }
-            interval = Math.floor(seconds / 60);
-            if (interval > 1) {
-                return interval + " minutes ago";
-            }
-            return Math.floor(seconds) + " seconds ago";
-        }
-
-        async function fetchConversations(itinId) {
+        async function fetchConversations(channel) {
             try {
-                const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+                const response = await fetch(`${baseUrl}/listConversations/${channel}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -528,7 +484,6 @@ margin-top: 4%;
 
                 // Populate with radio buttons for conversations
                 conversations.forEach((conversationId, index) => {
-                    const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                     const label = document.createElement('label');
                     label.classList.add('conversation-option');
 
@@ -542,7 +497,7 @@ margin-top: 4%;
                     }
 
                     label.appendChild(radio);
-                    label.appendChild(document.createTextNode(channelId));
+                    label.appendChild(document.createTextNode(conversationId));
                     conversationList.appendChild(label);
                 });
             } catch (error) {
@@ -568,18 +523,20 @@ margin-top: 4%;
                     const firstMessage = messages[0];
                     initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
 
-                    // Display the rest of the messages
+                    // Display the rest of the messages with radio buttons
                     messages.forEach((message, index) => {
                         const entryDiv = document.createElement('div');
                         entryDiv.classList.add('conversation-entry');
 
-                        const checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.checked = index === messages.length - 1; // Default last entry
-                        entryDiv.appendChild(checkbox);
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.name = 'selected-message';
+                        radio.value = message.hostId; // Use hostId as value
+
+                        entryDiv.appendChild(radio);
 
                         const msgElement = document.createElement('p');
-                        msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+                        msgElement.textContent = `${message.timestamp}: ${message.message} (Host: ${message.hostId})`;
                         entryDiv.appendChild(msgElement);
 
                         conversationMessages.appendChild(entryDiv);
@@ -592,51 +549,11 @@ margin-top: 4%;
         }
 
         document.getElementById('load-channel-button').addEventListener('click', () => {
-            currentItinId = document.getElementById('itin-id-input').value.trim();
             currentChannel = document.getElementById('channel-input').value.trim();
-            if (currentItinId) {
-                fetchConversations(currentItinId);
+            if (currentChannel) {
+                fetchConversations(currentChannel);
             } else {
-                alert('Please enter an Itinerary ID.');
-            }
-        });
-
-        document.getElementById('initiate-button').addEventListener('click', async () => {
-            const itinId = document.getElementById('itin-id-input').value.trim();
-            const message = document.getElementById('message-input').value.trim();
-            if (message !== '' && currentChannel !== '' && itinId !== '') {
-                try {
-                    const response = await fetch(`${baseUrl}/initiate`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    alert(`Conversation initiated with ID: ${data.conversationId}`);
-                    fetchConversations(itinId);  // Refresh the conversation list after initiating
-                } catch (error) {
-                    console.error('Error initiating conversation:', error);
-                    alert('Failed to initiate conversation. Please try again.');
-                }
-            } else {
-                alert('Please enter an Itinerary ID, Channel, and Message.');
-            }
-        });
-
-        conversationList.addEventListener('change', (event) => {
-            const selectedConversationId = event.target.value;
-            if (selectedConversationId) {
-                fetchAndDisplayMessages(selectedConversationId);
-            } else {
-                conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
-                initialRequest.innerHTML = '';
+                alert('Please enter a channel.');
             }
         });
 
@@ -644,15 +561,17 @@ margin-top: 4%;
             const message = document.getElementById('message-input').value.trim();
             const selectedRadio = document.querySelector('input[name="conversation"]:checked');
             const conversationId = selectedRadio ? selectedRadio.value : '';
+            const selectedMessageRadio = document.querySelector('input[name="selected-message"]:checked');
+            const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
 
-            if (message !== '' && conversationId !== '') {
+            if (message !== '' && conversationId !== '' && hostId !== '') {
                 try {
                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ message,hostId })
+                        body: JSON.stringify({ message, hostId }) // Include hostId from selected message
                     });
 
                     if (!response.ok) {
@@ -666,7 +585,7 @@ margin-top: 4%;
                     alert('Failed to send reply. Please try again.');
                 }
             } else {
-                alert('Please select a conversation and enter a message.');
+                alert('Please select a conversation, select a message, and enter a message.');
             }
         });
     </script>
