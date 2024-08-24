@@ -468,7 +468,8 @@ margin-top: 4%;
              margin-left: 10px;
          }
      </style>
- <div id="chat-container">
+ 
+     <div id="chat-container">
          <h2>CityKiosk Chat</h2>
  
          <input id="itin-id-input" placeholder="Enter Itinerary ID (e.g., ITIN1234)" />
@@ -581,6 +582,8 @@ margin-top: 4%;
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
  
                      const messages = await response.json();
+                     const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
+                     const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
  
                      if (messages.length > 0) {
                          const firstMessage = messages[0];
@@ -598,7 +601,7 @@ margin-top: 4%;
                              entryDiv.appendChild(radio);
  
                              const msgElement = document.createElement('p');
-                             msgElement.textContent = `${timeSince(message.timestamp)}: ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+                             msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
                              entryDiv.appendChild(msgElement);
  
                              conversationMessages.appendChild(entryDiv);
