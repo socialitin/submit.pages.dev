@@ -468,7 +468,6 @@ margin-top: 4%;
              margin-left: 10px;
          }
      </style>
- 
      <div id="chat-container">
          <h2>CityKiosk Chat</h2>
  
@@ -577,6 +576,8 @@ margin-top: 4%;
                  conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
                  initialRequest.innerHTML = '';  // Clear initial request
  
+                 const displayedMessages = new Set(); // To track displayed messages
+ 
                  for (const conversationId of conversations) {
                      const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -590,6 +591,11 @@ margin-top: 4%;
                          initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
  
                          messages.forEach((message, index) => {
+                             const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+                             if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
+ 
+                             displayedMessages.add(messageKey); // Track displayed messages
+ 
                              const entryDiv = document.createElement('div');
                              entryDiv.classList.add('conversation-entry');
  
