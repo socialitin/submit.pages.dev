@@ -422,8 +422,7 @@ margin-top: 4%;
               margin-top: 20px;
           }
  </style>
- 
- <style>
+    <style>
          .icon-button {
              border: none;
              background: none;
@@ -603,7 +602,7 @@ margin-top: 4%;
                              const radio = document.createElement('input');
                              radio.type = 'radio';
                              radio.name = 'message';
-                             radio.value = index;
+                             radio.value = message.hostId; // Set radio value to hostId
                              radio.checked = index === messages.length - 1;  // Default last entry
                              entryDiv.appendChild(radio);
  
@@ -673,11 +672,11 @@ margin-top: 4%;
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
              const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
-             const selectedMessageIndex = selectedMessageRadio ? selectedMessageRadio.value : '';
+             const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
  
-             if (message !== '' && destinationCode !== '' && selectedMessageIndex !== '') {
+             if (message !== '' && destinationCode !== '' && hostId !== '') {
                  const conversationIds = destinationMap.get(destinationCode);
-                 const conversationId = conversationIds[selectedMessageIndex]; // Use index to find conversation ID
+                 const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
  
                  try {
                      const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
@@ -685,7 +684,7 @@ margin-top: 4%;
                          headers: {
                              'Content-Type': 'application/json',
                          },
-                         body: JSON.stringify({ message, hostId: selectedMessageIndex })
+                         body: JSON.stringify({ message, hostId })
                      });
  
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
