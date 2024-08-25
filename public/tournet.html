@@ -853,7 +853,7 @@ console.log(data2);
 			//const data1 = await response.json();		
 		
 		const data2 = event.target.getAttribute('data-offer');
-    console.log('cOfr',data2);
+   // console.log('cOfr',data2);
     //const data2 = event.target.dataset.offer;
 
     //document.getElementById('"'+event.target.id+'"').data-offer;
@@ -888,7 +888,7 @@ console.log('tIATA',picsj.IATA);
 		var tImgAll = '';
 		for (var h = 0; h <picsj.length; h++ ) {
 			jdata=[];
-      console.log('tIATA',picsj[h].iata);
+      var tIata = picsj[h].iata;
 			var tname = picsj[h].name;
 			var tdesc = picsj[h].description;
 			jdata.push(tname);
