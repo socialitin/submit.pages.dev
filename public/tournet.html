@@ -877,7 +877,7 @@ var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></im
 ///var picsj = data.Pictures;
 			
 //var picsj = JSON.parse(pics);
-console.log('mypics', data2);	
+//console.log('mypics', data2);	
 
 //sessionStorage.setItem("pics",JSON.stringify(picsj));
 //var picsj = JSON.parse(pics);
@@ -939,10 +939,11 @@ var Pname = name.split(',')[0];
 var Pdesc = name.split(',')[1];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
-//console.warn('ofr details', name);
+console.warn('ofr details', name);
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
+
 //var element = document.getElementById('tofr');
  //   element.style.display = 'block';
     //<input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
@@ -951,7 +952,8 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //</button>
  var picsUpl = 
 `<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='LAXD'; document.getElementById('load-channel-button').click();"></i>`+
-    '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
+`document.getElementById('message-input').value='`+Pname+`'`;
+'<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+Pdesc +'" >'+	
       '<input type="file" id="file-input" name="file" onchange="previewImage(event)">'+
