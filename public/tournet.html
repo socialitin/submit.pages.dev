@@ -942,7 +942,7 @@ var Pdesc = name.split(',')[1];
 var PIata = name.split(',')[2];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
-console.warn('ofr details', name,Pname,PIata);
+console.warn('ofr details', Pname,PIata);
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
@@ -955,7 +955,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //</button>
  var picsUpl = 
 `<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='LAXD'; document.getElementById('load-channel-button').click();"></i>`+
-`document.getElementById('message-input').value='`+Pname+`'`;
+//`document.getElementById('message-input').value='`+Pname+`'`;
 '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+Pdesc +'" >'+	
