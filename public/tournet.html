@@ -493,8 +493,8 @@ margin-top: 4%;
              <!-- Messages will be dynamically inserted here -->
          </div>
  
-         <div id="message-input-container">
-             <textarea id="message-input" placeholder="Type your message..."></textarea>
+         <div id="message-input">
+             <textarea placeholder="Type your message..."></textarea>
              <button id="reply-button" class="icon-button" title="Reply to Conversation">
                  <i class="fas fa-reply"></i>
              </button>
@@ -955,7 +955,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //<i class="fas fa-sync"></i> <!-- Sync icon -->
 //</button>
  var picsUpl = 
-`<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='`+PIata+`'";  "document.getElementById('message-input-container').value='`+Pdesc+`'"; document.getElementById('load-channel-button').click();"></i>`+
+`<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='`+PIata+`'";  "document.getElementById('message-input').value='`+Pdesc+`'"; document.getElementById('load-channel-button').click();"></i>`+
 //`document.getElementById('message-input').value='`+Pname+`'`;
 '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
