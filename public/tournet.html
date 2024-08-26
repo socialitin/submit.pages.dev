@@ -937,9 +937,9 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 function picsDtl(evt,src,name) {
 //	console.log('params',document.getElementById("0").data);
 var picis = src;
-var Pname = name.split(',')[0];
+var Pname = name.split(',')[2];
 var Pdesc = name.split(',')[1];
-var PIata = name.split(',')[2];
+var PIata = name.split(',')[0];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
 console.warn('ofr details', Pname,PIata);
