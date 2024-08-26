@@ -940,7 +940,7 @@ var picis = src;
 var Pname = name.split(',')[2];
 var Pdesc = name.split(',')[1];
 var PIata = name.split(',')[0];
-var Pmesg = Pname + Pdesc;
+//var Pmesg = Pname + Pdesc;
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
 console.warn('ofr details', Pname,PIata);
@@ -955,8 +955,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //<i class="fas fa-sync"></i> <!-- Sync icon -->
 //</button>
  var picsUpl = 
-`<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='`+PIata+`'"; 
- "document.getElementById('message-input').value='`+Pmesg+`'"; document.getElementById('load-channel-button').click();"></i>`+
+`<i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='`+PIata+`'";  "document.getElementById('message-input').value='`+Pdes+`'"; document.getElementById('load-channel-button').click();"></i>`+
 //`document.getElementById('message-input').value='`+Pname+`'`;
 '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
