@@ -939,10 +939,10 @@ function picsDtl(evt,src,name) {
 var picis = src;
 var Pname = name.split(',')[0];
 var Pdesc = name.split(',')[1];
-var PIata = name.split(,)[3];
+var PIata = name.split(',')[2];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
-console.warn('ofr details', name,PIata);
+console.warn('ofr details', name,Pname,PIata);
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
