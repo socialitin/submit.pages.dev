@@ -158,6 +158,100 @@ margin-top: 4%;
       }
     }
   </style>
+                 <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      background-color: #f4f4f4;
+                      margin: 0;
+                      padding: 20px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      /*height: 100vh;*/
+                      flex-direction: column;
+                  }
+                  #chat-container {
+                      width: 400px;
+                      background-color: #fff;
+                      border-radius: 8px;
+                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                      padding: 20px;
+                  }
+                  #chat-container h2 {
+                      text-align: center;
+                      color: #007bff;
+                  }
+                  #message-input {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #conversation-list {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #chat-container button {
+                      width: 15%;
+                      padding: 10px;
+                      background-color: #c2cdd9;
+                      color: #fff;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      margin-bottom: 10px;
+                  }
+              </style>
+               <style>
+                .icon-button {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                    color: #cdd6df;
+                    margin: 5px;
+                }
+                .icon-button:hover {
+                    color: #c3ced8;
+                }
+        
+                #conversation-list {
+                    margin-top: 20px;
+                }
+                #conversation-messages {
+                    margin-top: 20px;
+                }
+        
+                .conversation-option {
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+        
+                #message-input-container {
+                    margin-top: 20px;
+                }
+        
+                #initial-request {
+                    margin-top: 20px;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+        
+                .conversation-entry {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                }
+        
+                .conversation-entry p {
+                    margin: 0;
+                    margin-left: 10px;
+                }
+            </style>
 </head>
 <body>
 
@@ -350,104 +444,10 @@ margin-top: 4%;
             <h1>Host Conversations</h1>
 
                 <title>CityKiosk Pub/Sub Chat</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f4f4;
-                        margin: 0;
-                        padding: 20px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        /*height: 100vh;*/
-                        flex-direction: column;
-                    }
-                    #chat-container {
-                        width: 400px;
-                        background-color: #fff;
-                        border-radius: 8px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                        padding: 20px;
-                    }
-                    #chat-container h2 {
-                        text-align: center;
-                        color: #007bff;
-                    }
-                    #message-input {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 10px;
-                        border: 1px solid #ddd;
-                        border-radius: 4px;
-                    }
-                    #conversation-list {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 10px;
-                        border: 1px solid #ddd;
-                        border-radius: 4px;
-                    }
-                    #chat-container button {
-                        width: 15%;
-                        padding: 10px;
-                        background-color: #c2cdd9;
-                        color: #fff;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;
-                        margin-bottom: 10px;
-                    }
-                </style>
-            </head>
-            <body>
+ 
     <title>Your Wathsapp number</title>
     <!-- Add Font Awesome for icons -->
-     <style>
-         .icon-button {
-             border: none;
-             background: none;
-             cursor: pointer;
-             font-size: 1.5rem;
-             color: #cdd6df;
-             margin: 5px;
-         }
-         .icon-button:hover {
-             color: #c3ced8;
-         }
- 
-         #conversation-list {
-             margin-top: 20px;
-         }
-         #conversation-messages {
-             margin-top: 20px;
-         }
- 
-         .conversation-option {
-             display: inline-block;
-             margin-right: 15px;
-         }
- 
-         #message-input-container {
-             margin-top: 20px;
-         }
- 
-         #initial-request {
-             margin-top: 20px;
-             font-size: 1.5rem;
-             font-weight: bold;
-         }
- 
-         .conversation-entry {
-             display: flex;
-             align-items: center;
-             margin-top: 10px;
-         }
- 
-         .conversation-entry p {
-             margin: 0;
-             margin-left: 10px;
-         }
-     </style>
+    
      <div id="chat-container">
          <h4>Your WhatsApp number</h4>
  
