@@ -920,7 +920,7 @@ var picis = src;
 var Pname = name.split(',')[2];
 var Pdesc = name.split(',')[1];
 var tIata = name.split(',')[0];
-var PIata = JSON.stringify(tIata).trim();
+var PIata = JSON.parse(tIata).trim();
 //var Pmesg = Pname + Pdesc;
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
