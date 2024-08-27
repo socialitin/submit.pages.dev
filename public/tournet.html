@@ -945,7 +945,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
 				//	$('#'+ picDtls + '').html(updPics);
 				//	$('#'+ picDtls + '').slideDown('slow');
-        var pItin = `
+        var plpItin = `
   <div>
     <input id="cell" placeholder="type your cell number"> Connect with Host 
     <i class="fas fa-sync" onclick="connectWithHost()"></i>
@@ -953,19 +953,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 `;
 document.getElementById('picDtls').innerHTML = picsUpl + pItin;	
 // Function to be called on icon click
-function connectWithHost() {
-  var cellValue = document.getElementById('cell').value; // Get the value after element exists
-  if (cellValue.trim() === "") {
-    alert("Please enter your cell number.");
-    return;
-  }
 
-  // Assign the values to respective input fields and trigger the click events
-  document.getElementById('itin-id-input').value = cellValue;
-  document.getElementById('channel-input').value = PIata;
-  document.getElementById('load-channel-button').click();
-  document.getElementById('initiate-button').click();
-}
 
 //	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
 
@@ -981,7 +969,21 @@ function connectWithHost() {
 //document.getElementById('picDtls').appendChild = picsUpl;	
 };	
 </script>
+<script>
+  function connectWithHost() {
+  var cellValue = document.getElementById('cell').value; // Get the value after element exists
+  if (cellValue.trim() === "") {
+    alert("Please enter your cell number.");
+    return;
+  }
 
+  // Assign the values to respective input fields and trigger the click events
+  document.getElementById('itin-id-input').value = cellValue;
+  document.getElementById('channel-input').value = PIata;
+  document.getElementById('load-channel-button').click();
+  document.getElementById('initiate-button').click();
+}
+</script>
   <script>
 	    function previewImage(event) {
       const fileInput = event.target;
