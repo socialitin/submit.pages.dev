@@ -786,7 +786,10 @@ for (const group in mpitch) {
 
     });
     document.getElementById("fjson1").click();
-    document.getElementById("0").click();
+    setTimeout(function(){
+      document.getElementById("0").click();
+		},500);
+  
     console.log(''); // Line break between groups for readability
   }
 }
