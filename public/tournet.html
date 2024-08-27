@@ -938,7 +938,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
 '<input  id ="descI" value ="'+Pdesc +'" >'+	
-'document.getElementById("channel-input").value = '+PIata+';'+
+'<input id = "pIata" value = " '+PIata+'">'+
       '<input type="file" style = "display: none;" id="file-input" name="file" onchange="previewImage(event)">'+
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
       '<button type="submit" style = "display: none;" >Upload Image</button>'+
@@ -948,7 +948,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 				//	$('#'+ picDtls + '').slideDown('slow');
         var pItin = `
   <div>
-    <input id="cell" placeholder="type your cell number"> Connect with Host 
+        <input id="cell" placeholder="type your cell number"> Connect with Host 
     <i class="fas fa-sync" onclick="connectWithHost()"></i>
   </div>
 `;
@@ -980,7 +980,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
 
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
-  
+  document.getElementById('channel-input').value = pIata;
   document.getElementById('load-channel-button').click();
   document.getElementById('initiate-button').click();
 }
