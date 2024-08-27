@@ -935,7 +935,7 @@ document.getElementById("itemImg").innerHTML = picUrl;
 //<i class="fas fa-sync"></i> <!-- Sync icon -->
 //</button>
  var picsUpl = 
-`<div> <input id="cell" placeholder = "type your cell number">Connect with Host <i class="fas fa-sync" onclick = "document.getElementById('channel-input').value='`+PIata+`';  document.getElementById('load-channel-button').click(); document.getElementById('initiate-button').click();"></i>`+
+`<div> <input id="cell" placeholder = "type your cell number">Connect with Host <i class="fas fa-sync" onclick = "document.getElementById('itin-id-input').value='`+document.getElementById('cell').value+`'; document.getElementById('channel-input').value='`+PIata+`';  document.getElementById('load-channel-button').click(); document.getElementById('initiate-button').click();"></i>`+
 //`document.getElementById('initiate-button').value='`+Pname+`'`;
 '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="picname" value = "'+Pname+'">'+											
