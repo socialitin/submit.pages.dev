@@ -924,12 +924,17 @@ function picsDtl(evt,src,name) {
 var picis = src;
 var Pname = name.split(',')[2];
 var Pdesc = name.split(',')[1];
-var PIata = name.split(',')[0];
+var pIata = name.split(',')[0];
 //var Pmesg = Pname + Pdesc;
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
-console.warn('ofr details', Pname,PIata);
-document.getElementById('channel-input').value= PIata.toString();
+//console.warn('ofr details', Pname);
+var tiata = pIata.toString();
+var PIata = iata+"S"; 
+if (tiata.length < 4) {
+var PIata = "NYCSS";
+};
+document.getElementById('channel-input').value= PIata;
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
 //document.getElementById("detail").descp = Pdesc; 
