@@ -942,16 +942,16 @@ document.getElementById("itemImg").innerHTML = picUrl;
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
       '<button type="submit" style = "display: none;" >Upload Image</button>'+
     '</form>';
-document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
+//document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
 				//	$('#'+ picDtls + '').html(updPics);
 				//	$('#'+ picDtls + '').slideDown('slow');
-        var picsUpl = `
+        var plpItin = `
   <div>
     <input id="cell" placeholder="type your cell number"> Connect with Host 
     <i class="fas fa-sync" onclick="connectWithHost()"></i>
   </div>
 `;
-
+document.getElementById('picDtls').innerHTML = picsUpl + pItin;	
 // Function to be called on icon click
 function connectWithHost() {
   var cellValue = document.getElementById('cell').value; // Get the value after element exists
