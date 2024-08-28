@@ -929,11 +929,13 @@ var pIata = name.split(',')[0];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
 //console.warn('ofr details', Pname);
-var tiata = pIata.toString();
-var PIata = iata+"S"; 
+var tiata = pIata.toString()+'S'; 
 if (tiata.length < 4) {
 var PIata = "NYCSS";
-};
+}else{
+var  PIata = tiata;
+}
+
 document.getElementById('channel-input').value= PIata;
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
