@@ -19,7 +19,7 @@ html {
     height: 100%; /* Ensure full height */
 }
 
-/* Ensure body takes full height */
+/* Ensure body takes full height and content starts at the top */
 body {
     display: flex;
     flex-direction: column;
@@ -31,17 +31,6 @@ body {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     line-height: 1.4;
-}
-
-/* Main Element Styles */
-main {
-    padding: 0; /* Remove padding */
-    margin: 0;  /* Remove margin */
-    max-width: none; /* Remove max-width */
-    background-color: transparent; /* Remove background color */
-    box-shadow: none; /* Remove box shadow */
-    width: 100%; /* Full width */
-    height: auto; /* Allow height to grow as needed */
 }
 
 /* Blockquote Styles */
