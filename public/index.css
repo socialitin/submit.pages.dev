@@ -16,8 +16,10 @@ body, html {
 
 html {
     font-size: 16px;
+    height: 100%; /* Ensure full height */
 }
 
+/* Ensure body takes full height */
 body {
     display: flex;
     flex-direction: column;
@@ -29,9 +31,6 @@ body {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     line-height: 1.4;
-    min-height: 100vh;
-    width: 100vw;
-    padding-top: 0; /* Remove padding to ensure top alignment */
 }
 
 /* Main Element Styles */
@@ -42,6 +41,7 @@ main {
     background-color: transparent; /* Remove background color */
     box-shadow: none; /* Remove box shadow */
     width: 100%; /* Full width */
+    height: auto; /* Allow height to grow as needed */
 }
 
 /* Blockquote Styles */
