@@ -16,10 +16,8 @@ body, html {
 
 html {
     font-size: 16px;
-    height: 100%; /* Ensure full height */
 }
 
-/* Ensure body takes full height and content starts at the top */
 body {
     display: flex;
     flex-direction: column;
@@ -31,15 +29,19 @@ body {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     line-height: 1.4;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 0; /* Remove padding to ensure top alignment */
 }
 
-/* Content Container */
-.container {
-    width: 100%;
-    padding: 1rem; /* Add some padding for spacing */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Ensure content is aligned to the start */
+/* Main Element Styles */
+main {
+    padding: 0; /* Remove padding */
+    margin: 0;  /* Remove margin */
+    max-width: none; /* Remove max-width */
+    background-color: transparent; /* Remove background color */
+    box-shadow: none; /* Remove box shadow */
+    width: 100%; /* Full width */
 }
 
 /* Blockquote Styles */
@@ -92,7 +94,7 @@ blockquote p {
     margin-right: 0.25rem;
 }
 
-/* Button Styles */
+/* Button Styles last */
 button {
     width: 100%;
     display: block;
