@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Cloudflare Pages 2 Tournet presence</title>
+		<meta name="theme-color" content="#d86300">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
+		<link rel="stylesheet" href="/index.css">
+
+		<style>
+			.tab {
+				height: 400px; /* Fixed height for container */
+				margin-top: 15%;
+				display: flex; /* Using flexbox */
+				flex-direction: column; /* Stack buttons vertically */
+				align-items: center; /* Center buttons horizontally within the container */
+				justify-content: space-evenly; /* Distribute space evenly between buttons */
+				background-color: #f1f1f10e;
+			}
+			
+			.tab button {
+				background-color: #c46767;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 10px 24px; /* Adjust padding */
+				display: block; /* Ensure buttons are block elements */
+				transform: rotate(-90deg); /* Rotate text vertically */
+				transform-origin: left center; /* Adjust rotation origin */
+				white-space: nowrap; /* Prevent text wrapping */
+			}
+			
+			.tab button:hover {
+				background-color: #c46767;
+			}
+			
+			.tab button.active {
+				background-color: #e54646;
+			}
+			
+			.tabcontent {
+				display: none;
+				width: 75%;
+				padding: 6px 12px;
+				border: 1px solid #ccc;
+				border-top: none;
+			}
+			
+			.tabcontent.active {
+				display: block;
+			}
+			</style>
+			</head>
+			
+			<body>
+				<div class="tab">
+					<button class="tablinks" onclick="openTab(event, 'Tab1')">Members</button>
+					<button class="tablinks" onclick="openTab(event, 'Tab2')">Pitch !!</button>
+					<button class="tablinks" onclick="openTab(event, 'Tab3')">Publish</button>
+					<button class="tablinks" onclick="openTab(event, 'Tab4')">Requests</button>
+				</div>
+				<div id="Tab1" class="tabcontent">
+
+			<main>
+				<h2> Basic Subscription is FREE </h2>
+					<blockquote >
+					<p id ="subjjson" data-json=''>
+						To Pitch on Tournet's cityKIOSKS network, Hosts must be verified, please complete this Subscription Form first, 
+						complete your first Pitch, which you can privately Test & Preview on the actual network while waiting approval process ...
+											  
+					</p>
+				</blockquote>   
+				<form method="POST" action="/api/subscribe">
+					<div class="input">
+						<label for="name">Company Name and Address</label>
+						<input id="name" name="name" type="text" />
+						<label for="url">Company Website</label>
+						<input id="web" name="web" type="url" />
+					</div>
+	
+					<div class="input">
+						<label for="name">Your Complete Name</label>
+						<input id="contact" name="contact" type="text" />
+						<label for="email">Company Email </label>
+						<input id="email" name="email" type="email" />
+					</div>
+	
+					<div class="input">
+						<label for="referers">Type/kind of offer</label>
+						<select id="referers" name="referers">
+							<option hidden disabled selected value></option>
+							<option value="Sightseeing">Sightseeing</option>
+							<option value="Excursion">Excursion</option>
+							<option value="Night life">Night life</option>
+							<option value="Walking tour">Walking tour</option>
+							<option value="Water cruising">Water cruising</option>
+						</select>
+					</div>
+	
+					<div class="checklist">
+						<label>What's the venue</label>
+						<ul>
+							<li>
+								<input id="m1" type="checkbox" name="venue" value="Attraction" />
+								<label for="m1">Attraction</label>
+							</li>
+							<li>
+								<input id="m2" type="checkbox" name="venue" value="Club" />
+								<label for="m2">Club</label>
+							</li>
+							<li>
+								<input id="m3" type="checkbox" name="venue" value="Accommodation" />
+								<label for="m3">Accommodation</label>
+							</li>
+							<li>
+								<input id="m4" type="checkbox" name="venue" value="Motorcoach" />
+								<label for="m4">Motorcoach</label>
+							</li>
+						</ul>
+					</div>
+					<div class="input">
+						<label for="pitch">Name and decription of Product or Offer</label>
+						<input id="pitch" name="pitch" type="textarea" />
+					</div>
+	
+					<button type="submit">Join Tournet</button>
+				</form>
+			</main>
+		</div>
+
+		  <div id="Tab2" class="tabcontent">
+
+			<h3>Streaming now ...</h3>
+			<div id ="jdata">
+			<label>1<img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" ></label>
+			<label>2</label><img id="fjson2" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" >
+			<label>3</label><img id="fjson3" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" >	
+			<label>4</label><img id="fjson4" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhosts()">
+			<script>
+				window.addEventListener('DOMContentLoaded', () => {
+				  document.getElementById("fjson4").click();
+				});
+  </script>
+		</div>
+			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
+			</div>
+				<div class="row">
+				<div id="thumbs" style="width:15%; float:left;" ></div>	
+				<div width="2%"></div>
+				<div>
+				<div id="itemImg" style ="width:61%; float:left;"></div>
+				<div id="picDtls" style ="width:20%; float:left;">
+		
+					
+				</div>
+		</div>	
+
+	</div>
+	
+		</div>
+		  <div id="Tab3" class="tabcontent">
+			<p style=" float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" onclick = "d1tnupdate();"</p> 
+		<main>
+			
+			<h2> Pitch your Offer </h2>
+
+			<blockquote >
+				<p id ="sjson" data-json=''>Review Your Pitch</p>
+				<p>All Pitches submitted are private, you can Publish one and only one at a time (Premium members can publish up to 4 )
+						
+			<form method="POST" action="/api/submit">
+				<div class="input" type = "hidden">
+					<label for="IATA"></label>
+					<input id="IATA" name="IATA" type="text" />
+					<input id="Province" name="Province" type="text" />
+				</div>
+				<div class="input" >
+					<label for="name">Name of Offer</label>
+					<input id="City" name="City" type="text" />
+				</div>
+				<div class="input" ">
+					<label for="video">Video</label>
+					<input id="embVideo" name="embVideo" type="array" />
+				</div>
+				<div class="input" ">
+					<label for="pictures">Pictures </label>
+					<input id="Pictures" name="Pictures" type="array" />
+				</div>
+
+				<div class="input">
+					<label for="typeKind">Type/kind of offer</label>
+					<select id="typeKind" name="typeKind">
+						<option hidden disabled selected value></option>
+						<option value="Sightseeing">Sightseeing</option>
+						<option value="Excursion">Excursion</option>
+						<option value="Night life">Night life</option>
+						<option value="Walking tour">Walking tour</option>
+						<option value="Water crusing">Water crusing</option>
+					</select>
+				</div>
+
+				<div class="checklist">
+					<label for="Venue">Whats the venue</label>
+					<select id="venue" name="venue">
+						<option hidden disabled selected value></option>
+						<option value="Attraction">Attraction</option>
+						<option value="Club">Club, Event</option>
+						<option value="Accommodation">Accommodation</option>
+						<option value="Motorcoach">Motorcoach</option>
+						<option value="Other">Other ... </option>
+					</select>
+
+				</div>
+				<div class="input">
+					<label for="pitch">Pitch!</label>
+					<input id="pitch" name="pitch" type="textarea" />
+				</div>
+
+				<button type="submit">Save & Preview</button>
+				
+			</form>
+		</main>
+	</div>
+	<div id="Tab4" class="tabcontent">
+
+		<main>
+			<h2> Visitors Requests </h2>
+
+			<blockquote >
+				<p id ="Requests" >
+					Coming Up.... Respond to Tournet's cityKIOSKS Visitors' Requests promptly, with-24 hours at the latest.
+					<br><br>
+					Meantime send us a FeedBack with your opinion of the Network, tell us if it fills any wishes you have as a Destination Promoter
+					<br><br>
+					members@tournet.com
+					<br><br>
+				</p>
+			</blockquote>  
+				<title>CityKiosk Chat - Host</title>
+				<div id="chat-container">
+					<h2>CityKiosk Chat - Host</h2>
+			
+					<input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+					<button id="load-channel-button">Load Channel</button>
+			
+					<select id="conversation-list-select">
+						<option value="">Select a conversation</option>
+					</select>
+			
+					<textarea id="message-input" placeholder="Type your message..."></textarea>
+					<input id="host-id-input" placeholder="Enter Host ID" />
+					<button id="reply-button">Reply to Conversation</button>
+			
+					<div id="conversation-messages">
+						<h3>Conversation Messages</h3>
+					</div>
+				</div>
+			
+				<script>
+					const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+					const conversationListSelect = document.getElementById('conversation-list-select');
+					const conversationMessages = document.getElementById('conversation-messages');
+					let currentChannel = '';
+			
+					async function fetchConversations(channel) {
+						try {
+							const response = await fetch(`${baseUrl}/listConversations/${channel}`);
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							const conversations = await response.json();
+			
+							conversationListSelect.innerHTML = '<option value="">Select a conversation</option>';
+							conversations.forEach(conversationId => {
+								const option = document.createElement('option');
+								option.value = conversationId;
+								option.textContent = `Conversation ${conversationId}`;
+								conversationListSelect.appendChild(option);
+							});
+						} catch (error) {
+							console.error('Error fetching conversations:', error);
+							alert('Failed to load conversations. Please try again later.');
+						}
+					}
+			
+					async function fetchAndDisplayMessages(conversationId) {
+						try {
+							const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							const messages = await response.json();
+			
+							conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+							messages.forEach(msg => {
+								const msgElement = document.createElement('p');
+								msgElement.textContent = `${msg.timestamp}: ${msg.message}`;
+								conversationMessages.appendChild(msgElement);
+							});
+						} catch (error) {
+							console.error('Error fetching conversation messages:', error);
+							alert('Failed to load conversation messages. Please try again later.');
+						}
+					}
+			
+					document.getElementById('load-channel-button').addEventListener('click', () => {
+						currentChannel = document.getElementById('channel-input').value.trim();
+						if (currentChannel) {
+							fetchConversations(currentChannel);
+						} else {
+							alert('Please enter a channel name.');
+						}
+					});
+			
+					document.getElementById('conversation-list-select').addEventListener('change', () => {
+						const selectedConversationId = conversationListSelect.value;
+						if (selectedConversationId) {
+							fetchAndDisplayMessages(selectedConversationId);
+						} else {
+							conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+						}
+					});
+			
+					document.getElementById('reply-button').addEventListener('click', async () => {
+						const message = document.getElementById('message-input').value.trim();
+						const conversationId = conversationListSelect.value;
+						const hostId = document.getElementById('host-id-input').value.trim();
+			
+						if (message !== '' && conversationId !== '' && hostId !== '') {
+							try {
+								const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json',
+									},
+									body: JSON.stringify({ message, hostId })
+								});
+			
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+			
+								alert(`Replied to conversation ${conversationId}`);
+								fetchAndDisplayMessages(conversationId);  // Refresh the messages after reply
+							} catch (error) {
+								console.error('Error replying to conversation:', error);
+								alert('Failed to send reply. Please try again.');
+							}
+						} else {
+							alert('Please select a conversation, enter a host ID, and a message.');
+						}
+					});
+				</script>
+			
+		</main>
+	</div>		
+	<script>
+ 
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Add this to make Tab1 active by default when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector('[onclick="openTab(event, \'Tab1\')"]').click();
+        });
+
+    </script>
+		
+
+<script>
+	async function d1tnupdate() {
+	const response = await fetch('/api/d1tnupdate');
+	const data2 = await response.json();
+	//const data =JSON.parse(data2.pitching);
+console.log(data2);
+	};
+	</script>
+		<script>
+			async function d1tnhosts() {
+			const response = await fetch('/api/d1tnhosts');
+			const data1 = await response.json();		
+		
+		const data2 = JSON.parse(data1.pitching);
+		const data = data2['440-2'];
+		//const data = data3.pitching;
+		//.pitching);
+	
+		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+		console.log('mypitch', data);
+		var picsj = data.Pictures;
+			
+//var picsj = JSON.parse(pics);
+console.log('mypics', picsj);	
+if (!sessionStorage.getItem("pics")){
+sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+}else{
+var pics = sessionStorage.getItem("pics");
+var picsj = JSON.parse(pics);
+};
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+document.getElementById("thumbs").innerHTML= tImgAll;
+	
+		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("IATA").value = data.IATA;
+		document.getElementById("City").value = data.City;
+		document.getElementById("Province").value = data.Province;
+		document.getElementById("pitch").value = data.Pitch;
+		document.getElementById("Pictures").value = pics;
+		document.getElementById("embVideo").value = tVideo;
+				
+
+				var picsUpl = 
+    '<form id="upload-video'+"3"+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="offer" value = "'+data.City+'">'+											
+'<input  id ="pitch" value ="'+data.Pitch +'" >'+	
+      '<input type="file" id="v-input" fname="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit">Upload Video</button>'+
+    '</form>';
+		
+document.getElementById('picDtls').innerHTML = picsUpl;	
+		};				
+			</script>
+<script>
+function picsDtl(evt,src,name) {
+//	console.log('params',document.getElementById("0").data);
+var picis = src;
+var Pname = name.split(',')[0];
+var Pdesc = name.split(',')[1];
+var pcount = event.target.id;
+var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
+
+document.getElementById("itemImg").innerHTML = picUrl;
+//document.getElementById("tofr").name = name; 	
+//document.getElementById("detail").descp = Pdesc; 
+
+//var element = document.getElementById('tofr');
+ //   element.style.display = 'block';
+
+ var picsUpl = 
+    '<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="picname" value = "'+Pname+'">'+											
+'<input  id ="descI" value ="'+Pdesc +'" >'+	
+      '<input type="file" id="file-input" name="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit">Upload Image</button>'+
+    '</form>';
+
+document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
+				//	$('#'+ picDtls + '').html(updPics);
+				//	$('#'+ picDtls + '').slideDown('slow');
+
+//	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
+
+//'<input type="file" id="imageInput" name="image" accept="image/*" required />'+
+//'<form id="uploadForm" method="POST" enctype="multipart/form-data">'
+//var picsUpl = 
+//	'<form id="upload-form" onsubmit="uploadImage(event)">'+
+//		'<input type="file" id="file-input" name="file" required">'+
+//        '<button type="submit" >Upload Image</button>'+
+//    '</form>';
+
+
+//document.getElementById('picDtls').appendChild = picsUpl;	
+};	
+</script>
+
+  <script>
+	    function previewImage(event) {
+      const fileInput = event.target;
+      const file = fileInput.files[0];
+      const preview = document.getElementById('3u');
+console.warn('preview', file);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+      }
+    }
+
+    async function uploadImage(event) {
+      event.preventDefault();
+      console.log('Form submitted');
+  
+      const fileInput = document.getElementById('file-input');
+      console.log('fileInput:', fileInput);
+      if (!fileInput) {
+        console.error('File input not found.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      console.log('Selected file:', file);
+      if (!file) {
+        alert('Please select a file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        console.log('Upload response:', result);
+
+        if (response.ok) {
+          alert('Image uploaded successfully!');	
+		
+		const data2 = result.variants;
+		//const data = data2['440-2'];
+		const data = data2[0];
+          //console.log(data2,data);
+
+		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+		  cImgId = event.target.id;
+		  cimgid = cImgId.charAt(cImgId.length-1)
+		  console.warn('this t-image',cImgId.charAt(cImgId.length-1));
+	  var idis = cImgId.charAt(cImgId.length-1);  
+ppicsj[idis].name = document.getElementById("picname").value;
+ppicsj[idis].description = document.getElementById("descI").value;
+ppicsj[idis].img = data;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+
+		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
+		  document.getElementById("itemImg").innerHTML = picUrl;
+		  document.getElementById(idis).src = data;
+		  //document.getElementById("itemImg").style.display = 'block'
+		  console.log(document.getElementById(idis).src);
+        } else {
+          alert(`Failed to upload image: ${result}`);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('An error occurred while uploading the image.');
+      }
+    }
+
+  </script>
+
+<script> 
+function picPost(evt,id){
+//document.getElementById("name").value= document.getElementById("descI").value;
+//json.price = 30;
+//picsj.name = document.getElementById("name").value;
+var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+var id = '3';
+ppicsj[id].name = document.getElementById("name").value;
+ppicsj[id].description = document.getElementById("descI").value;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+};
+</script>
+
+<script>
+			async function fetchjson() {
+			const response = await fetch('/api/fetchjson');
+			const data = await response.json();
+		//const data =JSON.parse(data1);
+		console.log(data);
+		sessionStorage.setItem("j2post",JSON.stringify(data));	
+var j2addStorage = {
+  "IATA": "US2",
+  "City": "US3-Eastern",
+  "Province": "Western",
+  "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
+  "Pictures":" [{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
+  "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
+};
+
+var j2add = j2addStorage;
+var j2publish =data; 
+//const j2add = JSON.parse(sessionStorage.getItem("j2add")); 
+//const mergedObj = Object.assign(j2publish, j2addStorage); 
+//const jsonStr = JSON.stringify(mergedObj); 
+
+//const extendJSON = (...objs) => objs.reduce((result, current) => ({...result, ...JSON.parse(current)}), {});
+  
+//console.log(extendJSON(j2publish, j2add),j2aad);
+//console.log(jsonStr); 
+var newjson = j2publish["NYCS"].push(j2add);
+console.log(j2publish);
+ //response2 = await fetch('/api/fetchputjson');
+			//const data2 = await response.json();
+		//	console.log(response2);
+			};	
+</script>
+	</body>
+</html>
