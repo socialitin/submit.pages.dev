@@ -842,7 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const data = await response.json();
-
+console.warn('loginD1', data);
       if (response.ok) {
         // Login successful
         messageDiv.textContent = data.message || 'Login successful!';
