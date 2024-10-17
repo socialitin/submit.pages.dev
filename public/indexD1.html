@@ -196,7 +196,11 @@
 				
 					  try {
 						// Send POST request to the /login endpoint
-						const response = await fetch('/login', { // Update with your Worker URL if needed
+						//const response = await fetch('/login', { // Update with your Worker URL if needed
+							const response = await fetch('https://cloudflare-login-worker.socialitin.workers.dev/', {
+  // ... rest of the fetch options
+});
+
 						  method: 'POST',
 						  headers: {
 							'Content-Type': 'application/json'
