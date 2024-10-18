@@ -1,5 +1,4 @@
 // index.js
-import bcrypt from 'bcryptjs';
 
 export default {
   async fetch(request, env) {
@@ -26,6 +25,7 @@ export default {
 
     // Handle preflight OPTIONS request
     if (url.pathname === "/login" && request.method === "OPTIONS") {
+      console.log('Received OPTIONS request for /login');
       return setCorsHeaders(new Response(null, { status: 204 }));
     }
 
@@ -33,9 +33,11 @@ export default {
     if (url.pathname === "/login" && request.method === "POST") {
       try {
         const { username, password } = await request.json();
+        console.log(`Received login request for username: ${username}`);
 
         // Validate input
         if (!username || !password) {
+          console.log('Username or password missing in request');
           const errorResponse = new Response(JSON.stringify({ error: "Username and password are required." }), {
             status: 400,
             headers: { "Content-Type": "application/json" }
@@ -47,6 +49,7 @@ export default {
         const result = await env.DB.prepare("SELECT * FROM members WHERE username = ?").bind(username).first();
 
         if (!result) {
+          console.log(`User not found: ${username}`);
           const errorResponse = new Response(JSON.stringify({ error: "Invalid username or password." }), {
             status: 401,
             headers: { "Content-Type": "application/json" }
@@ -54,10 +57,15 @@ export default {
           return setCorsHeaders(errorResponse);
         }
 
-        // Compare provided password with stored hash
-        const isPasswordValid = await bcrypt.compare(password, result.password_hash);
+        console.log(`Fetched user: ${result.username}`);
+        console.log(`Stored password: ${result.password_hash}`);
+
+        // Compare provided password with stored password
+        const isPasswordValid = (password === result.password_hash);
+        console.log(`Password valid: ${isPasswordValid}`);
 
         if (!isPasswordValid) {
+          console.log('Password comparison failed');
           const errorResponse = new Response(JSON.stringify({ error: "Invalid username or password." }), {
             status: 401,
             headers: { "Content-Type": "application/json" }
@@ -66,6 +74,7 @@ export default {
         }
 
         // Successful login
+        console.log('Login successful');
         const successResponse = new Response(JSON.stringify({ message: "Login successful!" }), {
           status: 200,
           headers: { "Content-Type": "application/json" }
@@ -83,6 +92,7 @@ export default {
     }
 
     // Handle all other routes
+    console.log(`Received request for unsupported path: ${url.pathname}`);
     return new Response('Not Found', { status: 404 });
   }
 };
