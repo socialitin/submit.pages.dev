@@ -34,6 +34,7 @@ export default {
       try {
         const { username, password } = await request.json();
 
+        // Validate input
         if (!username || !password) {
           const errorResponse = new Response(JSON.stringify({ error: "Username and password are required." }), {
             status: 400,
@@ -53,6 +54,7 @@ export default {
           return setCorsHeaders(errorResponse);
         }
 
+        // Compare provided password with stored hash
         const isPasswordValid = await bcrypt.compare(password, result.password_hash);
 
         if (!isPasswordValid) {
