@@ -20,7 +20,11 @@ async function handleLogin(request, env) {
     if (!username || !password) {
       return new Response(JSON.stringify({ error: 'Username and password are required.' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+         },
       });
     }
 
@@ -30,7 +34,11 @@ async function handleLogin(request, env) {
     if (!result) {
       return new Response(JSON.stringify({ error: 'Invalid username or password.' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+         },
       });
     }
 
@@ -39,7 +47,11 @@ async function handleLogin(request, env) {
     if (!isPasswordValid) {
       return new Response(JSON.stringify({ error: 'Invalid username or password.' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+         },
       });
     }
 
