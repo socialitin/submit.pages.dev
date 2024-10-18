@@ -6,7 +6,7 @@ export default {
     const url = new URL(request.url);
 
     // Define allowed origins (update with your actual domains)
-    const allowedOrigins = ["https://www.ads.tournet.com"];
+    const allowedOrigins = ["*"];
 
     // Get the Origin header from the request
     const origin = request.headers.get("Origin");
@@ -17,7 +17,7 @@ export default {
     // Function to set CORS headers
     const setCorsHeaders = (response) => {
       const headers = {
-        "Access-Control-Allow-Origin": isOriginAllowed ? origin : "https://www.ads.tournet.com", // Fallback to your domain
+        "Access-Control-Allow-Origin": isOriginAllowed ? origin : "*", // Fallback to your domain
         "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Credentials": "true", // If you need to allow credentials
