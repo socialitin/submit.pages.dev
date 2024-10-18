@@ -1,5 +1,5 @@
 // index.js
-import bcrypt from 'bcryptjs'; // Corrected import statement
+import bcrypt from 'bcryptjs'; // Correct import
 
 export default {
   async fetch(request, env) {
@@ -89,5 +89,8 @@ export default {
 
     // Handle all other routes
     return new Response('Not Found', { status: 404 });
+  }
+};
+
   }
 };
