@@ -23,7 +23,7 @@ async function handleLogin(request, env) {
         headers: { 'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Headers': 'Content-Type'
          },
       });
     }
@@ -37,7 +37,7 @@ async function handleLogin(request, env) {
         headers: { 'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Headers': 'Content-Type'
          },
       });
     }
@@ -50,7 +50,7 @@ async function handleLogin(request, env) {
         headers: { 'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Headers': 'Content-Type'
          },
       });
     }
@@ -59,14 +59,23 @@ async function handleLogin(request, env) {
     // In production, you might return a JWT or set a session cookie.
     return new Response(JSON.stringify({ message: 'Login successful!' }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+       },
+      
     });
 
   } catch (error) {
     console.error('Login error:', error);
     return new Response(JSON.stringify({ error: 'Internal Server Error.' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*', // Replace '*' with your specific origin in production
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+       },
     });
   }
 }
