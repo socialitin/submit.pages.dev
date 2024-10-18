@@ -73,9 +73,15 @@ export default {
           return setCorsHeaders(errorResponse);
         }
 
-        // Successful login
+        // Exclude sensitive fields from the user record
+        const { password_hash, ...userData } = result;
+
+        // Optional: Remove other sensitive fields if present
+        // For example, if there's an 'email' field that you don't want to expose:
+        // delete userData.email;
+
         console.log('Login successful');
-        const successResponse = new Response(JSON.stringify({ message: "Login successful!" }), {
+        const successResponse = new Response(JSON.stringify({ message: "Login successful!", user: userData }), {
           status: 200,
           headers: { "Content-Type": "application/json" }
         });
