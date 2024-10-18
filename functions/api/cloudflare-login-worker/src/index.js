@@ -4,14 +4,14 @@ import bcrypt from 'bcryptjs';
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const allowedOrigins = ["https://www.ads.tournet.com"]; // Ensure this list is accurate
+    const allowedOrigins = ["*"]; // Ensure this list is accurate
     const origin = request.headers.get("Origin");
     const isOriginAllowed = origin && allowedOrigins.includes(origin);
 
     // Function to set CORS headers
     const setCorsHeaders = (response) => {
       const headers = {
-        "Access-Control-Allow-Origin": isOriginAllowed ? origin : "https://www.ads.tournet.com",
+        "Access-Control-Allow-Origin": isOriginAllowed ? origin : "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Credentials": "true",
