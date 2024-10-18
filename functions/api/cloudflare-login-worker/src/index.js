@@ -5,8 +5,8 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Define allowed origins (update with your actual domains)
-    const allowedOrigins = ["*"];
+    // Define allowed origins
+    const allowedOrigins = ["https://www.ads.tournet.com"];
 
     // Get the Origin header from the request
     const origin = request.headers.get("Origin");
@@ -16,25 +16,17 @@ export default {
 
     // Function to set CORS headers
     const setCorsHeaders = (response) => {
-      const headers = {
-        "Access-Control-Allow-Origin": isOriginAllowed ? origin : "*", // Fallback to your domain
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Credentials": "true", // If you need to allow credentials
-        "Vary": "Origin" // Inform caches that response varies based on Origin
-      };
-
-      // Set each header
-      for (const [key, value] of Object.entries(headers)) {
-        response.headers.set(key, value);
-      }
-
+      response.headers.set("Access-Control-Allow-Origin", isOriginAllowed ? origin : "https://www.ads.tournet.com");
+      response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+      response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+      response.headers.set("Access-Control-Allow-Credentials", "true");
+      response.headers.set("Vary", "Origin");
       return response;
     };
 
     // Handle preflight OPTIONS request
     if (url.pathname === "/login" && request.method === "OPTIONS") {
-      return setCorsHeaders(new Response(null, { status: 204 })); // No Content
+      return setCorsHeaders(new Response(null, { status: 204 }));
     }
 
     // Handle POST /login request

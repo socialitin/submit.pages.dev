@@ -10,14 +10,10 @@ name = "cloudflare-login-worker"
 type = "javascript"
 account_id = "f0c92755958332f29a4d8658606c6f34ID"
 workers_dev = false
-route = "https://tournet.com/*"
+route = "https://cloudflare-login-worker.socialitin.workers.dev/*"
+"
 zone_id = "7953fd5d77fce8a01ae84db1a6c243e9"
 
 [[d1_databases]]
 binding = "DB"  # Corrected binding name
 database_id = "8145fb3e-996f-4c9f-a3e2-059d0ebd6c7d"
-
-[build]
-command = "npm install"
-[build.upload]
-format = "service-worker"
