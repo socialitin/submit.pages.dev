@@ -9,8 +9,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
- 
+
 		<style>
 			/* Container for the tabs */
 			.tab {
@@ -147,12 +146,7 @@
 				  <form id="loginForm">
 					<input type="text" id="username" name="username" placeholder="Your company email" required>
 					<input type="password" id="password" name="password" placeholder="PIN received" required>
-					
-					<input type="image" src="path_to_your_image/login-button.png" alt="Get PIN / Login" >
-				
-  <i type = "submit" class="fas fa-sign-in-alt"></i>
-
-
+					<button type="submit" class="btn">Get PIN / Login</button>
 				  </form>
 				  <div id="loading" class="loading">Logging in...</div>
 				  <div id="message" class="message"></div>
@@ -817,7 +811,7 @@ console.log(j2publish);
 	  const loginForm = document.getElementById('loginForm');
 	  const messageDiv = document.getElementById('message');
 	  const loadingDiv = document.getElementById('loading');
-	  const submitBtn = loginForm.querySelector('input[type="image"]');
+
 	  loginForm.addEventListener('submit', async function(event) {
 		event.preventDefault(); // Prevent the default form submission
 
