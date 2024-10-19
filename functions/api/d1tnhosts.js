@@ -1,5 +1,5 @@
   export async function onRequest(context) {
-    const cust_Id =  "440";
+    const cust_Id =  440;
     const ps = context.env.DB.prepare('SELECT * from streams where CustomerId = "${cust_Id}" ');
     const data = await ps.all();
     //const data = await ps;
