@@ -1,5 +1,5 @@
   export async function onRequest(context) {
-    const ps = context.env.DB.prepare('SELECT * from hosts');
+    const ps = context.env.DB.prepare('SELECT * from streams');
     const data = await ps.first();
       return Response.json(data);
  //const info = await env.DB.prepare(`INSERT INTO jsondata (pitch) VALUES ('{"City": "Cali"}')`);
