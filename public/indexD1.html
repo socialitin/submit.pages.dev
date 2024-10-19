@@ -9,7 +9,105 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
-
+		<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-p6MW9+5FhVvKCT2Oe6MF6eSBwBu5FJVAnEAho3A/niwycA32m0sEuzP+wIRoGh2OWuUB+Gg+T7+wHkpHblcVZA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	  />
+	  
+	  <style> 
+		.form-container { 
+		  width: auto; 
+		  margin: 50px auto; 
+		  padding: 10px; 
+		  border: 1px solid #ccc; 
+		  border-radius: 5px; 
+		  display: flex; 
+		  align-items: center;
+		  justify-content: center;
+		  flex-wrap: wrap;
+		  background-color: #f9f9f9; /* Optional: Add background color */
+		  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+		} 
+		.form-container input { 
+		  width: 30%; 
+		  padding: 10px; 
+		  margin: 5px 10px 5px 0; 
+		  border: 1px solid #ccc; 
+		  border-radius: 3px; 
+		  flex: 1 1 200px; /* Responsive width */
+		} 
+		.form-container .btn { 
+		  padding: 10px 20px; 
+		  background-color: #4285F4; 
+		  color: white; 
+		  border: none; 
+		  border-radius: 3px; 
+		  cursor: pointer; 
+		  width: 30%; 
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  font-size: 16px; /* Adjust font size if needed */
+		  transition: background-color 0.3s;
+		  flex: 1 1 200px; /* Responsive width */
+		  margin-top: 5px; /* Add top margin for spacing */
+		} 
+		.form-container .btn:hover { 
+		  background-color: #357ae8; 
+		} 
+		.message { 
+		  margin-top: 15px; 
+		  padding: 10px; 
+		  border-radius: 3px; 
+		  width: 100%;
+		  box-sizing: border-box;
+		} 
+		.message.success { 
+		  background-color: #d4edda; 
+		  color: #155724; 
+		  display: flex;
+		  align-items: center;
+		} 
+		.message.error { 
+		  background-color: #f8d7da; 
+		  color: #721c24; 
+		  display: flex;
+		  align-items: center;
+		} 
+		.loading { 
+		  display: none; 
+		  margin-top: 15px; 
+		  width: 100%;
+		  text-align: center;
+		} 
+		
+		/* Additional CSS for Icon Button */
+		.form-container .btn i {
+		  margin-right: 8px; /* Space between icon and text */
+		  font-size: 18px; /* Adjust icon size */
+		}
+		
+		/* Responsive Adjustments */
+		@media (max-width: 600px) {
+		  .form-container {
+			flex-direction: column;
+			align-items: stretch;
+		  }
+		  .form-container input, .form-container .btn {
+			width: 100%;
+			margin: 5px 0;
+		  }
+		}
+		
+		/* Focus State for Accessibility */
+		.form-container .btn:focus {
+		  outline: 2px dashed #333;
+		  outline-offset: 2px;
+		}
+	  </style>
 		<style>
 			/* Container for the tabs */
 			.tab {
@@ -90,68 +188,30 @@
 
 			<main>
 				<title>Login</title>
-				<style> 
-					.form-container { 
-					  width: auto; 
-					  margin: 50px auto; 
-					  padding: 10px; 
-					  border: 1px solid #ccc; 
-					  border-radius: 5px; 
-					  display: flex; 
-					  
-					  align-items: left;
-					} 
-					.form-container input { 
-					  width: 30%; 
-					  padding: 10px; 
-					  margin: 0 10px 0 0; 
-					  border: 1px solid #ccc; 
-					  border-radius: 3px; 
-					} 
-					.form-container .btn { 
-					  padding: 10px 20px; 
-					  background-color: #cbd2dd; 
-					  color: white; 
-					  border: none; 
-					  border-radius: 3px; 
-					  cursor: pointer; 
-					  width: 30%; 
-					} 
-					.form-container .btn:hover { 
-					  background-color: #e1e5eb; 
-					} 
-					.message { 
-					  margin-top: 15px; 
-					  padding: 10px; 
-					  border-radius: 3px; 
-					} 
-					.message.success { 
-					  background-color: #d4edda; 
-					  color: #155724; 
-					} 
-					.message.error { 
-					  background-color: #f8d7da; 
-					  color: #721c24; 
-					} 
-					.loading { 
-					  display: none; 
-					  margin-top: 15px; 
-					} 
-				  </style>
-				  
-			
-			  
 				<div class="form-container">
-				
-				  <form id="loginForm">
-					<input type="text" id="username" name="username" placeholder="Your company email" required>
-					<input type="password" id="password" name="password" placeholder="PIN received" required>
-					<button type="submit" class="btn">Get PIN / Login</button>
-				  </form>
-				  <div id="loading" class="loading">Logging in...</div>
-				  <div id="message" class="message"></div>
-				</div>
-			  
+					<form id="loginForm" style="width: 100%; display: flex; flex-direction: column; align-items: stretch;">
+					  <input type="text" id="username" name="username" placeholder="Your company email" required>
+					  <input type="password" id="password" name="password" placeholder="PIN received" required>
+					  
+					  <!-- Icon Button with Text -->
+					  <button type="submit" class="btn" aria-label="Get PIN or Login">
+						<i class="fas fa-sign-in-alt"></i>
+						Get PIN / Login
+					  </button>
+					  
+					  <!-- Icon Button without Text (Alternative) -->
+					  <!--
+					  <button type="submit" class="btn" aria-label="Get PIN or Login">
+						<i class="fas fa-sign-in-alt"></i>
+					  </button>
+					  -->
+					</form>
+					<div id="loading" class="loading">
+					  <i class="fas fa-spinner fa-spin"></i> Logging in...
+					</div>
+					<div id="message" class="message"></div>
+				  </div>
+
 				<h2> Basic Subscription is FREE </h2>
 					<blockquote >
 					<p id ="subjjson" data-json=''>
@@ -807,77 +867,78 @@ console.log(j2publish);
 			};	
 </script>
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-	  const loginForm = document.getElementById('loginForm');
-	  const messageDiv = document.getElementById('message');
-	  const loadingDiv = document.getElementById('loading');
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const messageDiv = document.getElementById('message');
+      const loadingDiv = document.getElementById('loading');
+      const submitBtn = loginForm.querySelector('.btn');
 
-	  loginForm.addEventListener('submit', async function(event) {
-		event.preventDefault(); // Prevent the default form submission
+      loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-		// Clear previous messages
-		messageDiv.textContent = '';
-		messageDiv.classList.remove('success', 'error');
+        // Clear previous messages
+        messageDiv.textContent = '';
+        messageDiv.classList.remove('success', 'error');
 
-		// Get form data
-		const username = document.getElementById('username').value.trim();
-		const password = document.getElementById('password').value;
+        // Get form data
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
 
-		// Basic validation
-		if (!username || !password) {
-		  messageDiv.textContent = 'Please enter both username and password.';
-		  messageDiv.classList.add('error');
-		  return;
-		}
+        // Basic validation
+        if (!username || !password) {
+          messageDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter both username and password.';
+          messageDiv.classList.add('error');
+          return;
+        }
 
-		try {
-		  // Show loading indicator
-		  loadingDiv.style.display = 'block';
-		  // Disable the submit button to prevent multiple submissions
-		  loginForm.querySelector('.btn').disabled = true;
+        try {
+          // Show loading indicator
+          loadingDiv.style.display = 'flex';
+          // Disable the submit button to prevent multiple submissions
+          submitBtn.disabled = true;
 
-		  // Send POST request to the /login endpoint
-		  const response = await fetch('https://cloudflare-login-worker.socialitin.workers.dev/login', {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ username, password })
-		  });
+          // Send POST request to the /login endpoint
+          const response = await fetch('https://cloudflare-login-worker.socialitin.workers.dev/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+          });
 
-		  const data = await response.json();
+          const data = await response.json();
 
-		  if (response.ok) {
-			// Login successful
-			messageDiv.textContent = data.message || 'Login successful!';
-			messageDiv.classList.add('success');
-			
-			// Access the returned user data
-			console.log('User Data:', data.user);
-			
-			// Example: Store user data in localStorage (for development purposes)
-			// **Note:** Avoid storing sensitive information in localStorage in production.
-			localStorage.setItem('user', JSON.stringify(data.user));
+          if (response.ok) {
+            // Login successful
+            messageDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + (data.message || 'Login successful!');
+            messageDiv.classList.add('success');
+            
+            // Access the returned user data
+            console.log('User Data:', data.user);
+            
+            // Example: Store user data in localStorage (for development purposes)
+            // **Note:** Avoid storing sensitive information in localStorage in production.
+            localStorage.setItem('user', JSON.stringify(data.user));
 
-			// Optional: Redirect to another page or update the UI
-			// Example: window.location.href = '/dashboard.html';
-		  } else {
-			// Login failed
-			messageDiv.textContent = data.error || 'Login failed. Please try again.';
-			messageDiv.classList.add('error');
-		  }
+            // Optional: Redirect to another page or update the UI
+            // Example: window.location.href = '/dashboard.html';
+          } else {
+            // Login failed
+            messageDiv.innerHTML = '<i class="fas fa-times-circle"></i> ' + (data.error || 'Login failed. Please try again.');
+            messageDiv.classList.add('error');
+          }
 
-		} catch (error) {
-		  console.error('Error during login:', error);
-		  messageDiv.textContent = 'An unexpected error occurred. Please try again later.';
-		  messageDiv.classList.add('error');
-		} finally {
-		  // Hide loading indicator and enable the submit button
-		  loadingDiv.style.display = 'none';
-		  loginForm.querySelector('.btn').disabled = false;
-		}
-	  });
-	});
+        } catch (error) {
+          console.error('Error during login:', error);
+          messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> An unexpected error occurred. Please try again later.';
+          messageDiv.classList.add('error');
+        } finally {
+          // Hide loading indicator and enable the submit button
+          loadingDiv.style.display = 'none';
+          submitBtn.disabled = false;
+        }
+      });
+    });
   </script>
 	</body>
 </html>
