@@ -578,9 +578,10 @@ console.log(data2);
 		<script>
 			async function d1tnhosts() {
 			const response = await fetch('/api/d1tnhosts');
-			const data1 = await response.json();		
+			const dataAll = await response.json();		
 			console.log('mypitch', data1);
-		const data2 = JSON.parse(data1[0].pitching);
+			const data1 = dataAll[0];
+		const data2 = JSON.parse(data1.pitching);
 		const data = data2['440-2'];
 		//const data = data3.pitching;
 		//.pitching);
