@@ -148,8 +148,9 @@
 					<input type="text" id="username" name="username" placeholder="Your company email" required>
 					<input type="password" id="password" name="password" placeholder="PIN received" required>
 					
-					
-  <i type = "submit"class="fas fa-sign-in-alt"></i>
+					<input type="image" src="path_to_your_image/login-button.png" alt="Get PIN / Login" title="Get PIN / Login">
+				
+  <i type = "submit" class="fas fa-sign-in-alt"></i>
 
 
 				  </form>
@@ -816,7 +817,7 @@ console.log(j2publish);
 	  const loginForm = document.getElementById('loginForm');
 	  const messageDiv = document.getElementById('message');
 	  const loadingDiv = document.getElementById('loading');
-
+	  const submitBtn = loginForm.querySelector('input[type="image"]');
 	  loginForm.addEventListener('submit', async function(event) {
 		event.preventDefault(); // Prevent the default form submission
 
