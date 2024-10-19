@@ -9,14 +9,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
 		<link rel="stylesheet" href="/index.css">
-		<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-		integrity="sha512-p6MW9+5FhVvKCT2Oe6MF6eSBwBu5FJVAnEAho3A/niwycA32m0sEuzP+wIRoGh2OWuUB+Gg+T7+wHkpHblcVZA=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"
-	  />
-	  
+
 		<style>
 			/* Container for the tabs */
 			.tab {
@@ -96,8 +89,8 @@
 				<div id="Tab1" class="tabcontent">
 
 			<main>
-
-				  <style> 
+				<title>Login</title>
+				<style> 
 					.form-container { 
 					  width: auto; 
 					  margin: 50px auto; 
@@ -105,129 +98,48 @@
 					  border: 1px solid #ccc; 
 					  border-radius: 5px; 
 					  display: flex; 
-					  align-items: center;
-					  justify-content: center;
-					  flex-wrap: wrap;
-					  background-color: #f9f9f9; /* Optional: Add background color */
-					  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+					  
+					  align-items: left;
 					} 
 					.form-container input { 
 					  width: 30%; 
 					  padding: 10px; 
-					  margin: 5px 10px 5px 0; 
+					  margin: 0 10px 0 0; 
 					  border: 1px solid #ccc; 
 					  border-radius: 3px; 
-					  flex: 1 1 200px; /* Responsive width */
 					} 
 					.form-container .btn { 
 					  padding: 10px 20px; 
-					  background-color: #4285F4; 
+					  background-color: #cbd2dd; 
 					  color: white; 
 					  border: none; 
 					  border-radius: 3px; 
 					  cursor: pointer; 
 					  width: 30%; 
-					  display: flex;
-					  align-items: center;
-					  justify-content: center;
-					  font-size: 16px; /* Adjust font size if needed */
-					  transition: background-color 0.3s;
-					  flex: 1 1 200px; /* Responsive width */
-					  margin-top: 5px; /* Add top margin for spacing */
 					} 
 					.form-container .btn:hover { 
-					  background-color: #357ae8; 
+					  background-color: #e1e5eb; 
 					} 
 					.message { 
 					  margin-top: 15px; 
 					  padding: 10px; 
 					  border-radius: 3px; 
-					  width: 100%;
-					  box-sizing: border-box;
 					} 
 					.message.success { 
 					  background-color: #d4edda; 
 					  color: #155724; 
-					  display: flex;
-					  align-items: center;
 					} 
 					.message.error { 
 					  background-color: #f8d7da; 
 					  color: #721c24; 
-					  display: flex;
-					  align-items: center;
 					} 
 					.loading { 
 					  display: none; 
 					  margin-top: 15px; 
-					  width: 100%;
-					  text-align: center;
 					} 
-					
-					/* Additional CSS for Icon Button */
-					.form-container .btn i {
-					  margin-right: 8px; /* Space between icon and text */
-					  font-size: 18px; /* Adjust icon size */
-					}
-					
-					/* Responsive Adjustments */
-					@media (max-width: 600px) {
-					  .form-container {
-						flex-direction: column;
-						align-items: stretch;
-					  }
-					  .form-container input, .form-container .btn {
-						width: 100%;
-						margin: 5px 0;
-					  }
-					}
-					
-					/* Focus State for Accessibility */
-					.form-container .btn:focus {
-					  outline: 2px dashed #333;
-					  outline-offset: 2px;
-					}
 				  </style>
-
-				  <div class="form-container">
-					<form id="loginForm" style="width: 100%; display: flex; flex-direction: column; align-items: stretch;">
-					  <input type="text" id="username" name="username" placeholder="Your company email" required>
-					  <input type="password" id="password" name="password" placeholder="PIN received" required>
-					  
-					  <!-- Icon Button with Text -->
-					  <button type="submit" class="btn" aria-label="Get PIN or Login">
-						<i class="fas fa-sign-in-alt"></i>
-						Get PIN / Login
-					  </button>
-					  
-					  <!-- Icon Button without Text (Alternative) -->
-					  <!--
-					  <button type="submit" class="btn" aria-label="Get PIN or Login">
-						<i class="fas fa-sign-in-alt"></i>
-					  </button>
-					  -->
-					</form>
-					<div id="loading" class="loading">
-					  <i class="fas fa-spinner fa-spin"></i> Logging in...
-					</div>
-					<div id="message" class="message"></div>
-				  </div>
 				  
-
-				
-					  
-					  <!-- Icon Button without Text (Alternative) -->
-					  <!--
-					  <button type="submit" class="btn" aria-label="Get PIN or Login">
-						<i class="fas fa-sign-in-alt"></i>
-					  </button>
-					  -->
-					</form>
-					<div id="loading" class="loading">Logging in...</div>
-					<div id="message" class="message"></div>
-				  </div>
-
-				
+			
 			  
 				<div class="form-container">
 				
