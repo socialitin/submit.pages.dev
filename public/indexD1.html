@@ -580,7 +580,7 @@ console.log(data2);
 			const response = await fetch('/api/d1tnhosts');
 			const data1 = await response.json();		
 			console.log('mypitch', data1);
-		const data2 = JSON.parse(data1.pitching);
+		const data2 = JSON.parse(data1[0].pitching);
 		const data = data2['440-2'];
 		//const data = data3.pitching;
 		//.pitching);
