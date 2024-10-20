@@ -3,7 +3,7 @@
     const cust_Id = '440';  
 const ps = context.env.DB.prepare('SELECT * FROM streams WHERE CustomerId = ?');  
 const result = ps.get(cust_Id);
-    const data = await ps.all();
+    const data = await result.all();
     //const data = await ps;
       return Response.json(data);
  //const info = await env.DB.prepare(`INSERT INTO jsondata (pitch) VALUES ('{"City": "Cali"}')`);
