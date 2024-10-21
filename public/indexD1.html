@@ -230,7 +230,8 @@
 			<label>4</label><img id="fjson3" data = "" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhosts(event)">
 			<script>
 				window.addEventListener('DOMContentLoaded', () => {
-				  document.getElementById("fjson0").click();
+				  //document.getElementById("fjson0").click();
+				  d1tnhosts();
 				});
   </script>
 		</div>
@@ -576,17 +577,17 @@ console.log(data2);
 	};
 	</script>
 		<script>
-			async function d1tnhosts(event) {
-				let str = event.target.id;
-				let cPitch = (str.match(/\d/g) || []).pop();  
-				//if (cPitch = 0) {
+			async function d1tnhosts() {
+			//	let str = event.target.id;
+				//let cPitch = (str.match(/\d/g) || []).pop();  
+				
 			const response = await fetch('/api/d1tnhosts');
 			const dataAll = await response.json();		
 			
 			const data1 = dataAll.results;
 			document.getElementById("fjson0").data = data1[0];
 			document.getElementById("fjson1").data = data1[1];
-			//};
+			
 //console.log(lastDigit); // Output: "3"
 			console.log('mypitch', cPitch,dataAll, document.getElementById("fjson1").data);
 		const data2 = JSON.parse(data1[0].pitching);
