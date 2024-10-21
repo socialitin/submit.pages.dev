@@ -581,11 +581,11 @@ console.log(data2);
 			const dataAll = await response.json();		
 			
 			const data1 = dataAll.results;
-			let str = "abc123";  
-//let lastDigit = (str.match(/\d/g) || []).pop();  
+			let str = event.target.id;  
+let cPitch = (str.match(/\d/g) || []).pop();  
 
 //console.log(lastDigit); // Output: "3"
-			console.log('mypitch', str.pop(),dataAll, data1.length);
+			console.log('mypitch', cPitch,dataAll, data1.length);
 		const data2 = JSON.parse(data1[0].pitching);
 		const data = data2['440-2'];
 		//const data = data3.pitching;
