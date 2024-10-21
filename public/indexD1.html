@@ -577,12 +577,16 @@ console.log(data2);
 	</script>
 		<script>
 			async function d1tnhosts(event) {
-			const response = await fetch('/api/d1tnhosts');
+				let str = event.target.id;
+				let cPitch = (str.match(/\d/g) || []).pop();  
+				if (cPitch == 0) {
+								const response = await fetch('/api/d1tnhosts');
 			const dataAll = await response.json();		
 			
 			const data1 = dataAll.results;
-			let str = event.target.id;
-let cPitch = (str.match(/\d/g) || []).pop();  
+				};
+
+
 
 //console.log(lastDigit); // Output: "3"
 			console.log('mypitch', cPitch,dataAll, data1.length);
