@@ -649,12 +649,12 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 				let str = event.target.id;
 				let cPitch = (str.match(/\d/g) || []).pop();  
 
-		var jPitch =	document.getElementById("fjson1").data; 
+		var jPitch = document.getElementById("fjson1").data; 
 			//document.getElementById("fjson1").data; 
 			
 //console.log(lastDigit); // Output: "3"
 			console.log('mypitch', cPitch, document.getElementById("fjson1").data);
-		const data2 = JSON.parse(jPitch[0].pitching);
+		const data2 = JSON.parse(jPitch.pitching);
 		const data = data2['440-1'];
 		//const data = data3.pitching;
 		//.pitching);
