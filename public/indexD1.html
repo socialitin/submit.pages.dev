@@ -648,11 +648,10 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		function d1tnhostsDtl(event) {
 				let str = event.target.id;
 				let cPitch = (str.match(/\d/g) || []).pop();  
-
+				console.log('mypitch', '"fjson"'+cPitch+'"');
 		var jPitch = document.getElementById('"fjson"'+cPitch+'"').data; 
 			//document.getElementById("fjson1").data; 
 			
-//console.log(lastDigit); // Output: "3"
 			console.log('mypitch', jPitch);
 		const data2 = JSON.parse(jPitch.pitching);
 		const data = data2['440-1'];
