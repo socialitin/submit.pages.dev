@@ -1,6 +1,6 @@
   export async function onRequest(context) {
    
-    const ps = context.env.DB.prepare('SELECT COUNT(*) from streams where CustomerId = "440" ');
+    const ps = context.env.DB.prepare('SELECT * from streams where CustomerId = "440" ');
     const data = await ps.all();
     
       return Response.json(data);
