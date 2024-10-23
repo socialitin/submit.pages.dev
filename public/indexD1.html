@@ -581,7 +581,7 @@ console.log(data2);
 				//let cPitch = (str.match(/\d/g) || []).pop();  
 				
 			const response = await fetch('https://www.ads.tournet.com/?CustomerId=440');
-			const dataAll = await response.json();		
+			const dataAll = await response;		
 			console.log('mypitch ftr', dataAll);
 			const data1 = dataAll.results;
 			for( var j = data1.length - 1; j >= 0; j--){
