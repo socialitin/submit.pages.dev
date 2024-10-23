@@ -21,7 +21,7 @@
   // Execute the prepared statement with the CustomerId as a parameter
   //const data = await ps.all([customerId]);
 
-   const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = ([customerId]) ');
+   const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = [customerId] ');
     const data = await ps.all();
     
       return Response.json(data);
