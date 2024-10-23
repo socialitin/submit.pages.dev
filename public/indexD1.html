@@ -580,7 +580,7 @@ console.log(data2);
 			//	let str = event.target.id;
 				//let cPitch = (str.match(/\d/g) || []).pop();  
 				
-			const response = await fetch('/api/d1tnhosts/?CustomerId=440');
+			const response = await fetch('/api/d1tnhosts');
 			const dataAll = await response.json();		
 			console.log('mypitch resp', dataAll);		
 			const data1 = dataAll.results;
