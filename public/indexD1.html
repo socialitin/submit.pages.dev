@@ -584,7 +584,7 @@ console.log(data2);
 			const dataAll = await response.json();		
 			
 			const data1 = dataAll.results;
-			for( var j = results.length - 1; j >= 0; j--){
+			for( var j = data1.length - 1; j >= 0; j--){
 			document.getElementById('fjson'+j+'').data = data1[j];
 		const data2cmp = data1[j].CustomerId;
 		const data2row = data1[j].rowid;
