@@ -3,7 +3,7 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const customerId = url.searchParams.get('CustomerId'); 
  // Prepare the SQL statement with a parameter placeholder
- const ps = env.DB.prepare(`
+ const ps = context.env.DB.prepare(`
   SELECT 
     ROWID, 
     CompanyName,
@@ -23,7 +23,7 @@ const data = await ps.all([customerId]);
  //const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = "440" ');
  // const data = await ps.all();
   
-    return Response.data;
+    return Response.json(data);
 
 
 }
