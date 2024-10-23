@@ -1,78 +1,16 @@
-export async function onRequest(context) {
-    try {
-      const { request, env } = context;
-  
-      // Extract the CustomerId from the query parameters
-      const url = new URL(request.url);
-      const customerId = url.searchParams.get('CustomerId');
-  
-      // Validate the CustomerId parameter
-      if (!customerId) {
-        return new Response(
-          JSON.stringify({ error: 'Missing CustomerId parameter' }),
-          {
-            status: 400,
-            headers: { 'Content-Type': 'application/json' },
-          }
-        );
-      }
-  
-      // Optional: Further validate the CustomerId (e.g., ensure it's numeric)
-      // if (!/^\d+$/.test(customerId)) {
-      //   return new Response(
-      //     JSON.stringify({ error: 'Invalid CustomerId format' }),
-      //     {
-      //       status: 400,
-      //       headers: { 'Content-Type': 'application/json' },
-      //     }
-      //   );
-      // }
-  
-      // Prepare the SQL statement with a parameter placeholder
-      const ps = env.DB.prepare(`
-        SELECT 
-          ROWID, 
-          CompanyName,
-          ContactName,
-          CountryIataRegion, 
-          CustomerId,
-          DateTime,
-          Status,
-          pitching 
-        FROM streams 
-        WHERE CustomerId = ?
-      `);
-  
-      // Execute the prepared statement with the CustomerId as a parameter
-      const data = await ps.all([customerId]);
-  
-      // Check if any records were found
-      if (data.results.length === 0) {
-        return new Response(
-          JSON.stringify({ message: 'No records found for the provided CustomerId' }),
-          {
-            status: 404,
-            headers: { 'Content-Type': 'application/json' },
-          }
-        );
-      }
-  
-      // Return the fetched data as JSON
-      return new Response(JSON.stringify(data), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    } catch (error) {
-      console.error('Error processing request:', error);
-  
-      // Return a generic error message
-      return new Response(
-        JSON.stringify({ error: 'Internal Server Error' }),
-        {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-    }
+  export async function onRequest(context) {
+   
+    const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = "440" ');
+    const data = await ps.all();
+    
+      return Response.json(data);
+ //const info = await env.DB.prepare(`INSERT INTO jsondata (pitch) VALUES ('{"City": "Cali"}')`);
+ //const info = await env.DB.prepare(`UPDATE jsondata SET pitch = json_replace(pitch, '$.City', 'NYC') `);
+//const dat = await info;
+//return Response.json(dat);
+//const cust_Id = '440';  
+//const ps = context.env.DB.prepare('SELECT * FROM streams WHERE CustomerId = ?');  
+//const data = await ps.all(cust_Id);  // Use all() directly on the prepared statement with parameters  
+//return Response.json(data);////
+
   }
-  
