@@ -661,12 +661,17 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 				let str = event.target.id;
 				let cPitch = (str.match(/\d/g) || []).pop();  
 				console.log('mypitch', 'fjson'+cPitch+'');
-		var jPitch = document.getElementById('fjson'+cPitch+'').data; 
-			//document.getElementById("fjson1").data; 
+		var data2 = document.getElementById('fjson'+cPitch+'').data; 
+		//const data2 = document.getElementById("fjson0").data;	
+		const data3 = JSON.parse(data2.pitching);
+		//const data3 = data2.pitching;
+var dFtr = document.getElementById('fjson'+cPitch+'').name;
+		console.log('mypitch ftr', dFtr, data2);
+		const data = data3[dFtr];		
 			
-			console.log('mypitch', jPitch);
-		const data2 = JSON.parse(jPitch.pitching);
-		const data = data2['440-1'];
+			console.log('mypitch', dFtr,data2);
+		//const data2 = JSON.parse(jPitch.pitching);
+		//const data = data2['440-1'];
 		//const data = data3.pitching;
 		//.pitching);
 	
