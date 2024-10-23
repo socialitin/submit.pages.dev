@@ -589,7 +589,7 @@ console.log(data2);
 		const data2cmp = data1[j].CustomerId;
 		const data2row = data1[j].rowid;
 		const dataFtr = data2cmp+'-'+data2row;
-		console.log('mypitch ftr', dataFtr);
+		//console.log('mypitch ftr', dataFtr);
 		//const data = data2[dataFtr];
 		
 		document.getElementById('fjson'+j+'').name = dataFtr;		
@@ -600,7 +600,7 @@ console.log(data2);
 		// JSON.parse(data1[0].pitching);
 		const data3 = data2.pitching;
 var dFtr = document.getElementById('fjson0').name;
-		console.log('mypitch ftr', dFtr);
+		console.log('mypitch ftr', dFtr, data3);
 		const data = data3[dFtr];
 		
 		//document.getElementById("fjson1").name = dataFtr;
