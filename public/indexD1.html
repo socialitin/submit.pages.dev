@@ -584,21 +584,26 @@ console.log(data2);
 			const dataAll = await response.json();		
 			
 			const data1 = dataAll.results;
-			document.getElementById("fjson0").data = data1[0];
-			document.getElementById("fjson1").data = data1[1];
-			
-//console.log(lastDigit); // Output: "3"
-			console.log('mypitch', dataAll, document.getElementById("fjson1").data);
-		const data2 = JSON.parse(data1[0].pitching);
-		const data2cmp = data1[0].CustomerId;
-		const data2row = data1[0].rowid;
+			for( var j = results.length - 1; j >= 0; j--){
+			document.getElementById('fjson'+j+'').data = data1[j];
+		const data2cmp = data1[j].CustomerId;
+		const data2row = data1[j].rowid;
 		const dataFtr = data2cmp+'-'+data2row;
 		console.log('mypitch ftr', dataFtr);
-		const data = data2[dataFtr];
-		//const data = data3.pitching;
-		//.pitching);
-		document.getElementById("fjson1").name = dataFtr;
-		console.log('mypitch jreid', document.getElementById("fjson1").name);
+		//const data = data2[dataFtr];
+		
+		document.getElementById('fjson'+j+'').name = dataFtr;		
+			console.log('mypitch', dataAll, document.getElementById('fjson'+j+'').data);
+			};
+
+		const data2 = document.getElementById("fjson0").data.pitching;
+		// JSON.parse(data1[0].pitching);
+var dFtr = document.getElementById('fjson0').name;
+		console.log('mypitch ftr', dFtr);
+		const data = data2[dFtr];
+		
+		//document.getElementById("fjson1").name = dataFtr;
+		
 		
 		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
 		
