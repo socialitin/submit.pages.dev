@@ -580,7 +580,7 @@ console.log(data2);
 			//	let str = event.target.id;
 				//let cPitch = (str.match(/\d/g) || []).pop();  
 				
-			const response = await fetch('https://www.ads.tournet.com/');
+			const response = await fetch('/api/d1tnhosts');
 			const dataAll = await response.json();		
 			console.log('mypitch ftr', dataAll);
 			const data1 = dataAll.results;
