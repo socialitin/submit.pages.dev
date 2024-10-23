@@ -1,7 +1,7 @@
   export async function onRequest(context) {
     // Extract the CustomerId from the query parameters
-    const url = new URL(request.url);
-    const customerId = url.searchParams.get('CustomerId'); 
+    //const url = new URL(request.url);
+    //const customerId = url.searchParams.get('CustomerId'); 
    // Prepare the SQL statement with a parameter placeholder
    const ps1= context.env.DB.prepare(`
     SELECT 
