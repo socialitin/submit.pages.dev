@@ -596,11 +596,12 @@ console.log(data2);
 			console.log('mypitch', dataAll, document.getElementById('fjson'+j+'').data);
 			};
 
-		const data2 = document.getElementById("fjson0").data.pitching;
+		const data2 = document.getElementById("fjson0").data;
 		// JSON.parse(data1[0].pitching);
+		const data3 = data2.pitching;
 var dFtr = document.getElementById('fjson0').name;
 		console.log('mypitch ftr', dFtr);
-		const data = data2[dFtr];
+		const data = data3[dFtr];
 		
 		//document.getElementById("fjson1").name = dataFtr;
 		
