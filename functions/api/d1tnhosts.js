@@ -19,11 +19,17 @@ export async function onRequest(context) {
 
 // Execute the prepared statement with the CustomerId as a parameter
 const data = await ps.all([customerId]);
-
+return new Response(JSON.stringify(data.results), {
+  status: 200,
+  headers: { 
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*', // Adjust as needed
+  },
+});
  //const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = "440" ');
  // const data = await ps.all();
   
-    return Response.json(data);
+   // return Response.json(data);
 
 
 }
