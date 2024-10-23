@@ -58,7 +58,7 @@ export async function onRequest(context) {
       }
   
       // Return the fetched data as JSON
-      return new Response(JSON.stringify(data.results), {
+      return new Response(JSON.stringify(data), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });
