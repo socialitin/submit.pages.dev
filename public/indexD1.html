@@ -577,7 +577,7 @@ console.log(data2);
 	</script>
 		<script>
 			async function d1tnhosts() {
-				const CustomerId = document.getElementById('tab2').name;
+				const CustomerId = document.getElementById('Tab2').name;
 				const response = await fetch('/api/d1tnhosts', {
 			method: 'POST',
 			headers: {
@@ -954,7 +954,7 @@ console.log(j2publish);
 			
 			// Access the returned user data
 			console.log('User Data:', data.user.id);
-			document.getElementById('tab2').name = data.user.id;
+			document.getElementById('Tab2').name = data.user.id;
 			// Example: Store user data in localStorage (for development purposes)
 			// **Note:** Avoid storing sensitive information in localStorage in production.
 			//localStorage.setItem('user', JSON.stringify(data.user));
