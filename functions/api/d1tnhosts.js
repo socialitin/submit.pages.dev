@@ -15,7 +15,7 @@ export async function onRequest(context) {
     const body = await request.json();
     const customerId = body.CustomerId;
 
-    const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = [customerId] ');
+    const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId == [customerId] ');
     const data = await ps.all();
     
       return Response.json(data);
