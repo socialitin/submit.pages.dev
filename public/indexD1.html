@@ -219,7 +219,7 @@
 				</form>
 			</main>
 		</div>
-		  <div id="Tab2" class="tabcontent" data = '1'>
+		  <div id="Tab2" class="tabcontent" data = '2'>
 
 			<h3>Streaming now ...</h3>
 			<div id ="jdata">
@@ -577,7 +577,8 @@ console.log(data2);
 	</script>
 		<script>
 			async function d1tnhosts() {
-				const CustomerId = document.getElementById('Tab2').data;
+				const CustomerId = '2';
+				//document.getElementById('Tab2').data;
 				const response = await fetch('/api/d1tnhosts', {
 			method: 'POST',
 			headers: {
@@ -955,6 +956,7 @@ console.log(j2publish);
 			// Access the returned user data
 			console.log('User Data:', data.user.id);
 			document.getElementById('Tab2').data = data.user.id;
+			console.log('User Data:', data.user.id,document.getElementById('Tab2').data);
 			// Example: Store user data in localStorage (for development purposes)
 			// **Note:** Avoid storing sensitive information in localStorage in production.
 			//localStorage.setItem('user', JSON.stringify(data.user));
