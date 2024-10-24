@@ -1,34 +1,32 @@
-  export async function onRequest(context) {
-    // Extract the CustomerId from the query parameters
-    //const url = new URL(request.url);
-    const customerId = '440';
-    //url.searchParams.get('CustomerId'); 
-   // Prepare the SQL statement with a parameter placeholder
-   const ps1= context.env.DB.prepare(`
-    SELECT 
-      ROWID, 
-      CompanyName,
-      ContactName,
-      CountryIataRegion, 
-      CustomerId,
-      DateTime,
-      Status,
-      pitching 
-    FROM streams 
-    WHERE CustomerId = ?
-  `);
+export async function onRequest(context) {
+  try {
+    const { request, env } = context;
 
-  // Execute the prepared statement with the CustomerId as a parameter
-  //const data = await ps.all([customerId]);
+    if (request.method !== 'POST') {
+      return new Response(
+        JSON.stringify({ error: 'Method Not Allowed' }),
+        {
+          status: 405,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
 
-   const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = [customerId] ');
+    const body = await request.json();
+    const customerId = body.CustomerId;
+
+    const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = [customerId] ');
     const data = await ps.all();
     
       return Response.json(data);
+  } catch (error) {
+    // Error handling as before
+  }
+}
+
+
  
 
-  }
+ 
 
- //const ps = context.env.DB.prepare('SELECT ROWID, CompanyName,ContactName,CountryIataRegion, CustomerId,DateTime,Status,pitching from streams where CustomerId = "440" ');
- //const data = await ps.all();
- //return Response.json(data);
+
