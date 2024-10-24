@@ -577,8 +577,7 @@ console.log(data2);
 	</script>
 		<script>
 			async function d1tnhosts() {
-				const CustomerId = '440';
-				//document.getElementById('Tab2').data;
+				const CustomerId = document.getElementById('Tab2').data;
 				const response = await fetch('/api/d1tnhosts', {
 			method: 'POST',
 			headers: {
