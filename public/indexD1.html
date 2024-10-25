@@ -222,7 +222,7 @@
 		  <div id="Tab2" class="tabcontent" >
 
 			<h3>Streaming now ...</h3>
-			<div id ="jdata">
+			<div id ="jdata" data = "">
 			<label>1</label><img id="fjson0" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>2</label><img id="fjson1" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>3</label><img id="fjson2" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">	
@@ -588,6 +588,7 @@ console.log(data2);
 			const dataAll = await response.json();		
 			console.log('mypitch ftr', CustomerId,dataAll);
 			const data1 = dataAll.results;
+			document.getElementById('jdata').data = data1.length;
 			for( var j = data1.length - 1; j >= 0; j--){
 			document.getElementById('fjson'+j+'').data = data1[j];
 		const data2cmp = data1[j].CustomerId;
@@ -596,8 +597,9 @@ console.log(data2);
 		//console.log('mypitch ftr', dataFtr);
 		//const data = data2[dataFtr];
 		
-		document.getElementById('fjson'+j+'').name = dataFtr;		
-			console.log('mypitch', dataAll, document.getElementById('fjson'+j+'').data);
+		document.getElementById('fjson'+j+'').name = dataFtr;
+
+			console.log('mypitch', dataAll, document.getElementById('fjson'+j+'').data,document.getElementById('jdata').data);
 			};
 
 		const data2 = document.getElementById("fjson0").data;
