@@ -301,8 +301,8 @@
 
 				</div>
 				<div class="input">
-					<label for="Pitch">Pitch!</label>
-					<input id="Pitch" name="pitch" type="textarea" />
+					<label for="pitch">Pitch!</label>
+					<input id="pitch" name="pitch" type="textarea" />
 				</div>
 
 				<button type="submit">Save & Preview</button>
@@ -589,7 +589,7 @@ console.log(data2);
 		
 			const data1 = dataAll.results;
 			document.getElementById('jdata').data = data1.length;
-			console.log('mypitch ftr', CustomerId,dataAll,document.getElementById('jdata').data );
+				console.log('mypitch ftr', CustomerId,dataAll,document.getElementById('jdata').data );
 			for( var j = data1.length - 1; j >= 0; j--){
 			document.getElementById('fjson'+j+'').data = data1[j];
 		const data2cmp = data1[j].CustomerId;
@@ -881,7 +881,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 		console.log(data);
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
-  "IATA": "US6",
+  "IATA": "US22",
   "City": "US3-Eastern",
   "Province": "Western",
   "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
