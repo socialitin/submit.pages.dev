@@ -227,7 +227,9 @@
 			<label>2</label><img id="fjson1" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>3</label><img id="fjson2" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">	
 			<label>4</label><img id="fjson3" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
-			<script></script>
+			<script>
+
+  </script>
 		</div>
 			<div id ="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px;  float:left; ">
 			</div>
@@ -238,57 +240,7 @@
 				<div id="itemImg" style ="width:61%; float:left;"></div>
 				<div id="picDtls" style ="width:20%; float:left;">
 		
-					form method="POST" action="/api/submit">
-					<div class="input" type = "hidden">
-						<label for="IATA"></label>
-						<input id="IATA" name="IATA" type="text" />
-						<input id="Province" name="Province" type="text" />
-					</div>
-					<div class="input" >
-						<label for="name">Name of Offer</label>
-						<input id="City" name="City" type="text" />
-					</div>
-					<div class="input" ">
-						<label for="video">Video</label>
-						<input id="embVideo" name="embVideo" type="array" />
-					</div>
-					<div class="input" ">
-						<label for="pictures">Pictures </label>
-						<input id="Pictures" name="Pictures" type="array" />
-					</div>
-	
-					<div class="input">
-						<label for="typeKind">Type/kind of offer</label>
-						<select id="typeKind" name="typeKind">
-							<option hidden disabled selected value></option>
-							<option value="Sightseeing">Sightseeing</option>
-							<option value="Excursion">Excursion</option>
-							<option value="Night life">Night life</option>
-							<option value="Walking tour">Walking tour</option>
-							<option value="Water crusing">Water crusing</option>
-						</select>
-					</div>
-	
-					<div class="checklist">
-						<label for="Venue">Whats the venue</label>
-						<select id="venue" name="venue">
-							<option hidden disabled selected value></option>
-							<option value="Attraction">Attraction</option>
-							<option value="Club">Club, Event</option>
-							<option value="Accommodation">Accommodation</option>
-							<option value="Motorcoach">Motorcoach</option>
-							<option value="Other">Other ... </option>
-						</select>
-	
-					</div>
-					<div class="input">
-						<label for="pitch">Pitch!</label>
-						<input id="pitch" name="pitch" type="textarea" />
-					</div>
-	
-					<button type="submit">Save & Preview</button>
 					
-				</form>					
 				</div>
 		</div>	
 
@@ -305,7 +257,57 @@
 				<p id ="sjson" data-json=''>Review Your Pitch</p>
 				<p>All Pitches submitted are private, you can Publish one and only one at a time (Premium members can publish up to 4 )
 						
-			
+			<form method="POST" action="/api/submit">
+				<div class="input" type = "hidden">
+					<label for="IATA"></label>
+					<input id="IATA" name="IATA" type="text" />
+					<input id="Province" name="Province" type="text" />
+				</div>
+				<div class="input" >
+					<label for="name">Name of Offer</label>
+					<input id="City" name="City" type="text" />
+				</div>
+				<div class="input" ">
+					<label for="video">Video</label>
+					<input id="embVideo" name="embVideo" type="array" />
+				</div>
+				<div class="input" ">
+					<label for="pictures">Pictures </label>
+					<input id="Pictures" name="Pictures" type="array" />
+				</div>
+
+				<div class="input">
+					<label for="typeKind">Type/kind of offer</label>
+					<select id="typeKind" name="typeKind">
+						<option hidden disabled selected value></option>
+						<option value="Sightseeing">Sightseeing</option>
+						<option value="Excursion">Excursion</option>
+						<option value="Night life">Night life</option>
+						<option value="Walking tour">Walking tour</option>
+						<option value="Water crusing">Water crusing</option>
+					</select>
+				</div>
+
+				<div class="checklist">
+					<label for="Venue">Whats the venue</label>
+					<select id="venue" name="venue">
+						<option hidden disabled selected value></option>
+						<option value="Attraction">Attraction</option>
+						<option value="Club">Club, Event</option>
+						<option value="Accommodation">Accommodation</option>
+						<option value="Motorcoach">Motorcoach</option>
+						<option value="Other">Other ... </option>
+					</select>
+
+				</div>
+				<div class="input">
+					<label for="pitch">Pitch!</label>
+					<input id="pitch" name="pitch" type="textarea" />
+				</div>
+
+				<button type="submit">Save & Preview</button>
+				
+			</form>
 		</main>
 	</div>
 	<div id="Tab4" class="tabcontent">
