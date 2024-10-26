@@ -210,10 +210,10 @@
 							</li>
 						</ul>
 					</div>
-					<div class="input">
+					<!--div class="input">
 						<label for="pitch">Name and decription of Product or Offer</label>
 						<input id="pitch" name="pitch" type="textarea" />
-					</div>
+					</div-->
 	
 					<button type="submit">Join Tournet</button>
 				</form>
@@ -878,7 +878,7 @@ sessionStorage.setItem("pics",JSON.stringify(ppicsj));
 			const response = await fetch('/api/fetchjson');
 			const data = await response.json();
 		//const data =JSON.parse(data1);
-		console.log('jFetched',data);
+		console.log('data);
 		sessionStorage.setItem("j2post",JSON.stringify(data));	
 var j2addStorage = {
   "IATA": "US22",
