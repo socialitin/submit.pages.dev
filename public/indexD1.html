@@ -222,7 +222,7 @@
 		  <div id="Tab2" class="tabcontent" >
 
 			<h3>Streaming now ...</h3>
-			<div id ="jdata" data = "">
+			<div id ="jdata" data = "" cpit = "" >
 			<label>1</label><img id="fjson0" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>2</label><img id="fjson1" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>3</label><img id="fjson2" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">	
@@ -676,6 +676,7 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		//const data3 = data2.pitching;
 var dFtr = document.getElementById('fjson'+cPitch+'').name;
 		console.log('mypitch ftr', dFtr, data2);
+		document.getElementById('jdata').cpit = dFtr; 
 		const data = data3[dFtr];		
 			
 			console.log('mypitch', dFtr,data2);
