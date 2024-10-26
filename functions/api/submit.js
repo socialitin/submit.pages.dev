@@ -14,10 +14,13 @@ export async function onRequestPost(context) {
             formDataObject[name] = value;
         }
         // Convert the JSON object to a string
-        let pWrap = formDataObject;
-        var pWrapa = pWrap + '{ "'+document.getElementById('jdata').cpit+'":'; 
-        var jsonData = JSON.stringify(pWrapa + '}');
+        let jsonData = JSON.stringify(formDataObject);
 console.log('jdata is', jsonData);
+//let pWrapb = {};
+//let pWrap = formDataObject;
+//var pWrapa = pWrap + '{ "'+document.getElementById('jdata').cpit+'":'; 
+//var jsonData = JSON.stringify(pWrapa + '}');
+//console.log('jdata is', jsonData);
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
