@@ -297,7 +297,10 @@
 					document.getElementById('addpitch').addEventListener('submit', async (event) => {
 						event.preventDefault(); // Prevent the default form submission
 			
-						const formData = new FormData(event.target);
+						const pWrap = new FormData(event.target);
+						var pWrapa = document.getElementById('jdata').cpit; 
+						let jsonData = { [pWrapa]: JSON.parse(pWrap) };
+
 				console.warn('pitch to add', formData);
 						
 					});
