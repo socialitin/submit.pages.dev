@@ -298,8 +298,10 @@
 						event.preventDefault(); // Prevent the default form submission
 			
 						const pWrap = new FormData(event.target);
-						var pWrapa = document.getElementById('jdata').cpit; 
-						let jsonData = { [pWrapa]: JSON.stringify(pWrap) };
+						var pWrapa = '3-5';
+						// document.getElementById('jdata').cpit; 
+						let jsonData = { [pWrapa]: FormData}; 
+							// JSON.stringify(pWrap) };
 
 				console.warn('pitch to add', pWrapa, pWrap, FormData);
 						
