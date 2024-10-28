@@ -300,10 +300,10 @@
 						const pWrap = new FormData(event.target);
 						var pWrapa = '3-5';
 						// document.getElementById('jdata').cpit; 
-						let jsonData = { [pWrapa]: FormData}; 
+						let jsonData = { [pWrapa]: JSON.parse(FormData)}; 
 							// JSON.stringify(pWrap) };
 
-				console.warn('pitch to add', pWrapa, pWrap, FormData);
+				console.warn('pitch to add', pWrapa, pWrap, FormData, jsonData);
 						
 					});
 				</script>
