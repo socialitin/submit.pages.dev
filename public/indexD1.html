@@ -241,7 +241,7 @@
 						
 				</div>
 				<div>
-					<form method="POST" action="/api/submit">
+					<form id ="addpitch" method="POST" >
 					<div class="input" type = "hidden">
 						<label for="IATA"></label>
 						<input id="IATA" name="IATA" type="text" />
@@ -293,6 +293,16 @@
 					
 				</form>							
 				</div>
+				<script>
+					document.getElementById('addpitch').addEventListener('submit', async (event) => {
+						event.preventDefault(); // Prevent the default form submission
+			
+						const formData = new FormData(event.target);
+				console.warn('pitch to add', formData);
+						
+					});
+				</script>
+
 				</div>
 		</div>	
 
