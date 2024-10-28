@@ -297,13 +297,34 @@
 					document.getElementById('addpitch').addEventListener('submit', async (event) => {
 						event.preventDefault(); // Prevent the default form submission
 			
-						const pWrap = new FormData(event.target);
-						var pWrapa = '3-5';
+						//const pWrap = new FormData(event.target);
+						const data = {"3-5": new FormData(event.target)};
 						// document.getElementById('jdata').cpit; 
-						let jsonData = { [pWrapa]: pWrap}; 
+						//let jsonData = { [pWrapa]: pWrap}; 
 							// JSON.stringify(pWrap) };
 
-				console.warn('pitch to add', pWrapa, pWrap,jsonData);
+							function convertDataObject(dataObject) {
+  const converted = {};
+
+  for (const key in dataObject) {
+    if (dataObject.hasOwnProperty(key)) {
+      const formData = dataObject[key];
+      const plainObject = {};
+
+      for (const [formKey, formValue] of formData.entries()) {
+        plainObject[formKey] = formValue;
+      }
+
+      converted[key] = plainObject;
+    }
+  }
+
+  return converted;
+}
+
+const plainData = convertDataObject(data);
+console.log(plainData);
+				//console.warn('pitch to add', pWrapa, pWrap,jsonData);
 						
 					});
 				</script>
