@@ -1,45 +1,27 @@
-/**
- * POST /api/submit
- */
-export async function onRequestPost(context) {
+
+async function handleSubmit(request, event) {
     try {
-      //  const db = context.env.DB;
+        // Parse JSON body
+        const data = await request.json();
 
-        // Parse form data from the request
-        let formData = await context.request.formData();
+        // Remove 'FormData' by using plain object
+        // In this example, data is already a plain object
 
-        // Convert form data to JSON object
-        let formDataObject = {};
-        for (const [name, value] of formData.entries()) {
-            formDataObject[name] = value;
-        }
-        // Convert the JSON object to a string
-     //   let jsonData = JSON.stringify(formDataObject);
-//console.log('jdata is', jsonData);
-//let pWrapb = {};
-let pWrap = JSON.stringify(formDataObject);
-var pWrapa = document.getElementById('jdata').cpit; 
+        // Prepare jsonData with dynamic key
+        const jsonData = data;
+        //{ [pWrapa]: data };
+        console.log('jdata is', jsonData);
 
-jsonData = {"'+pWrapa+'":'+pWrap+'};
-console.log('jdata is', jsonData);
-        // Insert the JSON data into the SQLite database
-       // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
-       //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
+        // Stringify jsonData if the database expects a string
+        const jsonString = JSON.stringify(jsonData);
 
-       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
-const response = await stmt.bind(jsonData).run(); 
+        // Prepare and execute the SQL statement
+        const stmt = event.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
+        const dbResponse = await stmt.bind(jsonString).run();
 
-       //Update corresponding published json
-
-       
-        return new Response(jsonData, {
-            status: 200,
-            headers: {
-                'Content-Type': 'text/plain'
-            }
-        });
-    } catch (err) {
-        return new Response('Error inserting data into SQLite database', { status: 500 });
+        return new Response('Database updated successfully', { status: 200 });
+    } catch (error) {
+        console.error('Error handling request:', error);
+        return new Response('Internal Server Error', { status: 500 });
     }
 }
-  
