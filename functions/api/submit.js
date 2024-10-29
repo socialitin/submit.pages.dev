@@ -19,9 +19,9 @@ async function handleSubmit(request, event) {
         const stmt = event.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
         const dbResponse = await stmt.bind(jsonString).run();
 
-        return new Response('Database updated successfully', { status: 200 });
+        return new Response(jsonString, { status: 200 });
     } catch (error) {
-        console.error('Error handling request:', error);
+        console.error(jsonString, error);
         return new Response('Internal Server Error', { status: 500 });
     }
 }
