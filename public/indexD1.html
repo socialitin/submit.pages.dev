@@ -296,7 +296,7 @@
 				<script>
 					document.getElementById('addpitch').addEventListener('submit', async (event) => {
 						event.preventDefault(); // Prevent the default form submission
-			const thiscmpj = document.getElementById('jdata').data[cpit];
+			const thiscmpj = document.getElementById('jdata').data['cpit'];
 			console.log(thiscmpj);
 						//const pWrap = new FormData(event.target);
 						const data = {[thiscmpj]: new FormData(event.target)};
@@ -713,10 +713,10 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 		//const data3 = data2.pitching;
 var dFtr = document.getElementById('fjson'+cPitch+'').name;
 		console.log('mypitch ftr', dFtr, data2);
-		document.getElementById('jdata').data[cpit] = dFtr; 
+		document.getElementById('jdata').data['cpit'] = dFtr; 
 		const data = data3[dFtr];		
 			
-			console.log('cmppitch', document.getElementById('jdata').data[cpit],dFtr,data2);
+			console.log('cmppitch', document.getElementById('jdata').data['cpit'],dFtr,data2);
 		//const data2 = JSON.parse(jPitch.pitching);
 		//const data = data2['440-1'];
 		//const data = data3.pitching;
