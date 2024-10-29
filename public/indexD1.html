@@ -296,7 +296,7 @@
 				<script>
 					document.getElementById('addpitch').addEventListener('submit', async (event) => {
 						event.preventDefault(); // Prevent the default form submission
-			const thiscmpj = document.getElementById('jdata').name;
+			const thiscmpj = document.getElementById('jdata').data;
 			console.log(thiscmpj);
 						//const pWrap = new FormData(event.target);
 						const data = {[thiscmpj]: new FormData(event.target)};
