@@ -1,3 +1,4 @@
+
 // Define the allowed origin(s)
 const ALLOWED_ORIGIN = "https://your-allowed-origin.com"; // Replace with your frontend's origin
 
@@ -92,3 +93,18 @@ async function handleSubmit(request, event) {
     });
   }
 }
+
+// Fetch event listener
+addEventListener("fetch", (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Adjust the path as needed
+  if (url.pathname === "/api/submit") {
+    event.respondWith(handleSubmit(request, event));
+  } else {
+    // Handle other routes or return 404
+    event.respondWith(new Response("Not Found", { status: 404 }));
+  }
+});
+
