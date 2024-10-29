@@ -222,7 +222,7 @@
 		  <div id="Tab2" class="tabcontent" >
 
 			<h3>Streaming now ...</h3>
-			<div id ="jdata" data = "" name = "" >
+			<div id ="jdata" data = "" data-cpit = "" >
 			<label>1</label><img id="fjson0" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>2</label><img id="fjson1" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">
 			<label>3</label><img id="fjson2" data = "" name ="" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:left;" onclick="d1tnhostsDtl(event)">	
@@ -296,7 +296,7 @@
 				<script>
 					document.getElementById('addpitch').addEventListener('submit', async (event) => {
 						event.preventDefault(); // Prevent the default form submission
-			const thiscmpj = document.getElementById('jdata').data;
+			const thiscmpj = document.getElementById('jdata').data('cpit');
 			console.log(thiscmpj);
 						//const pWrap = new FormData(event.target);
 						const data = {[thiscmpj]: new FormData(event.target)};
