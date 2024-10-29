@@ -325,7 +325,7 @@
 }
 
 const data = convertDataObject(data2upd);
-console.log(JSON.stringify(data.pitching));
+console.log(JSON.parse(data.pitching), data);
 				
 				const response = await fetch('/api/submit', { 
                 method: 'POST',
