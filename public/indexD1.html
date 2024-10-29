@@ -299,7 +299,7 @@
 			const thiscmpj = document.getElementById('jdata').dataset.cpit;
 			console.log(thiscmpj);
 						//const pWrap = new FormData(event.target);
-						const data = {[thiscmpj]: new FormData(event.target)};
+						const data2upd = {[thiscmpj]: new FormData(event.target)};
 						// document.getElementById('jdata').cpit; 
 						//let jsonData = { [pWrapa]: pWrap}; 
 							// JSON.stringify(pWrap) };
@@ -321,12 +321,25 @@
   }
 
   return converted;
+  
 }
 
-const plainData = convertDataObject(data);
-console.log(JSON.stringify(plainData));
-				//console.warn('pitch to add', pWrapa, pWrap,jsonData);
-						
+const data = convertDataObject(data2upd).pitching;
+console.log(JSON.stringify(data));
+				
+				const response = await fetch('/api/submit', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Form submitted successfully!');
+            } else {
+                alert('Form submission failed.');
+            }					
 					});
 				</script>
 
