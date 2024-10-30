@@ -25,8 +25,8 @@ console.log('jdata is', jsonData);
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
 
-       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
-const response = await stmt.bind(jsonData).run(); 
+      // const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
+//const response = await stmt.bind(jsonData).run(); 
 
        //Update corresponding published json
 
