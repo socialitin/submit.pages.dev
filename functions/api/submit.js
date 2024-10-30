@@ -5,7 +5,7 @@ export async function onRequest(request, env) {
   
     // Handle CORS preflight requests
   
-    try {
+
       // Parse the JSON body
       const data = await request.json();
   
@@ -21,5 +21,5 @@ export async function onRequest(request, env) {
   
       // Check if the update was successful
 return new Response(jsonData);
-  }
+
 };
