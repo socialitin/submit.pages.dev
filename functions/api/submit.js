@@ -10,15 +10,7 @@ export async function onRequest(request, env) {
       const data = await request.json();
   
       // Validate incoming data (example validation)
-      if (!data || typeof data !== 'object') {
-        return new Response(JSON.stringify({ error: 'Invalid JSON data' }), {
-          status: 400,
-          headers: {
-            'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-            'Content-Type': 'application/json',
-          },
-        });
-      }
+  
   
       // Prepare jsonData (modify as per your requirements)
       const jsonData = JSON.stringify(data);
