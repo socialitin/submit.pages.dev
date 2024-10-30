@@ -241,7 +241,7 @@
 						
 				</div>
 				<div>
-					<form id ="addpitch" method="POST" >
+					<form id ="addpitch" method="POST" action = "/api/submit">
 					<div class="input" type = "hidden">
 						<label for="IATA"></label>
 						<input id="IATA" name="IATA" type="text" />
@@ -274,7 +274,7 @@
 	
 					<div class="checklist">
 						<label for="Venue">Whats the venue</label>
-						<select id="venue" name="venue" action = "/api/submit">
+						<select id="venue" name="venue">
 							<option hidden disabled selected value></option>
 							<option value="Attraction">Attraction</option>
 							<option value="Club">Club, Event</option>
