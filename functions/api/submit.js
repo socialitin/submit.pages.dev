@@ -4,28 +4,6 @@ export async function onRequest(request, env) {
     const ALLOWED_ORIGIN = 'https://www.ads.tournet.com'; // Replace with your frontend's origin
   
     // Handle CORS preflight requests
-    if (request.method === 'POST') {
-      return new Response(null, {
-        status: 204,
-        headers: {
-          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Max-Age': '86400', // 1 day
-        },
-      });
-    }
-  
-    // Ensure the request method is POST
-    if (request.method !== 'POST') {
-      return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
-        status: 405,
-        headers: {
-          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-          'Content-Type': 'application/json',
-        },
-      });
-    }
   
     try {
       // Parse the JSON body
