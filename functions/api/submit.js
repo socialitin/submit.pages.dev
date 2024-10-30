@@ -4,7 +4,7 @@ export async function onRequest(request, env) {
     const ALLOWED_ORIGIN = 'https://www.ads.tournet.com'; // Replace with your frontend's origin
   
     // Handle CORS preflight requests
-    if (request.method === 'OPTIONS') {
+    if (request.method === 'POST') {
       return new Response(null, {
         status: 204,
         headers: {
