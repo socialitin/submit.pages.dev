@@ -39,7 +39,7 @@ export async function onRequest(request, env) {
       }
     } catch (error) {
       console.error('Error in /api/submit:', error);
-      return new Response(JSON.stringify(jsonData), {
+      return new Response(jsonData, {
         status: 500,
         headers: {
           'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
