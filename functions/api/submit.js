@@ -28,7 +28,7 @@ const thiscmpj = "3-5";
 //document.getElementById('jdata').dataset.cpit;
 console.log(thiscmpj);
             //const pWrap = new FormData(event.target);
-            const jsonData = {[thiscmpj]: JSON.stringify(formDataObject,null,2)};
+            const jsonData = {[thiscmpj]: (formDataObject,null,2)};
               console.log(JSON.stringify(jsonData));
 /////
 console.log('jdata is', jsonData);
