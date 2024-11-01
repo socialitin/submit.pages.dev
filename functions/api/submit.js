@@ -42,7 +42,12 @@ const response = await stmt.bind(JSON.stringify(jsonData)).run();
        //Update corresponding published json
 
        
-
+        return new Response(jsonData, {
+            status: 200,
+            headers: {
+                'Content-Type': 'json'
+            }
+        });
     } catch (err) {
         return new Response('Error inserting data into SQLite database', { status: 500 });
     }
