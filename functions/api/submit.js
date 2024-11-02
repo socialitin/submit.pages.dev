@@ -50,11 +50,11 @@ const thiscmpj = param1 +'-'+param2;
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
-const CompanyName = 'Pereirawas';
+const companyName = 'Pereirawas';
  //      const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
 //const response = await stmt.bind(JSON.stringify(jsonData)).run(); 
 const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE ?"); 
-const response = await stmt.bind(JSON.stringify(jsonData), `%${CompanyName}%`).run(); 
+const response = await stmt.bind(JSON.stringify(jsonData), `%${companyName}%`).run(); 
        //Update corresponding published json
 
        
