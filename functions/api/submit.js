@@ -54,7 +54,7 @@ const CompanyName = 'Pereirawas';
  //      const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
 //const response = await stmt.bind(JSON.stringify(jsonData)).run(); 
 const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE ?"); 
-const response = await stmt.bind(JSON.stringify(jsonData), `%${companyName}%`).run(); 
+const response = await stmt.bind(JSON.stringify(jsonData), `%${CompanyName}%`).run(); 
        //Update corresponding published json
 
        
