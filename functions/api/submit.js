@@ -27,7 +27,7 @@ export async function onRequestPost(context) {
     
     // Retrieve URL parameters using searchParams  
     const param1 = url.searchParams.get('cmpid'); 
-    const param2 = url.searchParams.get('countid'); 
+    const param2 = url.searchParams.get('jid'); 
 
     // Craft a response using the captured parameters  
 
@@ -50,10 +50,11 @@ const thiscmpj = param1 +'-'+param2;
         // Insert the JSON data into the SQLite database
        // await db.run("INSERT INTO hosts (pitching) VALUES (?)", [jsonData]);
        //const stmt = context.env.DB.prepare("INSERT INTO hosts (pitching) VALUES (?),[jsonDate]");
-
-       const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
-const response = await stmt.bind(JSON.stringify(jsonData)).run(); 
-
+const CompanyName = 'Pereirawas';
+ //      const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE '%Pereirawas%' ");
+//const response = await stmt.bind(JSON.stringify(jsonData)).run(); 
+const stmt = context.env.DB.prepare("UPDATE hosts SET pitching = ? WHERE CompanyName LIKE ?"); 
+const response = await stmt.bind(JSON.stringify(jsonData), `%${companyName}%`).run(); 
        //Update corresponding published json
 
        
