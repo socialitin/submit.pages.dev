@@ -678,6 +678,17 @@ document.getElementById('picDtls').innerHTML = picsUpl;
 var dFtr = document.getElementById('fjson'+cPitch+'').name;
 		console.log('mypitch ftr', dFtr, data2);
 		document.getElementById('jdata').dataset.cpit = dFtr; 
+///
+const form = document.getElementById('addpitch');  
+const dataDiv = document.getElementById('jdata'); 
+                // Get the values from data attributes of the div  
+                const cmpid = dataDiv.getAttribute('data-cpit') || '1'; // Use a default value if needed  
+                const jid = dataDiv.getAttribute('data-cpit') || '1'; // Use a default value if needed  
+                
+                // Update the form action  
+                form.action = `/api/submit/?cmpid='${cmpid}'&jid='${jid}'`;  
+                console.log(`Form action updated to: ${form.action}`); 
+////
 		const data = data3[dFtr];		
 			
 			console.log('cmppitch', document.getElementById('jdata').dataset.cpit,dFtr,data2);
