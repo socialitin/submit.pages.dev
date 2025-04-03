@@ -420,314 +420,300 @@
 </html>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    function openTab(evt, tabName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+  async function d1tnlogin() {
+    const workerUrl = 'https://grabjson.socialitin.workers.dev/';
+    try {
+      const response = await fetch(workerUrl);
+      if (!response.ok) {
+        return;
       }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-
-    async function d1tnlogin() {
-      const workerUrl = 'https://grabjson.socialitin.workers.dev/';
-      try {
-        const response = await fetch(workerUrl);
-        if (!response.ok) {
-          return;
+      const mpitch = await response.json();
+      console.log('mpitch', mpitch);
+      let cItems = 0;
+      for (const group in mpitch) {
+        if (mpitch.hasOwnProperty(group)) {
+          const groupName = group;
+          const tgroup = group;
+          console.log(`Group: ${groupName}`);
+          cItems++;
+          let jdata = [];
+          mpitch[group].forEach(item => {
+            const currentItem = item;
+            const cItem = item;
+            const pcountry = group.substring(0, 3) + '/';
+            const tImg = `https://mmedia.tournet.com/Tournet/Destinations/Presentation/${pcountry}${tgroup}/${cItem.City}.jpg`;
+            const Tpics = { "img": tImg, "name": cItem.City, "description": cItem.Pitch, "iata": cItem.IATA };
+            jdata.push(Tpics);
+            console.log('imgs ', Tpics);
+            document.getElementById('fjson' + cItems).src = tImg;
+            $('#fjson' + cItems).attr('data-offer', JSON.stringify(jdata));
+            console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
+          });
+          document.getElementById("fjson1").click();
+          setTimeout(function () {
+            document.getElementById("0").click();
+          }, 500);
+          console.log('');
         }
-        const mpitch = await response.json();
-        console.log('mpitch', mpitch);
-        let cItems = 0;
-        for (const group in mpitch) {
-          if (mpitch.hasOwnProperty(group)) {
-            const groupName = group;
-            const tgroup = group;
-            console.log(`Group: ${groupName}`);
-            cItems++;
-            let jdata = [];
-            mpitch[group].forEach(item => {
-              const currentItem = item;
-              const cItem = item;
-              const pcountry = group.substring(0, 3) + '/';
-              const tImg = `https://mmedia.tournet.com/Tournet/Destinations/Presentation/${pcountry}${tgroup}/${cItem.City}.jpg`;
-              const Tpics = { "img": tImg, "name": cItem.City, "description": cItem.Pitch, "iata": cItem.IATA };
-              jdata.push(Tpics);
-              console.log('imgs ', Tpics);
-              document.getElementById('fjson' + cItems).src = tImg;
-              $('#fjson' + cItems).attr('data-offer', JSON.stringify(jdata));
-              console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
-            });
-            document.getElementById("fjson1").click();
-            setTimeout(function () {
-              document.getElementById("0").click();
-            }, 500);
-            console.log('');
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching JSON:', error);
       }
+    } catch (error) {
+      console.error('Error fetching JSON:', error);
     }
+  }
 
-    async function d1tnupdate() {
-      const response = await fetch('/api/d1tnupdate');
-      const data2 = await response.json();
-      console.log(data2);
+  async function d1tnupdate() {
+    const response = await fetch('/api/d1tnupdate');
+    const data2 = await response.json();
+    console.log(data2);
+  }
+
+  async function d1tnhosts(evt, src) {
+    const data2 = evt.target.getAttribute('data-offer');
+    const picsj = JSON.parse(data2);
+    const picis = picsj[0].img;
+    const pcount = evt.target.id;
+    const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
+    console.log('thispitch', picsj);
+    let tImgAll = '';
+    for (let h = 0; h < picsj.length; h++) {
+      const tIata = picsj[h].iata;
+      const tname = picsj[h].name;
+      const tdesc = picsj[h].description;
+      const jdata = [tIata, tname, tdesc];
+      const tImg = `<div class="carousel-item"><img name="${jdata}" data="${picsj[h]}" id="${h}" src="${picsj[h].img}" style="width:102px; height:102px;" onclick="picsDtl(event,src,name);"></div>`;
+      tImgAll += tImg;
     }
-
-    async function d1tnhosts(evt, src) {
-      const data2 = evt.target.getAttribute('data-offer');
-      const picsj = JSON.parse(data2);
-      const picis = picsj[0].img;
-      const pcount = evt.target.id;
-      const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
-      console.log('thispitch', picsj);
-      let tImgAll = '';
-      for (let h = 0; h < picsj.length; h++) {
-        const tIata = picsj[h].iata;
-        const tname = picsj[h].name;
-        const tdesc = picsj[h].description;
-        const jdata = [tIata, tname, tdesc];
-        const tImg = `<div class="carousel-item"><img name="${jdata}" data="${picsj[h]}" id="${h}" src="${picsj[h].img}" style="width:102px; height:102px;" onclick="picsDtl(event,src,name);"></div>`;
-        tImgAll += tImg;
-      }
-      document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap;";
-      document.getElementById("thumbs").innerHTML = tImgAll;
-      document.getElementById("itemImg").style = "width: 100%;";
-      const tVideo = `<div width="20%">${data.embVideo}${data.Pitch}</div>`;
-      document.getElementById("itemImg").innerHTML = tVideo;
-      document.getElementById("IATA").value = data.IATA;
-      document.getElementById("City").value = data.City;
-      document.getElementById("Province").value = data.Province;
-      document.getElementById("pitch").value = data.Pitch;
-      document.getElementById("Pictures").value = pics;
-      document.getElementById("embVideo").value = tVideo;
-      const picsUpl = `
-        <form id="upload-video3" onsubmit="uploadImage(event)">
-          <div>
-            <input id="offer" value="${data.City}">
-            <textarea>
-              <input id="pitch" value="${data.Pitch} textarea"></textarea>
-            <input type="file" id="v-input" fname="file" onchange="previewImage(event)">
-            <button type="submit">Upload Video</button>
-          </div>
-        </form>`;
-      document.getElementById('picDtls').style = "width:100%;";
-      document.getElementById('picDtls').innerHTML = picsUpl;
-    }
-
-    function picsDtl(evt, src, name) {
-      const picis = src;
-      const Pname = name.split(',')[2];
-      const Pdesc = name.split(',')[1];
-      const pIata = name.split(',')[0];
-      const pcount = evt.target.id;
-      const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
-      const tiata = pIata.toString() + 'S';
-      const PIata = tiata.length < 4 ? "NYCSS" : tiata;
-      document.getElementById('channel-input').value = PIata;
-      document.getElementById("itemImg").innerHTML = picUrl;
-      const picsUpl = `
-        <form id="upload-form${pcount}" onsubmit="uploadImage(event)">
-          <div>
-            <input id="picname" value="${Pname}">
-            <input id="descI" value="${Pdesc}">
-            <input type="file" style="display: none;" id="file-input" name="file" onchange="previewImage(event)">
-            <button type="submit" style="display: none;">Upload Image</button>
-          </div>
-        </form>`;
-      const pItin = `
+    document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap;";
+    document.getElementById("thumbs").innerHTML = tImgAll;
+    document.getElementById("itemImg").style = "width: 100%;";
+    const tVideo = `<div width="20%">${data.embVideo}${data.Pitch}</div>`;
+    document.getElementById("itemImg").innerHTML = tVideo;
+    document.getElementById("IATA").value = data.IATA;
+    document.getElementById("City").value = data.City;
+    document.getElementById("Province").value = data.Province;
+    document.getElementById("pitch").value = data.Pitch;
+    document.getElementById("Pictures").value = pics;
+    document.getElementById("embVideo").value = tVideo;
+    const picsUpl = `
+      <form id="upload-video3" onsubmit="uploadImage(event)">
         <div>
-          <input id="cell" placeholder="type your cell number"> Connect with Host
-          <i class="fas fa-paper-plane" onclick="connectWithHost()"></i>
-        </div>`;
-      document.getElementById('picDtls').innerHTML = picsUpl + pItin;
-    }
+          <input id="offer" value="${data.City}">
+          <textarea>
+            <input id="pitch" value="${data.Pitch} textarea"></textarea>
+          <input type="file" id="v-input" fname="file" onchange="previewImage(event)">
+          <button type="submit">Upload Video</button>
+        </div>
+      </form>`;
+    document.getElementById('picDtls').style = "width:100%;";
+    document.getElementById('picDtls').innerHTML = picsUpl;
+  }
+</script>
 
-    function connectWithHost() {
-      const cellValue = document.getElementById('cell').value;
-      if (cellValue.trim() === "") {
-        alert("Please enter your cell number.");
-        return;
+<script>
+  function picsDtl(evt, src, name) {
+    const picis = src;
+    const Pname = name.split(',')[2];
+    const Pdesc = name.split(',')[1];
+    const pIata = name.split(',')[0];
+    const pcount = evt.target.id;
+    const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
+    const tiata = pIata.toString() + 'S';
+    const PIata = tiata.length < 4 ? "NYCSS" : tiata;
+    document.getElementById('channel-input').value = PIata;
+    document.getElementById("itemImg").innerHTML = picUrl;
+    const picsUpl = `
+      <form id="upload-form${pcount}" onsubmit="uploadImage(event)">
+        <div>
+          <input id="picname" value="${Pname}">
+          <input id="descI" value="${Pdesc}">
+          <input type="file" style="display: none;" id="file-input" name="file" onchange="previewImage(event)">
+          <button type="submit" style="display: none;">Upload Image</button>
+        </div>
+      </form>`;
+    const pItin = `
+      <div>
+        <input id="cell" placeholder="type your cell number"> Connect with Host
+        <i class="fas fa-paper-plane" onclick="connectWithHost()"></i>
+      </div>`;
+    document.getElementById('picDtls').innerHTML = picsUpl + pItin;
+  }
+
+  function connectWithHost() {
+    const cellValue = document.getElementById('cell').value;
+    if (cellValue.trim() === "") {
+      alert("Please enter your cell number.");
+      return;
+    }
+    document.getElementById('itin-id-input').value = cellValue;
+    document.getElementById('load-channel-button').click();
+    document.getElementById('initiate-button').click();
+  }
+
+  function previewImage(event) {
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+    const preview = document.getElementById('3u');
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
       }
-      document.getElementById('itin-id-input').value = cellValue;
-      document.getElementById('load-channel-button').click();
-      document.getElementById('initiate-button').click();
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = '';
+      preview.style.display = 'none';
     }
+  }
 
-    function previewImage(event) {
-      const fileInput = event.target;
-      const file = fileInput.files[0];
-      const preview = document.getElementById('3u');
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
+  async function uploadImage(event) {
+    event.preventDefault();
+    const fileInput = document.getElementById('file-input');
+    if (!fileInput) {
+      console.error('File input not found.');
+      return;
+    }
+    const file = fileInput.files[0];
+    if (!file) {
+      alert('Please select a file to upload.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert('Image uploaded successfully!');
+        const data2 = result.variants;
+        const data = data2[0];
+        const ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+        const cImgId = event.target.id;
+        const idis = cImgId.charAt(cImgId.length - 1);
+        ppicsj[idis].name = document.getElementById("picname").value;
+        ppicsj[idis].description = document.getElementById("descI").value;
+        ppicsj[idis].img = data;
+        sessionStorage.setItem("pics", JSON.stringify(ppicsj));
+        const picUrl = `<img src="${data}" style="width:99%;"></img>`;
+        document.getElementById("itemImg").innerHTML = picUrl;
+        document.getElementById(idis).src = data;
       } else {
-        preview.src = '';
-        preview.style.display = 'none';
+        alert(`Failed to upload image: ${result}`);
       }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('An error occurred while uploading the image.');
     }
+  }
+</script>
 
-    async function uploadImage(event) {
-      event.preventDefault();
-      const fileInput = document.getElementById('file-input');
-      if (!fileInput) {
-        console.error('File input not found.');
-        return;
+<script>
+  function picPost(evt, id) {
+    const ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+    ppicsj[id].name = document.getElementById("name").value;
+    ppicsj[id].description = document.getElementById("descI").value;
+    sessionStorage.setItem("pics", JSON.stringify(ppicsj));
+  }
+
+  function subscribeAug1724() {
+    const ws = new WebSocket('wss:pub-sub.socialitin.workers.dev/subscribe');
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (window.onMessageReceived) {
+        window.onMessageReceived(data);
+      } else {
+        console.log('Received:', data.message);
       }
-      const file = fileInput.files[0];
-      if (!file) {
-        alert('Please select a file to upload.');
-        return;
-      }
-      const formData = new FormData();
-      formData.append('file', file);
-      try {
-        const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
-          method: 'POST',
-          body: formData
-        });
-        const result = await response.json();
-        if (response.ok) {
-          alert('Image uploaded successfully!');
-          const data2 = result.variants;
-          const data = data2[0];
-          const ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-          const cImgId = event.target.id;
-          const idis = cImgId.charAt(cImgId.length - 1);
-          ppicsj[idis].name = document.getElementById("picname").value;
-          ppicsj[idis].description = document.getElementById("descI").value;
-          ppicsj[idis].img = data;
-          sessionStorage.setItem("pics", JSON.stringify(ppicsj));
-          const picUrl = `<img src="${data}" style="width:99%;"></img>`;
-          document.getElementById("itemImg").innerHTML = picUrl;
-          document.getElementById(idis).src = data;
-        } else {
-          alert(`Failed to upload image: ${result}`);
-        }
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        alert('An error occurred while uploading the image.');
-      }
-    }
+    };
+    ws.onopen = () => {
+      console.log('Subscribed to the channel');
+    };
+    ws.onclose = () => {
+      console.log('Subscription closed');
+    };
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+  }
 
-    function picPost(evt, id) {
-      const ppicsj = JSON.parse(sessionStorage.getItem("pics"));
-      ppicsj[id].name = document.getElementById("name").value;
-      ppicsj[id].description = document.getElementById("descI").value;
-      sessionStorage.setItem("pics", JSON.stringify(ppicsj));
-    }
-
-    function subscribeAug1724() {
-      const ws = new WebSocket('wss:pub-sub.socialitin.workers.dev/subscribe');
-      ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (window.onMessageReceived) {
-          window.onMessageReceived(data);
-        } else {
-          console.log('Received:', data.message);
-        }
-      };
-      ws.onopen = () => {
-        console.log('Subscribed to the channel');
-      };
-      ws.onclose = () => {
-        console.log('Subscription closed');
-      };
-      ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-      };
-    }
-
-    async function replyToConversation(conversationId, message) {
-      try {
-        const response = await fetch(`https://pub-sub.socialitin.workers.dev/reply/${conversationId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ message }),
-        });
-        if (response.ok) {
-          console.log(`Message added to conversation ${conversationId}`);
-        } else {
-          console.error(`Failed to add message to conversation:`, response.statusText);
-        }
-      } catch (error) {
-        console.error(`Error replying to conversation:`, error);
-      }
-    }
-
-    function publishAug1724(message) {
-      fetch('https://pub-sub.socialitin.workers.dev/publish', {
+  async function replyToConversation(conversationId, message) {
+    try {
+      const response = await fetch(`https://pub-sub.socialitin.workers.dev/reply/${conversationId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: message }),
-      })
-        .then(response => response.text())
-        .then(data => {
-          console.log('Message sent:', data);
-        })
-        .catch(error => {
-          console.error('Error sending message:', error);
-        });
-    }
-
-    async function initiateConversation(cityCode, serviceType, message) {
-      try {
-        const response = await fetch(`https://pub-sub.socialitin.workers.dev/initiate/${cityCode}/${serviceType}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ message }),
-        });
-        if (response.ok) {
-          const data = await response.json();
-          console.log(`Conversation initiated with ID: ${data.conversationId}`);
-          return data.conversationId;
-        } else {
-          console.error(`Failed to initiate conversation:`, response.statusText);
-        }
-      } catch (error) {
-        console.error(`Error initiating conversation:`, error);
+        body: JSON.stringify({ message }),
+      });
+      if (response.ok) {
+        console.log(`Message added to conversation ${conversationId}`);
+      } else {
+        console.error(`Failed to add message to conversation:`, response.statusText);
       }
+    } catch (error) {
+      console.error(`Error replying to conversation:`, error);
     }
+  }
 
-    async function fetchjson() {
-      const response = await fetch('/api/fetchjson');
-      const data = await response.json();
-      console.log(data);
-      sessionStorage.setItem("j2post", JSON.stringify(data));
-      const j2addStorage = {
-        "IATA": "US2",
-        "City": "US3-Eastern",
-        "Province": "Western",
-        "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
-        "Pictures": "[{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
-        "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
-      };
-      const j2add = j2addStorage;
-      const j2publish = data;
-      j2publish["NYCS"].push(j2add);
-      console.log(j2publish);
+  function publishAug1724(message) {
+    fetch('https://pub-sub.socialitin.workers.dev/publish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: message }),
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log('Message sent:', data);
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+      });
+  }
+
+  async function initiateConversation(cityCode, serviceType, message) {
+    try {
+      const response = await fetch(`https://pub-sub.socialitin.workers.dev/initiate/${cityCode}/${serviceType}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Conversation initiated with ID: ${data.conversationId}`);
+        return data.conversationId;
+      } else {
+        console.error(`Failed to initiate conversation:`, response.statusText);
+      }
+    } catch (error) {
+      console.error(`Error initiating conversation:`, error);
     }
+  }
 
-    // Initialize the application
-    d1tnlogin();
-  });
+  async function fetchjson() {
+    const response = await fetch('/api/fetchjson');
+    const data = await response.json();
+    console.log(data);
+    sessionStorage.setItem("j2post", JSON.stringify(data));
+    const j2addStorage = {
+      "IATA": "US2",
+      "City": "US3-Eastern",
+      "Province": "Western",
+      "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
+      "Pictures": "[{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
+      "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
+    };
+    const j2add = j2addStorage;
+    const j2publish = data;
+    j2publish["NYCS"].push(j2add);
+    console.log(j2publish);
+  }
 </script>
+
 
