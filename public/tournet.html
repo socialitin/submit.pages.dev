@@ -467,46 +467,47 @@
     console.log(data2);
   }
 
-  async function d1tnhosts(evt, src) {
-    const data2 = evt.target.getAttribute('data-offer');
-    const picsj = JSON.parse(data2);
-    const picis = picsj[0].img;
-    const pcount = evt.target.id;
-    const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
-    console.log('thispitch', picsj);
-    let tImgAll = '';
-    for (let h = 0; h < picsj.length; h++) {
-      const tIata = picsj[h].iata;
-      const tname = picsj[h].name;
-      const tdesc = picsj[h].description;
-      const jdata = [tIata, tname, tdesc];
-      const tImg = `<div class="carousel-item"><img name="${jdata}" data="${picsj[h]}" id="${h}" src="${picsj[h].img}" style="width:102px; height:102px;" onclick="picsDtl(event,src,name);"></div>`;
-      tImgAll += tImg;
-    }
-    document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap;";
-    document.getElementById("thumbs").innerHTML = tImgAll;
-    document.getElementById("itemImg").style = "width: 100%;";
-    const tVideo = `<div width="20%">${data.embVideo}${data.Pitch}</div>`;
-    document.getElementById("itemImg").innerHTML = tVideo;
-    document.getElementById("IATA").value = data.IATA;
-    document.getElementById("City").value = data.City;
-    document.getElementById("Province").value = data.Province;
-    document.getElementById("pitch").value = data.Pitch;
-    document.getElementById("Pictures").value = pics;
-    document.getElementById("embVideo").value = tVideo;
-    const picsUpl = `
-      <form id="upload-video3" onsubmit="uploadImage(event)">
-        <div>
-          <input id="offer" value="${data.City}">
-          <textarea>
-            <input id="pitch" value="${data.Pitch} textarea"></textarea>
-          <input type="file" id="v-input" fname="file" onchange="previewImage(event)">
-          <button type="submit">Upload Video</button>
-        </div>
-      </form>`;
-    document.getElementById('picDtls').style = "width:100%;";
-    document.getElementById('picDtls').innerHTML = picsUpl;
-  }
+	async function d1tnhosts(evt) {
+		const data2 = evt.target.getAttribute('data-offer');
+		const picsj = JSON.parse(data2);
+		const picis = picsj[0].img;
+		const pcount = evt.target.id;
+		const picUrl = `<img id="${pcount}u" src="${picis}" style="width:99%;"></img>`;
+		console.log('thispitch', picsj);
+		let tImgAll = '';
+		for (let h = 0; h < picsj.length; h++) {
+			const tIata = picsj[h].iata;
+			const tname = picsj[h].name;
+			const tdesc = picsj[h].description;
+			const jdata = [tIata, tname, tdesc];
+			const tImg = `<div class="carousel-item"><img name="${jdata}" data="${picsj[h]}" id="${h}" src="${picsj[h].img}" style="width:102px; height:102px;" onclick="picsDtl(event,src,name);"></div>`;
+			tImgAll += tImg;
+		}
+		document.getElementById("thumbs").style = "display: flex; overflow-x: auto; white-space: nowrap;";
+		document.getElementById("thumbs").innerHTML = tImgAll;
+		document.getElementById("itemImg").style = "width: 100%;";
+		const tVideo = `<div width="20%">${picsj[0].embVideo}${picsj[0].Pitch}</div>`;
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("IATA").value = picsj[0].IATA;
+		document.getElementById("City").value = picsj[0].City;
+		document.getElementById("Province").value = picsj[0].Province;
+		document.getElementById("pitch").value = picsj[0].Pitch;
+		document.getElementById("Pictures").value = JSON.stringify(picsj);
+		document.getElementById("embVideo").value = tVideo;
+		const picsUpl = `
+    <form id="upload-video3" onsubmit="uploadImage(event)">
+      <div>
+        <input id="offer" value="${picsj[0].City}">
+        <textarea>
+          <input id="pitch" value="${picsj[0].Pitch} textarea"></textarea>
+        <input type="file" id="v-input" fname="file" onchange="previewImage(event)">
+        <button type="submit">Upload Video</button>
+      </div>
+    </form>`;
+		document.getElementById('picDtls').style = "width:100%;";
+		document.getElementById('picDtls').innerHTML = picsUpl;
+	}
+
 </script>
 
 <script>
