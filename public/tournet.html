@@ -5,11 +5,7 @@
   <meta charset="utf-8">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat UI</title>
-    <!-- Tailwind CSS is loaded via a CDN for simplicity -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Cloudflare Pages 2 Tournet presence</title>
   <meta name="theme-color" content="#d86300">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,28 +226,6 @@ margin-top: 4%;
                 #conversation-messages {
                     margin-top: 20px;
                 }
-          /* Custom styles to match the look of the PDF image */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .conversation-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .conversation-container::-webkit-scrollbar-track {
-            background: #e5e7eb;
-            border-radius: 10px;
-        }
-        .conversation-container::-webkit-scrollbar-thumb {
-            background: #9ca3af;
-            border-radius: 10px;
-        }
-        .conversation-container {
-            scrollbar-width: thin;
-            scrollbar-color: #9ca3af #e5e7eb;
-        }
-        /* Custom font for a more modern feel */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
         
                 .conversation-option {
                     display: inline-block;
@@ -498,157 +472,6 @@ margin-top: 4%;
  
              <h3>Conversation Messages</h3>
              <!-- Messages will be dynamically inserted here -->
-              <body class="bg-gray-100 antialiased flex items-center justify-center min-h-screen p-4">
-
-    <!-- Main container for the chat application -->
-    <div class="w-full max-w-xl md:max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col h-[90vh] sm:h-[80vh]">
-
-        <!-- Top navigation/tabs container -->
-        <div class="p-2 border-b border-gray-200 flex items-center justify-between bg-gray-50">
-            <div class="flex-1 text-center font-semibold text-gray-400">FEATURED IN MY TOWN</div>
-            <div class="flex-1 text-center font-semibold text-gray-400">HAPPENING NEARBY</div>
-            <div class="flex-1 text-center font-semibold text-gray-400">MY ITINS</div>
-        </div>
-
-        <!-- Tabbed interface below the main navigation -->
-        <div class="flex border-b border-gray-200">
-            <button class="flex-1 py-3 px-6 text-center text-blue-600 border-b-2 border-blue-600 font-semibold transition-colors duration-200">
-                Conversation
-            </button>
-            <button class="flex-1 py-3 px-6 text-center text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                Coupons & Events
-            </button>
-            <button class="flex-1 py-3 px-6 text-center text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                Nearby
-            </button>
-            <button class="flex-1 py-3 px-6 text-center text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                Reservations
-            </button>
-            <div class="w-16 flex items-center justify-center p-2">
-                <img src="https://placehold.co/40x40/E5E7EB/4B5563?text=Logo" alt="Socialitin Logo" class="rounded-full">
-            </div>
-        </div>
-        
-        <!-- Main messages container -->
-        <div id="conversation-messages" class="conversation-container flex-grow p-4 overflow-y-auto space-y-6">
-
-            <!-- "My requests" header -->
-            <div class="text-xs font-semibold text-gray-500 mb-2">My requests</div>
-
-            <!-- First Request Block (User) -->
-            <div class="bg-blue-50 rounded-2xl p-4 shadow-sm flex flex-col space-y-2">
-                <div class="flex justify-between items-center text-xs text-gray-500">
-                    <span class="bg-red-200 text-red-800 font-bold px-2 py-1 rounded-full text-xs">First request</span>
-                    <span class="font-semibold">RIO</span>
-                </div>
-                <p class="text-sm font-medium">Would like a dinner show on July 7th and suggested local activities during that week</p>
-                <div class="flex items-center text-xs text-gray-600 space-x-2">
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Local Activities</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Sightseeing</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Dinner</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Event</span>
-                    <span class="flex-grow text-right">📅 3 months</span>
-                </div>
-                <div class="text-sm text-gray-500">👤 2 pax</div>
-                
-                <!-- Vendor Responses for the First Request -->
-                <div class="flex flex-col space-y-3 mt-4 border-t border-gray-200 pt-4">
-                    <!-- Vendor 1 -->
-                    <div class="flex items-center space-x-3">
-                        <img src="https://placehold.co/40x40/D1D5DB/1F2937?text=V1" alt="Vendor 1" class="rounded-full shadow">
-                        <div class="flex-1">
-                            <span class="font-semibold text-sm">Vendor 1</span>
-                            <div class="text-sm text-gray-600">Response with quote</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="font-bold text-lg text-green-600">$200.00</div>
-                            <div class="text-xs text-gray-400">see quote</div>
-                        </div>
-                    </div>
-
-                    <!-- Vendor 2 -->
-                    <div class="flex items-center space-x-3">
-                        <img src="https://placehold.co/40x40/D1D5DB/1F2937?text=V2" alt="Vendor 2" class="rounded-full shadow">
-                        <div class="flex-1">
-                            <span class="font-semibold text-sm">Vendor 2</span>
-                            <div class="text-sm text-gray-600">Second response with quote</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="font-bold text-lg text-green-600">$1,000.00</div>
-                            <div class="text-xs text-gray-400">see quote</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Request Block (User) -->
-            <div class="bg-blue-50 rounded-2xl p-4 shadow-sm flex flex-col space-y-2">
-                <div class="flex justify-between items-center text-xs text-gray-500">
-                    <span class="bg-red-200 text-red-800 font-bold px-2 py-1 rounded-full text-xs">Second request/no response yet</span>
-                    <span class="font-semibold">RIO</span>
-                </div>
-                <p class="text-sm font-medium">Discount Coupons</p>
-                <div class="flex items-center text-xs text-gray-600 space-x-2">
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Shopping</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Other arts/crafts</span>
-                    <span class="flex-grow text-right">🗓️ 5 months ago</span>
-                </div>
-                <div class="text-sm text-gray-500">👤 1 pax</div>
-            </div>
-
-            <!-- Third Request Block (User) -->
-            <div class="bg-blue-50 rounded-2xl p-4 shadow-sm flex flex-col space-y-2">
-                <div class="flex justify-between items-center text-xs text-gray-500">
-                    <span class="bg-red-200 text-red-800 font-bold px-2 py-1 rounded-full text-xs">Third request</span>
-                    <span class="font-semibold">RIO</span>
-                </div>
-                <p class="text-sm font-medium">Need apartment in Copacabana</p>
-                <div class="flex items-center text-xs text-gray-600 space-x-2">
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Accommodation</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Hotel</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Apartment</span>
-                    <span class="flex-grow text-right">🗓️ 3 months</span>
-                </div>
-                <div class="text-sm text-gray-500">👤 2 pax</div>
-
-                <!-- Vendor Responses for the Third Request -->
-                <div class="flex flex-col space-y-3 mt-4 border-t border-gray-200 pt-4">
-                    <!-- Vendor 3 -->
-                    <div class="flex items-center space-x-3">
-                        <img src="https://placehold.co/40x40/D1D5DB/1F2937?text=V3" alt="Vendor 3" class="rounded-full shadow">
-                        <div class="flex-1">
-                            <span class="font-semibold text-sm">Vendor 3</span>
-                            <div class="text-sm text-gray-600">Response with option and quote (selected)</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="font-bold text-lg text-green-600">$500.00</div>
-                            <div class="text-xs text-gray-400">see quote</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fourth Request Block (User) -->
-            <div class="bg-blue-50 rounded-2xl p-4 shadow-sm flex flex-col space-y-2">
-                <div class="flex justify-between items-center text-xs text-gray-500">
-                    <span class="bg-red-200 text-red-800 font-bold px-2 py-1 rounded-full text-xs">Fourth request</span>
-                    <span class="font-semibold">RIO</span>
-                </div>
-                <p class="text-sm font-medium">Need scorted bus tour of Brazil's Northeast</p>
-                <div class="flex items-center text-xs text-gray-600 space-x-2">
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Tour packages</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Escorted</span>
-                    <span class="bg-gray-200 rounded-full px-2 py-1 text-[10px]">Bus Tours</span>
-                    <span class="flex-grow text-right">🗓️ 3 months</span>
-                </div>
-                <div class="text-sm text-gray-500">👤 3 pax</div>
-            </div>
-
-        </div>
-
-    </div>
-
-</body>
          </div>
  
          <div id="message-input-container">
