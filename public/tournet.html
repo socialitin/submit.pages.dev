@@ -573,28 +573,56 @@ margin-top: 4%;
                          const firstMessage = messages[0];
                          initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
  
-                         messages.forEach((message, index) => {
-                             const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
-                             if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
- 
-                             displayedMessages.add(messageKey); // Track displayed messages
- 
-                             const entryDiv = document.createElement('div');
-                             entryDiv.classList.add('conversation-entry');
- 
-                             const radio = document.createElement('input');
-                             radio.type = 'radio';
-                             radio.name = 'message';
-                             radio.value = message.hostId; // Set radio value to hostId
-                             radio.checked = index === messages.length - 1;  // Default last entry
-                             entryDiv.appendChild(radio);
- 
-                             const msgElement = document.createElement('p');
-                             msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-                             entryDiv.appendChild(msgElement);
- 
-                             conversationMessages.appendChild(entryDiv);
-                         });
+// ...existing code...
+
+// Group messages by the first 2 digits of the message text
+const groupedMessages = {};
+
+messages.forEach((message, index) => {
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
+
+    displayedMessages.add(messageKey); // Track displayed messages
+
+    // Extract first 2 digits from the message text
+    const match = message.message.match(/^(\d{2})/);
+    const groupKey = match ? match[1] : 'Other';
+
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index });
+});
+
+// Render groups and messages
+Object.keys(groupedMessages).forEach(groupKey => {
+    const groupDiv = document.createElement('div');
+    groupDiv.classList.add('message-group');
+    const groupLabel = document.createElement('div');
+    groupLabel.textContent = `Group: ${groupKey}`;
+    groupLabel.style.fontWeight = 'bold';
+    groupDiv.appendChild(groupLabel);
+
+    groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;  // Default last entry
+        entryDiv.appendChild(radio);
+
+        const msgElement = document.createElement('p');
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        groupDiv.appendChild(entryDiv);
+    });
+
+    conversationMessages.appendChild(groupDiv);
+});
+
+// ...existing code...
                      }
                  }
              } catch (error) {
