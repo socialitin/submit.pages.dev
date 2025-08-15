@@ -507,7 +507,7 @@ margin-top: 4%;
              return Math.floor(seconds) + " seconds ago";
          }
  
-         async function fetchConversations(itinId) {
+         async function fetchConversationsTMP(itinId) {
              try {
                  const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
                  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -550,6 +550,68 @@ margin-top: 4%;
                  alert('Failed to load conversations. Please try again later.');
              }
          }
+
+// ...existing code...
+
+async function fetchConversations(itinId) {
+    try {
+        const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const conversations = await response.json();
+        conversationList.innerHTML = '';  // Clear existing radio buttons
+
+        // Step 1: Fetch first message for each conversation and group by its property
+        const groupMap = new Map();
+
+        for (const conversationId of conversations) {
+            const convResp = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+            if (!convResp.ok) continue;
+            const messages = await convResp.json();
+            if (!messages.length) continue;
+            // Use the property you want to group by (e.g., destinationCode)
+            const groupKey = messages[0].destinationCode || messages[0].channel || 'Other';
+            if (!groupMap.has(groupKey)) groupMap.set(groupKey, []);
+            groupMap.get(groupKey).push(conversationId);
+        }
+
+        // Step 2: Render radio buttons grouped by groupKey
+        groupMap.forEach((convIds, groupKey) => {
+            const groupDiv = document.createElement('div');
+            groupDiv.classList.add('conversation-group');
+            const groupLabel = document.createElement('div');
+            groupLabel.textContent = groupKey;
+            groupLabel.style.fontWeight = 'bold';
+            groupDiv.appendChild(groupLabel);
+
+            convIds.forEach((conversationId, idx) => {
+                const label = document.createElement('label');
+                label.classList.add('conversation-option');
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'destination';
+                radio.value = conversationId;
+                if (conversationList.childElementCount === 0 && idx === 0) {
+                    radio.checked = true;
+                    fetchAndDisplayMessages(groupKey); // Optionally load messages for the first group
+                }
+
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(conversationId));
+                groupDiv.appendChild(label);
+            });
+
+            conversationList.appendChild(groupDiv);
+        });
+
+    } catch (error) {
+        console.error('Error fetching conversations:', error);
+        alert('Failed to load conversations. Please try again later.');
+    }
+}
+
+// ...existing code...
  
          async function fetchAndDisplayMessages(destinationCode) {
              try {
