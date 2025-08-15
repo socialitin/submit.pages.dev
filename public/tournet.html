@@ -5,7 +5,14 @@
   <meta charset="utf-8">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
  
-  <title>Cloudflare Pages 2 Tournet presence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat UI</title>
+    <!--
+    Tailwind CSS is loaded via a CDN for simplicity.
+    In a production Cloudflare environment, you might
+    want to include it in your build process for better performance.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
   <meta name="theme-color" content="#d86300">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -227,6 +234,31 @@ margin-top: 4%;
                     margin-top: 20px;
                 }
         
+                 
+        /*
+        Custom scrollbar for a cleaner look.
+        This is one of the few things easier to style with
+        custom CSS than with Tailwind.
+        */
+        .conversation-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .conversation-container::-webkit-scrollbar-track {
+            background: #e5e7eb; /* gray-200 */
+            border-radius: 10px;
+        }
+
+        .conversation-container::-webkit-scrollbar-thumb {
+            background: #9ca3af; /* gray-400 */
+            border-radius: 10px;
+        }
+
+        .conversation-container {
+            scrollbar-width: thin;
+            scrollbar-color: #9ca3af #e5e7eb;
+        }
+    
                 .conversation-option {
                     display: inline-block;
                     margin-right: 15px;
@@ -472,6 +504,67 @@ margin-top: 4%;
  
              <h3>Conversation Messages</h3>
              <!-- Messages will be dynamically inserted here -->
+              <body class="bg-gray-100 font-sans antialiased flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the chat application -->
+    <div class="w-full max-w-xl md:max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col h-[80vh] sm:h-[70vh]">
+
+        <!-- Header -->
+        <div class="p-4 bg-blue-600 text-white shadow-md">
+            <h1 class="text-xl font-bold">Conversation</h1>
+        </div>
+
+        <!-- Conversation messages container -->
+        <div id="conversation-messages" class="conversation-container flex-grow p-4 overflow-y-auto space-y-4">
+
+            <!-- Example incoming message (from another user or bot) -->
+            <div class="flex items-start">
+                <!-- User avatar/icon can go here -->
+                <div class="bg-gray-200 text-gray-800 p-3 rounded-2xl max-w-[75%] sm:max-w-[60%] shadow-sm">
+                    <p class="text-sm">Hello there! How can I help you today?</p>
+                    <span class="block text-right text-xs text-gray-500 mt-1">10:00 AM</span>
+                </div>
+            </div>
+
+            <!-- Example outgoing message (from the current user) -->
+            <div class="flex justify-end">
+                <div class="bg-blue-500 text-white p-3 rounded-2xl max-w-[75%] sm:max-w-[60%] shadow-sm">
+                    <p class="text-sm">Hi! I need to modify the GUI for my chat application.</p>
+                    <span class="block text-left text-xs text-blue-200 mt-1">10:02 AM</span>
+                </div>
+            </div>
+
+            <!-- Another incoming message to show continuity -->
+            <div class="flex items-start">
+                <div class="bg-gray-200 text-gray-800 p-3 rounded-2xl max-w-[75%] sm:max-w-[60%] shadow-sm">
+                    <p class="text-sm">Of course, I can help with that. Can you provide the current HTML and CSS for the UI?</p>
+                    <span class="block text-right text-xs text-gray-500 mt-1">10:03 AM</span>
+                </div>
+            </div>
+
+            <!-- Another outgoing message -->
+            <div class="flex justify-end">
+                <div class="bg-blue-500 text-white p-3 rounded-2xl max-w-[75%] sm:max-w-[60%] shadow-sm">
+                    <p class="text-sm">No, I just need a replacement for the "conversation-messages" div.</p>
+                    <span class="block text-left text-xs text-blue-200 mt-1">10:05 AM</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Message input area at the bottom -->
+        <div class="p-4 bg-gray-50 border-t border-gray-200 flex items-center gap-2">
+            <input type="text" placeholder="Type your message..." class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+            <button class="bg-blue-500 text-white rounded-full p-3 hover:bg-blue-600 transition-colors shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+</body>
          </div>
  
          <div id="message-input-container">
