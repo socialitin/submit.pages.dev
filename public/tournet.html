@@ -582,7 +582,7 @@ messages.forEach((message, index) => {
     const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
     if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
 
-    displayedMessages.add(messageKey); // Track displayed messages
+    displayedMessages.add(messageKey);
 
     // Extract first 2 digits from the message text
     const match = message.message.match(/^(\d{2})/);
@@ -592,15 +592,37 @@ messages.forEach((message, index) => {
     groupedMessages[groupKey].push({ message, index });
 });
 
-// Render groups and messages
-Object.keys(groupedMessages).forEach(groupKey => {
-    const groupDiv = document.createElement('div');
-    groupDiv.classList.add('message-group');
-    const groupLabel = document.createElement('div');
-    groupLabel.textContent = `Group: ${groupKey}`;
-    groupLabel.style.fontWeight = 'bold';
-    groupDiv.appendChild(groupLabel);
+// Create tab headers and content containers
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab';
+const tabContent = document.createElement('div');
+tabContent.className = 'tabcontent';
 
+let first = true;
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Tab button
+    const btn = document.createElement('button');
+    btn.className = 'tablinks' + (first ? ' active' : '');
+    btn.textContent = groupKey;
+    btn.onclick = function() {
+        Array.from(tabHeader.children).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGroup(groupKey);
+    };
+    tabHeader.appendChild(btn);
+
+    // Render first tab by default
+    if (first) {
+        renderGroup(groupKey);
+        first = false;
+    }
+});
+
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContent);
+
+function renderGroup(groupKey) {
+    tabContent.innerHTML = '';
     groupedMessages[groupKey].forEach(({ message, index }) => {
         const entryDiv = document.createElement('div');
         entryDiv.classList.add('conversation-entry');
@@ -609,18 +631,16 @@ Object.keys(groupedMessages).forEach(groupKey => {
         radio.type = 'radio';
         radio.name = 'message';
         radio.value = message.hostId;
-        radio.checked = index === messages.length - 1;  // Default last entry
+        radio.checked = index === messages.length - 1;
         entryDiv.appendChild(radio);
 
         const msgElement = document.createElement('p');
         msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
         entryDiv.appendChild(msgElement);
 
-        groupDiv.appendChild(entryDiv);
+        tabContent.appendChild(entryDiv);
     });
-
-    conversationMessages.appendChild(groupDiv);
-});
+}
 
 // ...existing code...
                      }
