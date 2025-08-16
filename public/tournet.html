@@ -15,6 +15,41 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
+/* Tab header styles */
+.tab-header {
+    margin-bottom: 10px;
+}
+.tab-btn {
+    margin-right: 5px;
+    padding: 6px 16px;
+    cursor: pointer;
+    border: none;
+    background: #eee;
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    outline: none;
+    transition: background 0.2s;
+}
+.tab-btn.active {
+    background: #007bff;
+    color: #fff;
+}
+
+/* Tab content styles */
+.tab-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 12px;
+    background: #fafafa;
+    min-height: 40px;
+}
+
+/* Message entry styles */
+.conversation-entry {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}    
     .tab {
       display: flex;
       flex-direction: row;
