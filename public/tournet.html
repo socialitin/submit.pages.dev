@@ -603,18 +603,18 @@ margin-top: 4%;
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
  
 // ...existing code...
-/// Clear previous content
+// Clear previous content
 conversationMessages.innerHTML = '';
 
-// Group messages by the first 2 digits of the message text (fallback to '00' if not present)
+// Group messages by the first 2 characters of the message text (no filtering)
 const groupedMessages = {};
 messages.forEach((message, index) => {
     const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
     if (displayedMessages.has(messageKey)) return;
     displayedMessages.add(messageKey);
 
-    const match = message.message.match(/^(\d{2})/);
-    const groupKey = match ? match[1] : '00';
+    // Use first 2 characters as group key, or '??' if message is too short
+    const groupKey = message.message.substring(0, 2) || '??';
 
     if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
     groupedMessages[groupKey].push({ message, index });
@@ -633,29 +633,16 @@ tabContentsContainer.className = 'tab-contents';
 // Keep references to each tab's content div
 const tabContents = {};
 
-let firstTabKey = null;
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
-    if (idx === 0) firstTabKey = groupKey;
-
     // Tab button
     const tabBtn = document.createElement('button');
     tabBtn.className = 'tab-btn';
     tabBtn.textContent = groupKey;
-    tabBtn.style.padding = '6px 16px';
-    tabBtn.style.cursor = 'pointer';
-    tabBtn.style.border = 'none';
-    tabBtn.style.background = '#eee';
-    tabBtn.style.borderRadius = '4px 4px 0 0';
-    tabBtn.style.fontWeight = 'bold';
-    tabBtn.style.outline = 'none';
-    tabBtn.style.transition = 'background 0.2s';
-
     if (idx === 0) {
         tabBtn.classList.add('active');
         tabBtn.style.background = '#007bff';
         tabBtn.style.color = '#fff';
     }
-
     tabBtn.onclick = function() {
         // Remove active from all buttons and reset style
         tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
@@ -677,18 +664,10 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     const contentDiv = document.createElement('div');
     contentDiv.className = 'tab-content';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
-    contentDiv.style.border = '1px solid #ccc';
-    contentDiv.style.borderTop = 'none';
-    contentDiv.style.padding = '12px';
-    contentDiv.style.background = '#fafafa';
-    contentDiv.style.minHeight = '40px';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
         const entryDiv = document.createElement('div');
         entryDiv.classList.add('conversation-entry');
-        entryDiv.style.marginBottom = '10px';
-        entryDiv.style.padding = '8px';
-        entryDiv.style.borderBottom = '1px solid #e0e0e0';
 
         const radio = document.createElement('input');
         radio.type = 'radio';
