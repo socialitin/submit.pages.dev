@@ -600,37 +600,98 @@ margin-top: 4%;
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
  
 // ...existing code...
-    // Hide all tab contents, show only this one
-    Object.values(tabContents).forEach(div => div.style.display = 'none');
-    tabContents[groupKey].style.display = 'block';
-};
-tabHeader.appendChild(tabBtn);
+// Clear previous content
+//conversationMessages.innerHTML = '';
 
-// Tab content
-const contentDiv = document.createElement('div');
-contentDiv.className = 'tab-content';
-contentDiv.style.display = idx === 0 ? 'block' : 'none';
+// Group messages by the first 2 characters of the message text (no filtering, no sorting)
+const groupedMessages = {};
+messages.forEach((message, index) => {
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return;
+    displayedMessages.add(messageKey);
 
-groupedMessages[groupKey].forEach(({ message, index }) => {
-    const entryDiv = document.createElement('div');
-    entryDiv.classList.add('conversation-entry');
+    // Use first 2 characters as group key, or '??' if message is too short
+    const groupKey = productType;
+    // message.message.substring(0, 2) || '??';
 
-    const radio = document.createElement('input');
-    radio.type = 'radio';
-    radio.name = 'message';
-    radio.value = message.hostId;
-    radio.checked = index === messages.length - 1;
-    entryDiv.appendChild(radio);
-
-    const msgElement = document.createElement('p');
-    msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-    entryDiv.appendChild(msgElement);
-
-    contentDiv.appendChild(entryDiv);
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index });
 });
 
-tabContents[groupKey] = contentDiv;
-tabContentsContainer.appendChild(contentDiv);
+// ---- Only ONE tab header and ONE tab content container ----
+
+// Create tab header (horizontal)
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab-header';
+tabHeader.style.display = 'flex';
+tabHeader.style.gap = '5px';
+
+// Create a container for all tab contents
+const tabContentsContainer = document.createElement('div');
+tabContentsContainer.className = 'tab-contents';
+
+// Keep references to each tab's content div
+const tabContents = {};
+
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Tab button
+    const tabBtn = document.createElement('button');
+    tabBtn.className = 'tab-btn';
+    tabBtn.textContent = groupKey;
+    if (idx === 0) {
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+    }
+    tabBtn.onclick = function() {
+        // Remove active from all buttons and reset style
+        tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = '#eee';
+            btn.style.color = '#000';
+        });
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+
+        // Hide all tab contents, show only this one
+        Object.values(tabContents).forEach(div => div.style.display = 'none');
+        tabContents[groupKey].style.display = 'block';
+    };
+    tabHeader.appendChild(tabBtn);
+
+    // Tab content
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'tab-content';
+    contentDiv.style.display = idx === 0 ? 'block' : 'none';
+
+    groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;
+        entryDiv.appendChild(radio);
+
+        const msgElement = document.createElement('p');
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        contentDiv.appendChild(entryDiv);
+    });
+
+    tabContents[groupKey] = contentDiv;
+    tabContentsContainer.appendChild(contentDiv);
+});
+
+// Append only once!
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContentsContainer);
+
+
 // ...existing code...
                  }
              } catch (error) {
