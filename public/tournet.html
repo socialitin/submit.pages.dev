@@ -639,9 +639,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
 conversationMessages.appendChild(tabHeader);
 Object.values(tabContents).forEach(div => conversationMessages.appendChild(div));
 
-// ...existing code...
-
-}
+// ...existing code...                 }
              } catch (error) {
                  console.error('Error fetching conversation messages:', error);
                  alert('Failed to load conversation messages. Please try again later.');
