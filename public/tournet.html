@@ -580,11 +580,12 @@ messages.forEach((message, index) => {
     const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
     if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
 
-    displayedMessages.add(messageKey); // Track displayed messages
-
     // Extract first 2 digits from the message text
     const match = message.message.match(/^(\d{2})/);
-    const groupKey = match ? match[1] : 'Other';
+    if (!match) return; // Skip messages without 2 starting digits
+
+    const groupKey = match[1];
+    displayedMessages.add(messageKey); // Track displayed messages
 
     if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
     groupedMessages[groupKey].push({ message, index });
