@@ -15,7 +15,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
-    .tab-header {
+  .tab-header {
     display: flex;
     margin-bottom: 10px;
 }
@@ -43,7 +43,12 @@
     background: #fafafa;
     min-height: 40px;
 }
-    .tab {
+.conversation-entry {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+  .tab {
       display: flex;
       flex-direction: row;
       /*align-items: right;*/
@@ -599,60 +604,85 @@ margin-top: 4%;
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
  
 // ...existing code...
-// Step 1: Create tab buttons horizontally
-const tabHeader = document.createElement('div');
-tabHeader.className = 'tab-header';
-tabHeader.style.display = 'flex'; // Make tabs horizontal
+// Make sure messages are loaded before this code runs
+if (!Array.isArray(messages) || messages.length === 0) {
+    conversationMessages.innerHTML = '<div style="color:red;">No messages found or failed to load conversation.</div>';
+} else {
+    // Group messages by the first 2 digits of the message text (fallback to '00' if not present)
+    const groupedMessages = {};
 
-const tabContents = {}; // Store content divs for each tab
+    messages.forEach((message, index) => {
+        const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+        if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
 
-Object.keys(groupedMessages).forEach((groupKey, idx) => {
-    // Each tab button in its own div
-    const tabBtnDiv = document.createElement('div');
-    tabBtnDiv.style.marginRight = '5px';
+        displayedMessages.add(messageKey); // Track displayed messages
 
-    const tabBtn = document.createElement('button');
-    tabBtn.className = 'tab-btn' + (idx === 0 ? ' active' : '');
-    tabBtn.textContent = groupKey;
-    tabBtn.onclick = function() {
-        // Remove active from all buttons and hide all contents
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        Object.values(tabContents).forEach(div => div.style.display = 'none');
-        // Activate this tab and show its content
-        tabBtn.classList.add('active');
-        tabContents[groupKey].style.display = 'block';
-    };
-    tabBtnDiv.appendChild(tabBtn);
-    tabHeader.appendChild(tabBtnDiv);
+        // Extract first 2 digits from the message text, fallback to '00'
+        const match = message.message.match(/^(\d{2})/);
+        const groupKey = match ? match[1] : '00';
 
-    // Create content div for this tab
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'tab-content';
-    contentDiv.style.display = idx === 0 ? 'block' : 'none'; // Show only first tab by default
-
-    groupedMessages[groupKey].forEach(({ message, index }) => {
-        const entryDiv = document.createElement('div');
-        entryDiv.classList.add('conversation-entry');
-
-        const radio = document.createElement('input');
-        radio.type = 'radio';
-        radio.name = 'message';
-        radio.value = message.hostId;
-        radio.checked = index === messages.length - 1;
-        entryDiv.appendChild(radio);
-
-        const msgElement = document.createElement('p');
-        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-        entryDiv.appendChild(msgElement);
-
-        contentDiv.appendChild(entryDiv);
+        if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+        groupedMessages[groupKey].push({ message, index });
     });
 
-    tabContents[groupKey] = contentDiv;
-});
+    // Clear previous content
+    conversationMessages.innerHTML = '';
 
-conversationMessages.appendChild(tabHeader);
-Object.values(tabContents).forEach(div => conversationMessages.appendChild(div));
+    // Create tab headers and content containers
+    const tabHeader = document.createElement('div');
+    tabHeader.className = 'tab-header';
+    tabHeader.style.display = 'flex';
+
+    const tabContents = {}; // Store content divs for each tab
+
+    Object.keys(groupedMessages).forEach((groupKey, idx) => {
+        // Each tab button in its own div
+        const tabBtnDiv = document.createElement('div');
+        tabBtnDiv.style.marginRight = '5px';
+
+        const tabBtn = document.createElement('button');
+        tabBtn.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+        tabBtn.textContent = groupKey;
+        tabBtn.onclick = function() {
+            // Remove active from all buttons and hide all contents
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            Object.values(tabContents).forEach(div => div.style.display = 'none');
+            // Activate this tab and show its content
+            tabBtn.classList.add('active');
+            tabContents[groupKey].style.display = 'block';
+        };
+        tabBtnDiv.appendChild(tabBtn);
+        tabHeader.appendChild(tabBtnDiv);
+
+        // Create content div for this tab
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'tab-content';
+        contentDiv.style.display = idx === 0 ? 'block' : 'none'; // Show only first tab by default
+
+        groupedMessages[groupKey].forEach(({ message, index }) => {
+            const entryDiv = document.createElement('div');
+            entryDiv.classList.add('conversation-entry');
+
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'message';
+            radio.value = message.hostId;
+            radio.checked = index === messages.length - 1;
+            entryDiv.appendChild(radio);
+
+            const msgElement = document.createElement('p');
+            msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+            entryDiv.appendChild(msgElement);
+
+            contentDiv.appendChild(entryDiv);
+        });
+
+        tabContents[groupKey] = contentDiv;
+    });
+
+    conversationMessages.appendChild(tabHeader);
+    Object.values(tabContents).forEach(div => conversationMessages.appendChild(div));
+}
 
 // ...existing code...
                  }
