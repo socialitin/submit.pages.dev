@@ -638,7 +638,9 @@ const tabContents = {};
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
     const tabBtn = document.createElement('button');
-    tabBtn.className = 'tab-btn';
+    tabBtn.className = productType;
+    
+    
     tabBtn.textContent = groupKey;
     if (idx === 0) {
         tabBtn.classList.add('active');
@@ -664,8 +666,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
 
     // Tab content
     const contentDiv = document.createElement('div');
-    contentDiv.className = productType;
-  
+    contentDiv.className = 'tab-content';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
