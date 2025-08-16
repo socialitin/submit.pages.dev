@@ -614,7 +614,8 @@ messages.forEach((message, index) => {
     displayedMessages.add(messageKey);
 
     // Use first 2 characters as group key, or '??' if message is too short
-    const groupKey = message.message.substring(0, 2) || '??';
+    const groupKey = productType;
+    // message.message.substring(0, 2) || '??';
 
     if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
     groupedMessages[groupKey].push({ message, index });
@@ -638,9 +639,7 @@ const tabContents = {};
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
     const tabBtn = document.createElement('button');
-    tabBtn.className = productType;
-    
-    
+    tabBtn.className = 'tab-btn';
     tabBtn.textContent = groupKey;
     if (idx === 0) {
         tabBtn.classList.add('active');
