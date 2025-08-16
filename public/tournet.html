@@ -583,7 +583,7 @@ messages.forEach((message, index) => {
 
     // Extract first 2 digits from the message text
     const match = message.message.match(/^(\d{2})/);
-    const groupKey =  message.message;
+    const groupKey =  message.message.substring(0, 10);
     // match ? match[1] : match;
     
 
