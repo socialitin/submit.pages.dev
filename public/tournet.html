@@ -64,7 +64,10 @@ margin-top: 4%;
       display: block;
     }
 
-
+.tab-header { margin-bottom: 10px; }
+.tab-btn { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+.tab-btn.active { background: #007bff; color: #fff; }
+.tab-content { border: 1px solid #ccc; padding: 10px; }
     .pitch-container {
       overflow-x: auto; /* Enable horizontal scrolling */
       white-space: nowrap; /* Prevent line breaks between items */
@@ -567,33 +570,78 @@ margin-top: 4%;
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
  
-                     if (messages.length > 0) {
-                         const firstMessage = messages[0];
-                         initialRequest.textContent = `Initial Request: ${firstMessage.message}`;
- 
-                         messages.forEach((message, index) => {
-                             const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
-                             if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
- 
-                             displayedMessages.add(messageKey); // Track displayed messages
- 
-                             const entryDiv = document.createElement('div');
-                             entryDiv.classList.add('conversation-entry');
- 
-                             const radio = document.createElement('input');
-                             radio.type = 'radio';
-                             radio.name = 'message';
-                             radio.value = message.hostId; // Set radio value to hostId
-                             radio.checked = index === messages.length - 1;  // Default last entry
-                             entryDiv.appendChild(radio);
- 
-                             const msgElement = document.createElement('p');
-                             msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-                             entryDiv.appendChild(msgElement);
- 
-                             conversationMessages.appendChild(entryDiv);
-                         });
-                     }
+// ...existing code...
+
+// Group messages by the first 2 digits of the message text
+const groupedMessages = {};
+
+messages.forEach((message, index) => {
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return; // Skip duplicate messages
+
+    displayedMessages.add(messageKey); // Track displayed messages
+
+    // Extract first 2 digits from the message text
+    const match = message.message.match(/^(\d{2})/);
+    const groupKey = match ? match[1] : 'Other';
+
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index });
+});
+
+// Create tab headers and content container
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab-header';
+const tabContent = document.createElement('div');
+tabContent.className = 'tab-content';
+
+let first = true;
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Create tab button
+    const tabBtn = document.createElement('button');
+    tabBtn.className = 'tab-btn' + (first ? ' active' : '');
+    tabBtn.textContent = groupKey;
+    tabBtn.onclick = function() {
+        // Remove active from all buttons
+        Array.from(tabHeader.children).forEach(btn => btn.classList.remove('active'));
+        tabBtn.classList.add('active');
+        // Render messages for this group
+        renderGroup(groupKey);
+    };
+    tabHeader.appendChild(tabBtn);
+
+    // Render first group by default
+    if (first) {
+        renderGroup(groupKey);
+        first = false;
+    }
+});
+
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContent);
+
+function renderGroup(groupKey) {
+    tabContent.innerHTML = '';
+    groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;  // Default last entry
+        entryDiv.appendChild(radio);
+
+        const msgElement = document.createElement('p');
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        tabContent.appendChild(entryDiv);
+    });
+}
+
+// ...existing code...
                  }
              } catch (error) {
                  console.error('Error fetching conversation messages:', error);
