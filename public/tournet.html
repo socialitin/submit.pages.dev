@@ -609,7 +609,8 @@ messages.forEach((message, index) => {
     displayedMessages.add(messageKey);
 
     // Use first 2 characters as group key, or '??' if message is too short
-    const groupKey = message.message.substring(0, 2) || '??';
+    const groupKey = productType;
+    // .message.substring(0, 2) || '??';
 
     if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
     groupedMessages[groupKey].push({ message, index });
