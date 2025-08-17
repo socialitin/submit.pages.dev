@@ -601,8 +601,6 @@ margin-top: 4%;
  
 // ...existing code...
 // Clear previous content
-//conversationMessages.innerHTML = '';
-
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 const groupedMessages = {};
 messages.forEach((message, index) => {
@@ -611,8 +609,7 @@ messages.forEach((message, index) => {
     displayedMessages.add(messageKey);
 
     // Use first 2 characters as group key, or '??' if message is too short
-    const groupKey = productType;
-    // message.message.substring(0, 2) || '??';
+    const groupKey = message.message.substring(0, 2) || '??';
 
     if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
     groupedMessages[groupKey].push({ message, index });
@@ -689,10 +686,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
 
 // Append only once!
 conversationMessages.appendChild(tabHeader);
-conversationMessages.appendChild(tabContentsContainer);
-
-
-// ...existing code...
+conversationMessages.appendChild(tabContentsContainer);// ...existing code...
                  }
              } catch (error) {
                  console.error('Error fetching conversation messages:', error);
