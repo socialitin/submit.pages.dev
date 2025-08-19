@@ -696,7 +696,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab content
     const contentDiv = document.createElement('div');
     contentDiv.className = 'tab-content';
-    contentDiv.style.background = '#d6deee';
+    contentDiv.style.background = 'none';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
