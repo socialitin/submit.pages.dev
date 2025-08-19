@@ -614,16 +614,15 @@ messages.forEach((message, index) => {
     const host = message.hostId;
 
     if (host === 'initial') {
+            // Insert separator before each initial request
+    const separator = document.createElement('div');
+    separator.style.height = '16px';
+    separator.style.width = '100%';
+    separator.style.background = '#f0f0f0';
+    conversationMessages.appendChild(separator);
+    
         // Create the initial request div (only once)
         if (!initialRequestDiv) {
-            initialRequestDiv = document.createElement('div');
-            initialRequestDiv.className = 'initial-request';
-            initialRequestDiv.style.background = '#e5';
-            initialRequestDiv.style.border = '1px solid #ccc';
-            initialRequestDiv.style.padding = '12px';
-            initialRequestDiv.style.marginBottom = '16px';}{
-
-                      
             initialRequestDiv = document.createElement('div');
             initialRequestDiv.className = 'initial-request';
             initialRequestDiv.style.background = '#e5';
