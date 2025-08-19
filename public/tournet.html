@@ -665,9 +665,18 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
-        const p = document.createElement('p');
-        p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
-        initialRequestDiv.appendChild(p);
+
+// Create sightseeing icon (emoji or SVG)
+const icon = document.createElement('span');
+icon.textContent = '🗺️'; // Sightseeing emoji
+icon.style.marginRight = '8px';
+icon.style.fontSize = '1.2em';
+
+// Add icon and text to the paragraph
+p.appendChild(icon);
+p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
+
+initialRequestDiv.appendChild(p);
         return; // Do not group this message into tabs
     }
 
