@@ -632,10 +632,9 @@ const tabContents = {};
 
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
-    const tabBtn = document.createElement('button');
-    const host = message.hostId; 
+    const tabBtn = document.createElement('button');     
     tabBtn.className = 'tab-btn';
-    tabBtn.textContent = host;
+    tabBtn.textContent = productType;
     if (idx === 0) {
         tabBtn.classList.add('active');
         tabBtn.style.background = '#007bff';
