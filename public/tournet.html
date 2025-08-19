@@ -750,7 +750,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
 
     tabContents[groupKey] = contentDiv;
     tabContentsContainer.appendChild(contentDiv);
-});
+};
 
 // Append the initial request (if any) before the tabs
 if (initialRequestDiv) {
@@ -759,7 +759,7 @@ if (initialRequestDiv) {
 conversationMessages.appendChild(tabHeader);
 conversationMessages.appendChild(tabContentsContainer);
 // ...existing code...
-                 }
+                 
              } catch (error) {
                  console.error('Error fetching conversation messages:', error);
                  alert('Failed to load conversation messages. Please try again later.');
