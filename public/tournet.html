@@ -623,7 +623,7 @@ conversationMessages.appendChild(separator);
         if (!initialRequestDiv) {
             initialRequestDiv = document.createElement('div');
             initialRequestDiv.className = 'initial-request';
-            initialRequestDiv.style.background = '#d6deee';
+            initialRequestDiv.style.background = 'none';
             initialRequestDiv.style.border = 'none';
             initialRequestDiv.style.padding = '12px';
             initialRequestDiv.style.marginBottom = '16px';
@@ -686,6 +686,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab content
     const contentDiv = document.createElement('div');
     contentDiv.className = 'tab-content';
+    contentDiv.style.background = '#d6deee';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
