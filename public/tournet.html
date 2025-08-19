@@ -598,7 +598,7 @@ margin-top: 4%;
                      const messages = await response.json();
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
-                     
+                     const host = messages[0].hostId; // Extract host from the first message
 // ...existing code...
 // Clear previous content
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
@@ -634,7 +634,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
     const tabBtn = document.createElement('button');     
     tabBtn.className = 'tab-btn';
-    tabBtn.textContent = hostIdx;
+    tabBtn.textContent = host; ;
     if (idx === 0) {
         tabBtn.classList.add('active');
         tabBtn.style.background = '#007bff';
