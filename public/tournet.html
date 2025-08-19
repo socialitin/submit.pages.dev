@@ -651,7 +651,10 @@ messages.forEach((message, index) => {
     const host = message.hostId;
 
     if (host === 'initial') {
-        // Create the initial request div (only once)
+      const separator = document.createElement('hr');
+separator.style.margin = '16px 0'; // Optional: add vertical spacing
+conversationMessages.appendChild(separator); 
+      // Create the initial request div (only once)
         if (!initialRequestDiv) {
             initialRequestDiv = document.createElement('div');
             initialRequestDiv.className = 'initial-request';
