@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--Was Aug3124-->
+<head>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 
+  <title>Cloudflare Pages 2 Tournet presence</title>
+  <meta name="theme-color" content="#d86300">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
+  <link rel="stylesheet" href="/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+.tab-header {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.tab-btn {
+    padding: 6px 16px;
+    cursor: pointer;
+    border: none;
+    background: #eee;
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    outline: none;
+    transition: background 0.2s;
+    color: #000;
+}
+.tab-btn.active {
+    background: #007bff;
+    color: #fff;
+}
+.tab-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 12px;
+    background: #fafafa;
+    min-height: 40px;
+}
+
+  .tab {
+      display: flex;
+      flex-direction: row;
+      /*align-items: right;*/
+      margin-left: 10%;
+      justify-content: space-evenly;
+      background-color: #f1f1f10e;
+      padding: 0px;
+width:80%;
+margin-top: 4%;
+      /*flex-wrap: wrap; /* Allow items to wrap */
+    }
+
+    .tab button {
+      width:20%;
+      background-color: #c46767;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0px 0px;
+      display: inline-block;
+      white-space: nowrap;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin: 0; /* Add margin for spacing between buttons */
+    }
+
+    .tab button:hover {
+      background-color: #b35454;
+    }
+
+    .tab button.active {
+      background-color: #e54646;
+    }
+
+    .tabcontent {
+      display: none;
+      width: 75%;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      margin: 2.0px auto; /* Center the tab content */
+    }
+
+    .tabcontent.active {
+      display: block;
+    }
+
+.tab-header { margin-bottom: 10px; }
+.tab-btn { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+.tab-btn.active { background: #007bff; color: #fff; }
+.tab-content { border: 1px solid #ccc; padding: 10px; }
+    .pitch-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+      margin-left: 10%;
+    }
+
+    .pitch-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .pitch-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pitch-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
+
+    .carousel-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+      margin-left: 10%;
+    }
+
+    .carousel-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .carousel-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .carousel-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .tab {
+        flex-direction: row;
+        /*align-items: stretch;*/
+      }
+
+      .tab button {
+        width: 20%;
+        margin: .5px 0;
+      }
+
+      .tabcontent {
+        width: 100%;
+        padding: 12px;
+      }
+
+      .carousel-item {
+        margin-right: 10px; /* Less space between items on smaller screens */
+      }
+
+      .carousel-item span {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab button {
+        font-size: 14px;
+      }
+
+      .carousel-item {
+        margin-right: 5px; /* Even less space between items */
+      }
+
+      .carousel-item span {
+        font-size: 1.2px;
+      }
+    }
+  </style>
+                 <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      background-color: #f4f4f4;
+                      margin: 0;
+                      padding: 20px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      /*height: 100vh;*/
+                      flex-direction: column;
+                  }
+                  #chat-container {
+                      width: 400px;
+                      background-color: #fff;
+                      border-radius: 8px;
+                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                      padding: 20px;
+                  }
+                  #chat-container h2 {
+                      text-align: center;
+                      color: #007bff;
+                  }
+                  #message-input {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #conversation-list {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #chat-container button {
+                      width: 15%;
+                      padding: 10px;
+                      background-color: #c2cdd9;
+                      color: #fff;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      margin-bottom: 10px;
+                  }
+              </style>
+               <style>
+                .icon-button {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                    color: #cdd6df;
+                    margin: 5px;
+                }
+                .icon-button:hover {
+                    color: #c3ced8;
+                }
+        
+                #conversation-list {
+                    margin-top: 20px;
+                }
+                #conversation-messages {
+                    margin-top: 20px;
+                }
+        
+                .conversation-option {
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+        
+                #message-input-container {
+                    margin-top: 20px;
+                }
+        
+                #initial-request {
+                    margin-top: 20px;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+        
+                .conversation-entry {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                }
+        
+                .conversation-entry p {
+                    margin: 0;
+                    margin-left: 10px;
+                }
+            </style>
+</head>
+<body>
+
+  <div style=" margin-left: 20%; position:relative; display:block;">
+    <img src="https://tournet.com/SocialITIN/img/www.tournet.com_wZn.png" style=" border:0; width:50%;">
+  </div>
+    <div>
+    <div class="tab">
+      <!--button class="tablinks" onclick="openTab(event, 'Tab1')">Ads</button-->
+      <button class="tablinks active" onclick="openTab(event, 'Tab2')">Concierge</button>
+      <!--button class="tablinks" onclick="openTab(event, 'Tab3')">Nearby</button-->
+      <button class="tablinks" onclick="openTab(event, 'Tab4')">MyItim</button>
+    </div>
+    <div id="Tab1" class="tabcontent">
+      <main>
+        <h2>Basic Subscription is FREE</h2>
+        <blockquote>
+          <p id="subjjson" data-json=''>
+            To Pitch on Tournet's cityKIOSKS network, Hosts must be verified. Please complete this Subscription Form first, 
+            complete your first Pitch, which you can privately Test & Preview on the actual network while waiting approval process ...
+          </p>
+        </blockquote>
+        <form method="POST" action="/api/subscribe">
+          <div class="input">
+            <label for="name">Company Name and Address</label>
+            <input id="name" name="name" type="text" />
+            <label for="web">Company Website</label>
+            <input id="web" name="web" type="url" />
+          </div>
+
+          <div class="input">
+            <label for="contact">Your Complete Name</label>
+            <input id="contact" name="contact" type="text" />
+            <label for="email">Company Email</label>
+            <input id="email" name="email" type="email" />
+          </div>
+
+          <div class="input">
+            <label for="referers">Type/kind of offer</label>
+            <select id="referers" name="referers">
+              <option hidden disabled selected value></option>
+              <option value="Sightseeing">Sightseeing</option>
+              <option value="Excursion">Excursion</option>
+              <option value="Night life">Night life</option>
+              <option value="Walking tour">Walking tour</option>
+              <option value="Water cruising">Water cruising</option>
+            </select>
+          </div>
+
+          <div class="checklist">
+            <label>What's the venue</label>
+            <ul>
+              <li>
+                <input id="m1" type="checkbox" name="venue" value="Attraction" />
+                <label for="m1">Attraction</label>
+              </li>
+              <li>
+                <input id="m2" type="checkbox" name="venue" value="Club" />
+                <label for="m2">Club</label>
+              </li>
+              <li>
+                <input id="m3" type="checkbox" name="venue" value="Accommodation" />
+                <label for="m3">Accommodation</label>
+              </li>
+              <li>
+                <input id="m4" type="checkbox" name="venue" value="Motorcoach" />
+                <label for="m4">Motorcoach</label>
+              </li>
+            </ul>
+          </div>
+          <div class="input">
+            <label for="pitch">Name and description of Product or Offer</label>
+            <input id="pitch" name="pitch" type="text" />
+          </div>
+
+          <button type="submit">Join Tournet</button>
+        </form>
+      </main>
+    </div>
+
+    <div id="Tab2" class="tabcontent active">
+      <div id="jdata">
+         <div class="pitch-container">
+          <div class="pitch-item">
+            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts(event,src)" >
+            <span>Offer 1</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts()">
+            <span>data-offer 2</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts()">
+            <span>Offer 3</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts()">
+            <span>Offer 4</span>
+          </div>
+        </div>
+
+ 
+ <script>
+          window.addEventListener('DOMContentLoaded', () => {
+            d1tnlogin();
+           // document.getElementById("fjson1").click();
+          });
+        </script>
+      </div>
+
+      <div class="row">
+        <div id="thumbs" class="carousel-container" style="width:15%; float:left;"></div>
+        <div width="2%"></div>
+        <div id="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px; float:left;">
+        </div>        
+        <div>
+          <div id="itemImg" style="width:61%; float:left;"></div>
+          <div id="picDtls" style="width:20%; margin-left:20%">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Tab3" class="tabcontent">
+      <p style="float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" width="32px" height="32px" onclick="d1tnupdate();"></p>
+      <main>
+        <h2>Pitch your Offer</h2>
+        <blockquote>
+          <p id="sjson" data-json=''>Review Your Pitch</p>
+          <p>All Pitches submitted are private. You can publish one and only one at a time (Premium members can publish up to 4).</p>
+        </blockquote>
+        <form method="POST" action="/api/submit">
+          <div class="input" type="hidden">
+            <label for="IATA"></label>
+            <input id="IATA" name="IATA" type="text" />
+            <input id="Province" name="Province" type="text" />
+          </div>
+          <div class="input">
+            <label for="City">Name of Offer</label>
+            <input id="City" name="City" type="text" />
+          </div>
+          <div class="input">
+            <label for="embVideo">Video</label>
+            <input id="embVideo" name="embVideo" type="text" />
+          </div>
+          <div class="input">
+            <label for="Pictures">Pictures</label>
+            <input id="Pictures" name="Pictures" type="text" />
+          </div>
+
+          <div class="input">
+            <label for="typeKind">Type/kind of offer</label>
+            <select id="typeKind" name="typeKind">
+              <option hidden disabled selected value></option>
+              <option value="Sightseeing">Sightseeing</option>
+              <option value="Excursion">Excursion</option>
+              <option value="Night life">Night life</option>
+              <option value="Walking tour">Walking tour</option>
+              <option value="Water cruising">Water cruising</option>
+            </select>
+          </div>
+
+          <div class="checklist">
+            <label for="venue">What's the venue</label>
+            <select id="venue" name="venue">
+              <option hidden disabled selected value></option>
+              <option value="Attraction">Attraction</option>
+              <option value="Club">Club, Event</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Motorcoach">Motorcoach</option>
+              <option value="Other">Other ...</option>
+            </select>
+          </div>
+          <div class="input">
+            <label for="pitch">Pitch!</label>
+            <input id="pitch" name="pitch" type="text" />
+          </div>
+
+          <button type="submit">Save & Preview</button>
+        </form>
+      </main>
+    </div>
+    <div id="Tab4" class="tabcontent">
+      <main>
+        <h4>My Itineraries</h4>
+        <blockquote>
+          <p id="Requests">
+            Coming Up... Tournet's cityKIOSKS Visitors' Requests Response is instant or  within 24 hours at the latest.
+            <br>
+            <h4>Host Conversations</h4>
+
+                <title>CityKiosk Pub/Sub Chat</title>
+ 
+    <title>Your Wathsapp number</title>
+    <!-- Add Font Awesome for icons -->
+    
+     <div id="chat-container">
+         <h4>Your WhatsApp number</h4>
+ 
+         <input id="itin-id-input" placeholder="e.g., 1212555888, country code inclusive" />
+         <input id="channel-input" type ="hidden" placeholder="Posting to Channel (e.g., NYCDE)" />
+         <button id="load-channel-button" class="icon-button" title="Load Channel">
+             <i class="fas fa-sync"></i>
+         </button>
+ 
+         <button id="initiate-button" class="icon-button" title="Initiate Conversation" style = "display: none">
+             <i class="fas fa-paper-plane"></i>
+         </button>
+ 
+         <div id="conversation-list">
+             <!-- Conversations will be dynamically inserted here as radio buttons -->
+         </div>
+ 
+         <div id="conversation-messages">
+             <!-- Initial request as H1 title will be inserted here -->
+             <div id="initial-request"></div>
+ 
+             <h3>Conversation Messages</h3>
+             <!-- Messages will be dynamically inserted here -->
+         </div>
+ 
+         <div id="message-input-container">
+             <textarea id="message-input" placeholder="Type a message to Host"></textarea>
+             <button id="reply-button" class="icon-button" title="Reply to Conversation">
+                 <i class="fas fa-reply"></i>
+             </button>
+         </div>
+     </div>
+ 
+     <script>
+         const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+         const conversationList = document.getElementById('conversation-list');
+         const conversationMessages = document.getElementById('conversation-messages');
+         const initialRequest = document.getElementById('initial-request');
+         let currentItinId = '';
+         let currentChannel = '';
+         let destinationMap = new Map(); // To store unique destinations and associated conversations
+ 
+         function timeSince(date) {
+             const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+             let interval = Math.floor(seconds / 31536000);
+ 
+             if (interval > 1) return interval + " years ago";
+             interval = Math.floor(seconds / 2592000);
+             if (interval > 1) return interval + " months ago";
+             interval = Math.floor(seconds / 86400);
+             if (interval > 1) return interval + " days ago";
+             interval = Math.floor(seconds / 3600);
+             if (interval > 1) return interval + " hours ago";
+             interval = Math.floor(seconds / 60);
+             if (interval > 1) return interval + " minutes ago";
+             return Math.floor(seconds) + " seconds ago";
+         }
+ 
+         async function fetchConversations(itinId) {
+             try {
+                 const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                 const conversations = await response.json();
+                 conversationList.innerHTML = '';  // Clear existing radio buttons
+                 destinationMap.clear(); // Clear the map for new conversations
+ 
+                 // Group conversations by unique destination code
+                 conversations.forEach((conversationId) => {
+                     const channelId = conversationId.split('_')[1];
+                     const destinationCode = channelId.slice(0, 3); // Extract the first three characters
+ 
+                     if (!destinationMap.has(destinationCode)) {
+                         destinationMap.set(destinationCode, []);
+                     }
+                     destinationMap.get(destinationCode).push(conversationId);
+                 });
+ 
+                 // Populate with radio buttons for unique destination codes
+                 destinationMap.forEach((conversations, destinationCode) => {
+                     const label = document.createElement('label');
+                     label.classList.add('conversation-option');
+ 
+                     const radio = document.createElement('input');
+                     radio.type = 'radio';
+                     radio.name = 'destination';
+                     radio.value = destinationCode;
+                     if (conversationList.childElementCount === 0) {
+                         radio.checked = true;
+                         fetchAndDisplayMessages(destinationCode); // Load messages for the first destination by default
+                     }
+ 
+                     label.appendChild(radio);
+                     label.appendChild(document.createTextNode(destinationCode));
+                     conversationList.appendChild(label);
+                 });
+             } catch (error) {
+                 console.error('Error fetching conversations:', error);
+                 alert('Failed to load conversations. Please try again later.');
+             }
+         }
+ 
+         async function fetchAndDisplayMessages(destinationCode) {
+             try {
+                 const conversations = destinationMap.get(destinationCode) || [];
+                 conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
+                 initialRequest.innerHTML = '';  // Clear initial request
+ 
+                 const displayedMessages = new Set(); // To track displayed messages
+ 
+                 for (const conversationId of conversations) {
+                     const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     const messages = await response.json();
+                     const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
+                     const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
+                    
+// Clear previous content
+// Group messages by the first 2 characters of the message text (no filtering, no sorting)
+const groupedMessages = {};
+messages.forEach((message, index) => {
+  
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return;
+    displayedMessages.add(messageKey);
+
+    // Use first 2 characters as group key, or '??' if message is too short
+    const groupKey = message.hostId;
+    // .message.substring(0, 2) || '??';
+  const host = messages[index].hostId;
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index, host });
+    console.log('groupKey', groupKey, message.message, host);
+});
+
+// ---- Only ONE tab header and ONE tab content container ----
+
+// Create tab header (horizontal)
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab-header';
+tabHeader.style.display = 'flex';
+tabHeader.style.gap = '5px';
+
+// Create a container for all tab contents
+const tabContentsContainer = document.createElement('div');
+tabContentsContainer.className = 'tab-contents';
+
+// Keep references to each tab's content div
+const tabContents = {};
+
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Tab button
+    const tabBtn = document.createElement('button');     
+    tabBtn.className = 'tab-btn';
+    tabBtn.textContent = groupKey; 
+    if (idx === 0) {
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+    }
+    tabBtn.onclick = function() {
+        // Remove active from all buttons and reset style
+        tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = '#eee';
+            btn.style.color = '#000';
+        });
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+
+        // Hide all tab contents, show only this one
+        Object.values(tabContents).forEach(div => div.style.display = 'none');
+        tabContents[groupKey].style.display = 'block';
+    };
+    tabHeader.appendChild(tabBtn);
+
+    // Tab content
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'tab-content';
+    contentDiv.style.display = idx === 0 ? 'block' : 'none';
+
+    groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;
+        entryDiv.appendChild(radio);
+
+        const msgElement = document.createElement('p');
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        contentDiv.appendChild(entryDiv);
+    });
+
+    tabContents[groupKey] = contentDiv;
+    tabContentsContainer.appendChild(contentDiv);
+});
+
+// Append only once!
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContentsContainer);// ...existing code...
+                 }
+             } catch (error) {
+                 console.error('Error fetching conversation messages:', error);
+                 alert('Failed to load conversation messages. Please try again later.');
+             }
+         }
+ 
+         document.getElementById('load-channel-button').addEventListener('click', () => {
+             currentItinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
+             currentChannel = document.getElementById('channel-input').value.trim();
+             if (currentItinId) {
+                 fetchConversations(currentItinId);
+             } else {
+                 alert('Please enter an Itinerary ID.');
+             }
+         });
+ 
+         document.getElementById('initiate-button').addEventListener('click', async () => {
+             const itinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
+             const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
+             if (message !== '' && currentChannel !== '' && itinId !== '') {
+                 try {
+                     const response = await fetch(`${baseUrl}/initiate`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
+                     });
+ 
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     const data = await response.json();
+                     alert(`Conversation initiated with ID: ${data.conversationId}`);
+                     fetchConversations(itinId);  // Refresh the conversation list after initiating
+                 } catch (error) {
+                     console.error('Error initiating conversation:', error);
+                     alert('Failed to initiate conversation. Please try again.');
+                 }
+             } else {
+                 alert('Please enter an Itinerary ID, Channel, and Message.');
+             }
+         });
+ 
+         conversationList.addEventListener('change', (event) => {
+             const selectedDestinationCode = event.target.value;
+             if (selectedDestinationCode) {
+                 fetchAndDisplayMessages(selectedDestinationCode);
+             } else {
+                 conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                 initialRequest.innerHTML = '';
+             }
+         });
+ 
+         document.getElementById('reply-button').addEventListener('click', async () => {
+             const message = document.getElementById('message-input').value.trim();
+             const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
+             const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
+             const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
+             const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
+ 
+             if (message !== '' && destinationCode !== '' && hostId !== '') {
+                 const conversationIds = destinationMap.get(destinationCode);
+                 const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
+ 
+                 try {
+                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ message, hostId })
+                     });
+ 
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     alert(`Replied to conversation ${conversationId}`);
+                     fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
+                 } catch (error) {
+                     console.error('Error replying to conversation:', error);
+                     alert('Failed to send reply. Please try again.');
+                 }
+             } else {
+                 alert('Please select a conversation, select a message, and enter a message.');
+             }
+         });
+     </script>
+ 
+<script>
+
+function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+
+        // Add this to make Tab1 active by default when the page loads
+   //     document.addEventListener("DOMContentLoaded", function() {
+     //       document.querySelector('[onclick="openTab(event, \'Tab1\')"]').click();
+      //  });
+
+    </script>
+		
+		<script>
+			async function d1tnlogin() {
+
+        // URL of the Cloudflare Worker
+        const workerUrl = 'https://grabjson.socialitin.workers.dev/';
+
+        // Function to fetch and display JSON data
+        
+           // try {
+                // Fetch data from the Cloudflare Worker
+                const response = await fetch(workerUrl);
+
+                // Check if the response is OK (status 200)
+                if (!response.ok) {
+//document.getElementById('jData').textContent = 'Failed to fetch JSON data';
+                    return;
+                }
+
+                // Parse the JSON content
+                const mpitch = await response.json();
+
+                // Display the JSON data in the <pre> element
+              //  document.getElementById('jData').textContent = JSON.stringify(data, null, 2);
+           // } catch (error) {
+                // Handle any errors that occur during the fetch
+//document.getElementById('jData').textContent = 'Error fetching JSON: ' + error.message;
+           // }
+        
+
+        // Call the function to fetch and display JSON data when the page loads
+      //  fetchJsonData();
+
+
+				//const response = await fetch('/api/d1tnlogin');
+			//const data1 = await response.json();		
+		
+		//const data2 = JSON.parse(data1.pitching);
+		//const data = data2['440-2'];
+		console.log('mpitch', mpitch);
+		//var picsj = data1.Pictures;
+		console.log('mypics', Object.keys(mpitch));
+    let cItems = 0;
+    // Loop through each group in the mypitch object
+for (const group in mpitch) {
+  if (mpitch.hasOwnProperty(group)) {
+    // Save the group name to a constant
+    const groupName = group;
+    const tgroup = group;
+   
+    console.log(`Group: ${groupName}`);
+    cItems++;
+    // Extract and loop through each item in the current group
+    jdata=[];
+    mpitch[group].forEach(item => {
+      // Save each item to a constant
+      const currentItem = item;
+      const cItem = item;
+      var pcountry = group.substring(0,3)+'/';       
+       
+       var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
+       var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
+      
+			//var tname = picsj[h].name;
+			
+			jdata.push(Tpics);
+
+       console.log('imgs ',Tpics); 
+      document.getElementById('fjson'+ cItems).src = tImg;
+     //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
+     $('#fjson' +cItems).attr('data-offer', JSON.stringify(jdata));
+      console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
+
+    });
+    document.getElementById("fjson1").click();
+    setTimeout(function(){
+      document.getElementById("0").click();
+		},500);
+  
+    console.log(''); // Line break between groups for readability
+  }
+}
+
+    ///////
+
+////////
+//sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+
+//var pics = sessionStorage.getItem("pics");
+//var picsj = JSON.parse(pics);
+
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+			var fj = h+1;
+			
+			console.log(fj);
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+//document.getElementById('fjsoncsj[h].img;' + fj).src = pi
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+
+			};
+			</script>
+		
+<script>
+	async function d1tnupdate() {
+	const response = await fetch('/api/d1tnupdate');
+	const data2 = await response.json();
+	//const data =JSON.parse(data2.pitching);
+console.log(data2);
+	};
+	</script>
+		<script>
+			async function d1tnhosts(evt,src) {
+			//const response = await fetch('/api/d1tnhosts');
+			//const data1 = await response.json();		
+		
+		const data2 = event.target.getAttribute('data-offer');
+   // console.log('cOfr',data2);
+    //const data2 = event.target.dataset.offer;
+
+    //document.getElementById('"'+event.target.id+'"').data-offer;
+    var picsj = JSON.parse(data2);
+		//const data = data2['440-2'];
+		//const data = data3.pitching;
+		//.pitching);
+	
+		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+		
+//	console.log('params',document.getElementById("0").data);
+var picis = picsj[0].img;
+//var Pname = name.split(',')[0];
+//var Pdesc = name.split(',')[1];
+var pcount = event.target.id;
+var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
+
+//document.getElementById("itemImg").innerHTML = picUrl;
+
+    console.log('thispitch',picsj);
+///var picsj = data.Pictures;
+			
+//var picsj = JSON.parse(pics);
+//console.log('mypics', data2);	
+
+//sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+
+///var pics = sessionStorage.getItem("pics");
+///var picsj = JSON.parse(pics);
+console.log('tIATA',picsj.IATA);
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+      var tIata = picsj[h].iata;
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+      jdata.push(tIata);
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+			var fj = h+1;
+			
+//			console.log(fj);
+
+
+var tImg = '<div class="carousel-item"><img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style=" width:102px; height:102px;" onclick = "picsDtl(event,src,name);" ></div>';
+//document.getElementById('fjson' + fj).src = picsj[].img;
+
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+
+    document.getElementById("thumbs").style = " display: flex; overflow-x: auto; white-space: nowrap;";
+document.getElementById("thumbs").innerHTML= tImgAll;
+	document.getElementById("itemImg").style = "width: 100%; ";
+		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("IATA").value = data.IATA;
+		document.getElementById("City").value = data.City;
+		document.getElementById("Province").value = data.Province;
+		document.getElementById("pitch").value = data.Pitch;
+		document.getElementById("Pictures").value = pics;
+		document.getElementById("embVideo").value = tVideo;
+				
+
+				var picsUpl = 
+    '<form id="upload-video'+"3"+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="offer" value = "'+data.City+'">'+				
+' <textarea >'						
+'<input  id ="pitch" value ="'+data.Pitch +' textarea" ></textarea>	'+	
+      '<input type="file" id="v-input" fname="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit">Upload Video</button>'+
+    '</form>';
+    document.getElementById('picDtls').style = "width:100%;";		
+document.getElementById('picDtls').innerHTML = picsUpl;	
+		};				
+			</script>
+      
+<script>
+function picsDtl(evt,src,name) {
+//	console.log('params',document.getElementById("0").data);
+var picis = src;
+var Pname = name.split(',')[2];
+var Pdesc = name.split(',')[1];
+var pIata = name.split(',')[0];
+//var Pmesg = Pname + Pdesc;
+var pcount = event.target.id;
+var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
+//console.warn('ofr details', Pname);
+var tiata = pIata.toString()+'S'; 
+if (tiata.length < 4) {
+var PIata = "NYCSS";
+}else{
+var  PIata = tiata;
+}
+document.getElementById('channel-input').value= PIata;
+document.getElementById("itemImg").innerHTML = picUrl;
+//document.getElementById("tofr").name = name; 	
+//document.getElementById("detail").descp = Pdesc; 
+
+//var element = document.getElementById('tofr');
+ //   element.style.display = 'block';
+    //<input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+//<button id="load-channel-button" class="icon-button">
+//<i class="fas fa-sync"></i> <!-- Sync icon -->
+//</button>
+ var picsUpl = 
+'<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="picname" value = "'+Pname+'">'+											
+'<input  id ="descI" value ="'+Pdesc +'" >'+	
+      '<input type="file" style = "display: none;" id="file-input" name="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit" style = "display: none;" >Upload Image</button>'+
+    '</form>';
+//document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
+				//	$('#'+ picDtls + '').html(updPics);
+				//	$('#'+ picDtls + '').slideDown('slow');
+        var pItin = `
+  <div>
+        <input id="cell" placeholder="type your cell number"> Connect with Host 
+    <i class="fas fa-paper-plane" onclick="connectWithHost()"></i>
+  </div>
+`;
+document.getElementById('picDtls').innerHTML = picsUpl + pItin;	
+// Function to be called on icon click
+
+
+//	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
+
+//'<input type="file" id="imageInput" name="image" accept="image/*" required />'+
+//'<form id="uploadForm" method="POST" enctype="multipart/form-data">'
+//var picsUpl = 
+//	'<form id="upload-form" onsubmit="uploadImage(event)">'+
+//		'<input type="file" id="file-input" name="file" required">'+
+//        '<button type="submit" >Upload Image</button>'+
+//    '</form>';
+
+
+//document.getElementById('picDtls').appendChild = picsUpl;	
+};	
+</script>
+<script>
+  function connectWithHost() {
+  var cellValue = document.getElementById('cell').value; // Get the value after element exists
+  if (cellValue.trim() === "") {
+    alert("Please enter your cell number.");
+    return;
+  }
+
+  // Assign the values to respective input fields and trigger the click events
+  document.getElementById('itin-id-input').value = cellValue;
+  //document.getElementById('channel-input').value = pIata;
+  document.getElementById('load-channel-button').click();
+  document.getElementById('initiate-button').click();
+}
+</script>
+  <script>
+	    function previewImage(event) {
+      const fileInput = event.target;
+      const file = fileInput.files[0];
+      const preview = document.getElementById('3u');
+console.warn('preview', file);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+      }
+    }
+
+    async function uploadImage(event) {
+      event.preventDefault();
+      console.log('Form submitted');
+  
+      const fileInput = document.getElementById('file-input');
+      console.log('fileInput:', fileInput);
+      if (!fileInput) {
+        console.error('File input not found.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      console.log('Selected file:', file);
+      if (!file) {
+        alert('Please select a file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        console.log('Upload response:', result);
+
+        if (response.ok) {
+          alert('Image uploaded successfully!');	
+		
+		const data2 = result.variants;
+		//const data = data2['440-2'];
+		const data = data2[0];
+          //console.log(data2,data);
+
+		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+		  cImgId = event.target.id;
+		  cimgid = cImgId.charAt(cImgId.length-1)
+		  console.warn('this t-image',cImgId.charAt(cImgId.length-1));
+	  var idis = cImgId.charAt(cImgId.length-1);  
+ppicsj[idis].name = document.getElementById("picname").value;
+ppicsj[idis].description = document.getElementById("descI").value;
+ppicsj[idis].img = data;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+
+		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
+		  document.getElementById("itemImg").innerHTML = picUrl;
+		  document.getElementById(idis).src = data;
+		  //document.getElementById("itemImg").style.display = 'block'
+		  console.log(document.getElementById(idis).src);
+        } else {
+          alert(`Failed to upload image: ${result}`);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('An error occurred while uploading the image.');
+      }
+    }
+
+  </script>
+
+<script> 
+function picPost(evt,id){
+//document.getElementById("name").value= document.getElementById("descI").value;
+//json.price = 30;
+//picsj.name = document.getElementById("name").value;
+var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+var id = '3';
+ppicsj[id].name = document.getElementById("name").value;
+ppicsj[id].description = document.getElementById("descI").value;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+};
+</script>
+<script>
+  function subscribeAug1724() {
+  //const ws = new WebSocket('wss:https://pub-sub.socialitin.workers.dev/subscribe');
+  const ws = new WebSocket('wss:pub-sub.socialitin.workers.dev/subscribe');
+  ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (window.onMessageReceived) {
+          window.onMessageReceived(data);
+      } else {
+          console.log('Received:', data.message);
+      }
+  };
+  ws.onopen = () => {
+      console.log('Subscribed to the channel',data.message);
+  };
+  ws.onclose = () => {
+      console.log('Subscription closed');
+  };
+  ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+  };
+}
+</script>
+
+<script>
+function subscribe() {
+async function replyToConversation(conversationId, message) {
+  try {
+    const response = await fetch(`https://pub-sub.socialitin.workers.dev/reply/${conversationId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (response.ok) {
+      console.log(`Message added to conversation ${conversationId}`);
+    } else {
+      console.error(`Failed to add message to conversation:`, response.statusText);
+    }
+  } catch (error) {
+    console.error(`Error replying to conversation:`, error);
+  }
+}
+}
+</script>
+<script>
+function publishAug1724(message) {
+    fetch('https://pub-sub.socialitin.workers.dev/publish', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message }),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Message sent:', data);
+    })
+    .catch(error => {
+        console.error('Error sending message:', error);
+    });
+}
+
+</script>
+<script>
+function publish(message) {
+
+async function initiateConversation(cityCode, serviceType, message) {
+  try {
+    const response = await fetch(`https://pub-sub.socialitin.workers.dev/initiate/${cityCode}/${serviceType}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(`Conversation initiated with ID: ${data.conversationId}`);
+      return data.conversationId;
+    } else {
+      console.error(`Failed to initiate conversation:`, response.statusText);
+    }
+  } catch (error) {
+    console.error(`Error initiating conversation:`, error);
+  }
+}
+}
+</script>
+
+<script>
+			async function fetchjson() {
+			const response = await fetch('/api/fetchjson');
+			const data = await response.json();
+		//const data =JSON.parse(data1);
+		console.log(data);
+		sessionStorage.setItem("j2post",JSON.stringify(data));	
+var j2addStorage = {
+  "IATA": "US2",
+  "City": "US3-Eastern",
+  "Province": "Western",
+  "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
+  "Pictures":" [{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
+  "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
+};
+
+var j2add = j2addStorage;
+var j2publish =data; 
+//const j2add = JSON.parse(sessionStorage.getItem("j2add")); 
+//const mergedObj = Object.assign(j2publish, j2addStorage); 
+//const jsonStr = JSON.stringify(mergedObj); 
+
+//const extendJSON = (...objs) => objs.reduce((result, current) => ({...result, ...JSON.parse(current)}), {});
+  
+//console.log(extendJSON(j2publish, j2add),j2aad);
+//console.log(jsonStr); 
+var newjson = j2publish["NYCS"].push(j2add);
+console.log(j2publish);
+ //response2 = await fetch('/api/fetchputjson');
+			//const data2 = await response.json();
+		//	console.log(response2);
+			};	
+</script>
+	</body>
+</html>
