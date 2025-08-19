@@ -603,6 +603,7 @@ margin-top: 4%;
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 const groupedMessages = {};
 messages.forEach((message, index) => {
+  const host = messages[index].hostId;
     const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
     if (displayedMessages.has(messageKey)) return;
     displayedMessages.add(messageKey);
@@ -628,7 +629,7 @@ tabContentsContainer.className = 'tab-contents';
 
 // Keep references to each tab's content div
 const tabContents = {};
-const host = messages[1].hostId;
+
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
     const tabBtn = document.createElement('button');     
