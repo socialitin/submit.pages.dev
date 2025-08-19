@@ -15,6 +15,31 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
+    .tab-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.tab-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.tab-avatar.active {
+    border: 2px solid #007bff;
+}
+.tab-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 12px;
+    background: #fafafa;
+    min-height: 40px;
+}
 .chat-message {
     background: #e6f3ff;
     border-radius: 16px;
@@ -24,7 +49,8 @@
     word-break: break-word;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     font-size: 1em;
-}    
+}
+  
 .tab-header {
     display: flex !important;
     flex-direction: row !important;
