@@ -606,7 +606,7 @@ messages.forEach((message, index) => {
     const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
     if (displayedMessages.has(messageKey)) return;
     displayedMessages.add(messageKey);
-const host = messages[index].hostId;
+
     // Use first 2 characters as group key, or '??' if message is too short
     const groupKey = message.message.substring(0, 2) || '??';
 
@@ -628,7 +628,7 @@ tabContentsContainer.className = 'tab-contents';
 
 // Keep references to each tab's content div
 const tabContents = {};
-
+const host = messages[index].hostId;
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
     // Tab button
     const tabBtn = document.createElement('button');     
