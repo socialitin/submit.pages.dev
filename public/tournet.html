@@ -764,8 +764,8 @@ conversationMessages.appendChild(tabContentsContainer);
                  console.error('Error fetching conversation messages:', error);
                  alert('Failed to load conversation messages. Please try again later.');
              }
-         }
- 
+         };
+
          document.getElementById('load-channel-button').addEventListener('click', () => {
              currentItinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
