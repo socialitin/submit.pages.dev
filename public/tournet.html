@@ -585,135 +585,134 @@ margin-top: 4%;
  
          async function fetchAndDisplayMessages(destinationCode) {
              try {
- // ...inside your fetchAndDisplayMessages function...
+                 const conversations = destinationMap.get(destinationCode) || [];
+                 conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
+                 initialRequest.innerHTML = '';  // Clear initial request
+ 
+                 const displayedMessages = new Set(); // To track displayed messages
+ 
+                 for (const conversationId of conversations) {
+                     const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     const messages = await response.json();
+                     const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
+                     const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
+                    
+// Clear previous content
+// Group messages by the first 2 characters of the message text (no filtering, no sorting)
+// Prepare to collect initial requests
+let initialRequestDiv = null;
 
-const conversations = destinationMap.get(destinationCode) || [];
-conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
+// Group messages by hostId, but handle 'Initial' specially
+const groupedMessages = {};
+messages.forEach((message, index) => {
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return;
+    displayedMessages.add(messageKey);
 
-const displayedMessages = new Set(); // To track displayed messages
+    const host = message.hostId;
 
-for (const conversationId of conversations) {
-    const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-    const messages = await response.json();
-    const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
-    const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
-
-    // Prepare to collect initial requests
-    let initialRequestDiv = null;
-
-    // Group messages by hostId, but handle 'Initial' specially
-    const groupedMessages = {};
-    messages.forEach((message, index) => {
-        const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
-        if (displayedMessages.has(messageKey)) return;
-        displayedMessages.add(messageKey);
-
-        const host = message.hostId;
-
-        if (host === 'Initial') {
-            // Create the initial request div (only once)
-            if (!initialRequestDiv) {
-                initialRequestDiv = document.createElement('div');
-                initialRequestDiv.className = 'initial-request';
-                initialRequestDiv.style.background = '#f9f9f9';
-                initialRequestDiv.style.border = '1px solid #ccc';
-                initialRequestDiv.style.padding = '12px';
-                initialRequestDiv.style.marginBottom = '16px';
-            }
-            // Add the initial message
-            const p = document.createElement('p');
-            p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
-            initialRequestDiv.appendChild(p);
-            return; // Do not group this message into tabs
+    if (host === 'Initial') {
+        // Create the initial request div (only once)
+        if (!initialRequestDiv) {
+            initialRequestDiv = document.createElement('div');
+            initialRequestDiv.className = 'initial-request';
+            initialRequestDiv.style.background = '#f9f9f9';
+            initialRequestDiv.style.border = '1px solid #ccc';
+            initialRequestDiv.style.padding = '12px';
+            initialRequestDiv.style.marginBottom = '16px';
         }
-
-        // Group all other messages by hostId
-        const groupKey = host;
-        if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
-        groupedMessages[groupKey].push({ message, index, host });
-    });
-
-    // ---- Only ONE tab header and ONE tab content container ----
-
-    // Create tab header (horizontal)
-    const tabHeader = document.createElement('div');
-    tabHeader.className = 'tab-header';
-    tabHeader.style.display = 'flex';
-    tabHeader.style.gap = '5px';
-
-    // Create a container for all tab contents
-    const tabContentsContainer = document.createElement('div');
-    tabContentsContainer.className = 'tab-contents';
-
-    // Keep references to each tab's content div
-    const tabContents = {};
-
-    Object.keys(groupedMessages).forEach((groupKey, idx) => {
-        // Tab button
-        const tabBtn = document.createElement('button');     
-        tabBtn.className = 'tab-btn';
-        tabBtn.textContent = groupKey; 
-        if (idx === 0) {
-            tabBtn.classList.add('active');
-            tabBtn.style.background = '#007bff';
-            tabBtn.style.color = '#fff';
-        }
-        tabBtn.onclick = function() {
-            // Remove active from all buttons and reset style
-            tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.background = '#eee';
-                btn.style.color = '#000';
-            });
-            tabBtn.classList.add('active');
-            tabBtn.style.background = '#007bff';
-            tabBtn.style.color = '#fff';
-
-            // Hide all tab contents, show only this one
-            Object.values(tabContents).forEach(div => div.style.display = 'none');
-            tabContents[groupKey].style.display = 'block';
-        };
-        tabHeader.appendChild(tabBtn);
-
-        // Tab content
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'tab-content';
-        contentDiv.style.display = idx === 0 ? 'block' : 'none';
-
-        groupedMessages[groupKey].forEach(({ message, index }) => {
-            const entryDiv = document.createElement('div');
-            entryDiv.classList.add('conversation-entry');
-
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.name = 'message';
-            radio.value = message.hostId;
-            radio.checked = index === messages.length - 1;
-            entryDiv.appendChild(radio);
-
-            const msgElement = document.createElement('p');
-            msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-            entryDiv.appendChild(msgElement);
-
-            contentDiv.appendChild(entryDiv);
-        });
-
-        tabContents[groupKey] = contentDiv;
-        tabContentsContainer.appendChild(contentDiv);
-    });
-
-    // Append only once!
-    if (initialRequestDiv) {
-        conversationMessages.appendChild(initialRequestDiv);
+        // Add the initial message
+        const p = document.createElement('p');
+        p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
+        initialRequestDiv.appendChild(p);
+        return; // Do not group this message into tabs
     }
-    conversationMessages.appendChild(tabHeader);
-    conversationMessages.appendChild(tabContentsContainer);
-}
 
-// ...existing code...// ...existing code...
-                 
+    // Group all other messages by hostId
+    const groupKey = host;
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index, host });
+});
+
+// ---- Only ONE tab header and ONE tab content container ----
+
+// Create tab header (horizontal)
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab-header';
+tabHeader.style.display = 'flex';
+tabHeader.style.gap = '5px';
+
+// Create a container for all tab contents
+const tabContentsContainer = document.createElement('div');
+tabContentsContainer.className = 'tab-contents';
+
+// Keep references to each tab's content div
+const tabContents = {};
+
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Tab button
+    const tabBtn = document.createElement('button');     
+    tabBtn.className = 'tab-btn';
+    tabBtn.textContent = groupKey; 
+    if (idx === 0) {
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+    }
+    tabBtn.onclick = function() {
+        // Remove active from all buttons and reset style
+        tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = '#eee';
+            btn.style.color = '#000';
+        });
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+
+        // Hide all tab contents, show only this one
+        Object.values(tabContents).forEach(div => div.style.display = 'none');
+        tabContents[groupKey].style.display = 'block';
+    };
+    tabHeader.appendChild(tabBtn);
+
+    // Tab content
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'tab-content';
+    contentDiv.style.display = idx === 0 ? 'block' : 'none';
+
+    groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;
+        entryDiv.appendChild(radio);
+
+        const msgElement = document.createElement('p');
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        contentDiv.appendChild(entryDiv);
+    });
+
+    tabContents[groupKey] = contentDiv;
+    tabContentsContainer.appendChild(contentDiv);
+});
+
+// Append the initial request (if any) before the tabs
+if (initialRequestDiv) {
+    conversationMessages.appendChild(initialRequestDiv);
+}
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContentsContainer);
+// ...existing code...
+                 }
              } catch (error) {
                  console.error('Error fetching conversation messages:', error);
                  alert('Failed to load conversation messages. Please try again later.');
