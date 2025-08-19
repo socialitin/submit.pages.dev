@@ -15,6 +15,14 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
+.tab-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.tab-avatar {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}    
 .chat-message {
     background: #e6f3ff;
     border-radius: 16px;
@@ -667,31 +675,53 @@ tabContentsContainer.className = 'tab-contents';
 const tabContents = {};
 
 Object.keys(groupedMessages).forEach((groupKey, idx) => {
-    // Tab button
-    const tabBtn = document.createElement('button');     
+    // Tab button (hidden)
+    const tabBtn = document.createElement('button');
     tabBtn.className = 'tab-btn';
-    tabBtn.textContent = groupKey; 
+    tabBtn.style.display = 'none'; // Hide the button
+    tabBtn.textContent = groupKey;
     if (idx === 0) {
         tabBtn.classList.add('active');
         tabBtn.style.background = '#007bff';
         tabBtn.style.color = '#fff';
     }
-    tabBtn.onclick = function() {
-        // Remove active from all buttons and reset style
+
+    // Avatar (visible, acts as tab selector)
+    const avatar = document.createElement('img');
+    avatar.src = 'https://randomuser.me/api/portraits/men/32.jpg'; // Sample avatar, you can randomize or use a set
+    avatar.alt = groupKey;
+    avatar.className = 'tab-avatar';
+    avatar.style.width = '40px';
+    avatar.style.height = '40px';
+    avatar.style.borderRadius = '50%';
+    avatar.style.cursor = 'pointer';
+    avatar.style.objectFit = 'cover';
+    avatar.style.border = idx === 0 ? '2px solid #007bff' : '2px solid transparent';
+    avatar.style.transition = 'border 0.2s';
+
+    avatar.onclick = function() {
+        // Remove active from all buttons and avatars
         tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
             btn.style.background = '#eee';
             btn.style.color = '#000';
         });
+        tabHeader.querySelectorAll('.tab-avatar').forEach(img => {
+            img.style.border = '2px solid transparent';
+        });
         tabBtn.classList.add('active');
         tabBtn.style.background = '#007bff';
         tabBtn.style.color = '#fff';
+        avatar.style.border = '2px solid #007bff';
 
         // Hide all tab contents, show only this one
         Object.values(tabContents).forEach(div => div.style.display = 'none');
         tabContents[groupKey].style.display = 'block';
     };
-    tabHeader.appendChild(tabBtn);
+
+    tabHeader.appendChild(tabBtn);   // Hidden button for logic
+    tabHeader.appendChild(avatar);   // Visible avatar
+});
 
     // Tab content
     const contentDiv = document.createElement('div');
