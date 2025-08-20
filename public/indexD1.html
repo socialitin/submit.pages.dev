@@ -417,7 +417,7 @@
 									throw new Error(`HTTP error! status: ${response.status}`);
 								}
 								const conversationData = await response.json();
-								console.log(`Fetched messages: `, conversationData);
+								console.log(`Fetched messages: `, conversationData, conversationId, vendorId);
 				
 								// Check if the vendor has participated in this conversation
 								let isVendorInvolved = false;
