@@ -668,7 +668,7 @@ conversationMessages.appendChild(separator);
         const icon = document.createElement('span');
 icon.textContent = '🗺️'; // Sightseeing emoji
 icon.style.marginRight = '8px';
-icon.style.fontSize = '1.2em';
+icon.style.fontSize = '3.2em';
 
         const p = document.createElement('p');
         p.appendChild(icon); 
@@ -769,6 +769,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
         radio.value = message.hostId;
         radio.checked = index === messages.length - 1;
         entryDiv.appendChild(radio);
+        radio.onclick = () => fetchAndFilterConversations(conversationId, message.hostId);
 
         const msgElement = document.createElement('p');
         msgElement.className = 'chat-message';
@@ -1415,5 +1416,43 @@ console.log(j2publish);
 		//	console.log(response2);
 			};	
 </script>
-	</body>
+<script>
+
+  async function fetchAndFilterConversation(conversationId, vendorId) {
+							try {
+								const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+								const conversationData = await response.json();
+								console.log(`Fetched messages: `, conversationData);
+				
+								// Check if the vendor has participated in this conversation
+								let isVendorInvolved = false;
+				
+								if (Array.isArray(conversationData)) {
+									isVendorInvolved = conversationData.some(msg => msg.hostId === vendorId);
+								} else if (typeof conversationData === 'object' && conversationData.conversation) {
+									isVendorInvolved = conversationData.conversation.some(msg => msg.hostId === vendorId);
+								}
+				
+								if (isVendorInvolved) {
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+									ongoingConversationList.appendChild(option);
+								} else {
+									// If the vendor is not involved, add to new conversations
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+									conversationList.appendChild(option);
+								}
+							} catch (error) {
+								console.error('Error fetching and filtering conversation:', error);
+								alert('Failed to filter conversation. Please try again later.');
+							}
+						}
+</script>
+</body>
 </html>
