@@ -769,7 +769,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
         radio.value = message.hostId;
         radio.checked = index === messages.length - 1;
         entryDiv.appendChild(radio);
-        radio.onclick = () => fetchAndFilterConversation(NYCD_ITIN18563086291, message.hostId);
+        radio.onclick = () => fetchAndFilterConversation('NYCD_ITIN18563086291', message.hostId);
 
         const msgElement = document.createElement('p');
         msgElement.className = 'chat-message';
