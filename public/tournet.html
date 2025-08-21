@@ -15,39 +15,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
-    #chatPopup { display: none; flex-direction: column; }
-.chat-bubble {
-  max-width: 80%;
-  padding: 10px 14px;
-  border-radius: 18px;
-  margin-bottom: 4px;
-  font-size: 1em;
-  background: #e6f3ff;
-  align-self: flex-start;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
-  position: relative;
-  word-break: break-word;
-}
-.chat-bubble.me {
-  background: #007bff;
-  color: #fff;
-  align-self: flex-end;
-}
-.chat-bubble.vendor {
-  background: #fffbe6;
-  color: #222;
-  border: 1px solid #ffe58f;
-}
-.chat-meta {
-  font-size: 0.8em;
-  opacity: 0.7;
-  margin-bottom: 2px;
-  display: flex;
-  justify-content: space-between;
-}
-.chat-time {
-  margin-left: 8px;
-}
     .tab-header {
     display: flex;
     gap: 10px;
@@ -793,6 +760,26 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('conversation-entry');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'message';
+        radio.value = message.hostId;
+        radio.checked = index === messages.length - 1;
+        entryDiv.appendChild(radio);
+        radio.onclick = () => fetchAndFilterConversation('NYCD_ITIN18563086291_305f17f4-c36e-488f-879a-ed8dcfb26226', message.hostId);
+
+        const msgElement = document.createElement('p');
+        msgElement.className = 'chat-message';
+        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+        entryDiv.appendChild(msgElement);
+
+        contentDiv.appendChild(entryDiv);
+    });
+
+    groupedMessages[groupKey].forEach(({ message, index }) => {
     const entryDiv = document.createElement('div');
     entryDiv.classList.add('conversation-entry');
 
@@ -1489,36 +1476,5 @@ console.log(j2publish);
 							}
 						}
 </script>
-<script>
-function renderChatMessages(messages) {
-  const chatMessages = document.getElementById('chatMessages');
-  chatMessages.innerHTML = '';
-  messages.forEach(msg => {
-    const isMe = msg.hostId.toLowerCase() === 'initial';
-    const isVendor = msg.hostId === '440';
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
-    bubble.innerHTML = `
-      <div class="chat-meta">
-        ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + msg.hostId}
-        <span class="chat-time">${new Date(msg.timestamp).toLocaleString()}</span>
-      </div>
-      <div>${msg.message}</div>
-    `;
-    chatMessages.appendChild(bubble);
-  });
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-document.getElementById('closeChatBtn').onclick = function() {
-  document.getElementById('chatPopup').style.display = 'none';
-};
-function popupChatWithHost(messages, hostId) {
-  // Filter messages for this hostId and 'initial'
-  const filtered = messages.filter(m => m.hostId.toLowerCase() === hostId.toLowerCase() || m.hostId.toLowerCase() === 'initial');
-  document.getElementById('chatPopup').style.display = 'flex';
-  renderChatMessages(filtered);
-}
-</script>
-
 </body>
 </html>
