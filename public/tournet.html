@@ -1565,5 +1565,13 @@ console.log(j2publish);
 						}
             
 </script>
+<script>
+  function popupChatWithHost(messages, hostId) {
+  // Filter messages for this hostId and 'initial'
+  const filtered = messages.filter(m => m.hostId.toLowerCase() === hostId.toLowerCase() || m.hostId.toLowerCase() === 'initial');
+  document.getElementById('chatPopup').style.display = 'flex';
+  renderChatMessages(filtered);
+}
+</script>
 </body>
 </html>
