@@ -839,7 +839,12 @@ chatMessages.style.gap = '10px';
 // Assemble popup
 chatPopup.appendChild(chatHeader);
 chatPopup.appendChild(chatMessages);
-
+  function popupChatWithHost(messages, hostId) {
+  // Filter messages for this hostId and 'initial'
+  const filtered = messages.filter(m => m.hostId.toLowerCase() === hostId.toLowerCase() || m.hostId.toLowerCase() === 'initial');
+  document.getElementById('chatPopup').style.display = 'flex';
+  renderChatMessages(filtered);
+}
 // Add to body
 document.body.appendChild(chatPopup);
 
@@ -887,12 +892,7 @@ document.body.appendChild(chatPopup);
     entryDiv.appendChild(msgElement);
 
     contentDiv.appendChild(entryDiv);
-      function popupChatWithHost(messages, hostId) {
-  // Filter messages for this hostId and 'initial'
-  const filtered = messages.filter(m => m.hostId.toLowerCase() === hostId.toLowerCase() || m.hostId.toLowerCase() === 'initial');
-  document.getElementById('chatPopup').style.display = 'flex';
-  renderChatMessages(filtered);
-}
+    
 });
 
     tabContents[groupKey] = contentDiv;
