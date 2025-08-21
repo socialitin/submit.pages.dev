@@ -1480,7 +1480,7 @@ console.log(j2publish);
 								}
 								const conversationData = await response.json();
 								console.log(`Fetched messages: `, conversationData, conversationId, vendorId);
-				popupChatWithHost(conversationData, vendorId);
+				chatPopup(conversationData, vendorId);
 								// Check if the vendor has participated in this conversation
 								let isVendorInvolved = false;
 				
