@@ -1423,7 +1423,7 @@ console.log(j2publish);
 								if (!response.ok) {
 									throw new Error(`HTTP error! status: ${response.status}`);
 								}
-								const conversation = await response.json();
+								const conversation = await response();
                 const conversationtext = await conversation.text();
 								console.log(`Fetched messages: `, conversation, conversationtext, vendorId);
                 const conversationData = JSON.parse(conversation);
