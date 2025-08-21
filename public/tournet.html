@@ -1423,10 +1423,10 @@ console.log(j2publish);
 								if (!response.ok) {
 									throw new Error(`HTTP error! status: ${response.status}`);
 								}
-								const conversation = await response.json();
+								const conversationData = await response.json();
                 // const conversationtext = conversation.text();
-								console.log(`Fetched messages: `, conversation, conversationId, vendorId);
-                const conversationData = JSON.parse(conversation);
+								console.log(`Fetched messages: `, conversationData, conversationId, vendorId);
+                const conversationD = JSON.parse(conversation);
 			//	chatPopup(conversationData, vendorId);
       // Create chat popup container
 const chatPopup = document.createElement('div');
