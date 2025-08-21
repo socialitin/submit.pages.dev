@@ -755,6 +755,61 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     tabHeader.appendChild(avatar);   // Visible avatar
 
     // Tab content
+      // Create chat popup container
+const chatPopup = document.createElement('div');
+chatPopup.id = 'chatPopup';
+chatPopup.style.display = 'none';
+chatPopup.style.position = 'fixed';
+chatPopup.style.bottom = '20px';
+chatPopup.style.right = '20px';
+chatPopup.style.width = '350px';
+chatPopup.style.maxWidth = '95vw';
+chatPopup.style.height = '500px';
+chatPopup.style.maxHeight = '90vh';
+chatPopup.style.background = '#fff';
+chatPopup.style.borderRadius = '16px';
+chatPopup.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
+chatPopup.style.zIndex = '1001';
+chatPopup.style.overflow = 'hidden';
+chatPopup.style.flexDirection = 'column';
+
+// Create header
+const chatHeader = document.createElement('div');
+chatHeader.style.background = '#007bff';
+chatHeader.style.color = '#fff';
+chatHeader.style.padding = '12px 16px';
+chatHeader.style.fontWeight = 'bold';
+chatHeader.style.display = 'flex';
+chatHeader.style.justifyContent = 'space-between';
+chatHeader.style.alignItems = 'center';
+chatHeader.textContent = 'Chat';
+
+// Create close button
+const closeBtn = document.createElement('span');
+closeBtn.id = 'closeChatBtn';
+closeBtn.style.cursor = 'pointer';
+closeBtn.style.fontSize = '1.3em';
+closeBtn.innerHTML = '&times;';
+chatHeader.appendChild(closeBtn);
+
+// Create messages container
+const chatMessages = document.createElement('div');
+chatMessages.id = 'chatMessages';
+chatMessages.style.flex = '1';
+chatMessages.style.overflowY = 'auto';
+chatMessages.style.padding = '16px';
+chatMessages.style.background = '#f4f8fb';
+chatMessages.style.display = 'flex';
+chatMessages.style.flexDirection = 'column';
+chatMessages.style.gap = '10px';
+
+// Assemble popup
+chatPopup.appendChild(chatHeader);
+chatPopup.appendChild(chatMessages);
+
+// Add to body
+document.body.appendChild(chatPopup);
+
     const contentDiv = document.createElement('div');
     contentDiv.className = 'tab-content';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
