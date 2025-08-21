@@ -1424,7 +1424,7 @@ console.log(j2publish);
 									throw new Error(`HTTP error! status: ${response.status}`);
 								}
 								const conversation = await response.json();
-                const conversationtext = await response.text();
+                const conversationtext = await conversation.text();
 								console.log(`Fetched messages: `, conversation, conversationtext, vendorId);
                 const conversationData = JSON.parse(conversation);
 			//	chatPopup(conversationData, vendorId);
