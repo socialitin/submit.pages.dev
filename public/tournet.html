@@ -1481,7 +1481,9 @@ const renderedMessages = document.createElement('div');
 
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
-  conversationData.forEach(message => {
+ 
+    (conversationData.conversation || []).forEach(message => {
+
     const isMe = message.hostId.toLowerCase() === 'initial';
     const isVendor = message.hostId === '440';
     const bubble = document.createElement('div');
