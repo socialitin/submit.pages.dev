@@ -760,24 +760,26 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
     groupedMessages[groupKey].forEach(({ message, index }) => {
-        const entryDiv = document.createElement('div');
-        entryDiv.classList.add('conversation-entry');
+    const entryDiv = document.createElement('div');
+    entryDiv.classList.add('conversation-entry');
 
-        const radio = document.createElement('input');
-        radio.type = 'radio';
-        radio.name = 'message';
-        radio.value = message.hostId;
-        radio.checked = index === messages.length - 1;
-        entryDiv.appendChild(radio);
-        radio.onclick = () => fetchAndFilterConversation('NYCD_ITIN18563086291_305f17f4-c36e-488f-879a-ed8dcfb26226', message.hostId);
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'message';
+    radio.value = message.hostId;
+    radio.checked = index === messages.length - 1;
+    entryDiv.appendChild(radio);
 
-        const msgElement = document.createElement('p');
-        msgElement.className = 'chat-message';
-        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-        entryDiv.appendChild(msgElement);
+    // On click, popup chat for this hostId
+    radio.onclick = () => popupChatWithHost(messages, message.hostId);
 
-        contentDiv.appendChild(entryDiv);
-    });
+    const msgElement = document.createElement('p');
+    msgElement.className = 'chat-message';
+    msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+    entryDiv.appendChild(msgElement);
+
+    contentDiv.appendChild(entryDiv);
+});
 
     tabContents[groupKey] = contentDiv;
     tabContentsContainer.appendChild(contentDiv);
