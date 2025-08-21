@@ -1476,9 +1476,9 @@ chatMessages.style.gap = '10px';
 
 // Assemble popup 
 chatPopup.appendChild(chatHeader);
-chatPopup.appendChild(chatMessages);
+chatPopup.append(JSON.stringify(conversationData));
 chatPopup.style.display = 'flex';
-chatPopup.append(conversationData)
+
 // Add to body
 document.body.appendChild(chatPopup);
 
