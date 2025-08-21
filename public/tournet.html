@@ -867,29 +867,7 @@ document.body.appendChild(chatPopup);
         contentDiv.appendChild(entryDiv);
     });
 
-    groupedMessages[groupKey].forEach(({ message, index }) => {
-    const entryDiv = document.createElement('div');
-    entryDiv.classList.add('conversation-entry');
-
-    const radio = document.createElement('input');
-    radio.type = 'radio';
-    radio.name = 'message';
-    radio.value = message.hostId;
-    radio.checked = index === messages.length - 1;
-    entryDiv.appendChild(radio);
-
-    // On click, popup chat for this hostId
-    //radio.onclick = () => popupChatWithHost(messages, message.hostId);
-
-    const msgElement = document.createElement('p');
-    msgElement.className = 'chat-message';
-    msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-    entryDiv.appendChild(msgElement);
-
-    contentDiv.appendChild(entryDiv);
     
-});
-
     tabContents[groupKey] = contentDiv;
     tabContentsContainer.appendChild(contentDiv);
 });
