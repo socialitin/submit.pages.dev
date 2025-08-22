@@ -799,7 +799,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
 
         const radio = document.createElement('input');
         radio.type = 'radio';
-        radio.name = 'message';
+        radio.name = relConversation;
         radio.value = message.hostId;
         radio.checked = index === messages.length - 1;
         entryDiv.appendChild(radio);
