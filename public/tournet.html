@@ -621,13 +621,13 @@ margin-top: 4%;
                  conversations.forEach((conversationId) => {
                      const channelId = conversationId.split('_')[1];
                      const destinationCode = channelId.slice(0, 3); // Extract the first three characters
-  const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[2];
+  const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
                      console.warn('fetching conversations:', relConversation);
 
                      if (!destinationMap.has(destinationCode)) {
                          destinationMap.set(destinationCode, []);
                      }
-                     destinationMap.get(destinationCode).push(conversationId,relConversation);
+                     destinationMap.get(destinationCode).push(conversationId);
                  });
  
                  // Populate with radio buttons for unique destination codes
