@@ -632,7 +632,7 @@ margin-top: 4%;
                  destinationMap.forEach((conversations, destinationCode) => {
                      const label = document.createElement('label');
                      label.classList.add('conversation-option');
- 
+                     console.warn('fetching conversations:', conversationId, message.hostId, channelId);
                      const radio = document.createElement('input');
                      radio.type = 'radio';
                      radio.name = 'destination';
