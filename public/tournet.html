@@ -660,7 +660,7 @@ margin-top: 4%;
                  conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
                  initialRequest.innerHTML = '';  // Clear initial request
                   const displayedMessages = new Set(); // To track displayed messages
-console.warn('fetching messages:', destinationCode);
+
                  for (const conversationId of conversations) {
                      const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -668,7 +668,7 @@ console.warn('fetching messages:', destinationCode);
                      const messages = await response.json();
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
-                    
+      console.warn('fetching messages:', conversationId,messages);              
 // Clear previous content
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 // Prepare to collect initial requests
