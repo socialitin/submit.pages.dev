@@ -1509,6 +1509,74 @@ chatMessages.style.display = 'flex';
 chatMessages.style.flexDirection = 'column';
 chatMessages.style.gap = '10px';
 
+// ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
+
+// --- Reply area ---
+const chatReply = document.createElement('div');
+chatReply.style.display = 'flex';
+chatReply.style.alignItems = 'center';
+chatReply.style.padding = '10px 12px';
+chatReply.style.borderTop = '1px solid #eee';
+chatReply.style.background = '#fafafa';
+chatReply.style.gap = '8px';
+
+// Emoji icon
+const emojiBtn = document.createElement('span');
+emojiBtn.innerHTML = '😊';
+emojiBtn.title = 'Emoji';
+emojiBtn.style.cursor = 'pointer';
+emojiBtn.style.fontSize = '1.3em';
+
+// Attach icon (paperclip)
+const attachBtn = document.createElement('span');
+attachBtn.innerHTML = '📎';
+attachBtn.title = 'Attach file';
+attachBtn.style.cursor = 'pointer';
+attachBtn.style.fontSize = '1.3em';
+
+// Input
+const replyInput = document.createElement('input');
+replyInput.type = 'text';
+replyInput.placeholder = 'Type a message...';
+replyInput.style.flex = '1';
+replyInput.style.padding = '8px 12px';
+replyInput.style.border = '1px solid #ccc';
+replyInput.style.borderRadius = '16px';
+replyInput.style.fontSize = '1em';
+
+// Send icon (paper plane)
+const sendBtn = document.createElement('span');
+sendBtn.innerHTML = '📤';
+sendBtn.title = 'Send';
+sendBtn.style.cursor = 'pointer';
+sendBtn.style.fontSize = '1.3em';
+sendBtn.style.marginLeft = '4px';
+
+// Optional: handle send action
+sendBtn.onclick = function() {
+    if (replyInput.value.trim()) {
+        // Add your send logic here
+        alert('Send: ' + replyInput.value);
+        replyInput.value = '';
+    }
+};
+
+// Assemble reply area
+chatReply.appendChild(emojiBtn);
+chatReply.appendChild(attachBtn);
+chatReply.appendChild(replyInput);
+chatReply.appendChild(sendBtn);
+
+// --- Assemble popup ---
+chatPopup.appendChild(chatHeader);
+chatPopup.appendChild(chatMessages);
+chatPopup.appendChild(chatReply);
+
+// Add to body
+document.body.appendChild(chatPopup);
+
+// ...existing message rendering code...
+
 // rendered messages
 const renderedMessages = document.createElement('div');
 
