@@ -621,9 +621,7 @@ margin-top: 4%;
                  conversations.forEach((conversationId) => {
                      const channelId = conversationId.split('_')[1];
                      const destinationCode = channelId.slice(0, 3); // Extract the first three characters
-  const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
-                     console.warn('fetching conversations:', relConversation);
-
+  
                      if (!destinationMap.has(destinationCode)) {
                          destinationMap.set(destinationCode, []);
                      }
@@ -668,7 +666,8 @@ margin-top: 4%;
                      const messages = await response.json();
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
-      console.warn('fetching messages:', conversationId,messages);              
+const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
+                     console.warn('fetching conversations:', relConversation,conversationId,messages);              
 // Clear previous content
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 // Prepare to collect initial requests
