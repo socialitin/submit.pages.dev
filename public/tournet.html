@@ -621,7 +621,7 @@ margin-top: 4%;
                  conversations.forEach((conversationId) => {
                      const channelId = conversationId.split('_')[1];
                      const destinationCode = channelId.slice(0, 3); // Extract the first three characters
-  console.warn('fetching conversations:', conversationId);
+  console.warn('fetching conversations:', conversationId,conversationId.split('_')[2]);
                      if (!destinationMap.has(destinationCode)) {
                          destinationMap.set(destinationCode, []);
                      }
