@@ -1116,7 +1116,7 @@ console.log('tIATA',picsj.IATA);
 var tImg = '<div class="carousel-item"><img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style=" width:102px; height:102px;" onclick = "picsDtl(event,src,name);" ></div>';
 //document.getElementById('fjson' + fj).src = picsj[].img;
 
-console.log(tImgAll,jdata);
+console.log(tImgAll,jdata,picsj[h].img);
 var tImgAll = tImgAll+tImg;
 		};
 
@@ -1509,7 +1509,6 @@ chatMessages.style.display = 'flex';
 chatMessages.style.flexDirection = 'column';
 chatMessages.style.gap = '10px';
 
-
 // rendered messages
 const renderedMessages = document.createElement('div');
 
@@ -1532,9 +1531,7 @@ const renderedMessages = document.createElement('div');
     chatMessages.appendChild(bubble);
   });
   chatMessages.scrollTop = chatMessages.scrollHeight;
-
-
-  // ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
+// ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
 
 // --- Reply area ---
 const chatReply = document.createElement('div');
@@ -1601,13 +1598,7 @@ chatPopup.appendChild(chatReply);
 document.body.appendChild(chatPopup);
 
 // ...existing message rendering code...
-// Assemble popup 
-chatPopup.appendChild(chatHeader);
-chatPopup.append(chatMessages);
-chatPopup.style.display = 'flex';
 
-// Add to body
-document.body.appendChild(chatPopup);
 
 								// Check if the vendor has participated in this conversation
 								let isVendorInvolved = false;
