@@ -627,7 +627,7 @@ margin-top: 4%;
                      if (!destinationMap.has(destinationCode)) {
                          destinationMap.set(destinationCode, []);
                      }
-                     destinationMap.get(destinationCode).push(conversationId);
+                     destinationMap.get(destinationCode).push(relConversation);
                  });
  
                  // Populate with radio buttons for unique destination codes
@@ -804,7 +804,7 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
         radio.value = message.hostId;
         radio.checked = index === messages.length - 1;
         entryDiv.appendChild(radio);
-radio.onclick = () => fetchAndFilterConversation('NYCD_ITIN18563086291_305f17f4-c36e-488f-879a-ed8dcfb26226', message.hostId);
+radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
         const msgElement = document.createElement('p');
         msgElement.className = 'chat-message';
         msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
