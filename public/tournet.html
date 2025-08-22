@@ -1531,6 +1531,7 @@ const renderedMessages = document.createElement('div');
     chatMessages.appendChild(bubble);
   });
   chatMessages.scrollTop = chatMessages.scrollHeight;
+
 // ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
 
 // --- Reply area ---
@@ -1594,11 +1595,10 @@ chatPopup.appendChild(chatHeader);
 chatPopup.appendChild(chatMessages);
 chatPopup.appendChild(chatReply);
 
+chatPopup.style.display = 'flex';
+
 // Add to body
 document.body.appendChild(chatPopup);
-
-// ...existing message rendering code...
-
 
 								// Check if the vendor has participated in this conversation
 								let isVendorInvolved = false;
