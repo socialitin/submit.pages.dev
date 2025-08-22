@@ -660,7 +660,7 @@ margin-top: 4%;
                  conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
                  initialRequest.innerHTML = '';  // Clear initial request
                   const displayedMessages = new Set(); // To track displayed messages
-
+console.warn('fetching messages:', destinationCode);
                  for (const conversationId of conversations) {
                      const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
