@@ -1561,6 +1561,7 @@ attachBtn.style.fontSize = '1.3em';
 // Input
 const replyInput = document.createElement('input');
 replyInput.type = 'text';
+replyInput.id = vendorId;
 replyInput.placeholder = 'Type a message...';
 replyInput.style.flex = '1';
 replyInput.style.padding = '8px 12px';
@@ -1586,7 +1587,7 @@ sendBtn.style.marginLeft = '4px';
 // };*/
 
 sendBtn.onclick = async function() {
-             const message = document.getElementById('Input').value.trim();
+             const message = document.getElementById(vendorId).value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
              const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
