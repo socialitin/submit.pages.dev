@@ -1596,8 +1596,8 @@ sendBtn.onclick = async function() {
              // selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
 console.log('reply', vendorId, message, destinationCode, hostId);
              if (message !== '' && destinationCode !== '' && hostId !== '') {
-                 const conversationIds = destinationMap.get(destinationCode);
-                 const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
+          //       const conversationIds = destinationMap.get(destinationCode);
+        //         const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
 
                  try {
                      const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
