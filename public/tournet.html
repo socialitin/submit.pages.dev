@@ -1515,9 +1515,9 @@ const renderedMessages = document.createElement('div');
 
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
- 
+console.log(conversationData); 
     (conversationData.conversation || []).forEach(message => {
-console.log(conversationData.conversation, conversationData.conversation.id);
+
     const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(-me)');
     const isVendor = message.hostId === vendorId;
     const bubble = document.createElement('div');
