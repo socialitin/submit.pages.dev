@@ -1589,9 +1589,10 @@ sendBtn.style.marginLeft = '4px';
 sendBtn.onclick = async function() {
              const message = document.getElementById(vendorId).value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
-             const destinationCode = selectedConversationRadio ? selectedConversationRadio.name : '';
+             const destinationCode = conversationId
+             // selectedConversationRadio ? selectedConversationRadio.name : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
-             const hostId = vendorId
+             const hostId = vendorId;
              // selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
 console.log('reply', vendorId, message, destinationCode, hostId);
              if (message !== '' && destinationCode !== '' && hostId !== '') {
