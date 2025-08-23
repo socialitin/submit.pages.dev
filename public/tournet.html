@@ -1585,7 +1585,7 @@ sendBtn.style.marginLeft = '4px';
   //  }
 // };*/
 
-       sendBtn.onclick = async () => {
+       sendBtn.onclick = function() {
              const message = document.getElementById('replyInput').value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
              const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
