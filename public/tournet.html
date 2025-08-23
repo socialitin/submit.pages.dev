@@ -1592,7 +1592,7 @@ sendBtn.onclick = async function() {
              const destinationCode = selectedConversationRadio ? selectedConversationRadio.name : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
              const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
-
+console.log('reply', vendorId, message, destinationCode, hostId);
              if (message !== '' && destinationCode !== '' && hostId !== '') {
                  const conversationIds = destinationMap.get(destinationCode);
                  const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
