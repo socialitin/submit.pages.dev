@@ -828,211 +828,8 @@ conversationMessages.appendChild(tabContentsContainer);
                  console.error('Error fetching conversation messages:', error);
                  alert('Failed to load conversation messages. Please try again later.');
              }
-
-/// load chat  
-	                // const conversationtext = conversation.text();
-								console.log(`Fetched messages: `, conversationData, conversationId, vendorId);
-                //const conversationD = JSON.parse(conversation);
-			//	chatPopup(conversationData, vendorId);
-      // Create chat popup container
-const chatPopup = document.createElement('div');
-chatPopup.id = 'chatPopup';
-chatPopup.style.display = 'none';
-chatPopup.style.position = 'fixed';
-chatPopup.style.bottom = '20px';
-chatPopup.style.right = '20px';
-chatPopup.style.width = '350px';
-chatPopup.style.maxWidth = '95vw';
-chatPopup.style.height = '500px';
-chatPopup.style.maxHeight = '90vh';
-chatPopup.style.background = '#fff';
-chatPopup.style.borderRadius = '16px';
-chatPopup.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
-chatPopup.style.zIndex = '1001';
-chatPopup.style.overflow = 'hidden';
-chatPopup.style.flexDirection = 'column';
-
-// Create header
-const chatHeader = document.createElement('div');
-chatHeader.style.background = '#007bff';
-chatHeader.style.color = '#fff';
-chatHeader.style.padding = '12px 16px';
-chatHeader.style.fontWeight = 'bold';
-chatHeader.style.display = 'flex';
-chatHeader.style.justifyContent = 'space-between';
-chatHeader.style.alignItems = 'center';
-chatHeader.textContent = 'Chat';
-
-// Create close button
-const closeBtn = document.createElement('span');
-closeBtn.id = 'closeChatBtn';
-closeBtn.style.cursor = 'pointer';
-closeBtn.style.fontSize = '1.3em';
-closeBtn.innerHTML = '&times;';
-chatHeader.appendChild(closeBtn);
-
-// Create messages container
-const chatMessages = document.createElement('div');
-chatMessages.id = 'chatMessages';
-chatMessages.style.flex = '1';
-chatMessages.style.overflowY = 'auto';
-chatMessages.style.padding = '16px';
-chatMessages.style.background = '#f4f8fb';
-chatMessages.style.display = 'flex';
-chatMessages.style.flexDirection = 'column';
-chatMessages.style.gap = '10px';
-
-// rendered messages
-const renderedMessages = document.createElement('div');
-
-  // const chatMessages = document.getElementById('chatMessages');
-  //chatMessages.innerHTML = '';
-console.log(conversationData); 
-    (conversationData.conversation || []).forEach(message => {
-
-    const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(-me)');
-    const isVendor = message.hostId === vendorId;
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
-    bubble.innerHTML = `
-      <div class="chat-meta">
-        ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
-        <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
-      </div>
-      <div>${message.message}</div>
-    `;
-    chatMessages.appendChild(bubble);
-  });
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-
-// ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
-
-// --- Reply area ---
-const chatReply = document.createElement('div');
-chatReply.style.display = 'flex';
-chatReply.style.alignItems = 'center';
-chatReply.style.padding = '10px 12px';
-chatReply.style.borderTop = '1px solid #eee';
-chatReply.style.background = '#fafafa';
-chatReply.style.gap = '8px';
-
-// Emoji icon
-const emojiBtn = document.createElement('span');
-emojiBtn.innerHTML = '😊';
-emojiBtn.title = 'Emoji';
-emojiBtn.style.cursor = 'pointer';
-emojiBtn.style.fontSize = '1.3em';
-
-// Attach icon (paperclip)
-const attachBtn = document.createElement('span');
-attachBtn.innerHTML = '📎';
-attachBtn.title = 'Attach file';
-attachBtn.style.cursor = 'pointer';
-attachBtn.style.fontSize = '1.3em';
-
-// Input
-const replyInput = document.createElement('input');
-replyInput.type = 'text';
-replyInput.id = vendorId;
-replyInput.placeholder = 'Type a message...';
-replyInput.style.flex = '1';
-replyInput.style.padding = '8px 12px';
-replyInput.style.border = '1px solid #ccc';
-replyInput.style.borderRadius = '16px';
-replyInput.style.fontSize = '1em';
-
-// Send icon (paper plane)
-const sendBtn = document.createElement('span');
-sendBtn.innerHTML = '📤';
-sendBtn.title = 'Send';
-sendBtn.style.cursor = 'pointer';
-sendBtn.style.fontSize = '1.3em';
-sendBtn.style.marginLeft = '4px';
-
-// Optional: handle send action
-// sendBtn.onclick = function() {
- //    if (replyInput.value.trim()) {
-        // Add your send logic here
-   //      alert('Send: ' + replyInput.value);
-        replyInput.value = '';
-  //  }
-// };*/
-
-sendBtn.onclick = async function() {
-             const message = document.getElementById(vendorId).value.trim();
-             const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
-             const destinationCode = conversationId;
-             // selectedConversationRadio ? selectedConversationRadio.name : '';
-             const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
-             const hostId = vendorId;
-             // selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
-console.log('reply', vendorId, message, destinationCode, hostId);
-             if (message !== '' && destinationCode !== '' && hostId !== '') {
-          //       const conversationIds = destinationMap.get(destinationCode);
-        //         const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
-
-                 try {
-                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
-                         method: 'POST',
-                         headers: {
-                             'Content-Type': 'application/json',
-                         },
-                         body: JSON.stringify({ message, hostId })
-                     });
-
-                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-                     alert(`Replied to conversation ${conversationId}`);
-                     fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
-                 } catch (error) {
-                     console.error('Error replying to conversation:', error);
-                     alert('Failed to send reply. Please try again.');
-                 }
-             } else {
-                 alert('Please select a conversation, select a message, and enter a message.');
-             }
-         };
-// Assemble reply area
-chatReply.appendChild(emojiBtn);
-chatReply.appendChild(attachBtn);
-chatReply.appendChild(replyInput);
-chatReply.appendChild(sendBtn);
-
-// --- Assemble popup ---
-chatPopup.appendChild(chatHeader);
-chatPopup.appendChild(chatMessages);
-chatPopup.appendChild(chatReply);
-
-chatPopup.style.display = 'flex';
-
-// Add to body
-document.body.appendChild(chatPopup);
-
-								// Check if the vendor has participated in this conversation
-								let isVendorInvolved = false;
-				
-								if (Array.isArray(conversationData)) {
-									isVendorInvolved = conversationData.some(msg => msg.hostId === vendorId);
-								} else if (typeof conversationData === 'object' && conversationData.conversation) {
-									isVendorInvolved = conversationData.conversation.some(msg => msg.hostId === vendorId);
-								}
-				
-								if (isVendorInvolved) {
-									const option = document.createElement('option');
-									option.value = conversationId;
-									option.textContent = `Conversation ${conversationId}`;
-								//	ongoingConversationList.appendChild(option);
-								} else {
-									// If the vendor is not involved, add to new conversations
-									const option = document.createElement('option');
-									option.value = conversationId;
-									option.textContent = `Conversation ${conversationId}`;
-								//	conversationList.appendChild(option);
-								}
-
-// end chat
          }
-
+ 
          document.getElementById('load-channel-button').addEventListener('click', () => {
              currentItinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
@@ -1653,6 +1450,219 @@ console.log(j2publish);
 			};	
 </script>
 <script>
+
+  async function fetchAndFilterConversation(conversationId, vendorId) {
+							try {
+								const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+								const conversationData = await response.json();
+                // const conversationtext = conversation.text();
+								console.log(`Fetched messages: `, conversationData, conversationId, vendorId);
+                //const conversationD = JSON.parse(conversation);
+			//	chatPopup(conversationData, vendorId);
+      // Create chat popup container
+const chatPopup = document.createElement('div');
+chatPopup.id = 'chatPopup';
+chatPopup.style.display = 'none';
+chatPopup.style.position = 'fixed';
+chatPopup.style.bottom = '20px';
+chatPopup.style.right = '20px';
+chatPopup.style.width = '350px';
+chatPopup.style.maxWidth = '95vw';
+chatPopup.style.height = '500px';
+chatPopup.style.maxHeight = '90vh';
+chatPopup.style.background = '#fff';
+chatPopup.style.borderRadius = '16px';
+chatPopup.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
+chatPopup.style.zIndex = '1001';
+chatPopup.style.overflow = 'hidden';
+chatPopup.style.flexDirection = 'column';
+
+// Create header
+const chatHeader = document.createElement('div');
+chatHeader.style.background = '#007bff';
+chatHeader.style.color = '#fff';
+chatHeader.style.padding = '12px 16px';
+chatHeader.style.fontWeight = 'bold';
+chatHeader.style.display = 'flex';
+chatHeader.style.justifyContent = 'space-between';
+chatHeader.style.alignItems = 'center';
+chatHeader.textContent = 'Chat';
+
+// Create close button
+const closeBtn = document.createElement('span');
+closeBtn.id = 'closeChatBtn';
+closeBtn.style.cursor = 'pointer';
+closeBtn.style.fontSize = '1.3em';
+closeBtn.innerHTML = '&times;';
+chatHeader.appendChild(closeBtn);
+
+// Create messages container
+const chatMessages = document.createElement('div');
+chatMessages.id = 'chatMessages';
+chatMessages.style.flex = '1';
+chatMessages.style.overflowY = 'auto';
+chatMessages.style.padding = '16px';
+chatMessages.style.background = '#f4f8fb';
+chatMessages.style.display = 'flex';
+chatMessages.style.flexDirection = 'column';
+chatMessages.style.gap = '10px';
+
+// rendered messages
+const renderedMessages = document.createElement('div');
+
+  // const chatMessages = document.getElementById('chatMessages');
+  //chatMessages.innerHTML = '';
+ 
+    (conversationData.conversation || []).forEach(message => {
+
+    const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
+    const isVendor = message.hostId === vendorId;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
+    bubble.innerHTML = `
+      <div class="chat-meta">
+        ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
+        <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
+      </div>
+      <div>${message.message}</div>
+    `;
+    chatMessages.appendChild(bubble);
+  });
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+// ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
+
+// --- Reply area ---
+const chatReply = document.createElement('div');
+chatReply.style.display = 'flex';
+chatReply.style.alignItems = 'center';
+chatReply.style.padding = '10px 12px';
+chatReply.style.borderTop = '1px solid #eee';
+chatReply.style.background = '#fafafa';
+chatReply.style.gap = '8px';
+
+// Emoji icon
+const emojiBtn = document.createElement('span');
+emojiBtn.innerHTML = '😊';
+emojiBtn.title = 'Emoji';
+emojiBtn.style.cursor = 'pointer';
+emojiBtn.style.fontSize = '1.3em';
+
+// Attach icon (paperclip)
+const attachBtn = document.createElement('span');
+attachBtn.innerHTML = '📎';
+attachBtn.title = 'Attach file';
+attachBtn.style.cursor = 'pointer';
+attachBtn.style.fontSize = '1.3em';
+
+// Input
+const replyInput = document.createElement('input');
+replyInput.type = 'text';
+replyInput.id = vendorId;
+replyInput.placeholder = 'Type a message...';
+replyInput.style.flex = '1';
+replyInput.style.padding = '8px 12px';
+replyInput.style.border = '1px solid #ccc';
+replyInput.style.borderRadius = '16px';
+replyInput.style.fontSize = '1em';
+
+// Send icon (paper plane)
+const sendBtn = document.createElement('span');
+sendBtn.innerHTML = '📤';
+sendBtn.title = 'Send';
+sendBtn.style.cursor = 'pointer';
+sendBtn.style.fontSize = '1.3em';
+sendBtn.style.marginLeft = '4px';
+
+// Optional: handle send action
+// sendBtn.onclick = function() {
+ //    if (replyInput.value.trim()) {
+        // Add your send logic here
+   //      alert('Send: ' + replyInput.value);
+        replyInput.value = '';
+  //  }
+// };*/
+
+sendBtn.onclick = async function() {
+             const message = document.getElementById(vendorId).value.trim();
+             const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
+             const destinationCode = conversationId;
+             // selectedConversationRadio ? selectedConversationRadio.name : '';
+             const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
+             const hostId = vendorId;
+             // selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
+console.log('reply', vendorId, message, destinationCode, hostId);
+             if (message !== '' && destinationCode !== '' && hostId !== '') {
+          //       const conversationIds = destinationMap.get(destinationCode);
+        //         const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
+
+                 try {
+                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ message, hostId })
+                     });
+
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                     alert(`Replied to conversation ${conversationId}`);
+                     fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
+                 } catch (error) {
+                     console.error('Error replying to conversation:', error);
+                     alert('Failed to send reply. Please try again.');
+                 }
+             } else {
+                 alert('Please select a conversation, select a message, and enter a message.');
+             }
+         };
+// Assemble reply area
+chatReply.appendChild(emojiBtn);
+chatReply.appendChild(attachBtn);
+chatReply.appendChild(replyInput);
+chatReply.appendChild(sendBtn);
+
+// --- Assemble popup ---
+chatPopup.appendChild(chatHeader);
+chatPopup.appendChild(chatMessages);
+chatPopup.appendChild(chatReply);
+
+chatPopup.style.display = 'flex';
+
+// Add to body
+document.body.appendChild(chatPopup);
+
+								// Check if the vendor has participated in this conversation
+								let isVendorInvolved = false;
+				
+								if (Array.isArray(conversationData)) {
+									isVendorInvolved = conversationData.some(msg => msg.hostId === vendorId);
+								} else if (typeof conversationData === 'object' && conversationData.conversation) {
+									isVendorInvolved = conversationData.conversation.some(msg => msg.hostId === vendorId);
+								}
+				
+								if (isVendorInvolved) {
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+								//	ongoingConversationList.appendChild(option);
+								} else {
+									// If the vendor is not involved, add to new conversations
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+								//	conversationList.appendChild(option);
+								}
+							} catch (error) {
+								console.error('Error fetching and filtering conversation:', error);
+								alert('Failed to filter conversation. Please try again later.');
+							}
+						}
+            
 </script>
 	</body>
 </html>
