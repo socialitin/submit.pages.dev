@@ -1589,7 +1589,7 @@ sendBtn.style.marginLeft = '4px';
 sendBtn.onclick = async function() {
              const message = document.getElementById(vendorId).value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
-             const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
+             const destinationCode = selectedConversationRadio ? selectedConversationRadio.name : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
              const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
 
