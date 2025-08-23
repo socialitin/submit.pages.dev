@@ -1585,17 +1585,17 @@ sendBtn.style.marginLeft = '4px';
   //  }
 // };*/
 
-       sendBtn.onclick = function() {
+sendBtn.onclick = async function() {
              const message = document.getElementById('replyInput').value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
              const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
              const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
- 
+
              if (message !== '' && destinationCode !== '' && hostId !== '') {
                  const conversationIds = destinationMap.get(destinationCode);
                  const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
- 
+
                  try {
                      const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
                          method: 'POST',
@@ -1604,9 +1604,9 @@ sendBtn.style.marginLeft = '4px';
                          },
                          body: JSON.stringify({ message, hostId })
                      });
- 
+
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
- 
+
                      alert(`Replied to conversation ${conversationId}`);
                      fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
                  } catch (error) {
