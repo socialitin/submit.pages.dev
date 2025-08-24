@@ -1589,8 +1589,7 @@ sendBtn.style.marginLeft = '4px';
 sendBtn.onclick = async function() {
              const message = document.getElementById(vendorId).value.trim();
              const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
-             const destinationCode = 'NYCSS'
-             // conversationId;
+             const destinationCode = conversationId;
              // selectedConversationRadio ? selectedConversationRadio.name : '';
              const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
              const hostId = vendorId;
