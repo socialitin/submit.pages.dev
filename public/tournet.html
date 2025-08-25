@@ -1517,10 +1517,10 @@ const renderedMessages = document.createElement('div');
 
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
+ 
+    (conversationData.conversation || []).forEach(message => {
 
-    (Messgs || []).forEach(message => {
-
-    const isMe = message.hostId.toLowerCase() === 'initial' ;
+    const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
     const isVendor = message.hostId === vendorId;
     const bubble = document.createElement('div');
     bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
