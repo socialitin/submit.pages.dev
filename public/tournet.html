@@ -1517,22 +1517,23 @@ const renderedMessages = document.createElement('div');
 
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
- 
-    (Messgs || []).forEach(message => {
+ (Messgs || []).forEach(message => {
+  if (vendorId !== message.hostId) return; // Skip if not vendor
 
-    const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
-    const isVendor = message.hostId === vendorId;
-    const bubble = document.createElement('div');
-    bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
-    bubble.innerHTML = `
-      <div class="chat-meta">
-        ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
-        <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
-      </div>
-      <div>${message.message}</div>
-    `;
-    chatMessages.appendChild(bubble);
-  });
+  const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
+  const isVendor = message.hostId === vendorId;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
+  bubble.innerHTML = `
+    <div class="chat-meta">
+      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
+      <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
+    </div>
+    <div>${message.message}</div>
+  `;
+  chatMessages.appendChild(bubble);
+});
+    
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
 // ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
