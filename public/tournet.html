@@ -843,8 +843,9 @@ conversationMessages.appendChild(tabContentsContainer);
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
              const itinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
-             const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
-             const offerIs = document.getElementById('1u').src;
+              const offerIs = document.getElementById('1u').src;
+             const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim()+offerIs;
+          
              if (message !== '' && currentChannel !== '' && itinId !== '') {
                  try {
                      const response = await fetch(`${baseUrl}/initiate`, {
@@ -852,7 +853,7 @@ conversationMessages.appendChild(tabContentsContainer);
                          headers: {
                              'Content-Type': 'application/json',
                          },
-                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message,offerIs })
+                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
                      });
  
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
