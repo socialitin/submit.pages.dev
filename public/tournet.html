@@ -1518,7 +1518,7 @@ const renderedMessages = document.createElement('div');
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
-  if (vendorId !== message.hostId) return; // Skip if not vendor
+  if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
 
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
