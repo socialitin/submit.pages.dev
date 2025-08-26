@@ -1531,8 +1531,9 @@ const itiOffer = sessionStorage.getItem(conversationId);
   bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
   bubble.innerHTML = `
     <div class="chat-meta">
-      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId + itiOffer}
+      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
       <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
+      <div>${itiOffer}</div>
     </div>
     <div>${message.message}</div>
   `;
