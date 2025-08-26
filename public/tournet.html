@@ -845,7 +845,7 @@ conversationMessages.appendChild(tabContentsContainer);
              const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
-             sessionStorage.setItem("iOffer",itiOffer);
+             sessionStorage.setItem(itinId,itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
         
              if (message !== '' && currentChannel !== '' && itinId !== '') {
@@ -1524,7 +1524,7 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-const itiOffer = sessionStorage.getItem("iOffer");
+const itiOffer = sessionStorage.getItem(conversationId);
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
   const bubble = document.createElement('div');
