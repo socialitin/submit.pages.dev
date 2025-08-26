@@ -843,7 +843,9 @@ conversationMessages.appendChild(tabContentsContainer);
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
              const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
-         
+             const itiOffer = sessionStorage.getItem("ITI0");
+             sessionStorage.removeItem("ITI0");
+             sessionStorage.setItem("iOffer",itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
         
              if (message !== '' && currentChannel !== '' && itinId !== '') {
@@ -1522,14 +1524,14 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-
+const itiOffer = sessionStorage.getItem("iOffer");
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
   const bubble = document.createElement('div');
   bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
   bubble.innerHTML = `
     <div class="chat-meta">
-      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
+      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId + itiOffer}
       <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
     </div>
     <div>${message.message}</div>
