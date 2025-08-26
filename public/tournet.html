@@ -845,7 +845,7 @@ conversationMessages.appendChild(tabContentsContainer);
              const itinId = 'ITIN'+document.getElementById('itin-id-input').value.trim();
               const offerIs = document.getElementById('3u').src;
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
-          
+          console.log('offerIs:', offerIs);
              if (message !== '' && currentChannel !== '' && itinId !== '') {
                  try {
                      const response = await fetch(`${baseUrl}/initiate`, {
