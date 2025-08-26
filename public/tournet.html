@@ -855,7 +855,7 @@ conversationMessages.appendChild(tabContentsContainer);
                          },
                          body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
                      });
-                     console.log('offerIs:', JSON.stringify({ itinId: itinId, channel: currentChannel, message, offerIs: offerIs }));
+                
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
  
                      const data = await response.json();
