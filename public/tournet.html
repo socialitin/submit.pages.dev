@@ -853,7 +853,7 @@ conversationMessages.appendChild(tabContentsContainer);
                          headers: {
                              'Content-Type': 'application/json',
                          },
-                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message, offerIs: offerIs })
+                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
                      });
                      console.log('offerIs:', JSON.stringify({ itinId: itinId, channel: currentChannel, message, offerIs: offerIs }));
                      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -1162,6 +1162,7 @@ var pIata = name.split(',')[0];
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
 //console.warn('ofr details', Pname);
+sessionStorage.setItem("iCmpt",name+picis)
 var tiata = pIata.toString()+'S'; 
 if (tiata.length < 4) {
 var PIata = "NYCSS";
