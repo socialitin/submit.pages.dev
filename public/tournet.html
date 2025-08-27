@@ -699,10 +699,24 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
+        const pp = document.createElement('p');
+       // p.appendChild(icon); 
+        
+        const key = relConversation.substring(0, 19);
+const value = sessionStorage.getItem(key);
+console.log('sessionStorage key:', key, 'value:', value);
+
+if (value) {
+    const iofr = document.createElement('span');
+    iofr.appendChild(document.createTextNode('value'));
+    pp.appendChild(iofr);
+    
+}  
+
         const icon = document.createElement('span');
 icon.textContent = '🗺️'; // Sightseeing emoji
 icon.style.marginRight = '8px';
-icon.style.fontSize = '3.2em';
+icon.style.fontSize = '2.2em';
 
         const p = document.createElement('p');
         p.appendChild(icon); 
