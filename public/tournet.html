@@ -715,23 +715,23 @@ icon.style.fontSize = '1.2em';
         const key = relConversation.substring(0, 19);
 const value = sessionStorage.getItem(key);
 if (value !== null && value !== undefined && value !== "null") {
-// Split on the last underscore (assuming that's your separator)
-// const lastUnderscore = value.lastIndexOf('_');
-// const textPart = value.substring(0, lastUnderscore);
-const urlPart = value; // .substring(lastUnderscore + 1);
+const obj = JSON.parse(value);
+
+const src = obj.src;
+const name = obj.name;
+const desc = obj.desc;
 
 // Create image
 const iof = document.createElement('BR');
 const iofr = document.createElement('Div');
 const img = document.createElement('img');
-img.src = urlPart.trim();
+img.src = src;
 img.style.width = '9%';
 
 // Create text node
-// const textNode = document.createTextNode(textPart);
+const textNode = document.createTextNode(name+'-'+desc);
 
 // Append to your parent element (e.g., p)
-
 
 console.log('sessionStorage key:', key, 'value:', value);
 
@@ -739,6 +739,7 @@ console.log('sessionStorage key:', key, 'value:', value);
     span.appendChild(iof);  
     span.appendChild(iofr);
     span.appendChild(img);
+    span.appendChild(textNode);
     // span.appendChild(textNode);
     p.appendChild(span);
 }
