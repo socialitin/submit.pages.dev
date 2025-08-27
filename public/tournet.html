@@ -1259,7 +1259,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
     alert("Please enter your cell number.");
     return;
   }
-const itiOffer = pIata+'_ITI0'+cellValue;
+const itiOffer = 'NYCS'+'_ITI0'+cellValue;
 var iofr  = {'src' : document.getElementById(event.target.id).src, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
 sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
  
