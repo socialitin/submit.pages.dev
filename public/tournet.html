@@ -716,10 +716,11 @@ if (value) {
         const icon = document.createElement('span');
 icon.textContent = '🗺️'; // Sightseeing emoji
 icon.style.marginRight = '8px';
-icon.style.fontSize = '2.2em';
+icon.style.fontSize = '1.2em';
 
         const p = document.createElement('p');
         p.appendChild(icon); 
+        p.appendChild(pp); 
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
 
