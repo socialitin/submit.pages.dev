@@ -1171,7 +1171,7 @@ var PIata = tiata+"SS";
 }else{
 var  PIata = tiata;
 }
-const itiOffer = PIata+'_ITI0'+document.getElementById('cell'); 
+const itiOffer = PIata+'_ITI0'+document.getElementById(event.target.id).cell.value(); 
 sessionStorage.setItem(itiOffer,name+'_'+picis);
 document.getElementById('channel-input').value= PIata;
 document.getElementById("itemImg").innerHTML = picUrl;;
