@@ -1205,9 +1205,7 @@ var PIata = tiata+"SS";
 }else{
 var  PIata = tiata;
 }
-const itiOffer = PIata+'_ITI0'+'9548259161';
-var iofr  = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;">'+name+'</img>';
-sessionStorage.setItem(itiOffer,picis);
+
 document.getElementById('channel-input').value= PIata;
 document.getElementById("itemImg").innerHTML = picUrl;
 //document.getElementById("tofr").name = name; 	
@@ -1261,7 +1259,10 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
     alert("Please enter your cell number.");
     return;
   }
-
+const itiOffer = pIata+'_ITI0'+cellValue;
+var iofr  = {'src' : document.getElementById(event.target.id).src, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
+sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
+ 
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
   //document.getElementById('channel-input').value = pIata;
