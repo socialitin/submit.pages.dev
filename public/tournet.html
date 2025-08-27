@@ -714,10 +714,28 @@ icon.style.fontSize = '1.2em';
         
         const key = relConversation.substring(0, 19);
 const value = sessionStorage.getItem(key);
+// Split on the last underscore (assuming that's your separator)
+const lastUnderscore = value.lastIndexOf('_');
+const textPart = value.substring(0, lastUnderscore);
+const urlPart = value.substring(lastUnderscore + 1);
+
+// Create image
+const img = document.createElement('img');
+img.src = urlPart.trim();
+img.style.width = '99%';
+img.id = '0u';
+
+// Create text node
+const textNode = document.createTextNode(textPart);
+
+// Append to your parent element (e.g., p)
+
+
 console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
     const span = document.createElement('span');
-    span.textContent = value;
+    span.appendChild(img);
+    span.appendChild(textNode);
     p.appendChild(span);
 }
         initialRequestDiv.appendChild(p);
