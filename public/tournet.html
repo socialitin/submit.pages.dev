@@ -1526,7 +1526,7 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-const itiOffer = sessionStorage.getItem(conversationId);
+const itiOffer = sessionStorage.getItem(conversationId.substring(0, 20));
 console.log('itiOffer', itiOffer, conversationId.substring(0, 20));
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
