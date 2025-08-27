@@ -708,7 +708,8 @@ icon.style.fontSize = '3.2em';
         p.appendChild(icon); 
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
-
+const itiOffer = sessionStorage.getItem(conversationId.substring(0, 20));
+p.appendChild(itiOffer);
         initialRequestDiv.appendChild(p);
         return; // Do not group this message into tabs
     }
