@@ -714,6 +714,7 @@ icon.style.fontSize = '1.2em';
         
         const key = relConversation.substring(0, 19);
 const value = sessionStorage.getItem(key);
+if (value !== null && value !== undefined && value !== "null") {
 // Split on the last underscore (assuming that's your separator)
 const lastUnderscore = value.lastIndexOf('_');
 const textPart = value.substring(0, lastUnderscore);
@@ -732,7 +733,7 @@ const textNode = document.createTextNode(textPart);
 
 
 console.log('sessionStorage key:', key, 'value:', value);
-if (value !== null && value !== undefined && value !== "null") {
+
     const span = document.createElement('span');
     span.appendChild(img);
     span.appendChild(textNode);
