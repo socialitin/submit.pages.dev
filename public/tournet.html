@@ -699,33 +699,17 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
-                const p = document.createElement('p');
-       // p.appendChild(icon); 
-        
-        const key = relConversation.substring(0, 19);
-const value = sessionStorage.getItem(key);
-console.log('sessionStorage key:', key, 'value:', value);
-
-if (value) {
-    const iofr = document.createElement('span');
-    iofr.appendChild(document.createTextNode('value'));
-    p.appendChild(iofr);
-    
-}  
-
-       // const p = document.createElement('p');
         const icon = document.createElement('span');
 icon.textContent = '🗺️'; // Sightseeing emoji
 icon.style.marginRight = '8px';
-icon.style.fontSize = '2.2em';
+icon.style.fontSize = '3.2em';
 
-
+        const p = document.createElement('p');
+        p.appendChild(icon); 
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
 
         initialRequestDiv.appendChild(p);
-       
-
         return; // Do not group this message into tabs
     }
 
@@ -1552,7 +1536,7 @@ console.log('itiOffer', itiOffer, conversationId.substring(0, 20));
     <div class="chat-meta">
       ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
       <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
-      
+      <br><div>${itiOffer}</div>
     </div>
     <div>${message.message}</div>
   `;
