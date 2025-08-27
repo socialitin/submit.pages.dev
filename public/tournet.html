@@ -700,7 +700,7 @@ conversationMessages.appendChild(separator);
         }
         // Add the initial message
         const p = document.createElement('p');
-        p.appendChild(icon); 
+       // p.appendChild(icon); 
         
         const key = relConversation.substring(0, 19);
 const value = sessionStorage.getItem(key);
@@ -709,7 +709,7 @@ console.log('sessionStorage key:', key, 'value:', value);
 if (value) {
     const icon = document.createElement('span');
     icon.appendChild(document.createTextNode(value));
-   // p.appendChild(icon);
+    p.appendChild(icon);
     
 }        
        // const icon = document.createElement('span');
