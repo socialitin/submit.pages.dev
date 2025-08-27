@@ -708,10 +708,13 @@ icon.style.fontSize = '3.2em';
         p.appendChild(icon); 
         const itiOffer = sessionStorage.getItem(relConversation.substring(0, 19));
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
-        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - (itiOffer)`));
-        console.log('itiOffer:', itiOffer, relConversation.substring(0, 19));
-        // p.appendChild(document.createTextNode(itiOffer));
+        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
+
         initialRequestDiv.appendChild(p);
+        const o = document.createElement('o');
+        o.appendChild(document.createTextNode(itiOffer));
+        p.appendChild(o);
+     
         return; // Do not group this message into tabs
     }
 
