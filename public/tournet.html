@@ -699,7 +699,20 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
-        const pp = document.createElement('p');
+         const icon = document.createElement('span');
+icon.textContent = '🗺️'; // Sightseeing emoji
+icon.style.marginRight = '8px';
+icon.style.fontSize = '1.2em';
+
+        const p = document.createElement('p');
+        p.appendChild(icon); 
+       
+        // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
+        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
+
+        initialRequestDiv.appendChild(p);
+        return; // Do not group this message into tabs
+               const pp = document.createElement('p');
        // p.appendChild(icon); 
         
         const key = relConversation.substring(0, 19);
@@ -708,23 +721,10 @@ console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
     const span = document.createElement('span');
     span.textContent = value;
-    pp.appendChild(span);
+    p.appendChild(span);
 }
  
 
-        const icon = document.createElement('span');
-icon.textContent = '🗺️'; // Sightseeing emoji
-icon.style.marginRight = '8px';
-icon.style.fontSize = '1.2em';
-
-        const p = document.createElement('p');
-        p.appendChild(icon); 
-        p.appendChild(pp); 
-        // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
-        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
-
-        initialRequestDiv.appendChild(p);
-        return; // Do not group this message into tabs
     }
 
     // Group all other messages by hostId
