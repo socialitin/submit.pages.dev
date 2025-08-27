@@ -723,7 +723,7 @@ const urlPart = value.substring(lastUnderscore + 1);
 // Create image
 const img = document.createElement('img');
 img.src = urlPart.trim();
-img.style.width = '99%';
+img.style.width = '9%';
 img.id = '0u';
 
 // Create text node
@@ -736,7 +736,7 @@ console.log('sessionStorage key:', key, 'value:', value);
 
     const span = document.createElement('span');
     span.appendChild(img);
-    span.appendChild(textNode);
+    // span.appendChild(textNode);
     p.appendChild(span);
 }
         initialRequestDiv.appendChild(p);
