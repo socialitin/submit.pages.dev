@@ -715,6 +715,7 @@ if (value) {
     const span = document.createElement('span');
     span.appendChild(document.createTextNode(value));
     p.appendChild(span);
+    initialRequestDiv.appendChild(p);
 }
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
