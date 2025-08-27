@@ -699,24 +699,24 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
-        const icon = document.createElement('span');
-icon.textContent = '🗺️'; // Sightseeing emoji
-icon.style.marginRight = '8px';
-icon.style.fontSize = '3.2em';
-
         const p = document.createElement('p');
         p.appendChild(icon); 
         
         const key = relConversation.substring(0, 19);
-const value = "New York NY"; ///sessionStorage.getItem(key);
+const value = sessionStorage.getItem(key);
 console.log('sessionStorage key:', key, 'value:', value);
 
 if (value) {
-    const span = document.createElement('span');
-    span.appendChild(document.createTextNode(value));
-    p.appendChild(span);
-    initialRequestDiv.appendChild(p);
-}
+    const icon = document.createElement('span');
+    icon.appendChild(document.createTextNode(value));
+   // p.appendChild(icon);
+    
+}        
+       // const icon = document.createElement('span');
+// icon.textContent = '🗺️'; // Sightseeing emoji
+// icon.style.marginRight = '8px';
+// icon.style.fontSize = '3.2em';
+
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
 
