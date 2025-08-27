@@ -1165,13 +1165,13 @@ var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
 //console.warn('ofr details', Pname);
 
-var tiata = pIata.toString()+'S'; 
-if (tiata.length < 4) {
-var PIata = "NYCSS";
+var tiata = pIata.toString(); 
+if (tiata.length < 5) {
+var PIata = tiata+"SS";
 }else{
 var  PIata = tiata;
 }
-const itiOffer = tiata+'_ITI0'+'9548255856'; 
+const itiOffer = PIata+'_ITI0'+document.getElementById('cell').value; 
 sessionStorage.setItem(itiOffer,name+'_'+picis);
 document.getElementById('channel-input').value= PIata;
 document.getElementById("itemImg").innerHTML = picUrl;
