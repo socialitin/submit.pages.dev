@@ -716,18 +716,17 @@ icon.style.fontSize = '1.2em';
 const value = sessionStorage.getItem(key);
 if (value !== null && value !== undefined && value !== "null") {
 // Split on the last underscore (assuming that's your separator)
-const lastUnderscore = value.lastIndexOf('_');
-const textPart = value.substring(0, lastUnderscore);
-const urlPart = value.substring(lastUnderscore + 1);
+// const lastUnderscore = value.lastIndexOf('_');
+// const textPart = value.substring(0, lastUnderscore);
+const urlPart = value; // .substring(lastUnderscore + 1);
 
 // Create image
 const img = document.createElement('img');
 img.src = urlPart.trim();
 img.style.width = '9%';
-img.id = '0u';
 
 // Create text node
-const textNode = document.createTextNode(textPart);
+// const textNode = document.createTextNode(textPart);
 
 // Append to your parent element (e.g., p)
 
