@@ -709,9 +709,6 @@ icon.style.fontSize = '1.2em';
        
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
-
-        initialRequestDiv.appendChild(p);
-        return; // Do not group this message into tabs
                const pp = document.createElement('p');
        // p.appendChild(icon); 
         
@@ -721,9 +718,10 @@ console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
     const span = document.createElement('span');
     span.textContent = value;
-    p.appendChild(span);
+    pp.appendChild(span);
 }
- 
+        initialRequestDiv.appendChild(p);
+        return; // Do not group this message into tabs
 
     }
 
