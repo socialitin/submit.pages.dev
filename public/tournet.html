@@ -712,9 +712,9 @@ icon.style.fontSize = '3.2em';
 
         initialRequestDiv.appendChild(p);
         const o = document.createElement('o');
-        o.appendChild(document.createTextNode(stringify(itiOffer)));
+        o.appendChild(document.createTextNode(JSON.parse(itiOffer)));
         p.appendChild(o);
-     
+
         return; // Do not group this message into tabs
     }
 
