@@ -705,13 +705,12 @@ conversationMessages.appendChild(separator);
         const key = relConversation.substring(0, 19);
 const value = sessionStorage.getItem(key);
 console.log('sessionStorage key:', key, 'value:', value);
-
-if (value) {
-    const iofr = document.createElement('span');
-    iofr.appendChild(document.createTextNode(value));
-    pp.appendChild(iofr);
-    
-}  
+if (value !== null && value !== undefined && value !== "null") {
+    const span = document.createElement('span');
+    span.textContent = value;
+    pp.appendChild(span);
+}
+ 
 
         const icon = document.createElement('span');
 icon.textContent = '🗺️'; // Sightseeing emoji
