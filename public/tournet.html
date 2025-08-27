@@ -721,6 +721,8 @@ if (value !== null && value !== undefined && value !== "null") {
 const urlPart = value; // .substring(lastUnderscore + 1);
 
 // Create image
+const iof = document.createElement('BR');
+const iofr = document.createElement('Div');
 const img = document.createElement('img');
 img.src = urlPart.trim();
 img.style.width = '9%';
@@ -734,6 +736,8 @@ img.style.width = '9%';
 console.log('sessionStorage key:', key, 'value:', value);
 
     const span = document.createElement('span');
+    span.appendChild(iof);  
+    span.appendChild(iofr);
     span.appendChild(img);
     // span.appendChild(textNode);
     p.appendChild(span);
