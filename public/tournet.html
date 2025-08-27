@@ -709,7 +709,7 @@ icon.style.fontSize = '3.2em';
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
 const itiOffer = sessionStorage.getItem(conversationId.substring(0, 20));
-p.appendChild(itiOffer);
+p.appendChild(document.createTextNode(itiOffer));
         initialRequestDiv.appendChild(p);
         return; // Do not group this message into tabs
     }
@@ -1537,7 +1537,7 @@ console.log('itiOffer', itiOffer, conversationId.substring(0, 20));
     <div class="chat-meta">
       ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
       <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
-      <br><div>${itiOffer}</div>
+      
     </div>
     <div>${message.message}</div>
   `;
