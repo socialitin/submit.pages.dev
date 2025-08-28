@@ -714,7 +714,7 @@ const iconArea = document.createElement('BR');
                const pp = document.createElement('p');
        // p.appendChild(icon); 
         
-        const key = relConversation.substring(0, 19);
+        const key = relConversation.substring(0, 20);
 const value = sessionStorage.getItem(key);
 console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
@@ -1568,7 +1568,7 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-const itiOffer = sessionStorage.getItem(conversationId.substring(0, 20));
+const itiOffer = sessionStorage.getItem(conversationId.substring(0,20));
 console.log('itiOffer', itiOffer);
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
