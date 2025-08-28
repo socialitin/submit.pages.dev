@@ -708,7 +708,6 @@ const iconArea = document.createElement('BR');
         const p = document.createElement('p');
 
         p.appendChild(icon); 
-       p.appendChild(iconArea); 
        
         // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
