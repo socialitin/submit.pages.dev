@@ -1564,10 +1564,11 @@ chatMessages.style.gap = '10px';
 
 // rendered messages
 const renderedMessages = document.createElement('div');
+ (conversationData.conversation || []).forEach(message => {
 
   // const chatMessages = document.getElementById('chatMessages');
   //chatMessages.innerHTML = '';
- (Messgs || []).forEach(message => {
+//  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
 // const itiOffer = sessionStorage.getItem(conversationId.substring(0, 20));
 // console.log('itiOffer', itiOffer, conversationId.substring(0, 20));
