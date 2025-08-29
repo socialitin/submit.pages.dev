@@ -718,7 +718,6 @@ const iconArea = document.createElement('BR');
 const value = sessionStorage.getItem(key);
 console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
-const obj = JSON.parse(value);
 
 // Example array (replace with your actual array)
 const itinArray = [JSON.parse(value)];
@@ -743,14 +742,14 @@ img.style.borderRadius = '12px';
 // Description area
 const descDiv = document.createElement('div');
 descDiv.innerHTML = `<h2 style="margin:0 0 8px 0;">${itinArray[0].name}</h2>
-<p style="margin:0;font-size:1.1em;color:#444;">; </p>`;
+<p style="margin:0;font-size:1.1em;color:#444;">${itinArray[0].desc}</p>`;
 
 // Assemble
 header.appendChild(img);
 header.appendChild(descDiv);
 
 // Add to page (e.g., to a container with id="itinHeader")
- p.appendChild(header);
+p.appendChild(header);
 }
         initialRequestDiv.appendChild(p);
         return; // Do not group this message into tabs
