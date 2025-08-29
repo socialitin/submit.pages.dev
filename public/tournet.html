@@ -1200,8 +1200,10 @@ var pIata = name.split(',')[0];
 //var Pmesg = Pname + Pdesc;
 var pcount = event.target.id;
 var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
-console.warn('ofr details', name, Pname,pIata,Pdesc);
-
+console.warn('ofr details name');
+console.warn('ofr details Pname', Pname);
+console.warn('ofr details pIata', pIata);
+console.warn('ofr details Pdesc', Pdesc);
 var tiata = pIata.toString(); 
 if (tiata.length < 5) {
 var PIata = tiata+"SS";
