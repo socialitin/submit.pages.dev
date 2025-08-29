@@ -48,7 +48,7 @@ blockquote {
 	display: block;
 	font-size: 0.85rem;
 	padding-left: 0.75rem;
-	border-left: 4px solid #f6821f;
+	/* border-left: 4px solid #f6821f; */
 	margin-bottom: 1rem;
 	margin-top: 0.5rem;
 }
