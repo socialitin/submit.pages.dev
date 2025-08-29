@@ -709,10 +709,10 @@ const iconArea = document.createElement('BR');
 
         p.appendChild(icon); 
        
-        // p.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`;
-        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
+      
+//        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId})`));
                const pp = document.createElement('p');
-       // p.appendChild(icon); 
+      
         
         const key = relConversation.substring(0, 20);
 const value = sessionStorage.getItem(key);
@@ -746,7 +746,7 @@ descDiv.innerHTML = `<h2 style="margin:0 0 8px 0;">${itinArray[0].name}</h2>
 
 // Assemble
 header.appendChild(img);
-// header.appendChild(descDiv);
+header.appendChild(descDiv);
 
 // Add to page (e.g., to a container with id="itinHeader")
  p.appendChild(header);
