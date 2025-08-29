@@ -720,30 +720,37 @@ console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
 const obj = JSON.parse(value);
 
-const src = obj.src;
-const name = obj.name;
-const desc = obj.desc;
+// Example array (replace with your actual array)
+const itinArray = JSON.parse(value);
+console.log('itinArray:', itinArray);
 
-// Create image
-const iof = document.createElement('BR');
-const iofr = document.createElement('Div');
+// Create header container
+const header = document.createElement('div');
+header.style.display = 'flex';
+header.style.alignItems = 'center';
+header.style.gap = '20px';
+header.style.marginBottom = '24px';
+
+// Large image
 const img = document.createElement('img');
-img.src = src;
-img.style.width = '9%';
+img.src = itinArray[0].src;
+img.alt = itinArray[0].name;
+img.style.width = '160px';
+img.style.height = '120px';
+img.style.objectFit = 'cover';
+img.style.borderRadius = '12px';
 
-// Create text node
-const textNode = document.createTextNode(name+'-'+desc);
+// Description area
+const descDiv = document.createElement('div');
+descDiv.innerHTML = `<h2 style="margin:0 0 8px 0;">${itinArray[0].name}</h2>
+<p style="margin:0;font-size:1.1em;color:#444;">${itinArray[0].desc}</p>`;
 
-// Append to your parent element (e.g., p)
+// Assemble
+header.appendChild(img);
+header.appendChild(descDiv);
 
-    const span = document.createElement('span');
-    span.appendChild(iofr);
-    span.appendChild(iof);  
-    span.appendChild(iof);  
-  
-    span.appendChild(img);
-    span.appendChild(textNode);
-    p.appendChild(span);
+// Add to page (e.g., to a container with id="itinHeader")
+document.getElementById('itinHeader').appendChild(header);
 }
         initialRequestDiv.appendChild(p);
         return; // Do not group this message into tabs
@@ -1570,8 +1577,7 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-const itiOffer = sessionStorage.getItem(conversationId.substring(0,
-20));
+const itiOffer = sessionStorage.getItem(conversationId.substring(0,20));
 console.log('itiOffer', itiOffer);
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
