@@ -661,7 +661,7 @@
                  destinationMap.forEach((conversations, destinationCode) => {
                      const label = document.createElement('label');
                      label.classList.add('conversation-option');
-                    
+            console.warn('destinationCode:', destinationCode, conversations);        
                      const radio = document.createElement('input');
                      radio.type = 'radio';
                      radio.name = 'destination';
