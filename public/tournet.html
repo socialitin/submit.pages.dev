@@ -870,7 +870,6 @@ entryDiv.appendChild(msgElement);
    //  entryDiv.appendChild(msgElement);
 
     horizontalContainer.appendChild(entryDiv);
-});
 // Create a meta/info line below the bubble
 const meta = document.createElement('div');
 meta.className = 'chat-meta';
@@ -879,6 +878,7 @@ meta.style.opacity = '0.7';
 meta.style.marginTop = '4px';
 meta.textContent = `${timeSince(message.timestamp)} · ${productType}`;
 entryDiv.appendChild(meta);
+  });
 
 // Add the horizontal container to your contentDiv
 contentDiv.appendChild(horizontalContainer);
