@@ -74,14 +74,19 @@
     min-height: 40px;
 }
 .chat-message {
-    background: #e6f3ff;
-    border-radius: 16px;
-    padding: 10px 16px;
-    margin: 8px 0;
-    max-width: 70%;
-    word-break: break-word;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    font-size: 1em;
+  background: #e6f3ff;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 0;
+  max-width: 90%;
+  word-break: break-word;
+  font-size: 1em;
+}
+
+.chat-meta {
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-top: 4px;
 }
   
 .tab-header {
@@ -344,10 +349,10 @@
                 }
         
                 .conversation-entry {
-  display: flex;
-  flex-direction: column;
-  /* other styles as needed */
-}
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                }
         
                 .conversation-entry p {
                     margin: 0;
