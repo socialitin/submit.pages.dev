@@ -699,7 +699,19 @@ conversationMessages.appendChild(separator);
             initialRequestDiv.style.marginBottom = '16px';
         }
         // Add the initial message
- 
+         const icon = document.createElement('span');
+icon.textContent = '🗺️'; // Sightseeing emoji
+icon.style.width = '50px';
+icon.style.textAlign = 'right';
+icon.style.fontSize = '1.2em';
+const iconArea = document.createElement('BR');
+        const p = document.createElement('p');
+
+        p.appendChild(icon); 
+       
+      
+        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType}  `));
+        // ${message.message} (${message.hostId})
                const pp = document.createElement('p');
       
         
@@ -741,20 +753,6 @@ header.appendChild(descDiv);
  p.appendChild(header);
 }
         initialRequestDiv.appendChild(p);
-
-                const icon = document.createElement('span');
-icon.textContent = '🗺️'; // Sightseeing emoji
-icon.style.width = '50px';
-icon.style.textAlign = 'right';
-icon.style.fontSize = '1.2em';
-const iconArea = document.createElement('BR');
-        const p = document.createElement('p');
-
-        p.appendChild(icon); 
-       
-      
-        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType} - `));
-        // ${message.message} (${message.hostId})
         return; // Do not group this message into tabs
 
     }
