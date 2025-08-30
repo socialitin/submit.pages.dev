@@ -874,8 +874,9 @@ groupedMessages[groupKey].forEach(({ message, index }) => {
     radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
 
     // Add meta text and radio to meta line
-    meta.textContent = `${timeSince(message.timestamp)} · ${productType} `;
     meta.appendChild(radio);
+    meta.textContent = `${timeSince(message.timestamp)} · ${productType} `;
+   
 
     // Append meta info below the chat bubble
     entryDiv.appendChild(meta);
