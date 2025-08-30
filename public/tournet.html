@@ -683,7 +683,7 @@
          async function fetchAndDisplayMessages(destinationCode) {
              try {
                  const conversations = destinationMap.get(destinationCode) || [];
-                 conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';  // Clear existing messages
+                 conversationMessages.innerHTML = '';  // Clear existing messages
                  initialRequest.innerHTML = '';  // Clear initial request
                   const displayedMessages = new Set(); // To track displayed messages
 
