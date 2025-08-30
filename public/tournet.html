@@ -861,12 +861,24 @@ groupedMessages[groupKey].forEach(({ message, index }) => {
     radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
 
     const msgElement = document.createElement('p');
-    msgElement.className = 'chat-message';
-    msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-    entryDiv.appendChild(msgElement);
+msgElement.className = 'chat-message';
+msgElement.textContent = message.message;
+entryDiv.appendChild(msgElement);
+    // const msgElement = document.createElement('p');
+   //  msgElement.className = 'chat-message';
+   //  msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+   //  entryDiv.appendChild(msgElement);
 
     horizontalContainer.appendChild(entryDiv);
 });
+// Create a meta/info line below the bubble
+const meta = document.createElement('div');
+meta.className = 'chat-meta';
+meta.style.fontSize = '0.85em';
+meta.style.opacity = '0.7';
+meta.style.marginTop = '4px';
+meta.textContent = `${timeSince(message.timestamp)} · ${productType}`;
+entryDiv.appendChild(meta);
 
 // Add the horizontal container to your contentDiv
 contentDiv.appendChild(horizontalContainer);
