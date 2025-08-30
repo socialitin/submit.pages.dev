@@ -765,7 +765,7 @@ img.style.borderRadius = '12px';
 
 // Description area
 const descDiv = document.createElement('div');
-descDiv.innerHTML = `<h2 style="margin:0 0 8px 0;">${itinArray[0].name}</h2>
+descDiv.innerHTML = `<h2 style="margin:0 0 8px 0; font-size:1.1em;color:#444;">${itinArray[0].name}</h2>
 <p style="margin:0;font-size:1.1em;color:#444;">${itinArray[0].desc}</p>`;
 
 // Assemble
@@ -898,7 +898,7 @@ groupedMessages[groupKey].forEach(({ message, index }) => {
 
   // Create meta text span
 const metaText = document.createElement('span');
-metaText.textContent = ` ${timeSince(message.timestamp)} · ${productType}`;
+metaText.textContent = `${timeSince(message.timestamp)} · ${productType}`; // No leading space
 
 // Append radio first, then meta text
 meta.appendChild(radio);
