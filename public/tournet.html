@@ -850,39 +850,39 @@ horizontalContainer.style.padding = '8px 0';
 groupedMessages[groupKey].forEach(({ message, index }) => {
     const entryDiv = document.createElement('div');
     entryDiv.classList.add('conversation-entry');
-    entryDiv.style.minWidth = '250px'; // Adjust as needed
-    entryDiv.style.flex = '0 0 auto';  // Prevent shrinking
+    entryDiv.style.minWidth = '250px';
+    entryDiv.style.flex = '0 0 auto';
 
+    const msgElement = document.createElement('p');
+    msgElement.className = 'chat-message';
+    msgElement.textContent = message.message;
+    entryDiv.appendChild(msgElement);
+
+    // Create a meta/info line below the bubble
+    const meta = document.createElement('div');
+    meta.className = 'chat-meta';
+    meta.style.fontSize = '0.85em';
+    meta.style.opacity = '0.7';
+    meta.style.marginTop = '4px';
+
+    // Create radio and add to meta
     const radio = document.createElement('input');
     radio.type = 'radio';
     radio.name = relConversation;
     radio.value = message.hostId;
     radio.checked = index === messages.length - 1;
-    entryDiv.appendChild(radio);
     radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
 
-    const msgElement = document.createElement('p');
-msgElement.className = 'chat-message';
-msgElement.textContent = message.message;
-entryDiv.appendChild(msgElement);
+    // Add meta text and radio to meta line
+    meta.textContent = `${timeSince(message.timestamp)} · ${productType} `;
+    meta.appendChild(radio);
 
+    // Append meta info below the chat bubble
+    entryDiv.appendChild(meta);
 
-// ... create entryDiv, radio, msgElement as before ...
-
-// Create a meta/info line below the bubble
-const meta = document.createElement('div');
-meta.className = 'chat-meta';
-meta.style.fontSize = '0.85em';
-meta.style.opacity = '0.7';
-meta.style.marginTop = '4px';
-meta.textContent = `${timeSince(message.timestamp)} · ${productType}`;
-
-// Append meta info below the chat bubble
-entryDiv.appendChild(meta);
-
-// Now add entryDiv to the horizontal container
-horizontalContainer.appendChild(entryDiv);
-  });
+    // Now add entryDiv to the horizontal container
+    horizontalContainer.appendChild(entryDiv);
+}); 
 
 // Add the horizontal container to your contentDiv
 contentDiv.appendChild(horizontalContainer);
