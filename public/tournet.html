@@ -838,24 +838,38 @@ Object.keys(groupedMessages).forEach((groupKey, idx) => {
     contentDiv.className = 'tab-content';
     contentDiv.style.display = idx === 0 ? 'block' : 'none';
 
-    groupedMessages[groupKey].forEach(({ message, index }) => {
-        const entryDiv = document.createElement('div');
-        entryDiv.classList.add('conversation-entry');
+    // Create a horizontal scrollable container for chat messages
+const horizontalContainer = document.createElement('div');
+horizontalContainer.style.display = 'flex';
+horizontalContainer.style.overflowX = 'auto';
+horizontalContainer.style.gap = '16px';
+horizontalContainer.style.padding = '8px 0';
 
-        const radio = document.createElement('input');
-        radio.type = 'radio';
-        radio.name = relConversation;
-        radio.value = message.hostId;
-        radio.checked = index === messages.length - 1;
-        entryDiv.appendChild(radio);
-radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
-        const msgElement = document.createElement('p');
-        msgElement.className = 'chat-message';
-        msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
-        entryDiv.appendChild(msgElement);
+// Loop through messages and add them horizontally
+groupedMessages[groupKey].forEach(({ message, index }) => {
+    const entryDiv = document.createElement('div');
+    entryDiv.classList.add('conversation-entry');
+    entryDiv.style.minWidth = '250px'; // Adjust as needed
+    entryDiv.style.flex = '0 0 auto';  // Prevent shrinking
 
-        contentDiv.appendChild(entryDiv);
-    });
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = relConversation;
+    radio.value = message.hostId;
+    radio.checked = index === messages.length - 1;
+    entryDiv.appendChild(radio);
+    radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
+
+    const msgElement = document.createElement('p');
+    msgElement.className = 'chat-message';
+    msgElement.textContent = `${timeSince(message.timestamp)}: ${productType} - ${message.message} (${message.hostId}) - Vendor: ${message.hostId}`;
+    entryDiv.appendChild(msgElement);
+
+    horizontalContainer.appendChild(entryDiv);
+});
+
+// Add the horizontal container to your contentDiv
+contentDiv.appendChild(horizontalContainer);
 
     tabContents[groupKey] = contentDiv;
     tabContentsContainer.appendChild(contentDiv);
