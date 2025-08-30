@@ -39,12 +39,18 @@
   border: 1px solid #ffe58f;
 }
 .chat-meta {
-  font-size: 0.8em;
-  opacity: 0.7;
-  margin-bottom: 2px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 4px; /* or 0 for no space */
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-top: 4px;
 }
+.chat-meta input[type="radio"] {
+  margin: 0 2px 0 0; /* minimal space to the right */
+  vertical-align: middle;
+}
+
 .chat-time {
   margin-left: 8px;
 }
