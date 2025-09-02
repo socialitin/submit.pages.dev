@@ -4,7 +4,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // --- Session management endpoints ---
+    // ---Session management endpoints ---
     if (url.pathname === '/api/session' && request.method === 'POST') {
       const { cell } = await request.json();
       if (!cell || !/^\d{6,}$/.test(cell)) {
