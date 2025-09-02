@@ -1,4 +1,4 @@
-// import { MyDurableObject } from "./MyDurableObject.js";
+import { MyDurableObject } from "./MyDurableObject.js";
 
 export default {
   async fetch(request, env, ctx) {
@@ -10,13 +10,24 @@ export default {
       if (!cell || !/^\d{6,}$/.test(cell)) {
         return new Response('Invalid cell number', { status: 400 });
       }
-      // Generate a secure session ID
+
+      // Check if a session already exists for this cell
+      const existingSessionId = await env.VENDOR_CONVERSATIONS.get(`cell-to-session:${cell}`);
+      if (existingSessionId) {
+        // Return the existing sessionId
+        return Response.json({ sessionId: existingSessionId });
+      }
+
+      // Create a new session
       const sessionId = crypto.randomUUID();
-      // Store session data in KV
       await env.VENDOR_CONVERSATIONS.put(`session:${sessionId}`, JSON.stringify({ cell, created: Date.now() }));
+      // Store the mapping from cell to sessionId
+      await env.VENDOR_CONVERSATIONS.put(`cell-to-session:${cell}`, sessionId);
+
       return Response.json({ sessionId });
     }
 
+    // Retrieve session by sessionId
     if (url.pathname === '/api/session' && request.method === 'GET') {
       const sessionId = url.searchParams.get('sessionId');
       if (!sessionId) {
@@ -27,6 +38,23 @@ export default {
         return new Response('Session not found', { status: 404 });
       }
       return Response.json(session);
+    }
+
+    // Retrieve session by cell number
+    if (url.pathname === '/api/session-by-cell' && request.method === 'GET') {
+      const cell = url.searchParams.get('cell');
+      if (!cell) {
+        return new Response('Missing cell number', { status: 400 });
+      }
+      const sessionId = await env.VENDOR_CONVERSATIONS.get(`cell-to-session:${cell}`);
+      if (!sessionId) {
+        return new Response('Session not found for cell', { status: 404 });
+      }
+      const session = await env.VENDOR_CONVERSATIONS.get(`session:${sessionId}`, { type: 'json' });
+      if (!session) {
+        return new Response('Session not found', { status: 404 });
+      }
+      return Response.json({ sessionId, ...session });
     }
 
     // --- Multi-get endpoint for batch KV retrieval ---
@@ -60,3 +88,4 @@ export default {
 
 // Export the Durable Object class
 export { MyDurableObject };
+
