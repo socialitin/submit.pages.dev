@@ -1335,7 +1335,7 @@ async function connectWithHost() {
     return;
   }
   const destinationCode = document.getElementById("channel-input").value; // or wherever your destination code comes from
-  const itiOffer = destinationCode + '_ITI0' + cellValue;
+  const itiOffer = 'ITI0' + cellValue +'_'+destinationCode;
   const oImg = document.querySelector('#itemImg img');
   const srcValue = oImg ? oImg.src : null;
   var iofr = {
@@ -1354,6 +1354,7 @@ async function connectWithHost() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cell: cellValue })
     });
+    console.log('sessionResp', sessionResp);
     if (!sessionResp.ok) throw new Error('Failed to create/retrieve session');
     const sessionData = await sessionResp.json();
     sessionId = sessionData.sessionId;
