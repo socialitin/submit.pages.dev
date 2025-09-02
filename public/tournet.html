@@ -1365,8 +1365,8 @@ async function connectWithHost() {
   // 2. Retrieve itinerary and conversation keys
 const itinKey = `itin:${cellValue}:${destinationCode}`;
 const convoKey = `conversation:${cellValue}:${destinationCode}`;
-let itinData, convoData, sessionId, sessionData;
-
+let itinData, convoData, sessionData; // Remove duplicate sessionId declaration
+// Declare sessionId only once above (already declared earlier)
 try {
   const multiResp = await fetch('/api/multi-get', {
     method: 'POST',
@@ -1397,6 +1397,7 @@ try {
   alert('Could not retrieve itinerary, conversation, or session.');
   return;
 }
+
 
   // (Optional) Do something with itinData and convoData here
   console.log('Itinerary:', itinData);
