@@ -1335,7 +1335,7 @@ async function connectWithHost() {
     return;
   }
   const destinationCode = document.getElementById("channel-input").value; // or wherever your destination code comes from
-  const itiOffer = 'ITI0' + cellValue +'_'+destinationCode;
+  const itiOffer = destinationCode + '_ITI0' + cellValue;
   const oImg = document.querySelector('#itemImg img');
   const srcValue = oImg ? oImg.src : null;
   var iofr = {
@@ -1348,53 +1348,36 @@ async function connectWithHost() {
   // 1. Create or retrieve session
   let sessionId;
   try {
-    // Try to create a session (POST /api/session)
-
     const sessionResp = await fetch(`/api/session?sessionId=${cellValue}`);
 if (!sessionResp.ok) throw new Error('Failed to retrieve session');
-const sessionD = await sessionResp.json(); // <-- This gets the actual data
-console.log('sessionData:', sessionD);
+const sessionData = await sessionResp.json(); // <-- This gets the actual data
+console.log('sessionData:', sessionData);
+    sessionId = sessionData.sessionId;
   } catch (err) {
-    alert('Could not retrieve session.');
+    alert('Could not create or retrieve session.');
     return;
   }
+  // sessionId = sessionData.sessionId;
 
   // 2. Retrieve itinerary and conversation keys
-const itinKey = `itin:${cellValue}:${destinationCode}`;
-const convoKey = `conversation:${cellValue}:${destinationCode}`;
-let itinData, convoData, sessionData; // Remove duplicate sessionId declaration
-// Declare sessionId only once above (already declared earlier)
-try {
-  const multiResp = await fetch('/api/multi-get', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ keys: [itinKey, convoKey, `session:${cellValue}`] }) // Add session key
-  });
-  if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation/session');
-  const results = await multiResp.json();
-  itinData = results.find(r => r.key === itinKey)?.value;
-  convoData = results.find(r => r.key === convoKey)?.value;
-  sessionData = results.find(r => r.key === `session:${cellValue}`)?.value;
-
-  // If session does not exist, create it
-  if (!sessionData) {
-    const sessionResp = await fetch('/api/session', {
+  const itinKey = `itin:${cellValue}:${destinationCode}`;
+  const convoKey = `conversation:${cellValue}:${destinationCode}`;
+  let itinData, convoData;
+  try {
+    const multiResp = await fetch('/api/multi-get', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cell: cellValue })
+      body: JSON.stringify({ keys: [itinKey, convoKey] })
     });
-    if (!sessionResp.ok) throw new Error('Failed to create session');
-    const sessionResult = await sessionResp.json();
-    sessionId = sessionResult.sessionId;
-    // Optionally, fetch the session data again if needed
-  } else {
-    sessionId = sessionData.sessionId || cellValue; // Use sessionId from data or cellValue
+    if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation');
+    const results = await multiResp.json();
+    // results is an array of { key, value }
+    itinData = results.find(r => r.key === itinKey)?.value;
+    convoData = results.find(r => r.key === convoKey)?.value;
+  } catch (err) {
+    alert('Could not retrieve itinerary or conversation.');
+    return;
   }
-} catch (err) {
-  alert('Could not retrieve itinerary, conversation, or session.');
-  return;
-}
-
 
   // (Optional) Do something with itinData and convoData here
   console.log('Itinerary:', itinData);
