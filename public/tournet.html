@@ -1363,24 +1363,40 @@ async function connectWithHost() {
   }
 
   // 2. Retrieve itinerary and conversation keys
-  const itinKey = `itin:${cellValue}:${destinationCode}`;
-  const convoKey = `conversation:${cellValue}:${destinationCode}`;
-  let itinData, convoData;
-  try {
-    const multiResp = await fetch('/api/multi-get', {
+const itinKey = `itin:${cellValue}:${destinationCode}`;
+const convoKey = `conversation:${cellValue}:${destinationCode}`;
+let itinData, convoData, sessionId, sessionData;
+
+try {
+  const multiResp = await fetch('/api/multi-get', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ keys: [itinKey, convoKey, `session:${cellValue}`] }) // Add session key
+  });
+  if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation/session');
+  const results = await multiResp.json();
+  itinData = results.find(r => r.key === itinKey)?.value;
+  convoData = results.find(r => r.key === convoKey)?.value;
+  sessionData = results.find(r => r.key === `session:${cellValue}`)?.value;
+
+  // If session does not exist, create it
+  if (!sessionData) {
+    const sessionResp = await fetch('/api/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ keys: [itinKey, convoKey] })
+      body: JSON.stringify({ cell: cellValue })
     });
-    if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation');
-    const results = await multiResp.json();
-    // results is an array of { key, value }
-    itinData = results.find(r => r.key === itinKey)?.value;
-    convoData = results.find(r => r.key === convoKey)?.value;
-  } catch (err) {
-    alert('Could not retrieve itinerary or conversation.');
-    return;
+    if (!sessionResp.ok) throw new Error('Failed to create session');
+    const sessionResult = await sessionResp.json();
+    sessionId = sessionResult.sessionId;
+    // Optionally, fetch the session data again if needed
+  } else {
+    sessionId = sessionData.sessionId || cellValue; // Use sessionId from data or cellValue
   }
+} catch (err) {
+  alert('Could not retrieve itinerary, conversation, or session.');
+  return;
+}
 
   // (Optional) Do something with itinData and convoData here
   console.log('Itinerary:', itinData);
