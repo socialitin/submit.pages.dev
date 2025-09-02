@@ -1357,13 +1357,8 @@ async function connectWithHost() {
 const sessionData = await sessionResp.json();
     console.log('sessionResp', sessionResp);
     if (!sessionResp.ok) throw new Error('Failed to create/retrieve session');
-        const sessionRespCreate = await fetch('/api/session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cell: cellValue })
-    });
-    const sessionData1 = await sessionRespCreate.json();
-    sessionId = sessionData1.sessionId;
+    // const sessionData = await sessionResp.json();
+    sessionId = sessionData.sessionId;
   } catch (err) {
     alert('Could not create/retrieve session.');
     return;
