@@ -1348,16 +1348,19 @@ async function connectWithHost() {
   // 1. Create or retrieve session
   let sessionId;
   try {
-    const sessionResp = await fetch(`/api/session?sessionId=${cellValue}`);
-if (!sessionResp.ok) throw new Error('Failed to retrieve session');
-const sessionData = await sessionResp.json(); // <-- This gets the actual data
-console.log('sessionData:', sessionData);
+    // Try to create a session (POST /api/session)
+    const sessionResp = await fetch('/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cell: cellValue })
+    });
+    if (!sessionResp.ok) throw new Error('Failed to create/retrieve session');
+    const sessionData = await sessionResp.json();
     sessionId = sessionData.sessionId;
   } catch (err) {
-    alert('Could not create or retrieve session.');
+    alert('Could not create/retrieve session.');
     return;
   }
-  // sessionId = sessionData.sessionId;
 
   // 2. Retrieve itinerary and conversation keys
   const itinKey = `itin:${cellValue}:${destinationCode}`;
