@@ -1344,7 +1344,7 @@ async function connectWithHost() {
     'desc': document.getElementById("descI").value
   };
   sessionStorage.setItem(itiOffer, JSON.stringify(iofr));
-
+  console.log('Session info stored:', iofr, cellValue);
   // 1. Try to retrieve session by cell number
   let sessionId;
   try {
