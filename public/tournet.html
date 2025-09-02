@@ -1334,7 +1334,7 @@ async function connectWithHost() {
     alert("Please enter your cell number.");
     return;
   }
-  const destinationCode = document.getElementById("channel-input").value; // or wherever your destination code comes from
+  const destinationCode = document.getElementById("channel-input").value;
   const itiOffer = destinationCode + '_ITI0' + cellValue;
   const oImg = document.querySelector('#itemImg img');
   const srcValue = oImg ? oImg.src : null;
@@ -1345,20 +1345,28 @@ async function connectWithHost() {
   };
   sessionStorage.setItem(itiOffer, JSON.stringify(iofr));
 
-  // 1. Create or retrieve session
+  // 1. Try to retrieve session by cell number
   let sessionId;
   try {
-    // Try to create a session (POST /api/session)
-    const sessionResp = await fetch('/api/session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cell: cellValue })
-    });
-    if (!sessionResp.ok) throw new Error('Failed to create/retrieve session');
-    const sessionData = await sessionResp.json();
-    sessionId = sessionData.sessionId;
+    const getResp = await fetch(`/api/session-by-cell?cell=${cellValue}`);
+    if (getResp.ok) {
+      const sessionData = await getResp.json();
+      sessionId = sessionData.sessionId;
+    } else if (getResp.status === 404) {
+      // If not found, create a new session
+      const sessionResp = await fetch('/api/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cell: cellValue })
+      });
+      if (!sessionResp.ok) throw new Error('Failed to create session');
+      const sessionData = await sessionResp.json();
+      sessionId = sessionData.sessionId;
+    } else {
+      throw new Error('Failed to retrieve session');
+    }
   } catch (err) {
-    alert('Could not create/retrieve session.');
+    alert('Could not retrieve or create session.');
     return;
   }
 
@@ -1374,7 +1382,6 @@ async function connectWithHost() {
     });
     if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation');
     const results = await multiResp.json();
-    // results is an array of { key, value }
     itinData = results.find(r => r.key === itinKey)?.value;
     convoData = results.find(r => r.key === convoKey)?.value;
   } catch (err) {
@@ -1386,7 +1393,6 @@ async function connectWithHost() {
   console.log('Itinerary:', itinData);
   console.log('Conversation:', convoData);
 
-  // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
   document.getElementById('load-channel-button').click();
   document.getElementById('initiate-button').click();
