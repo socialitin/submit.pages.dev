@@ -1328,25 +1328,70 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
 };	
 </script>
 <script>
-  function connectWithHost() {
-  var cellValue = document.getElementById('cell').value; // Get the value after element exists
+async function connectWithHost() {
+  var cellValue = document.getElementById('cell').value;
   if (cellValue.trim() === "") {
     alert("Please enter your cell number.");
     return;
   }
-const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
-const oImg = document.querySelector('#itemImg img');
-const srcValue = oImg ? oImg.src : null;
-console.log(srcValue);
-var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
-sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
- 
+  const destinationCode = document.getElementById("channel-input").value; // or wherever your destination code comes from
+  const itiOffer = destinationCode + '_ITI0' + cellValue;
+  const oImg = document.querySelector('#itemImg img');
+  const srcValue = oImg ? oImg.src : null;
+  var iofr = {
+    'src': srcValue,
+    'name': document.getElementById("picname").value,
+    'desc': document.getElementById("descI").value
+  };
+  sessionStorage.setItem(itiOffer, JSON.stringify(iofr));
+
+  // 1. Create or retrieve session
+  let sessionId;
+  try {
+    // Try to create a session (POST /api/session)
+    const sessionResp = await fetch('/api/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cell: cellValue })
+    });
+    if (!sessionResp.ok) throw new Error('Failed to create/retrieve session');
+    const sessionData = await sessionResp.json();
+    sessionId = sessionData.sessionId;
+  } catch (err) {
+    alert('Could not create/retrieve session.');
+    return;
+  }
+
+  // 2. Retrieve itinerary and conversation keys
+  const itinKey = `itin:${cellValue}:${destinationCode}`;
+  const convoKey = `conversation:${cellValue}:${destinationCode}`;
+  let itinData, convoData;
+  try {
+    const multiResp = await fetch('/api/multi-get', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: [itinKey, convoKey] })
+    });
+    if (!multiResp.ok) throw new Error('Failed to retrieve itinerary/conversation');
+    const results = await multiResp.json();
+    // results is an array of { key, value }
+    itinData = results.find(r => r.key === itinKey)?.value;
+    convoData = results.find(r => r.key === convoKey)?.value;
+  } catch (err) {
+    alert('Could not retrieve itinerary or conversation.');
+    return;
+  }
+
+  // (Optional) Do something with itinData and convoData here
+  console.log('Itinerary:', itinData);
+  console.log('Conversation:', convoData);
+
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
-  //document.getElementById('channel-input').value = pIata;
   document.getElementById('load-channel-button').click();
   document.getElementById('initiate-button').click();
 }
+
 </script>
   <script>
 	    function previewImage(event) {
