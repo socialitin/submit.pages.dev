@@ -1350,7 +1350,7 @@ async function connectWithHost() {
   try {
     // Try to create a session (POST /api/session)
     const sessionResp = await fetch('/api/session', {
-      method: 'POST',
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cell: cellValue })
     });
