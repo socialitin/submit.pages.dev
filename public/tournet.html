@@ -938,18 +938,7 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', async () => {
-             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
-             currentChannel = document.getElementById('channel-input').value.trim();
-             if (currentItinId) {
-                 fetchConversations(currentItinId);
-             } else {
-                 alert('Please enter an Itinerary ID.');
-             }
-         });
- 
-         document.getElementById('initiate-button').addEventListener('click', async () => {
-             const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
-        const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=13476815074.json';
+                 const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=13476815074.json';
         
                 const response = await fetch(workerUrl);
              const mysession = await response.json();
@@ -962,9 +951,21 @@ console.log('mysession:', mysession);
                 }
 
                 // Parse the JSON content
-                 
 
-             const itiOffer = sessionStorage.getItem("ITI0");
+                
+             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             currentChannel = document.getElementById('channel-input').value.trim();
+             if (currentItinId) {
+                 fetchConversations(currentItinId);
+             } else {
+                 alert('Please enter an Itinerary ID.');
+             }
+         });
+ 
+         document.getElementById('initiate-button').addEventListener('click', async () => {
+             const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+                 
+            const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
