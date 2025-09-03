@@ -941,19 +941,23 @@ conversationMessages.appendChild(tabContentsContainer);
              currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-                // fetchConversations(currentItinId);
+              response =  fetchConversations(currentItinId);
+  // fetch(`/api/conversations?${currentItinId}`)
+  /*
   fetch(`/api/conversations?${currentItinId}`)
     .then(response => response.text())
-  .then(text => {
-    console.log('Raw response:', text,currentItinId);
-    // Try to parse as JSON only if it looks valid
-    try {
-      const data = JSON.parse(text);
-      console.log('Parsed data:', data);
-    } catch (e) {
-      console.error('JSON parse error:', e);
-    }
-  });
+    .then(text => {
+      console.log('Raw response:', text, currentItinId);
+      // Try to parse as JSON only if it looks valid
+      try {
+        const data = JSON.parse(text);
+        console.log('Parsed data:', data);
+      } catch (e) {
+        console.error('JSON parse error:', e);
+      }
+    });
+  */
+ console.log('Raw response:', response, currentItinId);
              } else {
                  alert('Please enter an Itinerary ID.');
              }
