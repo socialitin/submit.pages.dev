@@ -941,7 +941,7 @@ conversationMessages.appendChild(tabContentsContainer);
              currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-              const wrkUrl = `https://ads.tournet.com/api/conversations?${currentItinId}`;
+              const wrkUrl = `/conversations?${currentItinId}`;
               
               // fetchConversations(currentItinId);
               const response = await fetch(wrkUrl);
