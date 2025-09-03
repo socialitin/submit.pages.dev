@@ -949,6 +949,20 @@ conversationMessages.appendChild(tabContentsContainer);
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
              const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+        const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=13476815074.json';
+        
+                const response = await fetch(workerUrl);
+
+                // Check if the response is OK (status 200)
+                if (!response.ok) {
+//document.getElementById('jData').textContent = 'Failed to fetch JSON data';
+                    return;
+                }
+
+                // Parse the JSON content
+                const msession = await response.json();
+console.log('msession:', msession);                
+
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
