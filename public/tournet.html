@@ -937,11 +937,15 @@ conversationMessages.appendChild(tabContentsContainer);
              }
          }
  
-         document.getElementById('load-channel-button').addEventListener('click', () => {
+         document.getElementById('load-channel-button').addEventListener('click', async () => {
              currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-              fetchConversations(currentItinId);
+              const wrkUrl = `https://ads.tournet.com/api/conversations?${currentItinId}`;
+              
+              // fetchConversations(currentItinId);
+              const response = await fetch(wrkUrl);
+
   // fetch(`/api/conversations?${currentItinId}`)
   /*
   fetch(`/api/conversations?${currentItinId}`)
