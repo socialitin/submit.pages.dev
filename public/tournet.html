@@ -938,31 +938,10 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', async () => {
-             currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-              const wrkUrl = `/conversations?${currentItinId}`;
-              
-              // fetchConversations(currentItinId);
-              const response = await fetch(wrkUrl);
-
-  // fetch(`/api/conversations?${currentItinId}`)
-  /*
-  fetch(`/api/conversations?${currentItinId}`)
-    .then(response => response.text())
-    .then(text => {
-      console.log('Raw response:', text, currentItinId);
-      // Try to parse as JSON only if it looks valid
-      try {
-        const data = JSON.parse(text);
-        console.log('Parsed data:', data);
-      } catch (e) {
-        console.error('JSON parse error:', e);
-      }
-    });
-  */
- console.log('Raw response:', response.text(), currentItinId);
-
+                 fetchConversations(currentItinId);
              } else {
                  alert('Please enter an Itinerary ID.');
              }
