@@ -942,7 +942,7 @@ conversationMessages.appendChild(tabContentsContainer);
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
                 // fetchConversations(currentItinId);
-  fetch(`/api/conversations?itinId=${itinId}`)
+  fetch(`/api/conversations?itinId=${currentItinId}`)
     .then(response => {
       console.log('Fetch response:', response); // Logs the Response object
       return response.json();
@@ -954,7 +954,7 @@ conversationMessages.appendChild(tabContentsContainer);
     .catch(error => {
       console.error('Fetch error:', error);
     });
-                    
+
              } else {
                  alert('Please enter an Itinerary ID.');
              }
