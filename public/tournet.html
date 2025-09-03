@@ -952,6 +952,8 @@ conversationMessages.appendChild(tabContentsContainer);
         const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=13476815074.json';
         
                 const response = await fetch(workerUrl);
+             const mysession = await response.json();
+console.log('mysession:', mysession);
 
                 // Check if the response is OK (status 200)
                 if (!response.ok) {
@@ -960,8 +962,7 @@ conversationMessages.appendChild(tabContentsContainer);
                 }
 
                 // Parse the JSON content
-                const msession = await response.json();
-console.log('msession:', msession);                
+                 
 
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
