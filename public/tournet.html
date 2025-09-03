@@ -943,18 +943,18 @@ conversationMessages.appendChild(tabContentsContainer);
              if (currentItinId) {
                 // fetchConversations(currentItinId);
   fetch(`/api/conversations?itinId=${currentItinId}`)
-    .then(response => {
-      console.log('Fetch response:', response); // Logs the Response object
-      return response.json();
-    })
-    .then(data => {
-      console.log('Conversation data:', data); // Logs the actual data
-      // ...rest of your code...
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-
+    fetch(`/api/conversations?itinId=${itinId}`)
+  .then(response => response.text())
+  .then(text => {
+    console.log('Raw response:', text);
+    // Try to parse as JSON only if it looks valid
+    try {
+      const data = JSON.parse(text);
+      console.log('Parsed data:', data);
+    } catch (e) {
+      console.error('JSON parse error:', e);
+    }
+  });
              } else {
                  alert('Please enter an Itinerary ID.');
              }
