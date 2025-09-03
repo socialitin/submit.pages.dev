@@ -961,7 +961,8 @@ conversationMessages.appendChild(tabContentsContainer);
       }
     });
   */
- console.log('Raw response:', response, currentItinId);
+ console.log('Raw response:', JSON.parse(response), currentItinId);
+ 
              } else {
                  alert('Please enter an Itinerary ID.');
              }
