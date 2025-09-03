@@ -941,7 +941,7 @@ conversationMessages.appendChild(tabContentsContainer);
              currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-              response =  fetchConversations(currentItinId);
+              fetchConversations(currentItinId);
   // fetch(`/api/conversations?${currentItinId}`)
   /*
   fetch(`/api/conversations?${currentItinId}`)
