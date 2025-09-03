@@ -943,8 +943,7 @@ conversationMessages.appendChild(tabContentsContainer);
              if (currentItinId) {
                 // fetchConversations(currentItinId);
   fetch(`/api/conversations?itinId=${currentItinId}`)
-    fetch(`/api/conversations?itinId=${itinId}`)
-  .then(response => response.text())
+    .then(response => response.text())
   .then(text => {
     console.log('Raw response:', text);
     // Try to parse as JSON only if it looks valid
@@ -955,6 +954,7 @@ conversationMessages.appendChild(tabContentsContainer);
       console.error('JSON parse error:', e);
     }
   });
+  
              } else {
                  alert('Please enter an Itinerary ID.');
              }
