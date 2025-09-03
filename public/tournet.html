@@ -945,7 +945,12 @@ conversationMessages.appendChild(tabContentsContainer);
 console.log('mysession:', mysession);
 
                 // Check if the response is OK (status 200)
-
+                if (!response.ok) {
+//document.getElementById('jData').textContent = 'Failed to fetch JSON data';
+                   
+                }else {
+                    //document.getElementById('jData').textContent = '';
+                }
 
                 // Parse the JSON content
 
