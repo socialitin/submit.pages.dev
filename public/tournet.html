@@ -938,10 +938,23 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', () => {
-             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             currentItinId = document.getElementById('itin-id-input').value.trim(); // 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
-                 fetchConversations(currentItinId);
+                // fetchConversations(currentItinId);
+  fetch(`/api/conversations?itinId=${itinId}`)
+    .then(response => {
+      console.log('Fetch response:', response); // Logs the Response object
+      return response.json();
+    })
+    .then(data => {
+      console.log('Conversation data:', data); // Logs the actual data
+      // ...rest of your code...
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+                    
              } else {
                  alert('Please enter an Itinerary ID.');
              }
