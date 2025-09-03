@@ -938,7 +938,7 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', async () => {
-                 const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=13476815074.json';
+                 const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=' + document.getElementById('itin-id-input').value.trim();
         
                 const response = await fetch(workerUrl);
              const mysession = await response.json();
@@ -948,11 +948,13 @@ console.log('mysession:', mysession);
                 if (!response.ok) {
 //document.getElementById('jData').textContent = 'Failed to fetch JSON data';
                     return;
+                }else{
+                  fetch('/?file=431.json', { method: 'PUT', body: JSON.stringify(mysession) })
                 }
 
                 // Parse the JSON content
 
-                
+
              currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
