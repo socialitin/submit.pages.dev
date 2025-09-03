@@ -944,7 +944,7 @@ conversationMessages.appendChild(tabContentsContainer);
                 // fetchConversations(currentItinId);
   fetch(`/api/conversations?itinId=${currentItinId}`)
     .then(response => {
-      console.log('Fetch response:', response); // Logs the Response object
+      console.log('Fetch response:', response.json()); // Logs the Response object
       return response.json();
     })
     .then(data => {
