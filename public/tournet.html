@@ -940,7 +940,7 @@ conversationMessages.appendChild(tabContentsContainer);
          document.getElementById('load-channel-button').addEventListener('click', async () => {
 const cellValue = document.getElementById('itin-id-input').value.trim();
 const fileName = cellValue + '.json';
-const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=' + fileName;
+const workerUrl = 'https://session-worker.socialitin.workers.dev/?file=' + fileName;
 
 // 1. Fetch the current session file from R2
 let mysession = [];

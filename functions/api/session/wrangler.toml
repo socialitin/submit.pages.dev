@@ -1,0 +1,8 @@
+name = "session-worker"
+main = "session.js"
+compatibility_date = "2024-09-04"
+workers_dev = true
+
+[[r2_buckets]]
+binding = "MY_BUCKET"
+bucket_name = "jsontournet"
