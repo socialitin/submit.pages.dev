@@ -1,0 +1,9 @@
+name = "grabjson"
+main = "entry.py"
+account_id = "f0c92755958332f29a4d8658606c6f34"
+compatibility_date = "2024-09-04"
+python_workers = true
+
+[[r2_buckets]]
+binding = "MY_BUCKET"
+bucket_name = "jsontournet"
