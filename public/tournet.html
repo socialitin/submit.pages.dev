@@ -942,7 +942,7 @@ conversationMessages.appendChild(tabContentsContainer);
        const workerUrl = 'https://f42a0ece.submit-pages-dev-560.pages.dev/?file=' + document.getElementById('itin-id-input').value.trim() + '.json';
                 const response = await fetch(workerUrl);
              const mysession = await response.text();
-console.log('mysession:', mysession);
+console.log('mysession:', workerUrl, mysession);
 
                 // Check if the response is OK (status 200)
                 if (!response.ok) {
