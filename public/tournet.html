@@ -938,18 +938,37 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', async () => {
-                const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=' + document.getElementById('itin-id-input').value.trim() + '.json';
-                const response = await fetch(workerUrl);
-             const mysession = await response.text();
-console.log('mysession:', workerUrl, mysession);
+const cellValue = document.getElementById('itin-id-input').value.trim();
+const fileName = cellValue + '.json';
+const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=' + fileName;
 
-                // Check if the response is OK (status 200)
-                if (!response.ok) {
-//document.getElementById('jData').textContent = 'Failed to fetch JSON data';
-                   
-                }else {
-                    //document.getElementById('jData').textContent = '';
-                }
+// 1. Fetch the current session file from R2
+let mysession = [];
+try {
+  const response = await fetch(workerUrl);
+  if (response.ok) {
+    mysession = await response.json();
+    console.log('Fetched session data:', mysession);
+    if (!Array.isArray(mysession)) mysession = [];
+  }
+} catch (e) {
+  // If file doesn't exist or error, start with empty array
+  mysession = [];
+}
+
+// 2. Get the session memory from sessionStorage and push into array
+const sessionKey = 'ITI0'+document.getElementById('message-input').value.trim();
+const itiOffer = sessionStorage.getItem(sessionKey);
+if (itiOffer) {
+  mysession.push(JSON.parse(itiOffer));
+}
+console.log('Updated session data:', mysession);
+// 3. Upload the updated array as a temporary file to R2
+await fetch(workerUrl, {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(mysession)
+});
 
                 // Parse the JSON content
 
