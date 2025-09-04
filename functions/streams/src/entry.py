@@ -3,7 +3,6 @@ async def on_request(request, env, ctx):
     try:
         url = request.url
         file_name = url.query.get("file")
-
         # Validate file name
         import re
         if not file_name or not re.match(r"^[\w\-]+\.json$", file_name):
