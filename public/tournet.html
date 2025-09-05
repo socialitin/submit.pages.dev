@@ -741,8 +741,9 @@ const iconArea = document.createElement('BR');
         p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType}  `));
         // ${message.message} (${message.hostId})
                const pp = document.createElement('p');
-
-        const key = relConversation.substring(0,21);
+      
+        
+        const key = relConversation.substring(0, 20);
 const value = sessionStorage.getItem(key);
 console.log('sessionStorage key:', key, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
@@ -937,23 +938,7 @@ conversationMessages.appendChild(tabContentsContainer);
              }
          }
  
-         document.getElementById('load-channel-button').addEventListener('click', async () => {
-                const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=' + document.getElementById('itin-id-input').value.trim() + '.json';
-                const response = await fetch(workerUrl);
-             const mysession = await response.text();
-console.log('mysession:', workerUrl, mysession);
-
-                // Check if the response is OK (status 200)
-                if (!response.ok) {
-//document.getElementById('jData').textContent = 'Failed to fetch JSON data';
-                   
-                }else {
-                    //document.getElementById('jData').textContent = '';
-                }
-
-                // Parse the JSON content
-
-
+         document.getElementById('load-channel-button').addEventListener('click', () => {
              currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
@@ -965,8 +950,7 @@ console.log('mysession:', workerUrl, mysession);
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
              const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
-                 
-            const itiOffer = sessionStorage.getItem("ITI0");
+             const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
@@ -1074,8 +1058,7 @@ function openTab(evt, tabName) {
 			async function d1tnlogin() {
 
         // URL of the Cloudflare Worker
-        const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=431.json';
-        
+        const workerUrl = 'https://grabjson.socialitin.workers.dev/';
 
         // Function to fetch and display JSON data
         
@@ -1657,7 +1640,7 @@ const renderedMessages = document.createElement('div');
   //chatMessages.innerHTML = '';
  (Messgs || []).forEach(message => {
   if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
-const itiOffer = sessionStorage.getItem(conversationId.substring(0,21));
+const itiOffer = sessionStorage.getItem(conversationId.substring(0,20));
 console.log('itiOffer', itiOffer);
   const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
   const isVendor = message.hostId === vendorId;
