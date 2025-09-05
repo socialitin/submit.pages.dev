@@ -14,7 +14,7 @@ export default {
       });
     }
 
-  // GET /api/session-by-cell?cell=cellValue
+    // GET /api/session-by-cell?cell=cellValue
     if (url.pathname === '/api/session-by-cell' && request.method === 'GET') {
       const cell = url.searchParams.get('cell');
       if (!cell) {
@@ -23,12 +23,11 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
-      const session = await env.KV_BINDING.get(cell, { type: 'json' });
+      let session = await env.KV_BINDING.get(cell, { type: 'json' });
       if (!session) {
-        return new Response('Session not found', {
-          status: 404,
-          headers: { 'Access-Control-Allow-Origin': '*' }
-        });
+        // Create a new session if not found
+        session = { cell, created: Date.now() };
+        await env.KV_BINDING.put(cell, JSON.stringify(session));
       }
       return new Response(JSON.stringify(session), {
         headers: {
@@ -55,7 +54,7 @@ export default {
       });
     }
 
-    // Default: Method Not Allowed
+    // Default: Not Found
     return new Response('Not Found', {
       status: 404,
       headers: { 'Access-Control-Allow-Origin': '*' }
