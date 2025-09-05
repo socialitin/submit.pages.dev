@@ -24,12 +24,13 @@ export default {
         });
       }
       let session = await env.KV_BINDING.get(cell, { type: 'json' });
+      let created = false;
       if (!session) {
-        // Create a new session if not found
         session = { cell, created: Date.now() };
         await env.KV_BINDING.put(cell, JSON.stringify(session));
+        created = true;
       }
-      return new Response(JSON.stringify(session), {
+      return new Response(JSON.stringify({ ...session, createdNew: created }), {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
