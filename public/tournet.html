@@ -638,23 +638,36 @@
  
          async function fetchConversations(itinId) {
              try {
-                 const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
-                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
- 
-                 const conversations = await response.json();
-                 conversationList.innerHTML = '';  // Clear existing radio buttons
-                 destinationMap.clear(); // Clear the map for new conversations
- 
-                 // Group conversations by unique destination code
-                 conversations.forEach((conversationId) => {
-                     const channelId = conversationId.split('_')[1];
-                     const destinationCode = channelId.slice(0, 3); // Extract the first three characters
-  
-                     if (!destinationMap.has(destinationCode)) {
-                         destinationMap.set(destinationCode, []);
-                     }
-                     destinationMap.get(destinationCode).push(conversationId);
-                 });
+ const itinIdInput = document.getElementById('itin-id-input');
+ const cellValue = '13476815074'; // itinIdInput.value; // Get the cell value from the input
+// 1. Get the current session from KV using the cell value as the key
+const sessionResp = await fetch(`${baseUrl}/api/session-by-cell?cell=${cellValue}`);
+if (!sessionResp.ok) {
+  alert('Session not found for this cell number.');
+  return;
+}
+const session = await sessionResp.json();
+// Optionally, use session data here (e.g., session.sessionId, session.cell, etc.)
+console.log('Fetched session:', session, itinIdInput.value);
+// 2. Now fetch the conversations as before
+const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+const conversations = await response.json();
+conversationList.innerHTML = '';  // Clear existing radio buttons
+destinationMap.clear(); // Clear the map for new conversations
+
+// Group conversations by unique destination code
+conversations.forEach((conversationId) => {
+  const channelId = conversationId.split('_')[1];
+  const destinationCode = channelId.slice(0, 3); // Extract the first three characters
+
+  if (!destinationMap.has(destinationCode)) {
+    destinationMap.set(destinationCode, []);
+  }
+  destinationMap.get(destinationCode).push(conversationId);
+});
+
  
                  // Populate with radio buttons for unique destination codes
                  destinationMap.forEach((conversations, destinationCode) => {
