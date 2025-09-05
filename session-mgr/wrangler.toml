@@ -1,0 +1,13 @@
+name = "session-mgr"
+main = "src/worker.js"
+workers_dev = true
+preview_urls = false
+compatibility_date = "2025-09-05"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[[kv_namespaces]]
+binding = "KV_BINDING"
+id = "0aee54799aaa4687ab64e3e457a65243"
