@@ -55,7 +55,7 @@ export default {
       });
     }
 
-    // Default: Not Found
+    // Default: Not Found !!!
     return new Response('Not Found', {
       status: 404,
       headers: { 'Access-Control-Allow-Origin': '*' }
