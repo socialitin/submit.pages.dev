@@ -641,7 +641,7 @@
  const itinIdInput = document.getElementById('itin-id-input');
  const cellValue = '13476815074'; // itinIdInput.value; // Get the cell value from the input
 // 1. Get the current session from KV using the cell value as the key
-const sessionResp = await fetch(`${baseUrl}/listConversations/?cell=${cellValue}`);
+const sessionResp = await fetch(`${baseUrl}/listConversations/${cellValue}`);
 if (!sessionResp.ok) {
   alert('Session not found for this cell number.');
   return;
