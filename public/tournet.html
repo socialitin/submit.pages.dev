@@ -1215,7 +1215,7 @@ const tpitch = {
    ]
 } ;
 
-const mypitch = tpitch.json();
+const mypitch = json.parse(JSON.stringify(tpitch));
 		//var picsj = data1.Pictures;
     console.log('mypitch',mypitch);
 	//	console.log('mypics', Object.keys(mpitch));
