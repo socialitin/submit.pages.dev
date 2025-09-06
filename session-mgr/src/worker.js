@@ -2,6 +2,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Handle CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
@@ -36,7 +37,7 @@ export default {
       });
     }
 
-    // ...POST handler as before...
+    // ...other handlers...
 
     return new Response('Not Found', {
       status: 404,
