@@ -30,6 +30,15 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
+      if (payload.length === 0) {
+        return new Response('Payload array is empty, nothing to store.', {
+          status: 204,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        });
+      }
 
       let session = await env.KV_BINDING.get(cell, { type: 'json' });
       if (session && Array.isArray(session.payload)) {
@@ -58,4 +67,3 @@ export default {
     });
   }
 };
-
