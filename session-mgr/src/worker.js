@@ -30,7 +30,7 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
-      if (payload.length < 1) {
+      if (payload.length < 2) {
         return new Response('Payload array must contain at least 1 item.', {
           status: 400,
           headers: {
