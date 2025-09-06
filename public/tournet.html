@@ -1077,7 +1077,7 @@ function openTab(evt, tabName) {
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue);
 
-const mypitch = `{
+const mypitch = {
  "430-WPN": [
       {
          "IATA": "NYCSN",
@@ -1213,10 +1213,11 @@ const mypitch = `{
          "Pitch": "ur 665 rooms are efficient, fun, and functional spaces with the comforts you need. Charge your gadgets in the media center, free Wi-Fi. After a day of travel, meetings, or a whirlwind tour of NYC, sink into an ultra-comfy bed. Soundproof windows and floor-to-ceiling shutters block out the city hum. With light dimmers and climate control to get the inside just right, you'll sleep like a baby—even in the middle of Times Square. We also offer rooms with bunk beds so value-minded friends or families can double up."
       }
    ]
-} `;
+} ;
 
 
 		//var picsj = data1.Pictures;
+    console.log('mypitch',mypitch);
 		console.log('mypics', Object.keys(mpitch));
     let cItems = 0;
     // Loop through each group in the mypitch object
