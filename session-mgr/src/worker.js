@@ -14,7 +14,8 @@ export default {
       });
     }
 
-    if (url.pathname === '/api/session-by-cell' && request.method === 'GET') {
+    // POST /api/session-by-cell?cell=cellValue
+    if (url.pathname === '/api/session-by-cell' && request.method === 'POST') {
       const cell = url.searchParams.get('cell');
       if (!cell) {
         return new Response('Missing cell number', {
@@ -22,22 +23,30 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
-      let session = await env.KV_BINDING.get(cell, { type: 'json' });
-      let created = false;
-      if (!session) {
-        session = { cell, created: Date.now() };
-        await env.KV_BINDING.put(cell, JSON.stringify(session));
-        created = true;
+      const { payload } = await request.json();
+      if (!Array.isArray(payload)) {
+        return new Response('Payload must be an array', {
+          status: 400,
+          headers: { 'Access-Control-Allow-Origin': '*' }
+        });
       }
-      return new Response(JSON.stringify({ ...session, createdNew: created }), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+
+      let session = await env.KV_BINDING.get(cell, { type: 'json' });
+      if (session && Array.isArray(session.payload)) {
+        // Append new payload items to existing payload array
+        session.payload.push(...payload);
+      } else {
+        // Create new session
+        session = { cell, payload };
+      }
+      await env.KV_BINDING.put(cell, JSON.stringify(session));
+      return new Response('Session updated', {
+        status: 200,
+        headers: { 'Access-Control-Allow-Origin': '*' }
       });
     }
 
-    // ...other handlers...
+    // ...existing GET handler...
 
     return new Response('Not Found', {
       status: 404,
