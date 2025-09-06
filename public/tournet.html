@@ -1072,17 +1072,6 @@ function openTab(evt, tabName) {
 			async function d1tnlogin() {
 
   //  const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=431.json';
-   
-                const response = await fetch(workerUrl);
-
-                // Check if the response is OK (status 200)
-                if (!response.ok) {
-
-                    return;
-                }
-
-                // Parse the JSON content
-               // const mpitch = await response.json();
 
     const cellValue = '431.json'; // Get the cell value from the input
 // 1. Get the current session from KV using the cell value as the key
