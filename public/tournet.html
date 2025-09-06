@@ -1081,10 +1081,9 @@ if (!sessionResp.ok) {
   alert('Session not found for this cell number.');
   return;
 }
+		console.log('mpitch', sessionResp);
 const mypitch = await sessionResp.json();
-console.log('Fetched session:', mypitch);
 
-		console.log('mpitch', mpitch);
 		//var picsj = data1.Pictures;
 		console.log('mypics', Object.keys(mpitch));
     let cItems = 0;
