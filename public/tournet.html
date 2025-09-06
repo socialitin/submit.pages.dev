@@ -1477,7 +1477,7 @@ const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/
 });
 
 const session = await sessionResp.json();
-console.log('Fetched session:', session, itinIdInput.value);
+console.log('Fetched session:', session);
 
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
