@@ -1082,7 +1082,7 @@ if (!sessionResp.ok) {
   return;
 }
 		console.log('mpitch', sessionResp);
-const mypitch = await sessionResp.json();
+const mypitch = sessionResp; ;
 
 		//var picsj = data1.Pictures;
 		console.log('mypics', Object.keys(mpitch));
