@@ -647,7 +647,7 @@ console.log('Fetched session:', cellValue, itinIdInput.value);
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: [{"src":"https://mmedia.tournet.com/Tournet/Destinations/Presentation/430/430-NYCWAS/Washington.jpg","name":"Washington","desc":"Dia 4: Saliendo por la manana hacia la capital del país"}] })
+  body: JSON.stringify({ payload: [ ] })
 });
 
 const session = await sessionResp.json();
@@ -1456,7 +1456,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
 };	
 </script>
 <script>
-  function connectWithHost() {
+  async function connectWithHost() {
   var cellValue = document.getElementById('cell').value; // Get the value after element exists
   if (cellValue.trim() === "") {
     alert("Please enter your cell number.");
@@ -1469,6 +1469,16 @@ console.log(srcValue);
 var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
 sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
  
+
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ payload: [{"src": srcValue, "name": document.getElementById("picname").value, "desc": document.getElementById("descI").value}] })
+});
+
+const session = await sessionResp.json();
+console.log('Fetched session:', session, itinIdInput.value);
+
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
   //document.getElementById('channel-input').value = pIata;
