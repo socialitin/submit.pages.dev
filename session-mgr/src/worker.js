@@ -40,9 +40,13 @@ export default {
         session = { cell, payload };
       }
       await env.KV_BINDING.put(cell, JSON.stringify(session));
-      return new Response('Session updated', {
+      // Return the updated session as JSON
+      return new Response(JSON.stringify(session), {
         status: 200,
-        headers: { 'Access-Control-Allow-Origin': '*' }
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
       });
     }
 
@@ -54,3 +58,4 @@ export default {
     });
   }
 };
+
