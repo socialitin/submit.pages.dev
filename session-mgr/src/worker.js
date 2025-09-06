@@ -30,9 +30,9 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
-      if (payload.length === 0) {
-        return new Response('Payload array is empty, nothing to store.', {
-          status: 204,
+      if (payload.length < 1) {
+        return new Response('Payload array must contain at least 1 item.', {
+          status: 400,
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
