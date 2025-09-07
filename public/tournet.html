@@ -990,11 +990,11 @@ conversationMessages.appendChild(tabContentsContainer);
 // create session
 
 // itiOffer.push(itinId);
-console.log('Creating session with payload:', itiOffer);
-const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+console.log('Creating session with payload:', message, itinId);
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: itiOffer })
+  body: JSON.stringify({ payload: {message}, itinId: itinId })
 });
 
 const session = await sessionResp.json();
