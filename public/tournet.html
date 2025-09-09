@@ -988,7 +988,7 @@ conversationMessages.appendChild(tabContentsContainer);
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
 //* create session 
-sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
+//sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
  
 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
