@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--Was Aug3124-->
+<head>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 
+  <title>Cloudflare Pages 2 Tournet presence</title>
+  <meta name="theme-color" content="#d86300">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
+  <link rel="stylesheet" href="/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    #chatPopup { display: none; flex-direction: column; }
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  margin-bottom: 4px;
+  font-size: 1em;
+  background: #e6f3ff;
+  align-self: flex-start;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  position: relative;
+  word-break: break-word;
+}
+.chat-bubble.me {
+  background: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+.chat-bubble.vendor {
+  background: #fffbe6;
+  color: #222;
+  border: 1px solid #ffe58f;
+}
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* or 0 for no space */
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+.chat-meta input[type="radio"] {
+  margin: 0 2px 0 0; /* minimal space to the right */
+  vertical-align: middle;
+}
+
+.chat-time {
+  margin-left: 8px;
+}
+    .tab-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.tab-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.tab-avatar.active {
+    border: 2px solid #007bff;
+}
+.tab-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 12px;
+    background: #fafafa;
+    min-height: 40px;
+}
+.chat-message-WAS {
+    background: #e6f3ff;
+    border-radius: 16px;
+    padding: 10px 16px;
+    margin: 8px 0;
+    max-width: 70%;
+    word-break: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    font-size: 1em;
+}
+  
+.tab-header {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.tab-btn {
+    padding: 6px 16px;
+    cursor: pointer;
+    border: none;
+    background: #eee;
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    outline: none;
+    transition: background 0.2s;
+    color: #000;
+}
+.tab-btn.active {
+    background: #007bff;
+    color: #fff;
+}
+.tab-content {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 12px;
+    background: #fafafa;
+    min-height: 40px;
+}
+
+  .tab {
+      display: flex;
+      flex-direction: row;
+      /*align-items: right;*/
+      margin-left: 10%;
+      justify-content: space-evenly;
+      background-color: #f1f1f10e;
+      padding: 0px;
+      /* width:80%; */
+      margin-top: 4%;
+      /*flex-wrap: wrap; /* Allow items to wrap */
+    }
+
+    .tab button {
+      width:20%;
+      background-color: #c46767;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0px 0px;
+      display: inline-block;
+      white-space: nowrap;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin: 0; /* Add margin for spacing between buttons */
+    }
+
+    .tab button:hover {
+      background-color: #b35454;
+    }
+
+    .tab button.active {
+      background-color: #e54646;
+    }
+
+    .tabcontent {
+      display: none;
+      /* width: 75%; */
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      margin: 2.0px auto; /* Center the tab content */
+    }
+
+    .tabcontent.active {
+      display: block;
+    }
+
+.tab-header { margin-bottom: 10px; }
+.tab-btn { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+.tab-btn.active { background: #007bff; color: #fff; }
+.tab-content { border: none; padding: 10px; }
+    .pitch-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+      margin-left: 10%;
+    }
+
+    .pitch-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .pitch-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pitch-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
+
+    .carousel-container {
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks between items */
+      display: flex; /* Use flexbox for horizontal alignment */
+      align-items: center;
+      padding: 10px 0; /* Add padding for better spacing */
+      margin-left: 10%;
+    }
+
+    .carousel-item {
+      display: inline-block;
+      margin-right: 20px; /* Space between items */
+      text-align: center; /* Center align the text below images */
+    }
+
+    .carousel-item img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .carousel-item span {
+      display: block;
+      margin-top: 10px; /* Space between image and text */
+      color: #333;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .tab {
+        flex-direction: row;
+        /*align-items: stretch;*/
+      }
+
+      .tab button {
+        width: 20%;
+        margin: .5px 0;
+      }
+
+      .tabcontent {
+        width: 100%;
+        padding: 12px;
+      }
+
+      .carousel-item {
+        margin-right: 10px; /* Less space between items on smaller screens */
+      }
+
+      .carousel-item span {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab button {
+        font-size: 14px;
+      }
+
+      .carousel-item {
+        margin-right: 5px; /* Even less space between items */
+      }
+
+      .carousel-item span {
+        font-size: 1.2px;
+      }
+    }
+  </style>
+                 <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      background-color: #f4f4f4;
+                      margin: 0;
+                      padding: 20px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      /*height: 100vh;*/
+                      flex-direction: column;
+                  }
+                  #chat-container {
+                      /* width: 400px; */
+                      background-color: #fff;
+                      border-radius: 8px;
+                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                      padding: 20px;
+                  }
+                  #chat-container h2 {
+                      text-align: center;
+                      color: #007bff;
+                  }
+                  #message-input {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #conversation-list {
+                      width: 100%;
+                      padding: 10px;
+                      margin-bottom: 10px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                  }
+                  #chat-container button {
+                      width: 15%;
+                      padding: 10px;
+                      background-color: #c2cdd9;
+                      color: #fff;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      margin-bottom: 10px;
+                  }
+              </style>
+               <style>
+                .icon-button {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                    color: #cdd6df;
+                    margin: 5px;
+                }
+                .icon-button:hover {
+                    color: #c3ced8;
+                }
+        
+                #conversation-list {
+                    margin-top: 20px;
+                }
+                #conversation-messages {
+                    margin-top: 20px;
+                }
+        
+                .conversation-option {
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+        
+                #message-input-container {
+                    margin-top: 20px;
+                }
+        
+                #initial-request {
+                    margin-top: 20px;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+        
+                        .conversation-entry p {
+                    margin: 0;
+                    margin-left: 10px;
+                }
+.horizontal-chat-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  align-items: stretch; /* Ensures children stretch to same height */
+}
+
+.conversation-entry {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  flex: 0 0 auto;
+  height: 100%; /* Ensures entry fills container height */
+}
+
+.chat-message {
+  background: #e6f3ff;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 0;
+  max-width: 90%;
+  word-break: break-word;
+  font-size: 1em;
+  flex: 1 1 auto;      /* Makes bubble fill available vertical space */
+  display: flex;
+  align-items: center; /* Vertically center text if needed */
+  min-height: 80px;    /* Set your desired min height */
+  height: 100%;        /* Stretch to fill parent */
+}                
+            </style> 
+</head>
+<body>
+
+  <div >
+    <img src="https://tournet.com/SocialITIN/img/www.tournet.com_wZn.png" style=" border:0; width:50%;">
+  </div>
+    <div>
+    <div class="tab">
+      <!--button class="tablinks" onclick="openTab(event, 'Tab1')">Ads</button-->
+      <button class="tablinks active" onclick="openTab(event, 'Tab2')">Concierge</button>
+      <!--button class="tablinks" onclick="openTab(event, 'Tab3')">Nearby</button-->
+      <button class="tablinks" onclick="openTab(event, 'Tab4')">MyItim</button>
+    </div>
+    <div id="Tab1" class="tabcontent">
+      <main>
+        <h2>Basic Subscription is FREE</h2>
+        <blockquote>
+          <p id="subjjson" data-json=''>
+            To Pitch on Tournet's cityKIOSKS network, Hosts must be verified. Please complete this Subscription Form first, 
+            complete your first Pitch, which you can privately Test & Preview on the actual network while waiting approval process ...
+          </p>
+        </blockquote>
+        <form method="POST" action="/api/subscribe">
+          <div class="input">
+            <label for="name">Company Name and Address</label>
+            <input id="name" name="name" type="text" />
+            <label for="web">Company Website</label>
+            <input id="web" name="web" type="url" />
+          </div>
+
+          <div class="input">
+            <label for="contact">Your Complete Name</label>
+            <input id="contact" name="contact" type="text" />
+            <label for="email">Company Email</label>
+            <input id="email" name="email" type="email" />
+          </div>
+
+          <div class="input">
+            <label for="referers">Type/kind of offer</label>
+            <select id="referers" name="referers">
+              <option hidden disabled selected value></option>
+              <option value="Sightseeing">Sightseeing</option>
+              <option value="Excursion">Excursion</option>
+              <option value="Night life">Night life</option>
+              <option value="Walking tour">Walking tour</option>
+              <option value="Water cruising">Water cruising</option>
+            </select>
+          </div>
+
+          <div class="checklist">
+            <label>What's the venue</label>
+            <ul>
+              <li>
+                <input id="m1" type="checkbox" name="venue" value="Attraction" />
+                <label for="m1">Attraction</label>
+              </li>
+              <li>
+                <input id="m2" type="checkbox" name="venue" value="Club" />
+                <label for="m2">Club</label>
+              </li>
+              <li>
+                <input id="m3" type="checkbox" name="venue" value="Accommodation" />
+                <label for="m3">Accommodation</label>
+              </li>
+              <li>
+                <input id="m4" type="checkbox" name="venue" value="Motorcoach" />
+                <label for="m4">Motorcoach</label>
+              </li>
+            </ul>
+          </div>
+          <div class="input">
+            <label for="pitch">Name and description of Product or Offer</label>
+            <input id="pitch" name="pitch" type="text" />
+          </div>
+
+          <button type="submit">Join Tournet</button>
+        </form>
+      </main>
+    </div>
+
+    <div id="Tab2" class="tabcontent active">
+      <div id="jdata">
+         <div class="pitch-container">
+          <div class="pitch-item">
+            <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = '' width="102px" height="102px" alt="Offer 1" onclick="d1tnhosts(event,src)" >
+            <span>Offer 1</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson2" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 2" onclick="d1tnhosts()">
+            <span>data-offer 2</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson3" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 3" onclick="d1tnhosts()">
+            <span>Offer 3</span>
+          </div>
+          <div class="pitch-item">
+            <img id="fjson4" src="https://tournet.com/SocialITIN/img/blank.jpg" data-offer = ''  width="102px" height="102px" alt="Offer 4" onclick="d1tnhosts()">
+            <span>Offer 4</span>
+          </div>
+        </div>
+
+ 
+ <script>
+          window.addEventListener('DOMContentLoaded', () => {
+            d1tnlogin();
+           // document.getElementById("fjson1").click();
+          });
+        </script>
+      </div>
+
+      <div class="row">
+        <div id="thumbs" class="carousel-container" style="width:15%; float:left;"></div>
+        <div width="2%"></div>
+        <div id="ofrContainerFormkiosk" data-ofr='{"vendorId":227, "ofr_id": 538, "pds_id": 272825 }' data-mode="kiosk" data-view="mobile" style="width:100%; margin-top:50px; margin-left:5px; float:left;">
+        </div>        
+        <div>
+          <div id="itemImg" style="width:61%; float:left;"></div>
+          <div id="picDtls" style="width:20%; margin-left:20%">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Tab3" class="tabcontent">
+      <p style="float:right;">Publish <img id="fjson1" src="https://tournet.com/SocialITIN/img/blank.jpg" width="32px" height="32px" onclick="d1tnupdate();"></p>
+      <main>
+        <h2>Pitch your Offer</h2>
+        <blockquote>
+          <p id="sjson" data-json=''>Review Your Pitch</p>
+          <p>All Pitches submitted are private. You can publish one and only one at a time (Premium members can publish up to 4).</p>
+        </blockquote>
+        <form method="POST" action="/api/submit">
+          <div class="input" type="hidden">
+            <label for="IATA"></label>
+            <input id="IATA" name="IATA" type="text" />
+            <input id="Province" name="Province" type="text" />
+          </div>
+          <div class="input">
+            <label for="City">Name of Offer</label>
+            <input id="City" name="City" type="text" />
+          </div>
+          <div class="input">
+            <label for="embVideo">Video</label>
+            <input id="embVideo" name="embVideo" type="text" />
+          </div>
+          <div class="input">
+            <label for="Pictures">Pictures</label>
+            <input id="Pictures" name="Pictures" type="text" />
+          </div>
+
+          <div class="input">
+            <label for="typeKind">Type/kind of offer</label>
+            <select id="typeKind" name="typeKind">
+              <option hidden disabled selected value></option>
+              <option value="Sightseeing">Sightseeing</option>
+              <option value="Excursion">Excursion</option>
+              <option value="Night life">Night life</option>
+              <option value="Walking tour">Walking tour</option>
+              <option value="Water cruising">Water cruising</option>
+            </select>
+          </div>
+
+          <div class="checklist">
+            <label for="venue">What's the venue</label>
+            <select id="venue" name="venue">
+              <option hidden disabled selected value></option>
+              <option value="Attraction">Attraction</option>
+              <option value="Club">Club, Event</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Motorcoach">Motorcoach</option>
+              <option value="Other">Other ...</option>
+            </select>
+          </div>
+          <div class="input">
+            <label for="pitch">Pitch!</label>
+            <input id="pitch" name="pitch" type="text" />
+          </div>
+
+          <button type="submit">Save & Preview</button>
+        </form>
+      </main>
+    </div>
+    <div id="Tab4" class="tabcontent">
+      <main>
+        <h4>My Itineraries</h4>
+        <blockquote>
+          <p id="Requests">
+            Coming Up... Tournet's cityKIOSKS Visitors' Requests Response is instant or  within 24 hours at the latest.
+            <br>
+            <h4>Host Conversations</h4>
+
+                <title>CityKiosk Pub/Sub Chat</title>
+ 
+    <title>Your Wathsapp number</title>
+    <!-- Add Font Awesome for icons -->
+    
+     <div id="chat-container">
+         <h4>Your WhatsApp number</h4>
+ 
+         <input id="itin-id-input" placeholder="e.g., 1212555888, country code inclusive" />
+         <input id="channel-input" type ="hidden" placeholder="Posting to Channel (e.g., NYCDE)" />
+         <button id="load-channel-button" class="icon-button" title="Load Channel">
+             <i class="fas fa-sync"></i>
+         </button>
+ 
+         <button id="initiate-button" class="icon-button" title="Initiate Conversation" style = "display: none">
+             <i class="fas fa-paper-plane"></i>
+         </button>
+ 
+         <div id="conversation-list">
+             <!-- Conversations will be dynamically inserted here as radio buttons -->
+         </div>
+ 
+         <div id="conversation-messages">
+             <!-- Initial request as H1 title will be inserted here -->
+             <div id="initial-request"></div>
+ 
+                         <!-- Messages will be dynamically inserted here -->
+         </div>
+ 
+         <div id="message-input-container">
+             <textarea id="message-input" placeholder="Type a message to Host"></textarea>
+             <button id="reply-button" class="icon-button" title="Reply to Conversation">
+                 <i class="fas fa-reply"></i>
+             </button>
+         </div>
+     </div>
+ 
+     <script>
+         const baseUrl = 'https://pub-sub.socialitin.workers.dev';
+         const conversationList = document.getElementById('conversation-list');
+         const conversationMessages = document.getElementById('conversation-messages');
+         const initialRequest = document.getElementById('initial-request');
+         let currentItinId = '';
+         let currentChannel = '';
+         let destinationMap = new Map(); // To store unique destinations and associated conversations
+ 
+         function timeSince(date) {
+             const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+             let interval = Math.floor(seconds / 31536000);
+ 
+             if (interval > 1) return interval + " years ago";
+             interval = Math.floor(seconds / 2592000);
+             if (interval > 1) return interval + " months ago";
+             interval = Math.floor(seconds / 86400);
+             if (interval > 1) return interval + " days ago";
+             interval = Math.floor(seconds / 3600);
+             if (interval > 1) return interval + " hours ago";
+             interval = Math.floor(seconds / 60);
+             if (interval > 1) return interval + " minutes ago";
+             return Math.floor(seconds) + " seconds ago";
+         }
+ 
+         async function fetchConversations(itinId) {
+             try {
+ const itinIdInput = document.getElementById('itin-id-input');
+ const cellValue = itinIdInput.value; // Get the cell value from the input
+
+// 1. Get the current session from KV using the cell value as the key
+console.log('Fetched session:', cellValue, itinIdInput.value);
+
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ payload: [ {}] })
+});
+
+const session = await sessionResp.json();
+console.log('Fetched session:', session, itinIdInput.value);
+
+// 2. Now fetch the conversations as before
+const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
+if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+const conversations = await response.json();
+conversationList.innerHTML = '';  // Clear existing radio buttons
+destinationMap.clear(); // Clear the map for new conversations
+
+// Group conversations by unique destination code
+conversations.forEach((conversationId) => {
+  const channelId = conversationId.split('_')[1];
+  const destinationCode = channelId.slice(0, 3); // Extract the first three characters
+
+  if (!destinationMap.has(destinationCode)) {
+    destinationMap.set(destinationCode, []);
+  }
+  destinationMap.get(destinationCode).push(conversationId);
+});
+
+ 
+                 // Populate with radio buttons for unique destination codes
+                 destinationMap.forEach((conversations, destinationCode) => {
+                     const label = document.createElement('label');
+                     label.classList.add('conversation-option');
+            console.warn('destinationCode:', destinationCode, conversations[0]);        
+                     const radio = document.createElement('input');
+                     radio.type = 'radio';
+                     radio.name = 'destination';
+                     radio.value = destinationCode;
+                     if (conversationList.childElementCount === 0) {
+                         radio.checked =false;
+                         fetchAndDisplayMessages(destinationCode); // Load messages for the first destination by default
+                     }
+ 
+                     label.appendChild(radio);
+                     label.appendChild(document.createTextNode(destinationCode));
+                     conversationList.appendChild(label);
+                 });
+             } catch (error) {
+                 console.error('Error fetching conversations:', error);
+                 alert('Failed to load conversations. Please try again later.');
+             }
+         }
+ 
+         async function fetchAndDisplayMessages(destinationCode) {
+             try {
+                 const conversations = destinationMap.get(destinationCode) || [];
+                 conversationMessages.innerHTML = '';  // Clear existing messages
+                 initialRequest.innerHTML = '';  // Clear initial request
+                  const displayedMessages = new Set(); // To track displayed messages
+
+                 for (const conversationId of conversations) {
+                     const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     const messages = await response.json();
+                     const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
+                     const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
+const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
+sessionStorage.setItem("messgs",JSON.stringify(messages));               
+console.warn('fetching conversations:', relConversation,conversationId,messages);              
+// Clear previous content
+// Group messages by the first 2 characters of the message text (no filtering, no sorting)
+// Prepare to collect initial requests
+// ...inside your fetchAndDisplayMessages function...
+
+// Group messages by hostId, but handle 'Initial' specially
+let initialRequestDiv = null;
+const groupedMessages = {};
+messages.forEach((message, index) => {
+    const messageKey = `${message.timestamp}-${message.hostId}-${message.message}`;
+    if (displayedMessages.has(messageKey)) return;
+    displayedMessages.add(messageKey);
+
+    const host = message.hostId;
+
+    if (host === 'initial') {
+        // Create the initial request div (only once)
+      const separator = document.createElement('hr');
+separator.style.margin = '16px 0'; // Optional: add vertical spacing
+conversationMessages.appendChild(separator);
+
+        if (!initialRequestDiv) {
+            initialRequestDiv = document.createElement('div');
+            initialRequestDiv.className = 'initial-request';
+            initialRequestDiv.style.background = 'none';
+            initialRequestDiv.style.border = 'none';
+            initialRequestDiv.style.padding = '12px';
+            initialRequestDiv.style.marginBottom = '16px';
+        }
+        // Add the initial message
+         const icon = document.createElement('span');
+icon.textContent = '🗺️'; // Sightseeing emoji
+icon.style.width = '50px';
+icon.style.textAlign = 'right';
+icon.style.fontSize = '1.8em';
+const iconArea = document.createElement('BR');
+        const p = document.createElement('p');
+
+        p.appendChild(icon); 
+       
+      
+        p.appendChild(document.createTextNode(`${timeSince(message.timestamp)}: ${productType}  `));
+        // ${message.message} (${message.hostId})
+               const pp = document.createElement('p');
+      
+        
+        const key = relConversation.substring(0,21);
+const value = sessionStorage.getItem(key);
+console.log('sessionStorage key:', key, 'value:', value);
+if (value !== null && value !== undefined && value !== "null") {
+
+// Example array (replace with your actual array)
+const itinArray = [JSON.parse(value)];
+console.log('itinArray:', itinArray);
+
+// Create header container
+const header = document.createElement('div');
+header.style.display = 'flex';
+header.style.alignItems = 'center';
+header.style.gap = '20px';
+header.style.marginBottom = '24px';
+
+// Large image
+const img = document.createElement('img');
+img.src = itinArray[0].src;
+img.alt = itinArray[0].name;
+img.style.width = '160px';
+img.style.height = '120px';
+img.style.objectFit = 'cover';
+img.style.borderRadius = '12px';
+
+// Description area
+const descDiv = document.createElement('div');
+descDiv.innerHTML = `<h2 style="margin:0 0 8px 0; font-size:1.1em;color:#444;">${itinArray[0].name}</h2>
+<p style="margin:0;font-size:1.1em;color:#444;">${itinArray[0].desc}</p>`;
+
+// Assemble
+header.appendChild(img);
+header.appendChild(descDiv);
+
+// Add to page (e.g., to a container with id="itinHeader")
+ p.appendChild(header);
+}
+        initialRequestDiv.appendChild(p);
+        return; // Do not group this message into tabs
+
+    }
+
+    // Group all other messages by hostId
+    const groupKey = host;
+    if (!groupedMessages[groupKey]) groupedMessages[groupKey] = [];
+    groupedMessages[groupKey].push({ message, index, host });
+});
+
+// ---- Only ONE tab header and ONE tab content container ----
+
+// Create tab header (horizontal)
+const tabHeader = document.createElement('div');
+tabHeader.className = 'tab-header';
+tabHeader.style.display = 'flex';
+tabHeader.style.gap = '10px';
+tabHeader.style.alignItems = 'center';
+
+// Create a container for all tab contents
+const tabContentsContainer = document.createElement('div');
+tabContentsContainer.className = 'tab-contents';
+
+// Keep references to each tab's content div
+const tabContents = {};
+
+Object.keys(groupedMessages).forEach((groupKey, idx) => {
+    // Tab button (hidden)
+    const tabBtn = document.createElement('button');
+    tabBtn.className = 'tab-btn';
+    tabBtn.style.display = 'none'; // Hide the button
+    tabBtn.textContent = groupKey;
+    if (idx === 0) {
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+    }
+
+    // Generate a sample avatar URL based on hostId (groupKey)
+    const avatarNum = Math.abs(
+        Array.from(groupKey).reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    ) % 99; // randomuser.me has images 0-99
+    const avatarUrl = `https://randomuser.me/api/portraits/men/${avatarNum}.jpg`;
+
+    const avatar = document.createElement('img');
+    avatar.src = avatarUrl;
+    avatar.alt = groupKey;
+    avatar.className = 'tab-avatar';
+    avatar.style.width = '40px';
+    avatar.style.height = '40px';
+    avatar.style.borderRadius = '50%';
+    avatar.style.cursor = 'pointer';
+    avatar.style.objectFit = 'cover';
+    avatar.style.border = idx === 0 ? '2px solid #007bff' : '2px solid transparent';
+    avatar.style.transition = 'border 0.2s';
+
+    avatar.onclick = function() {
+        // Remove active from all buttons and avatars
+        tabHeader.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = '#eee';
+            btn.style.color = '#000';
+        });
+        tabHeader.querySelectorAll('.tab-avatar').forEach(img => {
+            img.style.border = '2px solid transparent';
+        });
+        tabBtn.classList.add('active');
+        tabBtn.style.background = '#007bff';
+        tabBtn.style.color = '#fff';
+        avatar.style.border = '2px solid #007bff';
+
+        // Hide all tab contents, show only this one
+        Object.values(tabContents).forEach(div => div.style.display = 'none');
+        tabContents[groupKey].style.display = 'block';
+    };
+
+    tabHeader.appendChild(tabBtn);   // Hidden button for logic
+    tabHeader.appendChild(avatar);   // Visible avatar
+
+    // Tab content
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'tab-content';
+    contentDiv.style.display = idx === 0 ? 'block' : 'none';
+
+    // Create a horizontal scrollable container for chat messages
+const horizontalContainer = document.createElement('div');
+horizontalContainer.className = 'horizontal-chat-container';
+horizontalContainer.style.display = 'flex';
+horizontalContainer.style.overflowX = 'auto';
+horizontalContainer.style.gap = '16px';
+horizontalContainer.style.padding = '8px 0';
+
+// Loop through messages and add them horizontally
+groupedMessages[groupKey].forEach(({ message, index }) => {
+    const entryDiv = document.createElement('div');
+    entryDiv.classList.add('conversation-entry');
+    entryDiv.style.minWidth = '250px';
+    entryDiv.style.flex = '0 0 auto';
+
+    const msgElement = document.createElement('p');
+    msgElement.className = 'chat-message';
+    msgElement.textContent = message.message;
+    entryDiv.appendChild(msgElement);
+
+    // Create a meta/info line below the bubble
+    const meta = document.createElement('div');
+    meta.className = 'chat-meta';
+    meta.style.fontSize = '0.85em';
+    meta.style.opacity = '0.7';
+    meta.style.marginTop = '4px';
+
+    // Create radio and add to meta
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = relConversation;
+    radio.value = message.hostId;
+    radio.checked = index === messages.length - 1;
+    radio.onclick = () => fetchAndFilterConversation(relConversation, message.hostId);
+
+  // Create meta text span
+const metaText = document.createElement('span');
+metaText.textContent = `${timeSince(message.timestamp)} · ${productType}`; // No leading space
+
+// Append radio first, then meta text
+meta.appendChild(radio);
+meta.appendChild(metaText);
+   
+
+    // Append meta info below the chat bubble
+    entryDiv.appendChild(meta);
+
+    // Now add entryDiv to the horizontal container
+    horizontalContainer.appendChild(entryDiv);
+}); 
+
+// Add the horizontal container to your contentDiv
+contentDiv.appendChild(horizontalContainer);
+
+    tabContents[groupKey] = contentDiv;
+    tabContentsContainer.appendChild(contentDiv);
+});
+
+// Append the initial request (if any) before the tabs
+if (initialRequestDiv) {
+    conversationMessages.appendChild(initialRequestDiv);
+}
+conversationMessages.appendChild(tabHeader);
+conversationMessages.appendChild(tabContentsContainer); 
+// ...existing code...
+                 }
+             } catch (error) {
+                 console.error('Error fetching conversation messages:', error);
+                 alert('Failed to load conversation messages. Please try again later.');
+             }
+         }
+ 
+         document.getElementById('load-channel-button').addEventListener('click', () => {
+             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             currentChannel = document.getElementById('channel-input').value.trim();
+             if (currentItinId) {
+                 fetchConversations(currentItinId);
+             } else {
+                 alert('Please enter an Itinerary ID.');
+             }
+         });
+ 
+         document.getElementById('initiate-button').addEventListener('click', async () => {
+             const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             const itiOffer = sessionStorage.getItem("ITI0");
+             sessionStorage.removeItem("ITI0");
+             sessionStorage.setItem(itinId,itiOffer);
+             const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
+        
+             if (message !== '' && currentChannel !== '' && itinId !== '') {
+                 try {
+                     const response = await fetch(`${baseUrl}/initiate`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ itinId: itinId, channel: currentChannel, message })
+                     });
+                
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     const data = await response.json();
+                     alert(`Conversation initiated with ID: ${data.conversationId}`);
+                     fetchConversations(itinId);  // Refresh the conversation list after initiating
+
+                     
+                 } catch (error) {
+                     console.error('Error initiating conversation:', error);
+                     alert('Failed to initiate conversation. Please try again.');
+                 }
+             } else {
+                 alert('Please enter an Itinerary ID, Channel, and Message.');
+             }
+         });
+ 
+         conversationList.addEventListener('change', (event) => {
+             const selectedDestinationCode = event.target.value;
+             if (selectedDestinationCode) {
+                 fetchAndDisplayMessages(selectedDestinationCode);
+             } else {
+                 conversationMessages.innerHTML = '<h3>Conversation Messages</h3>';
+                 initialRequest.innerHTML = '';
+             }
+         });
+ 
+         document.getElementById('reply-button').addEventListener('click', async () => {
+             const message = document.getElementById('message-input').value.trim();
+             const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
+             const destinationCode = selectedConversationRadio ? selectedConversationRadio.value : '';
+             const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
+             const hostId = selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
+ 
+             if (message !== '' && destinationCode !== '' && hostId !== '') {
+                 const conversationIds = destinationMap.get(destinationCode);
+                 const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
+ 
+                 try {
+                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ message, hostId })
+                     });
+ 
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+ 
+                     alert(`Replied to conversation ${conversationId}`);
+                     fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
+                 } catch (error) {
+                     console.error('Error replying to conversation:', error);
+                     alert('Failed to send reply. Please try again.');
+                 }
+             } else {
+                 alert('Please select a conversation, select a message, and enter a message.');
+             }
+         });
+     </script>
+ 
+<script>
+
+function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+
+        // Add this to make Tab1 active by default when the page loads
+   //     document.addEventListener("DOMContentLoaded", function() {
+     //       document.querySelector('[onclick="openTab(event, \'Tab1\')"]').click();
+      //  });
+
+    </script>
+		
+		<script>
+			async function d1tnlogin() {
+
+  //  const workerUrl = 'https://grabjson.socialitin.workers.dev/?file=431.json';
+
+    const cellValue = '431.json'; // Get the cell value from the input
+// 1. Get the current session from KV using the cell value as the key
+console.log('Fetched session:', cellValue);
+
+const tpitch = {
+ "430-WPN": [
+      {
+         "IATA": "NYCSN",
+         "City": "New York City",
+         "Province": "Night Life",
+         "Pitch": "Bar hoping"
+      },
+      {
+                  "IATA": "NIAES",
+         "City": "Niagara Falls",
+         "Province": "NYC",
+         "Pitch": " (3) Desayunos Americanos. Crucero Hornblower (Opera de Mayo a Octubre) .Fuera de temporada sera substituido por los túneles escénicos .Guía hispano-parlante .Visitas locales y excursiones indicadas en itinerario"
+      },
+      {
+         "IATA": "PHIES",
+         "City": "Philadelphia",
+         "Province": "Brooklyn",
+         "Pitch": "Experiencing the eclectic, electrifying neighborhoods of Brooklyn is finally affordable. As long as you're okay with a fun, funky, and functional hotel that's anything but typical. EXPLORE BROOKLYN & BEYOND. Live music, comedy, craft eats, waterfront parks, museums and nightlife activities, are just the tip of the ice-'Burg. You'll find the attractions, shopping, and music venues within walking distance. "
+      },
+      {
+         "IATA": "WASSN",
+         "City": "Washington",
+         "Province": "Brooklyn",
+         "Pitch": "With a sweet location in the center of trendy Williamsburg, Pod Brooklyn is the perfect base for your NYC adventure—starting with our neighborhood's fashionable boutiques, buzzy cafes and restaurants, music venues, and nightlife. The hotel is within walking distance of the Music Hall of Williamsburg, Brooklyn Bowl, and the East River Ferry. We are just a ten-minute train ride to Manhattan and Union Square for shopping, museum hopping, and sightseeing expeditions for the best of the boroughs."
+      },
+      {
+         "IATA": "NYCSN",
+         "City": "New York",
+         "Province": "All over the city",
+         "Pitch": "Terrazes, Gardens, Loundges, Next door Parking, Restaurantes, Bars. Seasonal concertes and events are a walk away, even start a walk to manahattan via Wllingsburg or Brooklyn Bridges"
+      }
+   ], 
+    "430-NYCWAS": [
+      {
+         "IATA": "NYCEX",
+         "City": "New York City",
+         "Province": "Excursions",
+         "Pitch": ""
+      },
+      {
+         "IATA": "NYCEX",
+         "City": "6 Days NYC",
+         "Province": "Manhattan",
+         "Pitch": "6 dyas. Includes 5 nghts at the Sheraton Hotel midtown plus: Tour de Contrastes. Tour del Alto y Bajo Manhattan. Visita Dia entero a Washington. Visitas locales y excursiones indicadas en itinerario. Guía hispano-parlante"
+      },
+      {
+         "IATA": "NYCSS",
+         "City": "Midtown Downtown",
+         "Province": "Manhattan",
+         "Pitch": "Visita de la ciudad. En camino al Alto Manhattan a lo largo del Central Park pasaremos por el Lincoln Center, el edificio Dakota y Strawberry Fields, Harlem, 5ta Avenida, Rockefeller Center, Hudson Yards, Greenwich Village, Zona cero, Estatua de la Libertad y los Puentes del East River. Tarde Libre. Alojamiento"
+      },
+      {
+         "IATA": "NYCSS",
+         "City": "Uptown N The Bronx",
+         "Province": "Manhattan",
+         "Pitch": "Hoy nuestro Tour lo llevará desde Manhattan, a través del Lincoln Tunnel, hacia la vecina New Jersey. Vista Panoramicas de Nueva York, luego continuamo Al Bronx, Estadio de Los Yankees, Escaleras del Joker, Flushing meadows, DUMBO y el Puente de Brooklyn. Tarde libre. Alojamiento "
+      },
+      {
+         "IATA": "WASEX",
+         "City": "Washington",
+         "Province": "Manhattan",
+         "Pitch": "Dia 4: Saliendo por la manana hacia la capital del país, cruzaremos los estados de New Jersey, Delaware y Maryland hasta llegar a Washington. Visitaremos el Cementerio de Arlington, Monumentos de Lincoln, Guerra de Koreal, Vietnam. Seguimos hacia al Capitolio para verlo de afuera y Casa Blanca. Luego tendran tiempo para almorzar y visitar algun museo antes de comenzar el regreso a New York. Alojamiento. Dia 5 sera libre y dia 6 6 desayuno y despedida"
+      }
+   ],
+      
+   "430-Westcoast": [
+      {
+         "IATA": "SFOEX",
+         "City": "San Francisco",
+         "Province": "Culture & Art",
+         "Pitch": ""
+      },
+      {
+         "IATA": "LAXEX",
+         "City": "Los Angeles",
+         "Province": "California",
+         "Pitch": "9 Days: Sale de Los Angeles. Incluye: (7) Desayunos6 Americanos y 1 Continental Deluxe. Admisión al Grand Canyon y Yosemite National Park. Guía hispano-parlante. Visitas locales y excursiones indicadas en itinerario  "
+      },
+      {
+        "IATA": "DENEX",
+         "City": "Grand Canyon",
+         "Province": "Colorado",
+         "Pitch": "Grand Canyon (South Rim), cruzando por los desiertos de Mojave y Arizona con parada en Seligman para ver un puesto de descanso de la mitica Ruta 66. y pasaremos cerca de la represa de Hoover Dam antes de llegar a destino. Llegada a Las Vegas en horas de la tarde, ciudad de luces, fantasia y capital del juego. Alojamiento"
+      },          
+
+      {
+         "IATA": "NEVEX",
+         "City": "Las Vegas",
+         "Province": "Nevada",
+         "Pitch": "Día libre para realizar paseos opcionales. En la noche realizaremos una excursión nocturna de la ciudad donde visitaremos el hotel de mayor historia de Las Vegas el Caesar Palace, luego haremos una parada en el famoso letrero Bienvenido a Las Vegas, recorreremos la mas famosa y reconocida calle Las Vegas Strip presenciando sus múltiples atracciones hasta llegar a la famosa calle Fremont ubicada en el corazón del Downtown parte antigua y donde nació Las Vegas. Al otro dia cruzamos el desierto de Nevada hacia Fresno por el conocido y extenso valle de San Joaquin. (o a Mammoth Lakes), terminando en San Franciso"
+      },
+      {
+         "IATA": "SFOVS",
+         "City": "San Francisco",
+         "Province": "California",
+         "Pitch": "Visita a la zona del centro comercial y financiero, con paradas en el Centro Cívico, Twin Peaks, Golden Gate Park, el famoso puente Golden Gate y finalizando en el Fisherman’s Wharf. Seguimos a Monterrey, 17 Mile Drive, y Carmel hacia Los Angeles via Santa Barbara"
+      }
+   ],
+  
+  
+   "430-Canada": [
+      {
+         "IATA": "QVBOS",
+         "City": "Quebec",
+         "Province": "Shopping Walks",
+         "Pitch": ""
+      },
+      {
+             "IATA": "TOREX",
+         "City": "Toronto",
+         "Province": "All Over",
+         "Pitch": "You can not put a price on a perfectly located NYC hotel in the heart of Times Square. That is why Pod Hotel Times Square has made it impossibly affordable to stay at the center of the City That Never Sleeps, all while enjoying unique, urban chic accommodations that value efficiency over fuss. Broadway shows "
+      },      
+
+      {
+         "IATA": "QVBXO",
+         "City": "Quebec",
+         "Province": "Manhattan",
+         "Pitch": "the Hudson River waterfront, and exciting restaurants are seconds away. More laid-back urban adventures like strolling and biking through tranquil Hudson River Park, kayaking on the Hudson, the High Line, and Circle Line Cruises, are just as accessible. Experience it all without spending it all at Pod Times Square Hotel - the best value in Times Square."
+      },          
+       
+      {
+         "IATA": "OTTXO",
+         "City": "Ottawa",
+         "Province": "Manhattan",
+         "Pitch": "Nestled on a quiet corner of Midtown West, Pod Times Square Hotel is surrounded by the culture and energy of Times Square. Experience New York City's most exciting neighborhood, just steps from restaurants, shopping, entertainment, and iconic NYC attractions. Take in the colorful sights of Times Square, see a Broadway show or walk along the Hudson River Park. We're also near the NYC's major transit hubs."
+      },
+
+      {
+         "IATA": "MONVX",
+         "City": "Montreal",
+         "Province": "Manhattan",
+         "Pitch": "ur 665 rooms are efficient, fun, and functional spaces with the comforts you need. Charge your gadgets in the media center, free Wi-Fi. After a day of travel, meetings, or a whirlwind tour of NYC, sink into an ultra-comfy bed. Soundproof windows and floor-to-ceiling shutters block out the city hum. With light dimmers and climate control to get the inside just right, you'll sleep like a baby—even in the middle of Times Square. We also offer rooms with bunk beds so value-minded friends or families can double up."
+      }
+   ]
+} ;
+
+const mpitch = tpitch;
+;
+		//var picsj = data1.Pictures;
+    console.log('mypitch',mpitch);
+	//	console.log('mypics', Object.keys(mpitch));
+    let cItems = 0;
+    // Loop through each group in the mypitch object
+for (const group in mpitch) {
+  if (mpitch.hasOwnProperty(group)) {
+    // Save the group name to a constant
+    const groupName = group;
+    const tgroup = group;
+   
+    console.log(`Group: ${groupName}`);
+    cItems++;
+    // Extract and loop through each item in the current group
+    jdata=[];
+    mpitch[group].forEach(item => {
+      // Save each item to a constant
+      const currentItem = item;
+      const cItem = item;
+      var pcountry = group.substring(0,3)+'/';       
+       
+       var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
+       var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
+      
+			//var tname = picsj[h].name;
+			
+			jdata.push(Tpics);
+
+       console.log('imgs ',Tpics); 
+      document.getElementById('fjson'+ cItems).src = tImg;
+     //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
+     $('#fjson' +cItems).attr('data-offer', JSON.stringify(jdata));
+      console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
+
+    });
+    document.getElementById("fjson1").click();
+    setTimeout(function(){
+      document.getElementById("0").click();
+		},500);
+  
+    console.log(''); // Line break between groups for readability
+  }
+}
+
+    ///////
+
+////////
+//sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+
+//var pics = sessionStorage.getItem("pics");
+//var picsj = JSON.parse(pics);
+
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+			var fj = h+1;
+			
+			console.log(fj);
+var tImg = '<img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style="width: 99%;" onclick = "picsDtl(event,src,name);" >';
+//document.getElementById('fjsoncsj[h].img;' + fj).src = pi
+console.log(tImgAll,jdata);
+var tImgAll = tImgAll+tImg;
+		};
+
+			};
+			</script>
+		
+<script>
+	async function d1tnupdate() {
+	const response = await fetch('/api/d1tnupdate');
+	const data2 = await response.json();
+	//const data =JSON.parse(data2.pitching);
+console.log(data2);
+	};
+	</script>
+		<script>
+			async function d1tnhosts(evt,src) {
+			//const response = await fetch('/api/d1tnhosts');
+			//const data1 = await response.json();		
+		
+		const data2 = event.target.getAttribute('data-offer');
+   // console.log('cOfr',data2);
+    //const data2 = event.target.dataset.offer;
+
+    //document.getElementById('"'+event.target.id+'"').data-offer;
+    var picsj = JSON.parse(data2);
+		//const data = data2['440-2'];
+		//const data = data3.pitching;
+		//.pitching);
+	
+		///'[{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png","description":"tickets from $ 150 to $420","name":"Orquesta Center "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png","description":"tickets from $ 120 ","name":"Orquesta left and right"},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png","description":"tickets from $ 120 ","name":"Mezzanine "},{"img":"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png","description":"tickets from $ 120","name":"Mezzanine Rear "}]'
+		
+//	console.log('params',document.getElementById("0").data);
+var picis = picsj[0].img;
+//var Pname = name.split(',')[0];
+//var Pdesc = name.split(',')[1];
+var pcount = event.target.id;
+var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
+
+//document.getElementById("itemImg").innerHTML = picUrl;
+
+    console.log('thispitch',picsj);
+///var picsj = data.Pictures;
+			
+//var picsj = JSON.parse(pics);
+//console.log('mypics', data2);	
+
+//sessionStorage.setItem("pics",JSON.stringify(picsj));
+//var picsj = JSON.parse(pics);
+
+///var pics = sessionStorage.getItem("pics");
+///var picsj = JSON.parse(pics);
+console.log('tIATA',picsj);
+		var tImgAll = '';
+		for (var h = 0; h <picsj.length; h++ ) {
+			jdata=[];
+      var tIata = picsj[h].iata;
+			var tname = picsj[h].name;
+			var tdesc = picsj[h].description;
+      jdata.push(tIata);
+			jdata.push(tname);
+			jdata.push(tdesc);
+			var tprice ='';
+			var fj = h+1;
+			
+//			console.log(fj);
+
+
+var tImg = '<div class="carousel-item"><img name = "'+jdata+'" data ="'+picsj[h]+'" id = "'+h+'" src="'+picsj[h].img+'" style=" width:102px; height:102px;" onclick = "picsDtl(event,src,name);" ></div>';
+//document.getElementById('fjson' + fj).src = picsj[].img;
+
+console.log(tImgAll,jdata,picsj[h].img);
+var tImgAll = tImgAll+tImg;
+		};
+
+    document.getElementById("thumbs").style = " display: flex; overflow-x: auto; white-space: nowrap;";
+document.getElementById("thumbs").innerHTML= tImgAll;
+	document.getElementById("itemImg").style = "width: 100%; ";
+		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
+		document.getElementById("itemImg").innerHTML = tVideo;
+		document.getElementById("IATA").value = data.IATA;
+		document.getElementById("City").value = data.City;
+		document.getElementById("Province").value = data.Province;
+		document.getElementById("pitch").value = data.Pitch;
+		document.getElementById("Pictures").value = pics;
+		document.getElementById("embVideo").value = tVideo;
+				
+
+				var picsUpl = 
+    '<form id="upload-video'+"3"+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="offer" value = "'+data.City+'">'+				
+' <textarea >'						
+'<input  id ="pitch" value ="'+data.Pitch +' textarea" ></textarea>	'+	
+      '<input type="file" id="v-input" fname="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit">Upload Video</button>'+
+    '</form>';
+    document.getElementById('picDtls').style = "width:100%;";		
+document.getElementById('picDtls').innerHTML = picsUpl;	
+		};				
+			</script>
+      
+<script>
+function picsDtl(evt,src,name) {
+//	console.log('params',document.getElementById("0").data);
+var picis = src;
+var Pname = name.split(',')[1];
+var Pdesc = name.split(',')[2];
+var pIata = name.split(',')[0];
+//var Pmesg = Pname + Pdesc;
+var pcount = event.target.id;
+var picUrl = '<img id="'+ pcount+'u" src ="'+picis+' " style = "width:99%;"></img>';
+console.warn('ofr details name',name);
+console.warn('ofr details Pname', Pname);
+console.warn('ofr details pIata', pIata);
+console.warn('ofr details Pdesc', Pdesc);
+// var tiata = pIata.toString(); 
+// if (tiata.length < 5) {
+// var PIata = tiata+"SS";
+// }else{
+//var  PIata = tiata;
+//}
+
+document.getElementById('channel-input').value= pIata;
+document.getElementById("itemImg").innerHTML = picUrl;
+//document.getElementById("tofr").name = name; 	
+//document.getElementById("detail").descp = Pdesc; 
+
+//var element = document.getElementById('tofr');
+ //   element.style.display = 'block';
+    //<input id="channel-input" placeholder="Enter Channel (e.g., NYCDE)" />
+//<button id="load-channel-button" class="icon-button">
+//<i class="fas fa-sync"></i> <!-- Sync icon -->
+//</button>
+ var picsUpl = 
+'<form id="upload-form'+pcount+'" onsubmit="uploadImage(event)">'+
+		'<div> <input id="picname" value = "'+Pname+'">'+											
+'<input  id ="descI" value ="'+Pdesc +'" >'+	
+      '<input type="file" style = "display: none;" id="file-input" name="file" onchange="previewImage(event)">'+
+     // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
+      '<button type="submit" style = "display: none;" >Upload Image</button>'+
+    '</form>';
+//document.getElementById('picDtls').innerHTML = picsUpl;								                           							            										                           
+				//	$('#'+ picDtls + '').html(updPics);
+				//	$('#'+ picDtls + '').slideDown('slow');
+        var pItin = `
+  <div>
+        <input id="cell" placeholder="type your cell number"> Connect with Host 
+    <i class="fas fa-paper-plane" onclick="connectWithHost()"></i>
+  </div>
+`;
+document.getElementById('picDtls').innerHTML = picsUpl + pItin;	
+// Function to be called on icon click
+
+
+//	<img id="fjson" type="submit" src="https://tournet.com/SocialITIN/img/feedicon.jpg" width="32px" height="32px" style="margin-top:10px; float:right;" onclick="picsUpd()">
+
+//'<input type="file" id="imageInput" name="image" accept="image/*" required />'+
+//'<form id="uploadForm" method="POST" enctype="multipart/form-data">'
+//var picsUpl = 
+//	'<form id="upload-form" onsubmit="uploadImage(event)">'+
+//		'<input type="file" id="file-input" name="file" required">'+
+//        '<button type="submit" >Upload Image</button>'+
+//    '</form>';
+
+
+//document.getElementById('picDtls').appendChild = picsUpl;	
+};	
+</script>
+<script>
+  async function connectWithHost() {
+  var cellValue = document.getElementById('cell').value; // Get the value after element exists
+  if (cellValue.trim() === "") {
+    alert("Please enter your cell number.");
+    return;
+  }
+const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
+const oImg = document.querySelector('#itemImg img');
+const srcValue = oImg ? oImg.src : null;
+console.log(srcValue);
+var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
+sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
+ 
+
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ payload: [{"src": srcValue, "name": document.getElementById("picname").value, "desc": document.getElementById("descI").value}] })
+});
+
+const session = await sessionResp.json();
+console.log('Fetched session:', session);
+
+  // Assign the values to respective input fields and trigger the click events
+  document.getElementById('itin-id-input').value = cellValue;
+  //document.getElementById('channel-input').value = pIata;
+  document.getElementById('load-channel-button').click();
+  document.getElementById('initiate-button').click();
+}
+</script>
+  <script>
+	    function previewImage(event) {
+      const fileInput = event.target;
+      const file = fileInput.files[0];
+      const preview = document.getElementById('3u');
+console.warn('preview', file);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+      }
+    }
+
+    async function uploadImage(event) {
+      event.preventDefault();
+      console.log('Form submitted');
+  
+      const fileInput = document.getElementById('file-input');
+      console.log('fileInput:', fileInput);
+      if (!fileInput) {
+        console.error('File input not found.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      console.log('Selected file:', file);
+      if (!file) {
+        alert('Please select a file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('https://upl-img-url.socialitin.workers.dev/', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        console.log('Upload response:', result);
+
+        if (response.ok) {
+          alert('Image uploaded successfully!');	
+		
+		const data2 = result.variants;
+		//const data = data2['440-2'];
+		const data = data2[0];
+          //console.log(data2,data);
+
+		  var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+		  cImgId = event.target.id;
+		  cimgid = cImgId.charAt(cImgId.length-1)
+		  console.warn('this t-image',cImgId.charAt(cImgId.length-1));
+	  var idis = cImgId.charAt(cImgId.length-1);  
+ppicsj[idis].name = document.getElementById("picname").value;
+ppicsj[idis].description = document.getElementById("descI").value;
+ppicsj[idis].img = data;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+
+		  var picUrl = '<img src ="'+data+' " style = "width:99%;"></img>';
+		  document.getElementById("itemImg").innerHTML = picUrl;
+		  document.getElementById(idis).src = data;
+		  //document.getElementById("itemImg").style.display = 'block'
+		  console.log(document.getElementById(idis).src);
+        } else {
+          alert(`Failed to upload image: ${result}`);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('An error occurred while uploading the image.');
+      }
+    }
+
+  </script>
+
+<script> 
+function picPost(evt,id){
+//document.getElementById("name").value= document.getElementById("descI").value;
+//json.price = 30;
+//picsj.name = document.getElementById("name").value;
+var ppicsj = JSON.parse(sessionStorage.getItem("pics"));
+var id = '3';
+ppicsj[id].name = document.getElementById("name").value;
+ppicsj[id].description = document.getElementById("descI").value;
+//console.log(ppicsj[id].name ,ppicsj[id].description);
+sessionStorage.setItem("pics",JSON.stringify(ppicsj));
+};
+</script>
+<script>
+  function subscribeAug1724() {
+  //const ws = new WebSocket('wss:https://pub-sub.socialitin.workers.dev/subscribe');
+  const ws = new WebSocket('wss:pub-sub.socialitin.workers.dev/subscribe');
+  ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (window.onMessageReceived) {
+          window.onMessageReceived(data);
+      } else {
+          console.log('Received:', data.message);
+      }
+  };
+  ws.onopen = () => {
+      console.log('Subscribed to the channel',data.message);
+  };
+  ws.onclose = () => {
+      console.log('Subscription closed');
+  };
+  ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+  };
+}
+</script>
+
+<script>
+function subscribe() {
+async function replyToConversation(conversationId, message) {
+  try {
+    const response = await fetch(`https://pub-sub.socialitin.workers.dev/reply/${conversationId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (response.ok) {
+      console.log(`Message added to conversation ${conversationId}`);
+    } else {
+      console.error(`Failed to add message to conversation:`, response.statusText);
+    }
+  } catch (error) {
+    console.error(`Error replying to conversation:`, error);
+  }
+}
+}
+</script>
+<script>
+function publishAug1724(message) {
+    fetch('https://pub-sub.socialitin.workers.dev/publish', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message }),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Message sent:', data);
+    })
+    .catch(error => {
+        console.error('Error sending message:', error);
+    });
+}
+
+</script>
+<script>
+function publish(message) {
+
+async function initiateConversation(cityCode, serviceType, message) {
+  try {
+    const response = await fetch(`https://pub-sub.socialitin.workers.dev/initiate/${cityCode}/${serviceType}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(`Conversation initiated with ID: ${data.conversationId}`);
+      return data.conversationId;
+    } else {
+      console.error(`Failed to initiate conversation:`, response.statusText);
+    }
+  } catch (error) {
+    console.error(`Error initiating conversation:`, error);
+  }
+}
+}
+</script>
+
+<script>
+			async function fetchjson() {
+			const response = await fetch('/api/fetchjson');
+			const data = await response.json();
+		//const data =JSON.parse(data1);
+		console.log(data);
+		sessionStorage.setItem("j2post",JSON.stringify(data));	
+var j2addStorage = {
+  "IATA": "US2",
+  "City": "US3-Eastern",
+  "Province": "Western",
+  "embVideo": "<div style=\"position: relative; padding-top: 100%;\"><iframe src=\"https://iframe.videodelivery.net/c572438216d9778a180b4df0784ffb4d?poster=https%3A%2F%2Fvideodelivery.net%2Fc572438216d9778a180b4df0784ffb4d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>",
+  "Pictures":" [{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta center.png\",\"description\":\"tickets from $ 150 to $420\",\"name\":\"Orquesta Center \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Orquesta sides.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Orquesta left and right\"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Mezzanine.png\",\"description\":\"tickets from $ 120 \",\"name\":\"Mezzanine \"},{\"img\":\"https://mmedia.tournet.com/Tournet/www.travelknowhow.com/New York/ChicagoMusical/Rear Mezzanine.png\",\"description\":\"tickets from $ 120\",\"name\":\"Mezzanine Rear \"}]",
+  "Pitch": "NOT Unique and captivating, with channels that continually change a scenario unlike any other in the world."
+};
+
+var j2add = j2addStorage;
+var j2publish =data; 
+//const j2add = JSON.parse(sessionStorage.getItem("j2add")); 
+//const mergedObj = Object.assign(j2publish, j2addStorage); 
+//const jsonStr = JSON.stringify(mergedObj); 
+
+//const extendJSON = (...objs) => objs.reduce((result, current) => ({...result, ...JSON.parse(current)}), {});
+  
+//console.log(extendJSON(j2publish, j2add),j2aad);
+//console.log(jsonStr); 
+var newjson = j2publish["NYCS"].push(j2add);
+console.log(j2publish);
+ //response2 = await fetch('/api/fetchputjson');
+			//const data2 = await response.json();
+		//	console.log(response2);
+			};	
+</script>
+<script>
+
+  async function fetchAndFilterConversation(conversationId, vendorId) {
+							try {
+								const response = await fetch(`${baseUrl}/getConversation/${conversationId}`);
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+								const conversationData = await response.json();
+                // const conversationtext = conversation.text();
+                const Messgs = JSON.parse(sessionStorage.getItem("messgs"));
+								console.log(`Fetched messages: `, conversationData, conversationId, vendorId,Messgs);
+                //const conversationD = JSON.parse(conversation);
+			//	chatPopup(conversationData, vendorId);
+      // Create chat popup container
+const chatPopup = document.createElement('div');
+chatPopup.id = 'chatPopup';
+chatPopup.style.display = 'none';
+chatPopup.style.position = 'fixed';
+chatPopup.style.bottom = '.2px';
+chatPopup.style.right = '20px';
+chatPopup.style.width = '350px';
+chatPopup.style.maxWidth = '95vw';
+chatPopup.style.height = '500px';
+chatPopup.style.maxHeight = '90vh';
+chatPopup.style.background = '#fff';
+chatPopup.style.borderRadius = '16px';
+chatPopup.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
+chatPopup.style.zIndex = '1001';
+chatPopup.style.overflow = 'hidden';
+chatPopup.style.flexDirection = 'column';
+
+// Create header
+const chatHeader = document.createElement('div');
+chatHeader.style.background = '#007bff';
+chatHeader.style.color = '#fff';
+chatHeader.style.padding = '12px 16px';
+chatHeader.style.fontWeight = 'bold';
+chatHeader.style.display = 'flex';
+chatHeader.style.justifyContent = 'space-between';
+chatHeader.style.alignItems = 'center';
+chatHeader.textContent = 'Chat';
+
+// Create close button
+const closeBtn = document.createElement('span');
+closeBtn.id = 'closeChatBtn';
+closeBtn.style.cursor = 'pointer';
+closeBtn.style.fontSize = '1.3em';
+closeBtn.innerHTML = '&times;';
+chatHeader.appendChild(closeBtn);
+
+// Create messages container
+const chatMessages = document.createElement('div');
+chatMessages.id = 'chatMessages';
+chatMessages.style.flex = '1';
+chatMessages.style.overflowY = 'auto';
+chatMessages.style.padding = '16px';
+chatMessages.style.background = '#f4f8fb';
+chatMessages.style.display = 'flex';
+chatMessages.style.flexDirection = 'column';
+chatMessages.style.gap = '10px';
+
+// rendered messages
+const renderedMessages = document.createElement('div');
+
+  // const chatMessages = document.getElementById('chatMessages');
+  //chatMessages.innerHTML = '';
+ (Messgs || []).forEach(message => {
+  if (vendorId !== message.hostId && message.hostId.toLowerCase() !== 'initial') return; // Skip if not vendor
+const itiOffer = sessionStorage.getItem(conversationId.substring(0,20));
+console.log('itiOffer', itiOffer);
+  const isMe = message.hostId.toLowerCase() === 'initial' || message.message.includes('(me)');
+  const isVendor = message.hostId === vendorId;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble' + (isMe ? ' me' : isVendor ? ' vendor' : ' other');
+  bubble.innerHTML = `
+    <div class="chat-meta">
+      ${isMe ? 'Me' : isVendor ? 'Vendor' : 'User ' + message.hostId}
+      <span class="chat-time">${new Date(message.timestamp).toLocaleString()}</span>
+      
+    </div>
+    <div>${message.message}</div>
+  `;
+  chatMessages.appendChild(bubble);
+});
+    
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+// ...existing chatPopup, chatHeader, closeBtn, chatMessages code...
+
+// --- Reply area ---
+const chatReply = document.createElement('div');
+chatReply.style.display = 'flex';
+chatReply.style.alignItems = 'center';
+chatReply.style.padding = '10px 12px';
+chatReply.style.borderTop = '1px solid #eee';
+chatReply.style.background = '#fafafa';
+chatReply.style.gap = '8px';
+
+// Emoji icon
+const emojiBtn = document.createElement('span');
+emojiBtn.innerHTML = '😊';
+emojiBtn.title = 'Emoji';
+emojiBtn.style.cursor = 'pointer';
+emojiBtn.style.fontSize = '1.3em';
+
+// Attach icon (paperclip)
+const attachBtn = document.createElement('span');
+attachBtn.innerHTML = '📎';
+attachBtn.title = 'Attach file';
+attachBtn.style.cursor = 'pointer';
+attachBtn.style.fontSize = '1.3em';
+
+// Input
+const replyInput = document.createElement('input');
+replyInput.type = 'text';
+replyInput.id = vendorId;
+replyInput.placeholder = 'Type a message...';
+replyInput.style.flex = '1';
+replyInput.style.padding = '8px 12px';
+replyInput.style.border = '1px solid #ccc';
+replyInput.style.borderRadius = '16px';
+replyInput.style.fontSize = '1em';
+
+// Send icon (paper plane)
+const sendBtn = document.createElement('span');
+sendBtn.innerHTML = '📤';
+sendBtn.title = 'Send';
+sendBtn.style.cursor = 'pointer';
+sendBtn.style.fontSize = '1.3em';
+sendBtn.style.marginLeft = '4px';
+
+// Optional: handle send action
+// sendBtn.onclick = function() {
+ //    if (replyInput.value.trim()) {
+        // Add your send logic here
+   //      alert('Send: ' + replyInput.value);
+        replyInput.value = '';
+  //  }
+// };*/
+
+sendBtn.onclick = async function() {
+             const message = document.getElementById(vendorId).value.trim();
+             const selectedConversationRadio = document.querySelector('input[name="destination"]:checked');
+             const destinationCode = conversationId;
+             // selectedConversationRadio ? selectedConversationRadio.name : '';
+             const selectedMessageRadio = document.querySelector('input[name="message"]:checked');
+             const hostId = vendorId;
+             // selectedMessageRadio ? selectedMessageRadio.value : ''; // Get hostId from selected message
+console.log('reply', vendorId, message, destinationCode, hostId);
+             if (message !== '' && destinationCode !== '' && hostId !== '') {
+          //       const conversationIds = destinationMap.get(destinationCode);
+        //         const conversationId = conversationIds.find(id => id.includes(destinationCode)); // Find conversation ID based on destination
+
+                 try {
+                     const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ message, hostId })
+                     });
+
+                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                     alert(`Replied to conversation ${conversationId}`);
+                     fetchAndDisplayMessages(destinationCode);  // Refresh the messages after reply
+                 } catch (error) {
+                     console.error('Error replying to conversation:', error);
+                     alert('Failed to send reply. Please try again.');
+                 }
+             } else {
+                 alert('Please select a conversation, select a message, and enter a message.');
+             }
+         };
+// Assemble reply area
+chatReply.appendChild(emojiBtn);
+chatReply.appendChild(attachBtn);
+chatReply.appendChild(replyInput);
+chatReply.appendChild(sendBtn);
+
+// --- Assemble popup ---
+chatPopup.appendChild(chatHeader);
+chatPopup.appendChild(chatMessages);
+chatPopup.appendChild(chatReply);
+
+chatPopup.style.display = 'flex';
+
+// Add to body
+document.body.appendChild(chatPopup);
+
+								// Check if the vendor has participated in this conversation
+								let isVendorInvolved = false;
+				
+								if (Array.isArray(conversationData)) {
+									isVendorInvolved = conversationData.some(msg => msg.hostId === vendorId);
+								} else if (typeof conversationData === 'object' && conversationData.conversation) {
+									isVendorInvolved = conversationData.conversation.some(msg => msg.hostId === vendorId);
+								}
+				
+								if (isVendorInvolved) {
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+								//	ongoingConversationList.appendChild(option);
+								} else {
+									// If the vendor is not involved, add to new conversations
+									const option = document.createElement('option');
+									option.value = conversationId;
+									option.textContent = `Conversation ${conversationId}`;
+								//	conversationList.appendChild(option);
+								}
+							} catch (error) {
+								console.error('Error fetching and filtering conversation:', error);
+								alert('Failed to filter conversation. Please try again later.');
+							}
+						}
+            
+</script>
+	</body>
+</html>
