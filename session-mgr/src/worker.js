@@ -41,12 +41,13 @@ export default {
       }
 
       let session = await env.KV_BINDING.get(cell, { type: 'json' });
+      console.log(reqId, payload, session);
       if (session && Array.isArray(session.payload)) {
         // Append new payload items to existing payload array
         session.payload.push(...payload);
         session.reqId = reqId; // Replace or add reqId property
         // Remove 'cell' property if present
-        if ('cell' in session) delete session.cell;
+       // if ('cell' in session) delete session.cell;
       } else {
         // Create new session with reqId instead of cell
         session = { reqId, payload };
