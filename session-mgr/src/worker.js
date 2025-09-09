@@ -15,60 +15,43 @@ export default {
     }
 
     // POST /api/session-by-cell?cell=cellValue
-    if (url.pathname === '/api/session-by-cell' && request.method === 'POST') {
-      const cell = url.searchParams.get('cell');
-      if (!cell) {
-        return new Response('Missing cell number', {
-          status: 400,
-          headers: { 'Access-Control-Allow-Origin': '*' }
-        });
-      }
-      const { reqId, payload } = await request.json();
-      if (!Array.isArray(payload)) {
-        return new Response('Payload must be an array', {
-          status: 400,
-          headers: { 'Access-Control-Allow-Origin': '*' }
-        });
-      }
-      if (payload.length === 1 && Object.keys(payload[0]).length === 0 && payload[0].constructor === Object) {
-        return new Response('Payload array must contain at least 1 item.', {
-          status: 400,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-          }
-        });
-      }
+if (url.pathname === '/api/session-by-cell' && request.method === 'POST') {
+  const cell = url.searchParams.get('cell');
+  if (!cell) {
+    return new Response('Missing cell number', {
+      status: 400,
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    });
+  }
+  const { reqId, payload } = await request.json();
+  if (!reqId || !Array.isArray(payload)) {
+    return new Response('Missing reqId or payload must be an array', {
+      status: 400,
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    });
+  }
 
-let session = await env.KV_BINDING.get(cell, { type: 'json' });
-console.log(reqId, payload, session);
+  // Fetch or create the session object
+  let session = await env.KV_BINDING.get(cell, { type: 'json' });
+  if (!session || typeof session !== 'object') session = {};
 
-if (session && Array.isArray(session.payload)) {
-  // Append new payload items to existing payload array
-  session.payload.push(...payload);
+  // Set or overwrite the reqId entry with its payload
+  session[reqId] = { payload };
 
-  // Always add the new reqId to the reqIds array
-  if (!Array.isArray(session.reqIds)) session.reqIds = [];
-  session.reqIds.push(reqId);
-
-  // Optionally, remove duplicates:
-  session.reqIds = [...new Set(session.reqIds)];
-} else {
-  // Create new session with reqIds array
-  session = { reqIds: [reqId], payload };
+  await env.KV_BINDING.put(cell, JSON.stringify(session));
+  return new Response(JSON.stringify(session), {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
-await env.KV_BINDING.put(cell, JSON.stringify(session));
-// Return the updated session as JSON
-return new Response(JSON.stringify(session), {
-  status: 200,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  }
-});
+///  if (payload.length === 1 && Object.keys(payload[0]).length === 0 && payload[0].constructor === Object) {
+ ///       return new Response('Payload array must contain at least 1 item.', {
 
-    }
+
 
     // ...existing GET handler...
 
