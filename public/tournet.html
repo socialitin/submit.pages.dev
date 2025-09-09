@@ -991,12 +991,14 @@ conversationMessages.appendChild(tabContentsContainer);
  
  const itiOffer = document.getElementById("channel-input").value+'_ITI0'+document.getElementById('itin-id-input').value.trim();
            //  sessionStorage.removeItem("ITI0"); 
-             console.log('itiOffer to create session:', itinId, itiOffer,document.getElementById('itin-id-input').value.trim());
+          const sessionFor = sessionStorage.getItem(itiOffer);
+            console.log('sessionFor from sessionStorage:', itiOffer,sessionFor);
+             console.log('itiOffer to create session:', itiOffer,sessionFor,document.getElementById('itin-id-input').value.trim());
 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: [ itiOffer] })
+  body: JSON.stringify({ payload: [ sessionFor] })
 });
 
 const session = await sessionResp.json();
