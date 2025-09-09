@@ -968,9 +968,8 @@ conversationMessages.appendChild(tabContentsContainer);
          document.getElementById('initiate-button').addEventListener('click', async () => {
              const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              const itiOffer = sessionStorage.getItem("ITI0");
-             //sessionStorage.removeItem("ITI0");
+             sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
-             console.log('itiOffer to create session:', itiOffer, document.getElementById('itin-id-input').value.trim());
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
         
              if (message !== '' && currentChannel !== '' && itinId !== '') {
@@ -987,6 +986,21 @@ conversationMessages.appendChild(tabContentsContainer);
  
                      const data = await response.json();
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
+//* create session 
+//sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
+ const itiOffer = sessionStorage.getItem(itinId);
+           //  sessionStorage.removeItem("ITI0"); 
+             console.log('itiOffer to create session:', itiOffer,document.getElementById('itin-id-input').value.trim());
+
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ payload: [ itiOffer] })
+});
+
+const session = await sessionResp.json();
+console.log('Fetched session:', session);
+//* end create session
 
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
                  
@@ -1468,13 +1482,11 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
 const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
 const oImg = document.querySelector('#itemImg img');
 const srcValue = oImg ? oImg.src : null;
-//console.log(srcValue,itiOffer);
+console.log(srcValue);
 var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
-console.log('iofr',iofr, itiOffer);
 sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
  
 ///* was getting session 
-
 
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
