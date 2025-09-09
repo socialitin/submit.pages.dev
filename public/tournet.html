@@ -986,7 +986,6 @@ conversationMessages.appendChild(tabContentsContainer);
  
                      const data = await response.json();
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
-                     fetchConversations(itinId);  // Refresh the conversation list after initiating
 //* create session 
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
  const itiOffer = sessionStorage.getItem("ITI0");
@@ -1002,7 +1001,9 @@ const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/
 const session = await sessionResp.json();
 console.log('Fetched session:', session);
 //* end create session
-                     
+
+                     fetchConversations(itinId);  // Refresh the conversation list after initiating
+                 
                  } catch (error) {
                      console.error('Error initiating conversation:', error);
                      alert('Failed to initiate conversation. Please try again.');
