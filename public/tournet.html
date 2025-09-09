@@ -989,7 +989,7 @@ conversationMessages.appendChild(tabContentsContainer);
 //* create session 
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
  
- const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
+ const itiOffer = document.getElementById("channel-input").value+'_ITI0'+document.getElementById('itin-id-input').value.trim();
            //  sessionStorage.removeItem("ITI0"); 
              console.log('itiOffer to create session:', itinId, itiOffer,document.getElementById('itin-id-input').value.trim());
 
