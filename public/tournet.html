@@ -988,7 +988,8 @@ conversationMessages.appendChild(tabContentsContainer);
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
 //* create session 
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
- const itiOffer = sessionStorage.getItem(itinId);
+ 
+ const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
            //  sessionStorage.removeItem("ITI0"); 
              console.log('itiOffer to create session:', itinId, itiOffer,document.getElementById('itin-id-input').value.trim());
 
