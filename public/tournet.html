@@ -643,7 +643,7 @@
 
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue, itinIdInput.value);
-const reqId = 'XY32ab$e"; '
+const reqId = ''; 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
