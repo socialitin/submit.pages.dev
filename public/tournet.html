@@ -993,10 +993,10 @@ conversationMessages.appendChild(tabContentsContainer);
            //  sessionStorage.removeItem("ITI0"); 
 let sessionFor = sessionStorage.getItem(itiOffer);
 sessionFor = sessionFor ? JSON.parse(sessionFor) : [];
-sessionFor.push(data.conversationId);
+// sessionFor.push(data.conversationId);
 //sessionStorage.setItem(itiOffer, JSON.stringify(sessionFor));
-            
-             console.log('itiOffer to create session:', itiOffer,sessionFor,document.getElementById('itin-id-input').value.trim());
+
+             console.log('itiOffer to create session:', itiOffer,sessionFor,data.conversationId,document.getElementById('itin-id-input').value.trim());
 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
   method: 'POST',
