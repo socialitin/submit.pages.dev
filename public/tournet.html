@@ -998,7 +998,7 @@ conversationMessages.appendChild(tabContentsContainer);
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: [ sessionFor] })
+  body: JSON.stringify({ session: `${data.conversationId}`, payload: [sessionFor] })
 });
 
 const session = await sessionResp.json();
