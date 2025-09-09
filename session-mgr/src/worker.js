@@ -17,6 +17,7 @@ export default {
     // POST /api/session-by-cell?cell=cellValue
     if (url.pathname === '/api/session-by-cell' && request.method === 'POST') {
       const cell = url.searchParams.get('cell');
+      const reqId = url.searchParams.get('reqId');
       if (!cell) {
         return new Response('Missing cell number', {
           status: 400,
@@ -42,11 +43,12 @@ export default {
 
       let session = await env.KV_BINDING.get(cell, { type: 'json' });
       if (session && Array.isArray(session.payload)) {
-        // Append new payload items to existing payload array
-        session.payload.push(...payload);
+     // Append new payload items to existing payload array
+  session.payload.push(...payload);
+  session.reqId = reqId; // Replace or add reqId property
       } else {
         // Create new session
-        session = { cell, payload };
+        session = { cell, payload, reqId };
       }
       await env.KV_BINDING.put(cell, JSON.stringify(session));
       // Return the updated session as JSON
