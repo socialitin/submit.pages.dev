@@ -991,9 +991,11 @@ conversationMessages.appendChild(tabContentsContainer);
  
  const itiOffer = document.getElementById("channel-input").value+'_ITI0'+document.getElementById('itin-id-input').value.trim();
            //  sessionStorage.removeItem("ITI0"); 
-          const sessionFor = sessionStorage.getItem(itiOffer);
-          sessionFor.push(data.conversationId);
-          sessionStorage.setItem(itiOffer,sessionFor);
+       let sessionFor = sessionStorage.getItem(itiOffer);
+sessionFor = sessionFor ? JSON.parse(sessionFor) : [];
+sessionFor.push(data.conversationId);
+//sessionStorage.setItem(itiOffer, JSON.stringify(sessionFor));
+
             console.log('sessionFor from sessionStorage:', itiOffer,sessionFor);
              console.log('itiOffer to create session:', itiOffer,sessionFor,document.getElementById('itin-id-input').value.trim());
 
