@@ -987,7 +987,19 @@ conversationMessages.appendChild(tabContentsContainer);
                      const data = await response.json();
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
+//* create session 
+sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
+ 
 
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ payload: [ itiOffer] })
+});
+
+const session = await sessionResp.json();
+console.log('Fetched session:', session);
+//* end create session
                      
                  } catch (error) {
                      console.error('Error initiating conversation:', error);
@@ -1471,15 +1483,7 @@ console.log(srcValue);
 var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
 sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
  
-
-const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: [{"src": srcValue, "name": document.getElementById("picname").value, "desc": document.getElementById("descI").value}] })
-});
-
-const session = await sessionResp.json();
-console.log('Fetched session:', session);
+///* was getting session 
 
   // Assign the values to respective input fields and trigger the click events
   document.getElementById('itin-id-input').value = cellValue;
