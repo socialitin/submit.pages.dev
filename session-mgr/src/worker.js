@@ -30,7 +30,7 @@ export default {
           headers: { 'Access-Control-Allow-Origin': '*' }
         });
       }
-      if (payload.length < 1) {
+      if (payload.length === 1 && Object.keys(payload[0]).length === 0 && payload[0].constructor === Object) {
         return new Response('Payload array must contain at least 1 item.', {
           status: 400,
           headers: {
@@ -40,27 +40,34 @@ export default {
         });
       }
 
-      let session = await env.KV_BINDING.get(cell, { type: 'json' });
-      console.log(reqId, payload, session);
-      if (session && Array.isArray(session.payload)) {
-        // Append new payload items to existing payload array
-        session.payload.push(...payload);
-        session.reqId = reqId; // Replace or add reqId property
-        // Remove 'cell' property if present
-       // if ('cell' in session) delete session.cell;
-      } else {
-        // Create new session with reqId instead of cell
-        session = { reqId, payload };
-      }
-      await env.KV_BINDING.put(cell, JSON.stringify(session));
-      // Return the updated session as JSON
-      return new Response(JSON.stringify(session), {
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        }
-      });
+let session = await env.KV_BINDING.get(cell, { type: 'json' });
+console.log(reqId, payload, session);
+
+if (session && Array.isArray(session.payload)) {
+  // Append new payload items to existing payload array
+  session.payload.push(...payload);
+
+  // Always add the new reqId to the reqIds array
+  if (!Array.isArray(session.reqIds)) session.reqIds = [];
+  session.reqIds.push(reqId);
+
+  // Optionally, remove duplicates:
+  session.reqIds = [...new Set(session.reqIds)];
+} else {
+  // Create new session with reqIds array
+  session = { reqIds: [reqId], payload };
+}
+
+await env.KV_BINDING.put(cell, JSON.stringify(session));
+// Return the updated session as JSON
+return new Response(JSON.stringify(session), {
+  status: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  }
+});
+
     }
 
     // ...existing GET handler...
