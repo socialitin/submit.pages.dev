@@ -995,8 +995,7 @@ conversationMessages.appendChild(tabContentsContainer);
 sessionFor = sessionFor ? JSON.parse(sessionFor) : [];
 sessionFor.push(data.conversationId);
 //sessionStorage.setItem(itiOffer, JSON.stringify(sessionFor));
-
-            console.log('sessionFor from sessionStorage:', itiOffer,sessionFor);
+            
              console.log('itiOffer to create session:', itiOffer,sessionFor,document.getElementById('itin-id-input').value.trim());
 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
