@@ -990,7 +990,7 @@ conversationMessages.appendChild(tabContentsContainer);
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
  const itiOffer = sessionStorage.getItem(itinId);
            //  sessionStorage.removeItem("ITI0"); 
-             console.log('itiOffer to create session:', itiOffer,document.getElementById('itin-id-input').value.trim());
+             console.log('itiOffer to create session:', itinId, itiOffer,document.getElementById('itin-id-input').value.trim());
 
 const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
   method: 'POST',
