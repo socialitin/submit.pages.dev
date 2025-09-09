@@ -970,6 +970,7 @@ conversationMessages.appendChild(tabContentsContainer);
              const itiOffer = sessionStorage.getItem("ITI0");
              //sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
+             console.log('itiOffer to create session:', itiOffer, document.getElementById('itin-id-input').value.trim());
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
         
              if (message !== '' && currentChannel !== '' && itinId !== '') {
@@ -986,21 +987,6 @@ conversationMessages.appendChild(tabContentsContainer);
  
                      const data = await response.json();
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
-//* create session 
-//sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
- const itiOffer = sessionStorage.getItem("ITI0");
-           //  sessionStorage.removeItem("ITI0"); 
-             console.log('itiOffer to create session:', itiOffer,document.getElementById('itin-id-input').value.trim());
-
-const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${document.getElementById('itin-id-input').value.trim()}`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ payload: [ itiOffer] })
-});
-
-const session = await sessionResp.json();
-console.log('Fetched session:', session);
-//* end create session
 
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
                  
