@@ -657,9 +657,9 @@ const sessionR = await fetch(`https://session-mgr.socialitin.workers.dev/api/ses
 
 if (sessionR.ok) {
   const session = await sessionR.json();
-const thisItin = JSON.parse(session);
+//const thisItin = JSON.parse(session);
 console.log('Fetched session:', session, itinIdInput.value);
-for (const [key, value] of Object.entries(thisItin)) {
+for (const [key, value] of Object.entries(session)) {
   // Store the payload array as a JSON string
   sessionStorage.setItem(key, JSON.stringify(value.payload));
 }
