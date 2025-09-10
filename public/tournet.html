@@ -650,13 +650,13 @@ console.log('Fetched session:', cellValue, itinIdInput.value);
  // body: JSON.stringify({ ReqId, payload: [{}]})
 //});
 //const cellValue = document.getElementById('itin-id-input').value.trim();
-const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+const sessionR = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
   method: 'GET',
   headers: { 'Content-Type': 'application/json' }
 });
 
-if (sessionResp.ok) {
-  const session = await sessionResp.json();
+if (sessionR.ok) {
+  const session = await sessionR.json();
 
 console.log('Fetched session:', session, itinIdInput.value);
 
