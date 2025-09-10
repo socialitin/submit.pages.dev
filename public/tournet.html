@@ -639,7 +639,7 @@
          async function fetchConversations(itinId) {
              try {
  const itinIdInput = document.getElementById('itin-id-input');
- const cellValue = itinIdInput.value; // Get the cell value from the input
+ const cellValue = itinIdInput.value.trim(); // Get the cell value from the input
 
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue, itinIdInput.value);
@@ -649,9 +649,21 @@ console.log('Fetched session:', cellValue, itinIdInput.value);
 //  headers: { 'Content-Type': 'application/json' },
  // body: JSON.stringify({ ReqId, payload: [{}]})
 //});
+//const cellValue = document.getElementById('itin-id-input').value.trim();
+const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/session-by-cell?cell=${cellValue}`, {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json' }
+});
 
-// const session = await sessionResp.json();
-// console.log('Fetched session:', session, itinIdInput.value);
+if (sessionResp.ok) {
+  const session = await sessionResp.json();
+
+console.log('Fetched session:', session, itinIdInput.value);
+
+} else {
+  // Handle session not found or error
+}
+
 
 // 2. Now fetch the conversations as before
 const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
