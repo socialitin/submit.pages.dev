@@ -988,7 +988,7 @@ conversationMessages.appendChild(tabContentsContainer);
          });
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
-             const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
+             const itinId = 'ITI0_'+document.getElementById('itin-id-input').value.trim(); //* ITI0_
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
@@ -1010,9 +1010,9 @@ conversationMessages.appendChild(tabContentsContainer);
                      alert(`Conversation initiated with ID: ${data.conversationId}`);
 //* create session 
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
- 
- const itiOffer = document.getElementById("channel-input").value+'_ITI0'+document.getElementById('itin-id-input').value.trim();
-           //  sessionStorage.removeItem("ITI0"); 
+
+ const itiOffer = document.getElementById("channel-input").value+'_ITI0_'+document.getElementById('itin-id-input').value.trim(); //* ITI0_
+           //  sessionStorage.removeItem("ITI0");
 let sessionFor = sessionStorage.getItem(itiOffer);
 sessionFor = sessionFor ? JSON.parse(sessionFor) : [];
 const reqId = data.conversationId;
