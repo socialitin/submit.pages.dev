@@ -1510,7 +1510,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
 const itiOffer = document.getElementById("channel-input").value+'_'+cellValue;
 const oImg = document.querySelector('#itemImg img');
 const srcValue = oImg ? oImg.src : null;
-console.log(srcValue);
+console.log(srcValue, itiOffer);
 var iofr  = {'src' : srcValue, 'name':  document.getElementById("picname").value, 'desc': document.getElementById("descI").value};
 sessionStorage.setItem(itiOffer,JSON.stringify(iofr));
  
