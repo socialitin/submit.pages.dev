@@ -684,7 +684,7 @@ destinationMap.clear(); // Clear the map for new conversations
 
 // Group conversations by unique destination code
 conversations.forEach((conversationId) => {
-  const channelId = conversationId.split('_')[0]; //* was [1]
+  const channelId = conversationId.split('_')[2]; //* was [1]
   const destinationCode = channelId.slice(0, 3); // Extract the first three characters
 
   if (!destinationMap.has(destinationCode)) {
