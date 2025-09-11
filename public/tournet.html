@@ -733,8 +733,9 @@ conversations.forEach((conversationId) => {
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
 const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
+const relReq = conversationId.split('_')[0] +'_' +conversationId.split('_')[2];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb
 sessionStorage.setItem("messgs",JSON.stringify(messages));               
-console.warn('fetching conversations:', relConversation,conversationId,messages);              
+console.warn('fetching conversations:', relReq,relConversation,conversationId,messages);              
 // Clear previous content
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 // Prepare to collect initial requests
