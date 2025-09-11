@@ -735,7 +735,9 @@ conversations.forEach((conversationId) => {
 const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
 const relReq = 'ITI0_'+conversationId.split('_')[1] +'_' +conversationId.split('_')[2];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb
 sessionStorage.setItem("messgs",JSON.stringify(messages));               
-console.warn('fetching conversations:', relReq,relConversation,conversationId,messages);              
+console.warn('fetching relReq:', relReq);   
+console.warn('fetching conversations:', relConversation);              
+console.warn('fetching convId:', conversationId,messages);   
 // Clear previous content
 // Group messages by the first 2 characters of the message text (no filtering, no sorting)
 // Prepare to collect initial requests
@@ -782,9 +784,9 @@ const iconArea = document.createElement('BR');
                const pp = document.createElement('p');
       
         
-        const key = relConversation.substring(0,21);
+      //  const key = relConversation.substring(0,21);
 const value = sessionStorage.getItem(relReq);
-console.log('sessionStorage key:', key, 'value:', value);
+console.log('sessionStorage key:', relReq, 'value:', value);
 if (value !== null && value !== undefined && value !== "null") {
 
 // Example array (replace with your actual array)
