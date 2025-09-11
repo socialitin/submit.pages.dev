@@ -1507,7 +1507,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
     alert("Please enter your cell number.");
     return;
   }
-const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
+const itiOffer = document.getElementById("channel-input").value+'_ITI0_'+cellValue;
 const oImg = document.querySelector('#itemImg img');
 const srcValue = oImg ? oImg.src : null;
 console.log(srcValue, itiOffer);
