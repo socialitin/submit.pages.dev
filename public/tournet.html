@@ -669,6 +669,7 @@ for (const [key, value] of Object.entries(session)) {
 
 
 // 2. Now fetch the conversations as before
+console.warn('fetching conversations for:', baseUrl, itinId);
 const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
