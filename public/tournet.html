@@ -669,7 +669,6 @@ for (const [key, value] of Object.entries(session)) {
 
 
 // 2. Now fetch the conversations as before
-console.warn('fetching conversations for:', baseUrl, itinId);
 const response = await fetch(`${baseUrl}/listConversations/${itinId}`);
 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -985,12 +984,12 @@ conversationMessages.appendChild(tabContentsContainer);
          });
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
-             const itinId = 'ITI0'; //* document.getElementById('itin-id-input').value.trim();
+             const itinId = 'ITI0_'+document.getElementById('itin-id-input').value.trim();
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
-        console.warn('itiOffer to initiate:', itinId,itiOffer,message);
+        
              if (message !== '' && currentChannel !== '' && itinId !== '') {
                  try {
                      const response = await fetch(`${baseUrl}/initiate`, {
@@ -1024,8 +1023,7 @@ const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/
 });
 
 const session = await sessionResp.json();
-document.getElementById('itin-id-input').value = cellValue;
-console.log('Fetched session:', cellValue, session);
+console.log('Fetched session:', session);
 //* end create session body: JSON.stringify({ session: `${data.conversationId}`, payload: [sessionFor] })
 
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
