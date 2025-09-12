@@ -1024,6 +1024,7 @@ const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/
 });
 
 const session = await sessionResp.json();
+document.getElementById('itin-id-input').value = session;  // cellValue;
 console.log('Fetched session:', session);
 //* end create session body: JSON.stringify({ session: `${data.conversationId}`, payload: [sessionFor] })
 
