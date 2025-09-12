@@ -984,7 +984,7 @@ conversationMessages.appendChild(tabContentsContainer);
          });
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
-             const itinId = 'ITI0_'+document.getElementById('itin-id-input').value.trim();
+             const itinId = 'ITI0_'; //* document.getElementById('itin-id-input').value.trim();
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
