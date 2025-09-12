@@ -515,7 +515,7 @@
 				
 							if (message !== '' && conversationId !== '' && currentVendorId !== '') {
 								try {
-									console.log(`Sending reply to conversation ID: ${conversationId}`);
+									
 									const response = await fetch(`${baseUrl}/reply/${conversationId}`, {
 										method: 'POST',
 										headers: {
@@ -523,7 +523,7 @@
 										},
 										body: JSON.stringify({ message, hostId: currentVendorId })
 									});
-				
+				console.log(`Sending reply to conversation ID: ${conversationId}`, response);
 									if (!response.ok) {
 										throw new Error(`HTTP error! status: ${response.status}`);
 									}
