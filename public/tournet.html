@@ -1024,8 +1024,8 @@ const sessionResp = await fetch(`https://session-mgr.socialitin.workers.dev/api/
 });
 
 const session = await sessionResp.json();
-document.getElementById('itin-id-input').value = JSON.stringify(session);  // cellValue;
-console.log('Fetched session:', session);
+document.getElementById('itin-id-input').value = cellValue;
+console.log('Fetched session:', cellValue, session);
 //* end create session body: JSON.stringify({ session: `${data.conversationId}`, payload: [sessionFor] })
 
                      fetchConversations(itinId);  // Refresh the conversation list after initiating
