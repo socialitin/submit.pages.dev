@@ -989,7 +989,7 @@ conversationMessages.appendChild(tabContentsContainer);
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
              const message = document.getElementById('descI').value.trim() + document.getElementById('message-input').value.trim();
-        
+        console.warn('itiOffer to initiate:', itinId,itiOffer,message);
              if (message !== '' && currentChannel !== '' && itinId !== '') {
                  try {
                      const response = await fetch(`${baseUrl}/initiate`, {
