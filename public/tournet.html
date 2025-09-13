@@ -941,9 +941,10 @@ const metaText = document.createElement('span');
 metaText.textContent = `${timeSince(message.timestamp)} · ${productType}`; // No leading space
 
 // Append radio first, then meta text
-meta.appendChild(radio);
+if (message.message.includes('(me)')) {
+  meta.appendChild(radio);
 meta.appendChild(metaText);
-   
+}
 
     // Append meta info below the chat bubble
     entryDiv.appendChild(meta);
