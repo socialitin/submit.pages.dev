@@ -511,8 +511,9 @@
 				
 						document.getElementById('reply-button').addEventListener('click', async () => {
 							const message = document.getElementById('message-input').value.trim();
-							const conversationId = conversationList.value || ongoingConversationList.value;
-				
+							const conversationI = conversationList.value || ongoingConversationList.value;
+							const conversationId = conversationI;
+		const relReq = 'ITI0_'+conversationId.split('_')[0] +'_' +conversationId.split('_')[1]+conversationI[2]+'_'+conversationI[3];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb		
 							if (message !== '' && conversationId !== '' && currentVendorId !== '') {
 								try {
 									
