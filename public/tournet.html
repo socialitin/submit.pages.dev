@@ -1791,6 +1791,12 @@ closeBtn.id = 'closeChatBtn';
 closeBtn.style.cursor = 'pointer';
 closeBtn.style.fontSize = '1.3em';
 closeBtn.innerHTML = '&times;';
+
+// Add click event to close the chat popup
+closeBtn.onclick = () => {
+  chatPopup.style.display = 'none';
+};
+
 chatHeader.appendChild(closeBtn);
 
 // Create messages container
