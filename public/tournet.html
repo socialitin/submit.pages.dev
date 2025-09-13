@@ -944,11 +944,11 @@ metaText.textContent = `${timeSince(message.timestamp)} · ${productType}`; // N
 if (!(message.message.includes('(me)'))) {
   meta.appendChild(radio);
 meta.appendChild(metaText);
-}
+
 
     // Append meta info below the chat bubble
     entryDiv.appendChild(meta);
-
+}
     // Now add entryDiv to the horizontal container
     horizontalContainer.appendChild(entryDiv);
 }); 
