@@ -727,7 +727,7 @@ conversations.forEach((conversationId) => {
                      const channelId = conversationId.split('_')[1]; // Extract CHANNEL_ID
                      const productType = channelId.slice(-2); // Extract last two digits of CHANNEL_ID
 const relConversation = conversationId.split('_')[1] +'_' + conversationId.split('_')[0] +'_' +conversationId.split('_')[2];
-const relReq = 'ITI0_'+conversationId.split('_')[2] +'_' +conversationId.split('_')[3];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb
+const relReq = 'ITI0_'+'_' +conversationId.split('_')[2];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb
 sessionStorage.setItem("messgs",JSON.stringify(messages));               
 console.warn('fetching relReq:', relReq);   
 console.warn('fetching conversations:', relConversation);              
@@ -974,7 +974,7 @@ conversationMessages.appendChild(tabContentsContainer);
          }
  
          document.getElementById('load-channel-button').addEventListener('click', () => {
-             currentItinId = 'ITI0_'+document.getElementById('itin-id-input').value.trim();
+             currentItinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              currentChannel = document.getElementById('channel-input').value.trim();
              if (currentItinId) {
                  fetchConversations(currentItinId);
@@ -984,7 +984,7 @@ conversationMessages.appendChild(tabContentsContainer);
          });
  
          document.getElementById('initiate-button').addEventListener('click', async () => {
-             const itinId = 'ITI0_'+document.getElementById('itin-id-input').value.trim();
+             const itinId = 'ITI0'+document.getElementById('itin-id-input').value.trim();
              const itiOffer = sessionStorage.getItem("ITI0");
              sessionStorage.removeItem("ITI0");
              sessionStorage.setItem(itinId,itiOffer);
@@ -1007,7 +1007,7 @@ conversationMessages.appendChild(tabContentsContainer);
 //* create session 
 //sessionStorage.getItem(itiOffer,JSON.stringify(iofr));
  
- const itiOffer = document.getElementById("channel-input").value+'_ITI0_'+document.getElementById('itin-id-input').value.trim();
+ const itiOffer = document.getElementById("channel-input").value+'_ITI0'+document.getElementById('itin-id-input').value.trim();
   sessionStorage.removeItem("ITI0"); 
 let sessionFor = sessionStorage.getItem(itiOffer);
 sessionFor = sessionFor ? JSON.parse(sessionFor) : [];
@@ -1503,7 +1503,7 @@ document.getElementById('picDtls').innerHTML = picsUpl + pItin;
     alert("Please enter your cell number.");
     return;
   }
-const itiOffer = document.getElementById("channel-input").value+'_ITI0_'+cellValue;
+const itiOffer = document.getElementById("channel-input").value+'_ITI0'+cellValue;
 const oImg = document.querySelector('#itemImg img');
 const srcValue = oImg ? oImg.src : null;
 console.log(srcValue, itiOffer);
