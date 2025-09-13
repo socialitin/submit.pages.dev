@@ -941,7 +941,7 @@ const metaText = document.createElement('span');
 metaText.textContent = `${timeSince(message.timestamp)} · ${productType}`; // No leading space
 
 // Append radio first, then meta text
-if (message.message.includes('(me)')) {
+if (!(message.message.includes('(me)'))) {
   meta.appendChild(radio);
 meta.appendChild(metaText);
 }
