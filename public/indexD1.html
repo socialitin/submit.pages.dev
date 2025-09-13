@@ -511,10 +511,10 @@
 				
 						document.getElementById('reply-button').addEventListener('click', async () => {
 							const message = document.getElementById('message-input').value.trim();
-							const conversationI = conversationList.value || ongoingConversationList.value;
+							const conversationId = conversationList.value || ongoingConversationList.value;
 
-		const relReq = conversationI.split('_')[0] +'_' +conversationI.split('_')[1]+'_'+conversationI.split('_')[2]+'_'+conversationI.split('_')[3];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb		
-		const conversationId = relReq;
+		// const relReq = conversationI.split('_')[0] +'_' +conversationI.split('_')[1]+'_'+conversationI.split('_')[2]+'_'+conversationI.split('_')[3];  // ITI0_NYCSN_c105ad47-e10c-4bf0-be05-516eb0803fdb		
+		// const conversationId = relReq;
 		if (message !== '' && conversationId !== '' && currentVendorId !== '') {
 								try {
 									
