@@ -1123,7 +1123,7 @@ function openTab(evt, tabName) {
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue);
 
-const tpitch = [
+const lpitch = [
   {
     "Region": "US-CTL",
     "IATA": "MSY",
@@ -1335,7 +1335,19 @@ const tpitch = [
     "Pitch": "Green city with quirky, vibrant culture"
   }
 ]
+// Assume `listing` is your array of objects
+function groupByRegion(lpitch) {
+  return lpitch.reduce((groups, item) => {
+    const region = item.Region;
+    if (!groups[region]) groups[region] = [];
+    groups[region].push(item);
+    return groups;
+  }, {});
+}
 
+// Usage:
+const tpitch = groupByRegion(lpitch);
+console.log(tpitch);
 const mpitch = tpitch;
 
 		//var picsj = data1.Pictures;
