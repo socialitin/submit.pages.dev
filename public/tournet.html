@@ -1123,140 +1123,222 @@ function openTab(evt, tabName) {
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue);
 
-const tpitch = {
-   "WC0-Caribbean": [
-      {
-         "IATA": "WC0",
-         "City": "WC0-Caribbean",
-         "Province": "WC0",
-         ""Pitch": "ijrvjomnobnotot"
-      },
-      {
-         "IATA": "SJO",
-         "City": "Costa Rica",
-         "Province": "Costa Rica",
-         "Pitch": "Lo esencial está aquí"
-      },
-      {
-         "IATA": "GUA",
-         "City": "Guatemala",
-         "Province": "Guatemala",
-         "Pitch": "Corazón de mundo Maya - El destino te llama"
-      },
-      {
-         "IATA": "PTY",
-         "City": "Panamá",
-         "Province": "Panamá",
-         "Pitch": "Vive por más!"
-      },
-      {
-         "IATA": "GUA",
-         "City": "Guatemala",
-         "Province": "Guatemala",
-         "Pitch": "Corazón de mundo Maya - El destino te llama"
-      }
-   ],
-   "WC1-Caribbean": [
-      {
-         "IATA": "WC1",
-         "City": "WC1-Caribbean",
-         "Province": "WC1-Caribbean",
-         "Pitch": "'"
-         
-      },
-      {
-         "IATA": "BZE",
-         "City": "Belice",
-         "Province": "Belice",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "CCS",
-         "City": "Venezuela",
-         "Province": "Venezuela",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "TGU",
-         "City": "Honduras",
-         "Province": "Honduras",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "CCS",
-         "City": "Venezuela",
-         "Province": "Venezuela",
-         "Pitch": "....ijeriuou89u4"
-      }
-   ],
-   "EC0-Caribbean": [
-      {
-         "IATA": "EC0",
-         "City": "EC0-Caribbean",
-         "Province": "EC0-Caribbean",
-         "Pitch": "....ijeriuou89u4" 
-      },
-      {
-         "IATA": "FPO",
-         "City": "Bahamas",
-         "Province": "Bahamas",
-         "Pitch": "Fly Away!"
-      },
-      {
-         "IATA": "KIN",
-         "City": "Jamaica",
-         "Province": "Jamaica",
-         "Pitch": "Heartbeat of the world"
-      },
-      {
-         "IATA": "HAV",
-         "City": "Cuba",
-         "Province": "Cuba",
-         "Pitch": "Your safe destination"
-      },
-      {
-         "IATA": "KIN",
-         "City": "Jamaica",
-         "Province": "Jamaica",
-         "Pitch": "Heartbeat of the world"
-      }
-   ],
-   "EC1-Caribbean": [
-      {
-         "IATA": "EC1",
-         "City": "EC1-Caribbean",
-         "Province": "EC1-Caribbean",
-         "Pitch": "....ijeriuou89u4" 
-              },
-      {
-         "IATA": "BGI",
-         "City": "Barbados",
-         "Province": "Barbados",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "SDQ",
-         "City": "Republica Dominicana",
-         "Province": "Republica Dominicana",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "SJU",
-         "City": "Puerto Rico",
-         "Province": "Puerto Rico",
-         "Pitch": "....ijeriuou89u4"
-      },
-      {
-         "IATA": "SDQ",
-         "City": "Republica Dominicana",
-         "Province": "Republica Dominicana",
-         "Pitch": ""
-      }
-   ]
-}
+const tpitch = [
+  {
+    "Region": "US-CTL",
+    "IATA": "MSY",
+    "City": "New Orleans",
+    "State": "LA, Louisiana",
+    "Pitch": "Mardi Gras, jazz music & streetcars"
+	 , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/ComboOakAlleyPlantat.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/GuidedHistoricalFren.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/HighlightsofPrivateD.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/CityWideandPlantatio.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "MEM",
+    "City": "Memphis",
+    "State": "TN, Tennessee",
+    "Pitch": "BBQ, Beale Street & Elvis Graceland"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "BNA",
+    "City": "Nashville",
+    "State": "TN, Tennessee",
+    "Pitch": "Grand Ole Opry & Johnny Cash Museum"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "AUS",
+    "City": "Austin",
+    "State": "TX, Texas",
+    "Pitch": "Live music, LBJ Library & Zilker Park"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "DFW",
+    "City": "Dallas",
+    "State": "TX, Texas",
+    "Pitch": "Historic Dealey Plaza & many art museums"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "SAT",
+    "City": "San Antonio",
+    "State": "TX, Texas",
+    "Pitch": "Texan city with the Alamo & River Walk"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-CTL",
+    "IATA": "IAH",
+    "City": "Houston",
+    "State": "TX< Texas",
+    "Pitch": "NASA’s Space Center & major museums"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "WAS",
+    "City": "Washington, D.C.",
+    "State": "DC, Washington Columbia District",
+    "Pitch": "U.S. capital & home to the Smithsonian"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/WAS\\\\\\/\\\\\\/ExpertLedPrivateTour.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/WAS\\\\\\/\\\\\\/IconsofCapitolHillPh.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/WAS\\\\\\/\\\\\\/PrivateLuxuryTourofa.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/WAS\\\\\\/\\\\\\/TheWharfSightseeingC.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "EGT",
+    "City": "Wellington",
+    "State": "DE, Delaware",
+    "Pitch": "Waterfront capital with Te Papa Museum"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "MIA",
+    "City": "Miami",
+    "State": "FL, Florida",
+    "Pitch": "South Beach, art deco & Little Havana"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "MYR",
+    "City": "Myrtle Beach",
+    "State": "FL, Florida",
+    "Pitch": "Beach, boardwalk, golf & variety shows"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "MCO",
+    "City": "Orlando",
+    "State": "FL, Florida",
+    "Pitch": "Walt Disney World & Universal Studios"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "SAV",
+    "City": "Savannah",
+    "State": "GA, Georgia",
+    "Pitch": "Forsyth Park & pre-Civil-War sites"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "CHI",
+    "City": "Chicago",
+    "State": "IL, Illinois",
+    "Pitch": "Willis Tower, the Cubs & deep-dish pizza"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "BOS",
+    "City": "Boston",
+    "State": "MS, Massachussetts",
+    "Pitch": "Freedom Trail, Red Sox & clam chowder"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "NYC",
+    "City": "New York",
+    "State": "NY, New York",
+    "Pitch": "Statue of Liberty, skyscrapers & culture"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "PHL",
+    "City": "Philadelphia",
+    "State": "PA, Pennylvania",
+    "Pitch": "Liberty Bell & Independence Hall"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "CHS",
+    "City": "Charleston",
+    "State": "SC, South Carolina",
+    "Pitch": "Fort Sumter & pre–Civil War buildings"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-ECT",
+    "IATA": "ATL",
+    "City": "Atlanta",
+    "State": "GE, Georgia",
+    "Pitch": "Fort Sumter & pre–Civil War buildings"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-PAC",
+    "IATA": "HNL",
+    "City": "Honolulu - Oahu",
+    "State": "HI, Hawaii",
+    "Pitch": "Hawaiis capital, Waikiki & Pearl Harbor"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/HNL\\\\\\/\\\\\\/WaikikiOahuDiscovery.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/HNL\\\\\\/\\\\\\/OahuNorthShoreHalf-D.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/HNL\\\\\\/\\\\\\/NorthShoreTourForOah.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/HNL\\\\\\/\\\\\\/BlueSkiesofOahuECOHe.jpg\"}]"},
+  {
+    "Region": "US-PAC",
+    "IATA": "OGG",
+    "City": "Maui",
+    "State": "HI, Kahului, Hawaii",
+    "Pitch": "Haleakala volcano & beaches"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "PHX",
+    "City": "Phoenix",
+    "State": "AZ, Arizona",
+    "Pitch": "Golf, desert spas & Camelback Mountain"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/PHX\\\\\\/\\\\\\/DesertOffRoadsinScot.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/PHX\\\\\\/\\\\\\/HummerNightintheSono.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/PHX\\\\\\/\\\\\\/MorningRideHotAirBal.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/PHX\\\\\\/\\\\\\/Full-daySaltRiverWhi.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "LAX",
+    "City": "Los Angeles",
+    "State": "CA, California",
+    "Pitch": "Hollywood, Venice beach & the Lakers"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+    {
+    "Region": "US-WCT",
+    "IATA": "SEA",
+    "City": "Seattle",
+    "State": "WA, Washington",
+    "Pitch": "Space Needle, Starbucks & Puget Sound"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "SAN",
+    "City": "San Diego",
+    "State": "CA, California",
+    "Pitch": "Beaches, U.S. Navy & the San Diego Zoo"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "SFO",
+    "City": "San Francisco",
+    "State": "CA, California",
+    "Pitch": "Golden Gate Bridge, cable cars & fog"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "DEN",
+    "City": "Denver",
+    "State": "CO, Colorado",
+    "Pitch": "Mile High City\" with museums & stadiums"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "TVL",
+    "City": "Lake Tahoe",
+    "State": "NV, Nevada",
+    "Pitch": "Ski resorts, beaches & Emerald Bay Park, Nevada / California"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "LAS",
+    "City": "Las Vegas",
+    "State": "NV, Nevada",
+    "Pitch": "The Strip, casinos & gourmet dining"
+  , "Pictures": "[{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/City - Private Natur.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/TheFiveinOneExtravag.jpg\"},{\"img\":\"https:\\/\\/mmedia.tournet.com\\/\\/Tournet\\\\\\/US\\\\\\/MSY\\\\\\/\\\\\\/VIPSightseeingFlight.jpg\"}]"},
+  {
+    "Region": "US-WCT",
+    "IATA": "PDX",
+    "City": "Portland",
+    "State": "OR, Oregon",
+    "Pitch": "Green city with quirky, vibrant culture"
+  }
+];
+
 
 const mpitch = tpitch;
-;
+
 		//var picsj = data1.Pictures;
     console.log('mypitch',mpitch);
 	//	console.log('mypics', Object.keys(mpitch));
