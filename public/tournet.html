@@ -1287,7 +1287,7 @@ if (!cItem.Pitch.includes('<iframe src="https://iframe.videodelivery.net/')) {
 } else {  
 	       var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : '', "iata" : cItem.IATA};		//var tname = picsj[h].name;
-}
+
 			
 			jdata.push(Tpics);
 
@@ -1296,7 +1296,7 @@ if (!cItem.Pitch.includes('<iframe src="https://iframe.videodelivery.net/')) {
      //document.getElementById('fjson' + cItems).attr('data-offer') = cItem;
      $('#fjson' +cItems).attr('data-offer', JSON.stringify(jdata));
       console.log(`Name: ${currentItem.IATA}, Score: ${currentItem.City}`);
-
+    }
     });
     document.getElementById("fjson1").click();
     setTimeout(function(){
@@ -1305,6 +1305,7 @@ if (!cItem.Pitch.includes('<iframe src="https://iframe.videodelivery.net/')) {
   
     console.log(''); // Line break between groups for readability
   }
+  
 }
 
     ///////
