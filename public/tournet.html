@@ -1406,7 +1406,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
 		document.getElementById("IATA").value = data.IATA;
 		document.getElementById("City").value = data.City;
 		document.getElementById("Province").value = data.Province;
-		document.getElementById("pitch").value = data.Pitch;
+	//	document.getElementById("pitch").value = data.Pitch;
 		document.getElementById("Pictures").value = pics;
 	//	document.getElementById("embVideo").value = tVideo;
 				
@@ -1415,7 +1415,7 @@ document.getElementById("thumbs").innerHTML= tImgAll;
     '<form id="upload-video'+"3"+'" onsubmit="uploadImage(event)">'+
 		'<div> <input id="offer" value = "'+data.City+'">'+				
 ' <textarea >'						
-'<input  id ="pitch" value ="'+data.Pitch +' textarea" ></textarea>	'+	
+'<input  id ="pitch" value ="'+data.City +' textarea" ></textarea>	'+	
       '<input type="file" id="v-input" fname="file" onchange="previewImage(event)">'+
      // '<img id="preview" src="" alt="Image Preview" style="display:none; width: 300px; height: auto; margin-top: 10px;">' +
       '<button type="submit">Upload Video</button>'+
