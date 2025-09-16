@@ -1285,7 +1285,8 @@ if (!cItem.Pitch.includes('<iframe src="https://iframe.videodelivery.net/')) {
        var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
        var Tpics = {"img": tImg , "name" : cItem.City, "description" : cItem.Pitch, "iata" : cItem.IATA};
 } else {  
-			//var tname = picsj[h].name;
+	       var tImg = "https://mmedia.tournet.com/Tournet/Destinations/Presentation/"+ pcountry +tgroup+'/'+ cItem.City+'.jpg';
+       var Tpics = {"img": tImg , "name" : cItem.City, "description" : '', "iata" : cItem.IATA};		//var tname = picsj[h].name;
 }
 			
 			jdata.push(Tpics);
