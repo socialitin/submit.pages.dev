@@ -1401,7 +1401,7 @@ var tImgAll = tImgAll+tImg;
     document.getElementById("thumbs").style = " display: flex; overflow-x: auto; white-space: nowrap;";
 document.getElementById("thumbs").innerHTML= tImgAll;
 	document.getElementById("itemImg").style = "width: 100%; ";
-		var tVideo = '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
+		var tVideo = data.Pitch; // '<div width="20%" ">'+data.embVideo+data.Pitch+'</div>';
 		document.getElementById("itemImg").innerHTML = tVideo;
 		document.getElementById("IATA").value = data.IATA;
 		document.getElementById("City").value = data.City;
