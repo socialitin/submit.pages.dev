@@ -1123,133 +1123,165 @@ function openTab(evt, tabName) {
 // 1. Get the current session from KV using the cell value as the key
 console.log('Fetched session:', cellValue);
 
-const tpitch = {
-   "WC0-Caribbean": [
+const tpitch = 
+   "BR0-North": [
       {
-         "IATA": "WC0",
-         "City": "WC0-Caribbean",
-         "Province": "WC0",
-         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/df90e95e51e7d8fbed88fc04e0a39f9d?poster=https%3A%2F%2Fvideodelivery.net%2Fdf90e95e51e7d8fbed88fc04e0a39f9d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
+         "IATA": "BR0",
+         "City": "BR0-North",
+         "Province": "",
+         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/8e8974ee854ac3c0f26b17c1dbafd290?poster=https%3A%2F%2Fvideodelivery.net%2F8e8974ee854ac3c0f26b17c1dbafd290%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
       },
       {
-         "IATA": "SJO",
-         "City": "Costa Rica",
-         "Province": "Costa Rica",
-         "Pitch": "Lo esencial está aquí"
+         "IATA": "PMW",
+         "City": "Jalapão",
+         "Province": "Tocantins",
+         "Pitch": "BRAZIL-North  Jalapão State Park"
       },
       {
-         "IATA": "GUA",
-         "City": "Guatemala",
-         "Province": "Guatemala",
-         "Pitch": "Corazón de mundo Maya - El destino te llama"
+         "IATA": "RBR",
+         "City": "Rio Branco",
+         "Province": "Acre",
+         "Pitch": "BRAZIL NORTH Region Río Branco Acre's cultural diversity is amazing. In Rio Branco, the state capital, it is also possible to experience unique natural beauty and socio-environmental tourism. * Our Lady of Nazareth Mother Church, one of Rio Branco’s icons (edited)"
       },
       {
-         "IATA": "PTY",
-         "City": "Panamá",
-         "Province": "Panamá",
-         "Pitch": "Vive por más!"
+         "IATA": "BJZ",
+         "City": "Alter do Chão.",
+         "Province": "Pará",
+         "Pitch": "BRAZIL - North Region Alter do Chão. "
       },
       {
-         "IATA": "GUA",
-         "City": "Guatemala",
-         "Province": "Guatemala",
-         "Pitch": "Corazón de mundo Maya - El destino te llama"
+         "IATA": "MAO",
+         "City": "Manaus",
+         "Province": "Amazonas",
+         "Pitch": "Manaus is a charming and cultural city. The green Amazon Forest, the dark waters of Rio Negro, the muddy waters of Solimões River, exotic local cuisine, diverse architecture, and very welcoming people are some of the city's treasures."
       }
    ],
-   "WC1-Caribbean": [
+   "BR1-Northeast": [
       {
-         "IATA": "WC1",
-         "City": "WC1-Caribbean",
-         "Province": "WC1-Caribbean",
-         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/a78da8cea56693c400d616013d8c709e?poster=https%3A%2F%2Fvideodelivery.net%2Fa78da8cea56693c400d616013d8c709e%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
+         "IATA": "BR1",
+         "City": "BR1-Northeast",
+         "Province": "",
+         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/c01ec0d696ca89bfd72176f2ee3d9dcc?poster=https%3A%2F%2Fvideodelivery.net%2Fc01ec0d696ca89bfd72176f2ee3d9dcc%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
       },
       {
-         "IATA": "BZE",
-         "City": "Belice",
-         "Province": "Belice",
-         "Pitch": ""
+         "IATA": "FEN",
+         "City": "Fernando de Noronha",
+         "Province": "Pernambuco",
+         "Pitch": "Fernando de Noronha is the perfect combination of crystal-clear waters, golden sand, and rich marine life that amazes people from all around the world. * Sancho Bay Beach in Fernando do Noronha"
       },
       {
-         "IATA": "CCS",
-         "City": "Venezuela",
-         "Province": "Venezuela",
-         "Pitch": ""
+         "IATA": "SSA",
+         "City": "Salvador",
+         "Province": "Bahia",
+         "Pitch": "Salvador is the capital of the state of Bahia, a place renowned for its natural beauty, friendliness of its people, and the strong influence of African culture. *A View of Lacerda Elevator, the Model Market, and the Port of Salvador"
       },
       {
-         "IATA": "TGU",
-         "City": "Honduras",
-         "Province": "Honduras",
-         "Pitch": ""
+         "IATA": "BPS",
+         "City": "Porto Seguro",
+         "Province": "Bahía",
+         "Pitch": "The city of Porto Seguro, gateway to the region known as the Discovery Coast, is a real-life lesson in Brazilian history. • Porto Seguro’s charming roads and architecture"
       },
       {
-         "IATA": "CCS",
-         "City": "Venezuela",
-         "Province": "Venezuela",
-         "Pitch": ""
+         "IATA": "MCZ",
+         "City": "Maceió",
+         "Province": "Alagoas",
+         "Pitch": "MAEIÓ, the capital of Alagoas state has stunning seas in shades of blue and green, and calm warm waters.  Connect, Comment or Request for relevant Locals Hosts to respond with offers and information.  #maceió #maceioalagoas #brazil #brasil #localhosts #travel #localhost #lovetotravel #localhostoffers #whatznearby #tournet"
       }
    ],
-   "EC0-Caribbean": [
+   "BR2-Midwest": [
       {
-         "IATA": "EC0",
-         "City": "EC0-Caribbean",
-         "Province": "EC0-Caribbean",
-         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/189af68cf1ad145b341225dbf50b9be5?poster=https%3A%2F%2Fvideodelivery.net%2F189af68cf1ad145b341225dbf50b9be5%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
+         "IATA": "BR2",
+         "City": "BR2-Midwest",
+         "Province": "",
+         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/35bf7b48da776a9f0369ef87a9a2adf6?poster=https%3A%2F%2Fvideodelivery.net%2F35bf7b48da776a9f0369ef87a9a2adf6%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
       },
       {
-         "IATA": "FPO",
-         "City": "Bahamas",
-         "Province": "Bahamas",
-         "Pitch": "Fly Away!"
+         "IATA": "CGB",
+         "City": "Cuiabá",
+         "Province": "Mato Grosso",
+         "Pitch": "The capital of Mato Grosso State is renowned for its colonial architecture and its green urban areas. The city is also the gateway to some of the main tourist destinations in the country: the north side of the Pantanal and Chapada dos Guimarães National Park."
       },
       {
-         "IATA": "KIN",
-         "City": "Jamaica",
-         "Province": "Jamaica",
-         "Pitch": "Heartbeat of the world"
+         "IATA": "BYO",
+         "City": "Bonito",
+         "Province": "Mato Grosso do sul",
+         "Pitch": "Bonito is a true paradise where visitors can experience rivers with crystal-clear waters and the contrast of the colorful fish against the intense green backdrop of the native forests. Bonito, a city in the state of Mato Grosso do Sul, is one of the main ecotourism and adventure tourism destinations in Brazil. * Natural pool in Bonito"
       },
       {
-         "IATA": "HAV",
-         "City": "Cuba",
-         "Province": "Cuba",
-         "Pitch": "Your safe destination"
+         "IATA": "GYN",
+         "City": "Goiânia",
+         "Province": "Goiás",
+         "Pitch": "The capital of the state of Goiás impresses everyone with its rich culture, welcoming people, and for being so well planned. It has more than 900,000 trees spread along the streets and parks, which makes it a beautiful destination with a lively social atmosphere. * Oscar Niemeyer Cultural Center"
       },
       {
-         "IATA": "KIN",
-         "City": "Jamaica",
-         "Province": "Jamaica",
-         "Pitch": "Heartbeat of the world"
+         "IATA": "CLV",
+         "City": "Caldas Novas",
+         "Province": "Goiás",
+         "Pitch": "Caldas Novas is located in a region that is home to one of the largest hydrothermal parks in the world. The region's water springs, with temperatures ranging between 36 and 70 degrees celsius, are the main reason for the city's popularity. Water park in Caldas Novas"
       }
    ],
-   "EC1-Caribbean": [
+   "BR3-Southeast": [
       {
-         "IATA": "EC1",
-         "City": "EC1-Caribbean",
-         "Province": "EC1-Caribbean",
-         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/8ae8f564bbbd0a18403a5451d0f92d65?poster=https%3A%2F%2Fvideodelivery.net%2F8ae8f564bbbd0a18403a5451d0f92d65%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
+         "IATA": "BR3",
+         "City": "BR3-Southeast",
+         "Province": "",
+         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/e1b976c93b486047396d00cfa817f6dd?poster=https%3A%2F%2Fvideodelivery.net%2Fe1b976c93b486047396d00cfa817f6dd%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
       },
       {
-         "IATA": "BGI",
-         "City": "Barbados",
-         "Province": "Barbados",
-         "Pitch": ""
+         "IATA": "RIO",
+         "City": "Rio de Janeiro",
+         "Province": "Rio de Janeiro",
+         "Pitch": "Stunning natural attractions, the spontaneity and hospitality of the local people, who turn everything into a celebration, and world-famous iconic monuments."
       },
       {
-         "IATA": "SDQ",
-         "City": "Republica Dominicana",
-         "Province": "Republica Dominicana",
-         "Pitch": ""
+         "IATA": "CNF",
+         "City": "Belo Horizonte",
+         "Province": "Minas Gerais",
+         "Pitch": "Amazing destination that combines culture, gastronomy, and creativity."
       },
       {
-         "IATA": "SJU",
-         "City": "Puerto Rico",
-         "Province": "Puerto Rico",
-         "Pitch": ""
+         "IATA": "VIT",
+         "City": "Vitória",
+         "Province": "Espírito Santo",
+         "Pitch": "One of three capital cities in Brazil located on an island, Vitória has a rich history and fascinating culture."
       },
       {
-         "IATA": "SDQ",
-         "City": "Republica Dominicana",
-         "Province": "Republica Dominicana",
-         "Pitch": ""
+         "IATA": "GRU",
+         "City": "São Paulo",
+         "Province": "São Paulo",
+         "Pitch": "São Paulo is a national reference in history, business, culture, and tourism and is the most cosmopolitan city in Brazil."
+      }
+   ],
+   "BR4-South": [
+      {
+         "IATA": "BR4",
+         "City": "BR4-South",
+         "Province": "",
+         "Pitch": "<div style=\"position: relative; width: 60%; height:auto; padding-top: 58%;\"><iframe src=\"https://iframe.videodelivery.net/f07a98cda64fe358703c24198ac5e755?poster=https%3A%2F%2Fvideodelivery.net%2Ff07a98cda64fe358703c24198ac5e755%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600\" style=\"border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe></div>"
+      },
+      {
+         "IATA": "IGU",
+         "City": "Foz do Iguaçu",
+         "Province": "Paraná",
+         "Pitch": "With stunning natural beauty, Foz do Iguaçu impresses tourists from all over the world"
+      },
+      {
+         "IATA": "FLN",
+         "City": "Florianópolis",
+         "Province": "Santa Catarina",
+         "Pitch": "Popularly known as the Magic Island, Florianopolis is the capital city in Santa Catarina State. Visitors will fall in love with its charm and natural beauty."
+      },
+      {
+         "IATA": "POA",
+         "City": "Porto Alegre",
+         "Province": "Rio Grande",
+         "Pitch": "Visiting Porto Alegre is truly an unforgettable experience."
+      },
+      {
+         "IATA": "CWB",
+         "City": "Curitiba",
+         "Province": "Paraná",
+         "Pitch": "The capital of Paraná state has countless charming attractions. In addition to its several parks and squares, the city has breathtaking landscapes and great culinary options."
       }
    ]
 }
